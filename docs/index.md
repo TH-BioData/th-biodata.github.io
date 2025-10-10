@@ -2,16 +2,12 @@
   <div class="hero__bg"></div>
   <div class="hero__content">
     <div>
-      <div class="hero__title">TH BioData Consulting</div>
+      <div class="hero__title"></div>
       <div class="hero__tag">Transforming biological complexity into clear, data-driven insight.</div>
       <div><a class="hero__cta" href="projects/">View Projects</a></div>
     </div>
   </div>
 </div>
-
-# TH BioData Consulting
-
-> *Transforming biological complexity into clear, data-driven insight.*
 
 **EN —** Data science & bioinformatics for biological, environmental, and private-sector projects.  
 **ES —** Ciencia de datos y bioinformática para proyectos biológicos, ambientales y del sector privado.
