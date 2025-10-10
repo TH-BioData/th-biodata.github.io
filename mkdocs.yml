@@ -26,3 +26,6 @@ nav:
   - Services: services.md
   - Projects: projects.md
   - Contact: contact.md
+extra_css:
+  - styles/extra.css
+
