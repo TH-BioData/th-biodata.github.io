@@ -1,3 +1,14 @@
+<div class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div>
+      <div class="hero__title">TH BioData Consulting</div>
+      <div class="hero__tag">Transforming biological complexity into clear, data-driven insight.</div>
+      <div><a class="hero__cta" href="projects/">View Projects</a></div>
+    </div>
+  </div>
+</div>
+
 # TH BioData Consulting
 
 > *Transforming biological complexity into clear, data-driven insight.*
