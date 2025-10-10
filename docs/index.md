@@ -1,5 +1,5 @@
 <div class="hero">
-  <div class="hero__bg"></div>
+  <div class="hero__bg">TH BioData Consulting</div>
   <div class="hero__content">
     <div>
       <div class="hero__title"></div>
