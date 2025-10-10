@@ -8,7 +8,7 @@
 }
 .hero__bg {
   height: 280px;                 /* altura del banner */
-  background-image: none;
+  background-image: url('../assets/hero.jpg');
   background-color: #0F3D73; /* azul de respaldo */
   background-size: cover;
   background-position: center;
