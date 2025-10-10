@@ -35,3 +35,6 @@
   color: #fff !important;
   text-decoration: none;
 }
+.md-header { background-color: #0F3D73 !important; }
+.md-tabs { background-color: #0F3D73 !important; }
+.md-nav__title, .md-logo { color: #fff !important; }
