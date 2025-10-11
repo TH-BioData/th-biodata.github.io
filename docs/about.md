@@ -1,6 +1,6 @@
 # 🧬 About / Sobre Nosotros
 
-![Banner About](./assets/banner_about.png){ width="100%" }
+![Banner About](./assets/banner_about.png){ .banner-about }
 
 > *Transforming biological complexity into clear, data-driven insight.*
 
