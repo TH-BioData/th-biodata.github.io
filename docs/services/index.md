@@ -13,7 +13,7 @@ Explore our main areas of expertise below 👇
   Automated segmentation, lesion quantification, and phenotyping pipelines.  
   [:arrow_right: Learn more](./image-analysis/)
 
-- :dna: **Bioinformatics & Data Science**  
+- :🧬: **Bioinformatics & Data Science**  
   Omics data processing, statistical modeling, and visualization.  
   [:arrow_right: Learn more](./bioinformatics/)
 
