@@ -1,4 +1,4 @@
-<div class="hero">
+<div class="hero hero--full">
   <div class="hero__bg"></div>
   <div class="hero__content">
     <div>
@@ -8,6 +8,7 @@
     </div>
   </div>
 </div>
+
 
 
 **EN —** Data science & bioinformatics for biological, environmental, and private-sector projects.  
