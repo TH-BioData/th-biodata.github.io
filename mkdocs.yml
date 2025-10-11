@@ -14,8 +14,7 @@ theme:
     - search.highlight
   palette:
     - scheme: default
-      primary: blue        # barra superior azul
-      accent: light blue   # acentos
+
 markdown_extensions:
   - attr_list
   - md_in_html
