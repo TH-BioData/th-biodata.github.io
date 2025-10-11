@@ -27,8 +27,3 @@ Desarrollo de **pipelines reproducibles** para datos ómicos, modelado estadíst
 - Visualizaciones y reportes listos para publicación.
 
 🧩 *Aplicaciones:* Biología molecular, descubrimiento de biomarcadores, reproducibilidad científica.
-
----
-
-## 📊 Example
-![Bioinformatics Example](../assets/geobio_example.png){ width="800" }
