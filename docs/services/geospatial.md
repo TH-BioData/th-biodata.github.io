@@ -28,7 +28,3 @@ Diseñamos **flujos de datos geográficos y climáticos** para investigación ec
 
 🧩 *Aplicaciones:* Estudios de biodiversidad, modelado de cultivos, análisis de riesgo ambiental.
 
----
-
-## 🗺️ Example
-![Geospatial Example](../assets/geobio_example.png){ width="800" }
