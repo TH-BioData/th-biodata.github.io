@@ -27,8 +27,3 @@ Ofrecemos **asesoramiento técnico y analítico** a grupos de investigación y e
 - Colaboración en proyectos de I+D.
 
 🧩 *Aplicaciones:* Instituciones académicas, startups biotecnológicas, manejo de datos agrícolas.
-
----
-
-## 💼 Example
-![Consulting Example](../assets/corkyscab_example.png){ width="800" }
