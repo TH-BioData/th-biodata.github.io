@@ -31,7 +31,12 @@ markdown_extensions:
   - codehilite
 nav:
   - Home: index.md
-  - Services: services.md
+  - Services:
+      - Overview: services/index.md
+      - Image Analysis & Computer Vision: services/image-analysis.md
+      - Bioinformatics & Data Science: services/bioinformatics.md
+      - Geospatial & Environmental Modeling: services/geospatial.md
+      - Research Consulting & Data Integration: services/consulting.md
   - Projects:
       - Overview: projects/index.md
       - GeoBio: projects/geobio.md
