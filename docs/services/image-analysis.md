@@ -28,7 +28,3 @@ Desarrollamos flujos de trabajo basados en imágenes para **patología vegetal, 
 
 🧩 *Aplicaciones:* Monitoreo de enfermedades, fenotipado de cultivos, análisis de microscopía.
 
----
-
-## 📸 Example
-![Image Analysis Example](../assets/lls_sevest_example.png){ width="800" }
