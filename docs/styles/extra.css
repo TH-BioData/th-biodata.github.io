@@ -1,19 +1,77 @@
-/* Hero banner */
+/* ============================================================
+   TH BioData Consulting — Custom Styles
+   ============================================================ */
+
+/* --- General layout adjustments --- */
+.md-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   UNIVERSAL BANNER STYLES
+   ============================================================ */
+
+/* Clases base compartidas por todos los banners */
+.banner {
+  display: block;
+  width: 100%;
+  height: 200px;               /* Altura estándar */
+  object-fit: cover;           /* Mantiene proporciones sin deformar */
+  object-position: center 45%; /* Centrado vertical elegante */
+  border-radius: 0;
+  margin: 0 auto 24px auto;    /* Espacio inferior */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+  .banner {
+    height: 140px;
+    object-position: center 40%;
+  }
+}
+
+/* --- Variantes específicas por sección (si querés modificarlas después) --- */
+.banner-about {
+  object-position: center 45%;
+}
+
+.banner-projects {
+  object-position: center 50%;
+}
+
+.banner-services {
+  object-position: center 48%;
+}
+
+.banner-casestudies {
+  object-position: center 42%;
+}
+
+.banner-resources {
+  object-position: center 44%;
+}
+
+/* ============================================================
+   HERO SECTIONS (si usás banners de portada con texto)
+   ============================================================ */
+
 .hero {
   position: relative;
-  border-radius: 12px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;
   overflow: hidden;
-  margin: 0 0 24px 0;
-  background: #0b4ea2; /* fallback azul si no carga la imagen */
 }
+
 .hero__bg {
-  height: 280px;                 /* altura del banner */
-  background-image: url('../assets/hero.jpg');
-  background-color: #0F3D73; /* azul de respaldo */
+  height: 420px;
   background-size: cover;
   background-position: center;
-  filter: saturate(1.05);
+  background-repeat: no-repeat;
 }
+
 .hero__content {
   position: absolute;
   inset: 0;
@@ -21,49 +79,36 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px;
-  background: linear-gradient( to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55) );
+  background: linear-gradient(to bottom, rgba(10,35,80,0.15), rgba(10,35,80,0.55));
   color: #fff;
 }
-.hero__title { font-size: 34px; font-weight: 700; margin: 0 0 6px 0; }
-.hero__tag   { font-size: 18px; opacity: .95; }
+
+.hero__title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.hero__tag {
+  font-size: 18px;
+  opacity: .95;
+}
+
 .hero__cta {
-  margin-top: 16px;
   display: inline-block;
-  padding: 10px 16px;
-  background: #1e88e5; /* azul botón */
-  border-radius: 10px;
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: #1e88e5;
+  border-radius: 8px;
   color: #fff !important;
   text-decoration: none;
-}
-.md-header { background-color: #0F3D73 !important; }
-.md-tabs { background-color: #0F3D73 !important; }
-.md-nav__title, .md-logo { color: #fff !important; }
-
-/* ============================================================
-   ABOUT PAGE BANNER
-   ============================================================ */
-.banner-about {
-  display: block;
-  width: 100%;
-  height: 200px;             /* 🔹 Ajustá la altura a gusto */
-  object-fit: cover;         /* Evita deformación */
-  object-position: center 45%; /* 🔹 Centrado vertical elegante */
-  border-radius: 0;
-  margin: 0 auto 24px auto;  /* Margen inferior suave */
-}
-
-/* --- Responsive adjustments --- */
-@media (max-width: 768px) {
-  .banner-about {
-    height: 140px;
-    object-position: center 40%;
-  }
+  font-weight: 500;
 }
 
 /* ============================================================
-   Content enhancements
+   GRID CARDS AND CONTENT ENHANCEMENTS
    ============================================================ */
+
 .grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -76,4 +121,10 @@
   padding: 16px;
   background: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid.cards > *:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
