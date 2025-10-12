@@ -247,3 +247,15 @@ body:has(.hero--fixed) .md-main__inner {
     padding-top: var(--th-hero-height-sm, 300px) !important;
   }
 }
+/* ========= Corrección final de alineación en páginas SIN hero ========= */
+body:not(:has(.hero)) .md-main__inner {
+  padding-top: calc(var(--md-header-h, 3.6rem) + 0.5rem) !important; /* un leve margen de aire */
+}
+
+/* Evita márgenes redundantes en el primer bloque de texto o título */
+body:not(:has(.hero)) .md-content > h1:first-child,
+body:not(:has(.hero)) .md-content > .md-typeset > h1:first-child,
+body:not(:has(.hero)) .md-content > div:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
