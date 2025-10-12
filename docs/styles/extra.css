@@ -146,3 +146,17 @@ body.scrolled .hero {
   transform: translateY(-80px);
   pointer-events: none; /* evita que bloquee clics */
 }
+/* === Fix: hero centrado de borde a borde, sin desplazamiento === */
+body:has(.hero) .hero {
+  position: fixed;
+  top: var(--md-header-h);  /* debajo del header */
+  left: 0;
+  right: 0;
+  width: 100%;              /* evita 100vw (causa corrimiento) */
+  margin: 0;
+  transform: none;          /* quita translateX(-50%) */
+  z-index: 4;
+}
+
+/* Evita scroll horizontal accidental por diferencias entre vw y layout */
+html, body { overflow-x: hidden; }
