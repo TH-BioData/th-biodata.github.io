@@ -45,5 +45,6 @@ nav:
   - Contact: contact.md
 extra_css:
   - styles/extra.css
-extra_java:
-  - scripts/scroll-fade.js
+extra_javascript:
+  - assets/js/scroll-hero.js
+
