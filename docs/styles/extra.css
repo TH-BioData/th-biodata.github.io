@@ -227,3 +227,23 @@ html[data-md-state="drawer"] .hero__bg {
 
 /* Drawer debe aceptar clics sí o sí */
 .md-drawer { pointer-events: auto !important; }
+
+/* ========= Fix: páginas SIN hero no dejan hueco ========= */
+
+/* Si NO hay .hero, anulá cualquier padding/margen alto extra */
+body:not(:has(.hero)) .md-main,
+body:not(:has(.hero)) .md-main__inner,
+body:not(:has(.hero)) .md-content {
+  margin-top: 0 !important;
+  padding-top: var(--md-header-h, 3.6rem) !important; /* solo lo del header fijo */
+}
+
+/* Si usás un hero fijo (p.ej. .hero--fixed), reservá espacio SOLO ahí */
+body:has(.hero--fixed) .md-main__inner {
+  padding-top: var(--th-hero-height, 420px) !important;
+}
+@media (max-width: 768px) {
+  body:has(.hero--fixed) .md-main__inner {
+    padding-top: var(--th-hero-height-sm, 300px) !important;
+  }
+}
