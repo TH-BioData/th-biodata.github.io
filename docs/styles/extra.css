@@ -13,21 +13,32 @@
   background-color: #0F3D73 !important;
 }
 
-/* ===== HERO a todo ancho (con imagen) ===== */
+/* ===== Variables simples para el alto del hero ===== */
+:root {
+  --th-hero-height: 420px;   /* alto del hero en desktop */
+  --th-hero-height-sm: 300px;/* alto del hero en móvil  */
+}
+
+/* ============================================================
+   HERO a todo ancho (full-bleed) y contenido centrado
+   ============================================================ */
 .hero {
   position: relative;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   border-radius: 0;
   overflow: hidden;
+  z-index: 5; /* el hero está arriba del fondo, pero debajo del header */
 }
+
 .hero__bg {
-  height: 420px;
-  background-image: url('../assets/hero.jpg?v=3'); /* ← Asegura la carga nueva */
+  height: var(--th-hero-height);
+  background-image: url('../assets/hero.jpg?v=4'); /* rompe caché */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .hero__content {
   position: absolute;
   inset: 0;
@@ -37,19 +48,26 @@
   text-align: center;
   background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
   color: #fff;
+  z-index: 2;
 }
+
 .hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
 .hero__tag   { font-size: 18px; opacity: .95; }
 .hero__cta   {
   display: inline-block; margin-top: 16px; padding: 10px 18px;
   background: #0F3D73; border-radius: 8px; color: #fff !important; text-decoration: none;
 }
-@media (max-width: 768px){ .hero__bg{ height: 300px; } }
+
+/* ===== Desplazar TODO el contenido (incluye sidebar) por debajo del hero ===== */
+.md-main {
+  margin-top: var(--th-hero-height) !important;
+  position: relative;
+  z-index: 1; /* por debajo del hero */
+}
 
 /* ============================================================
    GRID CARDS (tarjetas de proyectos/servicios)
    ============================================================ */
-
 .grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -73,7 +91,6 @@
 /* ============================================================
    BANNERS (ajuste simple)
    ============================================================ */
-
 .banner {
   display: block;
   width: 100%;
@@ -85,39 +102,15 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* ============================================================
+   Responsivo
+   ============================================================ */
 @media (max-width: 768px) {
+  .hero__bg { height: var(--th-hero-height-sm); }
+  .md-main  { margin-top: var(--th-hero-height-sm) !important; }
+
   .banner {
     height: 160px;
     object-position: center 40%;
-  }
-}
-
-/* Menús laterales por encima del hero */
-.md-sidebar--primary,
-.md-sidebar--secondary {
-  position: relative;
-  z-index: 3;
-}
-
-/* El hero por debajo de todo */
-.hero { z-index: 0; }
-
-/* ===== Sidebar por encima del hero y opaco ===== */
-.md-sidebar--primary,
-.md-sidebar--secondary {
-  position: relative;
-  z-index: 5;                 /* por encima del hero */
-  background: #ffffff;        /* evita que se vea el hero detrás */
-  box-shadow: 2px 0 0 rgba(0,0,0,0.04); /* línea/sombra sutil */
-}
-
-/* Ajuste del hero (full-bleed) */
-.hero { z-index: 0; }
-.hero__bg { height: 380px; }  /* si querés menos alto que antes */
-
-/* Opcional: en pantallas grandes, dejar un respiro arriba del contenido */
-@media (min-width: 1024px) {
-  .md-main__inner {
-    padding-top: 0.25rem;
   }
 }
