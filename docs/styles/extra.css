@@ -91,3 +91,13 @@
     object-position: center 40%;
   }
 }
+
+/* Menús laterales por encima del hero */
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  position: relative;
+  z-index: 3;
+}
+
+/* El hero por debajo de todo */
+.hero { z-index: 0; }
