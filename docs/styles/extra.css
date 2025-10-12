@@ -1,5 +1,6 @@
+```css
 /* ============================================================
-   TH BioData Consulting — Custom Styles (versión con desvanecimiento)
+   TH BioData Consulting — Custom Styles (versión corregida móvil)
    ============================================================ */
 
 /* --- Ajustes generales de contenido --- */
@@ -12,13 +13,13 @@
 .md-header,
 .md-tabs {
   background-color: #0F3D73 !important;
-  z-index: 5; /* sobre contenido, debajo del drawer */
+  z-index: 5; /* suficiente para estar sobre hero, pero debajo del drawer */
 }
 
 /* ===== Variables para alto del hero ===== */
 :root {
-  --th-hero-height: 420px;          /* alto del hero en desktop */
-  --th-hero-height-sm: 300px;       /* alto del hero en móvil   */
+  --th-hero-height: 420px; /* alto del hero en desktop */
+  --th-hero-height-sm: 300px; /* alto del hero en móvil */
   --md-header-h: var(--md-header-height, 3.6rem); /* alto header Material */
 }
 
@@ -26,17 +27,16 @@
    HERO full-width (debajo del header)
    ============================================================ */
 
-/* --- Hero desplazable full-width --- */
+/* Solo en páginas que tienen .hero */
+/* --- Hero desplazable y full-width --- */
 body:has(.hero) .hero {
-  position: relative;
-  margin-left: calc(50% - 50vw);
+  position: fixed; /* no fijo, se mueve con el scroll */
+  margin-left: calc(50% - 50vw); /* expande a todo el ancho */
   margin-right: calc(50% - 50vw);
-  width: 100vw;
-  margin-top: var(--md-header-h);
+  width: 100vw; /* asegura ancho completo del viewport */
   border-radius: 0;
   overflow: hidden;
   z-index: 0;
-  transition: opacity 0.6s ease, transform 0.6s ease; /* ← efecto fade */
 }
 
 body:has(.hero) .hero__bg {
@@ -70,38 +70,11 @@ body:has(.hero) .hero__bg {
   text-decoration: none;
 }
 
-/* ============================================================
-   EFECTO DE DESVANECIMIENTO AL HACER SCROLL
-   ============================================================ */
-body:not(.scrolled) .hero {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-body.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-  pointer-events: none;
-}
-
-/* ============================================================
-   EMPUJES DE LAYOUT
-   ============================================================ */
-
-/* Quitar empuje global (evita hueco blanco) */
+/* Empujar TODO el contenido (incluye sidebar) por debajo del hero */
 body:has(.hero) .md-main {
-  padding-top: 0 !important;
-}
-
-/* Empujar sidebars por debajo del hero */
-body:has(.hero) .md-sidebar--primary,
-body:has(.hero) .md-sidebar--secondary {
-  margin-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
-}
-
-/* Espacio para el artículo */
-body:has(.hero) .md-content .md-typeset {
-  margin-top: 24px;
+  padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================================
@@ -128,7 +101,7 @@ body:has(.hero) .md-content .md-typeset {
 }
 
 /* ============================================================
-   BANNERS
+   BANNERS (ajuste simple)
    ============================================================ */
 .banner {
   display: block;
@@ -148,12 +121,9 @@ body:has(.hero) .md-content .md-typeset {
   body:has(.hero) .hero__bg {
     height: var(--th-hero-height-sm);
   }
-
-  body:has(.hero) .md-sidebar--primary,
-  body:has(.hero) .md-sidebar--secondary {
-    margin-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
+  body:has(.hero) .md-main {
+    padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
   }
-
   .banner {
     height: 160px;
     object-position: center 40%;
@@ -161,8 +131,22 @@ body:has(.hero) .md-content .md-typeset {
 }
 
 /* ============================================================
-   GENERAL
+   HERO CON EFECTO DE DESVANECIMIENTO AL HACER SCROLL
    ============================================================ */
+.hero {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+body:not(.scrolled) .hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+  pointer-events: none;
+}
 
 /* Evita scroll horizontal accidental */
 html, body {
