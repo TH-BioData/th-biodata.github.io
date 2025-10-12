@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Custom Styles (versión corregida móvil)
+   TH BioData Consulting — Custom Styles (versión con desvanecimiento)
    ============================================================ */
 
 /* --- Ajustes generales de contenido --- */
@@ -26,16 +26,17 @@
    HERO full-width (debajo del header)
    ============================================================ */
 
-/* --- Hero desplazable full-width (NO fijo) --- */
+/* --- Hero desplazable full-width --- */
 body:has(.hero) .hero {
-  position: relative;                      /* clave: contenedor de .hero__content */
-  margin-left: calc(50% - 50vw);           /* full-bleed */
+  position: relative;
+  margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   width: 100vw;
-  margin-top: var(--md-header-h);          /* justo debajo del header */
+  margin-top: var(--md-header-h);
   border-radius: 0;
   overflow: hidden;
   z-index: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease; /* ← efecto fade */
 }
 
 body:has(.hero) .hero__bg {
@@ -70,10 +71,24 @@ body:has(.hero) .hero__bg {
 }
 
 /* ============================================================
-   EMPUJES DE LAYOUT (evitar huecos y superposición)
+   EFECTO DE DESVANECIMIENTO AL HACER SCROLL
+   ============================================================ */
+body:not(.scrolled) .hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+  pointer-events: none;
+}
+
+/* ============================================================
+   EMPUJES DE LAYOUT
    ============================================================ */
 
-/* Quitar empuje global (evita “bloque” blanco arriba) */
+/* Quitar empuje global (evita hueco blanco) */
 body:has(.hero) .md-main {
   padding-top: 0 !important;
 }
@@ -84,7 +99,7 @@ body:has(.hero) .md-sidebar--secondary {
   margin-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
 }
 
-/* Un pequeño respiro para el artículo */
+/* Espacio para el artículo */
 body:has(.hero) .md-content .md-typeset {
   margin-top: 24px;
 }
@@ -113,7 +128,7 @@ body:has(.hero) .md-content .md-typeset {
 }
 
 /* ============================================================
-   BANNERS (ajuste simple)
+   BANNERS
    ============================================================ */
 .banner {
   display: block;
@@ -134,7 +149,6 @@ body:has(.hero) .md-content .md-typeset {
     height: var(--th-hero-height-sm);
   }
 
-  /* Sidebars deben respetar el alto móvil del hero */
   body:has(.hero) .md-sidebar--primary,
   body:has(.hero) .md-sidebar--secondary {
     margin-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
@@ -147,13 +161,8 @@ body:has(.hero) .md-content .md-typeset {
 }
 
 /* ============================================================
-   GENERAL (sin desvanecimiento ni animaciones)
+   GENERAL
    ============================================================ */
-.hero {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-}
 
 /* Evita scroll horizontal accidental */
 html, body {
