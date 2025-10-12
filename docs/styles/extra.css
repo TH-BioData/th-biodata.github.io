@@ -27,16 +27,15 @@
    ============================================================ */
 
 /* Solo en páginas que tienen .hero */
+/* --- Hero desplazable y full-width --- */
 body:has(.hero) .hero {
-  position: static;
-  top: var(--md-header-h);
-  left: 0;
-  right: 0;
-  width: 100%;
-  margin: 0;
+  position: static;                         /* no fijo, se mueve con el scroll */
+  margin-left: calc(50% - 50vw);            /* expande a todo el ancho */
+  margin-right: calc(50% - 50vw);
+  width: 100vw;                             /* asegura ancho completo del viewport */
   border-radius: 0;
   overflow: hidden;
-  z-index: 4;
+  z-index: 0;
 }
 
 body:has(.hero) .hero__bg {
