@@ -125,3 +125,24 @@ body:has(.hero) .md-main {
     object-position: center 40%;
   }
 }
+/* ============================================================
+   HERO CON EFECTO DE DESVANECIMIENTO AL HACER SCROLL
+   ============================================================ */
+
+/* transición suave */
+.hero {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Estado visible inicial */
+body:not(.scrolled) .hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estado al hacer scroll */
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+  pointer-events: none; /* evita que bloquee clics */
+}
