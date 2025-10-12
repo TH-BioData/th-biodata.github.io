@@ -120,3 +120,18 @@ body:has(.hero) .md-sidebar--secondary{
 
 /* Evita scroll horizontal por el full-bleed */
 html, body{ overflow-x:hidden; }
+/* ===== Sidebar siempre por debajo del header ===== */
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  position: sticky;
+  top: var(--md-header-height, 3.6rem); /* separa del header fijo */
+  z-index: 2;
+  background: #fff;                      /* evita que se transparente el hero */
+}
+
+/* ===== En páginas con hero: sidebar arranca debajo del hero + header ===== */
+body:has(.hero) .md-sidebar--primary,
+body:has(.hero) .md-sidebar--secondary {
+  margin-top: var(--th-hero-height);     /* coloca el menú tras el hero */
+  top: var(--md-header-height, 3.6rem);  /* mantiene offset del header al hacer scroll */
+}
