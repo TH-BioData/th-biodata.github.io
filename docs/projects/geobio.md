@@ -1,5 +1,9 @@
 # 🌍 GeoBio
 
+![GeoBio example](../assets/geobio_figure.png){ width="800" }
+
+*Example of occurrence map generated with GeoBio.*
+
 ## 🇬🇧 English
 **GeoBio** is a Python library designed for **ecological, biogeographical, and environmental data workflows**.  
 It enables researchers and organizations to integrate species occurrence data with climatic and environmental variables, automating the extraction of CHELSA rasters and other geospatial sources.  
@@ -39,8 +43,3 @@ GeoBio proporciona una plataforma sólida para **modelado de distribución de es
 
 ---
 
-## 🗺️ Package Example
-
-![GeoBio example](../assets/geobio_figure.png){ width="800" }
-
-*Example of occurrence map generated with GeoBio.*
