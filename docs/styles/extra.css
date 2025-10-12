@@ -1,3 +1,4 @@
+```css
 /* ============================================================
    TH BioData Consulting — Custom Styles (versión corregida móvil)
    ============================================================ */
@@ -17,8 +18,8 @@
 
 /* ===== Variables para alto del hero ===== */
 :root {
-  --th-hero-height: 420px;          /* alto del hero en desktop */
-  --th-hero-height-sm: 300px;       /* alto del hero en móvil   */
+  --th-hero-height: 420px; /* alto del hero en desktop */
+  --th-hero-height-sm: 300px; /* alto del hero en móvil */
   --md-header-h: var(--md-header-height, 3.6rem); /* alto header Material */
 }
 
@@ -26,6 +27,7 @@
    HERO full-width (debajo del header)
    ============================================================ */
 
+/* Solo en páginas que tienen .hero */
 /* --- Hero desplazable (no fijo) --- */
 body:has(.hero) .hero {
   position: fixed;   /* antes era fixed */
@@ -122,7 +124,6 @@ body:has(.hero) .md-main {
   body:has(.hero) .md-main {
     padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
   }
-
   .banner {
     height: 160px;
     object-position: center 40%;
@@ -151,5 +152,3 @@ body.scrolled .hero {
 html, body {
   overflow-x: hidden;
 }
-
-
