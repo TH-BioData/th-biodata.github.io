@@ -1,6 +1,13 @@
 # 🧬 About / Sobre Nosotros
 
-![Banner About](./assets/banner_about.png){ .banner-about }
+<div class="hero hero--full">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div>
+      <div class="hero__title">About</div>
+    </div>
+  </div>
+</div>
 
 > *Transforming biological complexity into clear, data-driven insight.*
 
