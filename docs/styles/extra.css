@@ -101,3 +101,23 @@
 
 /* El hero por debajo de todo */
 .hero { z-index: 0; }
+
+/* ===== Sidebar por encima del hero y opaco ===== */
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  position: relative;
+  z-index: 5;                 /* por encima del hero */
+  background: #ffffff;        /* evita que se vea el hero detrás */
+  box-shadow: 2px 0 0 rgba(0,0,0,0.04); /* línea/sombra sutil */
+}
+
+/* Ajuste del hero (full-bleed) */
+.hero { z-index: 0; }
+.hero__bg { height: 380px; }  /* si querés menos alto que antes */
+
+/* Opcional: en pantallas grandes, dejar un respiro arriba del contenido */
+@media (min-width: 1024px) {
+  .md-main__inner {
+    padding-top: 0.25rem;
+  }
+}
