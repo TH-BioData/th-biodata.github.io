@@ -129,9 +129,58 @@ html, body{ overflow-x:hidden; }
   background: #fff;                      /* evita que se transparente el hero */
 }
 
-/* ===== En páginas con hero: sidebar arranca debajo del hero + header ===== */
-body:has(.hero) .md-sidebar--primary,
-body:has(.hero) .md-sidebar--secondary {
-  margin-top: var(--th-hero-height);     /* coloca el menú tras el hero */
-  top: var(--md-header-height, 3.6rem);  /* mantiene offset del header al hacer scroll */
+/* ============================================================
+   FIX GLOBAL PARA PÁGINAS CON HERO (Home / About)
+   - El hero va en el flujo, full-bleed
+   - TODO el layout (contenido y sidebars) empieza debajo del hero
+   ============================================================ */
+
+/* 1) Hero full-bleed en el flujo normal */
+.hero{
+  position: relative;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;
+  overflow: hidden;
+  z-index: 0;
 }
+.hero__bg{
+  height: var(--th-hero-height, 420px);
+  background-image: url('../assets/hero.jpg?v=7');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero__content{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+  color: #fff;
+}
+
+/* 2) Cuando hay hero: empujar TODO el layout por debajo del hero */
+body:has(.hero) .md-main__inner{
+  padding-top: var(--th-hero-height, 420px) !important;
+}
+
+/* 3) Sidebars: fondo blanco siempre, sin flotar sobre el hero */
+.md-sidebar--primary,
+.md-sidebar--secondary{
+  background: #fff;
+  position: sticky;
+  top: var(--md-header-height, 3.6rem);
+  z-index: 2;
+  box-shadow: none;
+}
+
+/* 4) Responsivo (ajusta alturas en mobile) */
+@media (max-width: 768px){
+  .hero__bg{ height: var(--th-hero-height-sm, 300px); }
+  body:has(.hero) .md-main__inner{
+    padding-top: var(--th-hero-height-sm, 300px) !important;
+  }
+}
+
+/* 5) Seguridad: sin efectos de fade ni transform en el hero */
+.hero{ opacity: 1 !important; transform: none !important; transition: none !important; }
+
