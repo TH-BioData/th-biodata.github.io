@@ -9,31 +9,39 @@
 }
 
 /* ===== TOP BAR (azul corporativo fijo) ===== */
-.md-header, .md-tabs {
+.md-header,
+.md-tabs {
   background-color: #0F3D73 !important;
+  z-index: 10; /* por encima del hero */
 }
 
-/* ===== Variables simples para el alto del hero ===== */
+/* ===== Variables para alto del hero ===== */
 :root {
-  --th-hero-height: 420px;   /* alto del hero en desktop */
-  --th-hero-height-sm: 300px;/* alto del hero en móvil  */
+  --th-hero-height: 420px;          /* alto del hero en desktop */
+  --th-hero-height-sm: 300px;       /* alto del hero en móvil   */
+  --md-header-h: var(--md-header-height, 3.6rem); /* alto header Material */
 }
 
 /* ============================================================
-   HERO a todo ancho (full-bleed) y contenido centrado
+   HERO full-width (debajo del header)
    ============================================================ */
-.hero {
-  position: relative;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+
+/* Solo en páginas que tienen .hero */
+body:has(.hero) .hero {
+  position: fixed;                       /* fuera del flujo del layout */
+  top: var(--md-header-h);               /* inmediatamente bajo el header */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;                          /* a todo lo ancho de la ventana */
+  margin: 0;
   border-radius: 0;
   overflow: hidden;
-  z-index: 5; /* el hero está arriba del fondo, pero debajo del header */
+  z-index: 4;                            /* por debajo del header */
 }
 
-.hero__bg {
+body:has(.hero) .hero__bg {
   height: var(--th-hero-height);
-  background-image: url('../assets/hero.jpg?v=4'); /* rompe caché */
+  background-image: url('../assets/hero.jpg?v=5'); /* rompe caché */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,7 +56,6 @@
   text-align: center;
   background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
   color: #fff;
-  z-index: 2;
 }
 
 .hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
@@ -58,11 +65,11 @@
   background: #0F3D73; border-radius: 8px; color: #fff !important; text-decoration: none;
 }
 
-/* ===== Desplazar TODO el contenido (incluye sidebar) por debajo del hero ===== */
-.md-main {
-  margin-top: var(--th-hero-height) !important;
+/* Empujar TODO el contenido (incluye sidebar) por debajo del hero */
+body:has(.hero) .md-main {
+  padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
   position: relative;
-  z-index: 1; /* por debajo del hero */
+  z-index: 1;
 }
 
 /* ============================================================
@@ -106,8 +113,12 @@
    Responsivo
    ============================================================ */
 @media (max-width: 768px) {
-  .hero__bg { height: var(--th-hero-height-sm); }
-  .md-main  { margin-top: var(--th-hero-height-sm) !important; }
+  body:has(.hero) .hero__bg {
+    height: var(--th-hero-height-sm);
+  }
+  body:has(.hero) .md-main {
+    padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
+  }
 
   .banner {
     height: 160px;
