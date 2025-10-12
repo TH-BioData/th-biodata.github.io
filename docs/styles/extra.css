@@ -28,7 +28,7 @@
 
 /* Solo en páginas que tienen .hero */
 body:has(.hero) .hero {
-  position: fixed;
+  position: relative;
   top: var(--md-header-h);
   left: 0;
   right: 0;
@@ -36,7 +36,7 @@ body:has(.hero) .hero {
   margin: 0;
   border-radius: 0;
   overflow: hidden;
-  z-index: 4;
+  z-index: 0;
 }
 
 body:has(.hero) .hero__bg {
