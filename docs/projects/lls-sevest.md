@@ -1,5 +1,10 @@
 # 🍃 LLS-SevEst
 
+
+![LLS-SevEst example](../assets/lls-sevest_figure.png){ width="800" }
+
+*Example of lesion segmentation and defoliation-adjusted severity estimation.*
+
 ## 🇬🇧 English
 **LLS-SevEst (Late Leaf Spot Severity Estimator)** is a Python package developed to **quantify the severity of leaf lesions** caused by *Nothopassalora personata* in peanut (*Arachis hypogaea*).  
 It combines **K-Means image segmentation** with a **defoliation-adjustment algorithm** to calculate both lesion coverage and effective severity on each leaf sample.
@@ -41,8 +46,3 @@ LLS-SevEst reemplaza la evaluación manual con una metodología **objetiva, repr
 
 ---
 
-## 📸 Package Example
-
-![LLS-SevEst example](../assets/lls-sevest_figure.png){ width="800" }
-
-*Example of lesion segmentation and defoliation-adjusted severity estimation.*
