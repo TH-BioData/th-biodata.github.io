@@ -30,14 +30,14 @@
 /* Solo en páginas que tienen .hero */
 /* --- Hero desplazable y full-width --- */
 body:has(.hero) .hero {
-  position: fixed; /* no fijo, se mueve con el scroll */
-  margin-left: calc(50% - 50vw); /* expande a todo el ancho */
-  margin-right: calc(50% - 50vw);
-  width: 100vw; /* asegura ancho completo del viewport */
-  border-radius: 0;
-  overflow: hidden;
-  z-index: 0;
+  position: fixed;   /* antes era fixed */
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  z-index: 0;            /* opcional, para evitar superposición */
 }
+
 
 body:has(.hero) .hero__bg {
   height: var(--th-hero-height);
