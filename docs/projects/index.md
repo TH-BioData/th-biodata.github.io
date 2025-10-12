@@ -1,4 +1,13 @@
 # Projects / Proyectos
+<div class="hero hero--full">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div>
+      <div class="hero__title">Projects</div>
+      <div class="hero__tag">Our Data-driven solutions for biological and environmental challenges</div>
+    </div>
+  </div>
+</div>
 
 <div class="grid cards" markdown="1">
 
