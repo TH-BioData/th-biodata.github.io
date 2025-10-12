@@ -1,6 +1,14 @@
 # 🧬 Services / Servicios
 
-> *Transforming biological complexity into clear, data-driven insight.*
+<div class="hero hero--full">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div>
+      <div class="hero__title">Services</div>
+      <div class="hero__tag">Transforming biological complexity into clear, data-driven insight.</div>
+    </div>
+  </div>
+</div>
 
 TH BioData Consulting provides integrated **data science and bioinformatics solutions** for research institutions, agriculture, and biotechnology.  
 Explore our main areas of expertise below 👇
