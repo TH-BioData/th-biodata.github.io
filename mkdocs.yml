@@ -46,5 +46,5 @@ nav:
 extra_css:
   - styles/extra.css
 extra_javascript:
-  - assets/js/scroll-hero.js
+  - scripts/scroll-fade.js
 
