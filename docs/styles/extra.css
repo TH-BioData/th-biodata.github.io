@@ -162,3 +162,22 @@ body:has(.hero) .hero {
 
 /* Evita scroll horizontal accidental por diferencias entre vw y layout */
 html, body { overflow-x: hidden; }
+
+
+/* --- FIX: stacking del menú móvil --- */
+/* Volver a z-index por defecto en header/tabs (o al menos por debajo del drawer) */
+.md-header, .md-tabs {
+  z-index: auto;     /* o simplemente quitá la regla anterior */
+}
+
+/* Asegurar que el drawer quede por encima del overlay */
+.md-sidebar--primary, .md-drawer {
+  z-index: 1001;
+}
+.md-overlay {
+  z-index: 1000;
+}
+/* Color de fondo del menú lateral (opcional) */
+.md-sidebar--primary {
+  background-color: #0F3D73;   /* tu azul corporativo */
+}
