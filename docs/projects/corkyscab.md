@@ -1,5 +1,9 @@
 # 🥔 CorkyScab
 
+![CorkyScab example](../assets/corkyscab_figure.png){ width="800" }
+
+*Example of lesion segmentation and quantification using CorkyScab.*
+
 ## 🇬🇧 English
 **CorkyScab** is a Python-based tool for **automated segmentation and quantification of tuber lesions** caused by *Streptomyces spp.*  
 It allows researchers to assess the **extent and severity** of corky scab infections through reproducible image analysis workflows.
@@ -41,8 +45,3 @@ CorkyScab aporta una herramienta **precisa, objetiva y reproducible** para la cu
 
 ---
 
-## 📸 Package Example
-
-![CorkyScab example](../assets/corkyscab_figure.png){ width="800" }
-
-*Example of lesion segmentation and quantification using CorkyScab.*
