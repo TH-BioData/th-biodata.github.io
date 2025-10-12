@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Custom Styles (versión estable)
+   TH BioData Consulting — Custom Styles (versión corregida móvil)
    ============================================================ */
 
 /* --- Ajustes generales de contenido --- */
@@ -12,7 +12,7 @@
 .md-header,
 .md-tabs {
   background-color: #0F3D73 !important;
-  z-index: 10; /* por encima del hero */
+  z-index: 5; /* suficiente para estar sobre hero, pero debajo del drawer */
 }
 
 /* ===== Variables para alto del hero ===== */
@@ -28,20 +28,20 @@
 
 /* Solo en páginas que tienen .hero */
 body:has(.hero) .hero {
-  position: fixed;                       /* fuera del flujo del layout */
-  top: var(--md-header-h);               /* inmediatamente bajo el header */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;                          /* a todo lo ancho de la ventana */
+  position: fixed;
+  top: var(--md-header-h);
+  left: 0;
+  right: 0;
+  width: 100%;
   margin: 0;
   border-radius: 0;
   overflow: hidden;
-  z-index: 4;                            /* por debajo del header */
+  z-index: 4;
 }
 
 body:has(.hero) .hero__bg {
   height: var(--th-hero-height);
-  background-image: url('../assets/hero.jpg?v=5'); /* rompe caché */
+  background-image: url('../assets/hero.jpg?v=6'); /* rompe caché */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -61,8 +61,13 @@ body:has(.hero) .hero__bg {
 .hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
 .hero__tag   { font-size: 18px; opacity: .95; }
 .hero__cta   {
-  display: inline-block; margin-top: 16px; padding: 10px 18px;
-  background: #0F3D73; border-radius: 8px; color: #fff !important; text-decoration: none;
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: #0F3D73;
+  border-radius: 8px;
+  color: #fff !important;
+  text-decoration: none;
 }
 
 /* Empujar TODO el contenido (incluye sidebar) por debajo del hero */
@@ -129,55 +134,56 @@ body:has(.hero) .md-main {
 /* ============================================================
    HERO CON EFECTO DE DESVANECIMIENTO AL HACER SCROLL
    ============================================================ */
-
-/* transición suave */
 .hero {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Estado visible inicial */
 body:not(.scrolled) .hero {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Estado al hacer scroll */
 body.scrolled .hero {
   opacity: 0;
   transform: translateY(-80px);
-  pointer-events: none; /* evita que bloquee clics */
+  pointer-events: none;
 }
 
-/* === Fix: hero centrado de borde a borde, sin desplazamiento === */
-body:has(.hero) .hero {
-  position: fixed;
-  top: var(--md-header-h);  /* debajo del header */
-  left: 0;
-  right: 0;
-  width: 100%;              /* evita 100vw (causa corrimiento) */
-  margin: 0;
-  transform: none;          /* quita translateX(-50%) */
-  z-index: 4;
+/* Evita scroll horizontal accidental */
+html, body {
+  overflow-x: hidden;
 }
 
-/* Evita scroll horizontal accidental por diferencias entre vw y layout */
-html, body { overflow-x: hidden; }
+/* ============================================================
+   FIX: Menú móvil (drawer) visible y clickeable
+   ============================================================ */
 
-
-/* --- FIX: stacking del menú móvil --- */
-/* Volver a z-index por defecto en header/tabs (o al menos por debajo del drawer) */
-.md-header, .md-tabs {
-  z-index: auto;     /* o simplemente quitá la regla anterior */
+/* Drawer encima de todo */
+.md-drawer, .md-sidebar--primary {
+  z-index: 1050 !important;
+  background-color: #0F3D73 !important; /* color corporativo */
+  color: #fff;
 }
 
-/* Asegurar que el drawer quede por encima del overlay */
-.md-sidebar--primary, .md-drawer {
-  z-index: 1001;
-}
+/* Overlay transparente solo para sombrear, no bloquear */
 .md-overlay {
-  z-index: 1000;
+  background-color: rgba(0,0,0,0.25) !important;
+  z-index: 1040 !important;
+  pointer-events: none; /* evita bloquear clics */
 }
-/* Color de fondo del menú lateral (opcional) */
+
+/* Forzar interacción activa en el drawer */
+.md-drawer--active,
 .md-sidebar--primary {
-  background-color: #0F3D73;   /* tu azul corporativo */
+  pointer-events: auto !important;
+}
+
+/* Enlaces del menú */
+.md-sidebar--primary a {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+.md-sidebar--primary a:hover {
+  color: #bcd9ff !important;
 }
