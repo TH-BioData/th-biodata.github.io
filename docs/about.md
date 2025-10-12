@@ -64,21 +64,24 @@ Creemos en:
 > *“Transforming biological complexity into clear, data-driven insight.”*
 
 ---
-
 ## 👤 Founder / Fundador
 
-<div style="display: flex; align-items: center; gap: 16px;">
-  <img src="./assets/tiago_profile.png" alt="Tiago Alejo Herrador" width="140px" style="border-radius: 12px;">
-  <div>
+<div style="display: flex; align-items: flex-start; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
 
-**Tiago Alejo Herrador**  
-Founder · Data Scientist · Bioinformatician  
-*Bridging biology and data through code and creativity.*
+  <div style="flex-shrink: 0;">
+    <img src="./assets/tiago_profile.png" alt="Tiago Alejo Herrador" width="140" style="border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+  </div>
 
-📍 Córdoba, Argentina  
-📧 [thbiodata@gmail.com](mailto:thbiodata@gmail.com)  
-🔗 [LinkedIn](https://www.linkedin.com/in/tiago-alejo-herrador-425090316)  
-🔗 [GitHub](https://github.com/tiagoalejoh)
+  <div style="max-width: 600px;">
+
+  <strong>Tiago Alejo Herrador</strong><br>
+  Founder · Data Scientist · Bioinformatician<br>
+  <em>Bridging biology and data through code and creativity.</em><br><br>
+
+  📍 Córdoba, Argentina<br>
+  📧 <a href="mailto:thbiodata@gmail.com">thbiodata@gmail.com</a><br>
+  🔗 <a href="https://www.linkedin.com/in/tiago-alejo-herrador-425090316" target="_blank">LinkedIn</a><br>
+  🔗 <a href="https://github.com/tiagoalejoh" target="_blank">GitHub</a>
 
   </div>
 </div>
