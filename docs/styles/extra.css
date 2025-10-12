@@ -247,28 +247,41 @@ body:has(.hero--fixed) .md-main__inner {
     padding-top: var(--th-hero-height-sm, 300px) !important;
   }
 }
-/* ========= Versión centrada visualmente (sin hero) ========= */
-body:not(:has(.hero)) .md-main__inner {
-  padding-top: calc(var(--md-header-h, 3.6rem) + 2.5rem) !important; /* deja más aire debajo del header */
+/* ===== Layout compacto cuando NO hay hero ===== */
+:root {
+  --md-header-h: var(--md-header-height, 3.6rem);
 }
 
-/* Centra visualmente el título principal y reduce márgenes redundantes */
-body:not(:has(.hero)) .md-content > h1:first-child,
-body:not(:has(.hero)) .md-content > .md-typeset > h1:first-child {
+/* Solo reservá el alto del header fijo */
+body:not(:has(.hero)) .md-main {
+  padding-top: var(--md-header-h) !important;
+}
+
+/* No agregues padding redundante en contenedores internos */
+body:not(:has(.hero)) .md-main__inner,
+body:not(:has(.hero)) .md-content {
+  padding-top: 0 !important;
   margin-top: 0 !important;
-  padding-top: 1rem !important;
-  text-align: center;               /* centrado óptico horizontal */
 }
 
-/* Mantiene alineación limpia del primer bloque si no hay h1 */
-body:not(:has(.hero)) .md-content > div:first-child {
+/* Elimina el margen superior del primer bloque/título */
+body:not(:has(.hero)) .md-content .md-typeset > :first-child {
   margin-top: 0 !important;
-  padding-top: 0.5rem !important;
+  padding-top: 0 !important;
 }
 
-/* Opcional: agrega una transición suave si el contenido cambia */
-body:not(:has(.hero)) .md-main__inner {
-  transition: padding-top 0.3s ease;
+/* Ajusta márgenes globales del h1 (Material pone uno grande por defecto) */
+.md-typeset h1 {
+  margin: 0.25rem 0 1rem !important;
 }
 
+/* Compensa el header fijo cuando se navega por anclas/TOC */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
 }
+
+/* Si tenías reglas anteriores que añadían padding-top por .hero--fixed, mantenelas.
+   Pero asegúrate de que NO apliquen si no hay .hero. */
