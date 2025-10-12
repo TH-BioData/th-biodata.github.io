@@ -1,10 +1,16 @@
+---
+title: Home
+hide:
+  - toc
+---
+
 <div class="hero hero--full">
   <div class="hero__bg"></div>
   <div class="hero__content">
     <div>
       <div class="hero__title">TH BioData Consulting</div>
       <div class="hero__tag">Transforming biological complexity into clear, data-driven insight.</div>
-      <div><a class="hero__cta" href="projects/">View Projects</a></div>
+      <div><a class="hero__cta" href="/projects/">View Projects</a></div>
     </div>
   </div>
 </div>
@@ -14,8 +20,6 @@ We develop Python-based analytical tools that bridge biology and data, integrati
 
 **ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
 Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
-
-</div>
 
 ---
 
