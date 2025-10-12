@@ -154,36 +154,4 @@ html, body {
   overflow-x: hidden;
 }
 
-/* ============================================================
-   FIX: Menú móvil (drawer) visible y clickeable
-   ============================================================ */
 
-/* Drawer encima de todo */
-.md-drawer, .md-sidebar--primary {
-  z-index: 1050 !important;
-  background-color: #0F3D73 !important; /* color corporativo */
-  color: #fff;
-}
-
-/* Overlay transparente solo para sombrear, no bloquear */
-.md-overlay {
-  background-color: rgba(0,0,0,0.25) !important;
-  z-index: 1040 !important;
-  pointer-events: none; /* evita bloquear clics */
-}
-
-/* Forzar interacción activa en el drawer */
-.md-drawer--active,
-.md-sidebar--primary {
-  pointer-events: auto !important;
-}
-
-/* Enlaces del menú */
-.md-sidebar--primary a {
-  color: #fff !important;
-  font-weight: 500;
-}
-
-.md-sidebar--primary a:hover {
-  color: #bcd9ff !important;
-}
