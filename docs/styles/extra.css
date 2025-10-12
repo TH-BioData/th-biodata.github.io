@@ -1,163 +1,189 @@
-TH BioData Consulting — Custom Styles (versión estable)
-============================================================ */
+/* ============================================================
+   TH BioData Consulting — Custom Styles (versión corregida móvil)
+   ============================================================ */
 
 /* --- Ajustes generales de contenido --- */
 .md-content {
-max-width: 950px;
-margin: 0 auto;
+  max-width: 950px;
+  margin: 0 auto;
 }
 
-/* ===== TOP BAR (azul corporativo fijo) ===== /
+/* ===== TOP BAR (azul corporativo fijo) ===== */
 .md-header,
 .md-tabs {
-background-color: #0F3D73 !important;
-z-index: 10; / por encima del hero */
+  background-color: #0F3D73 !important;
+  z-index: 5; /* suficiente para estar sobre hero, pero debajo del drawer */
 }
 
-/* ===== Variables para alto del hero ===== /
+/* ===== Variables para alto del hero ===== */
 :root {
---th-hero-height: 420px;          / alto del hero en desktop /
---th-hero-height-sm: 300px;       / alto del hero en móvil   /
---md-header-h: var(--md-header-height, 3.6rem); / alto header Material */
+  --th-hero-height: 420px;          /* alto del hero en desktop */
+  --th-hero-height-sm: 300px;       /* alto del hero en móvil   */
+  --md-header-h: var(--md-header-height, 3.6rem); /* alto header Material */
 }
 
 /* ============================================================
-HERO full-width (debajo del header)
-============================================================ */
+   HERO full-width (debajo del header)
+   ============================================================ */
 
-/* Solo en páginas que tienen .hero /
+/* Solo en páginas que tienen .hero */
 body:has(.hero) .hero {
-position: fixed;                       / fuera del flujo del layout /
-top: var(--md-header-h);               / inmediatamente bajo el header /
-left: 50%;
-transform: translateX(-50%);
-width: 100vw;                          / a todo lo ancho de la ventana /
-margin: 0;
-border-radius: 0;
-overflow: hidden;
-z-index: 4;                            / por debajo del header */
+  position: fixed;
+  top: var(--md-header-h);
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  overflow: hidden;
+  z-index: 4;
 }
 
 body:has(.hero) .hero__bg {
-height: var(--th-hero-height);
-background-image: url('../assets/hero.jpg?v=5'); /* rompe caché */
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+  height: var(--th-hero-height);
+  background-image: url('../assets/hero.jpg?v=6'); /* rompe caché */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero__content {
-position: absolute;
-inset: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
-color: #fff;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+  color: #fff;
 }
 
 .hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
 .hero__tag   { font-size: 18px; opacity: .95; }
 .hero__cta   {
-display: inline-block; margin-top: 16px; padding: 10px 18px;
-background: #0F3D73; border-radius: 8px; color: #fff !important; text-decoration: none;
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: #0F3D73;
+  border-radius: 8px;
+  color: #fff !important;
+  text-decoration: none;
 }
 
 /* Empujar TODO el contenido (incluye sidebar) por debajo del hero */
 body:has(.hero) .md-main {
-padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
-position: relative;
-z-index: 1;
+  padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================================
-GRID CARDS (tarjetas de proyectos/servicios)
-============================================================ */
+   GRID CARDS (tarjetas de proyectos/servicios)
+   ============================================================ */
 .grid.cards {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 .grid.cards > * {
-border: 1px solid #e5e7eb;
-border-radius: 12px;
-padding: 16px;
-background: #fff;
-box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .grid.cards > *:hover {
-transform: translateY(-3px);
-box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
 
 /* ============================================================
-BANNERS (ajuste simple)
-============================================================ */
+   BANNERS (ajuste simple)
+   ============================================================ */
 .banner {
-display: block;
-width: 100%;
-height: 220px;
-object-fit: cover;
-object-position: center 45%;
-border-radius: 0;
-margin: 0 auto 24px auto;
-box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 45%;
+  border-radius: 0;
+  margin: 0 auto 24px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 /* ============================================================
-Responsivo
-============================================================ */
+   Responsivo
+   ============================================================ */
 @media (max-width: 768px) {
-body:has(.hero) .hero__bg {
-height: var(--th-hero-height-sm);
-}
-body:has(.hero) .md-main {
-padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
-}
+  body:has(.hero) .hero__bg {
+    height: var(--th-hero-height-sm);
+  }
+  body:has(.hero) .md-main {
+    padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
+  }
 
-.banner {
-height: 160px;
-object-position: center 40%;
-}
+  .banner {
+    height: 160px;
+    object-position: center 40%;
+  }
 }
 
 /* ============================================================
-HERO CON EFECTO DE DESVANECIMIENTO AL HACER SCROLL
-============================================================ */
-
-/* transición suave */
+   HERO CON EFECTO DE DESVANECIMIENTO AL HACER SCROLL
+   ============================================================ */
 .hero {
-transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Estado visible inicial */
 body:not(.scrolled) .hero {
-opacity: 1;
-transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Estado al hacer scroll /
 body.scrolled .hero {
-opacity: 0;
-transform: translateY(-80px);
-pointer-events: none; / evita que bloquee clics */
+  opacity: 0;
+  transform: translateY(-80px);
+  pointer-events: none;
 }
 
-/* === Fix: hero centrado de borde a borde, sin desplazamiento === /
-body:has(.hero) .hero {
-position: fixed;
-top: var(--md-header-h);  / debajo del header /
-left: 0;
-right: 0;
-width: 100%;              / evita 100vw (causa corrimiento) /
-margin: 0;
-transform: none;          / quita translateX(-50%) */
-z-index: 4;
+/* Evita scroll horizontal accidental */
+html, body {
+  overflow-x: hidden;
 }
 
-/* Evita scroll horizontal accidental por diferencias entre vw y layout */
-html, body { overflow-x: hidden; }
+/* ============================================================
+   FIX: Menú móvil (drawer) visible y clickeable
+   ============================================================ */
+
+/* Drawer encima de todo */
+.md-drawer, .md-sidebar--primary {
+  z-index: 1050 !important;
+  background-color: #0F3D73 !important; /* color corporativo */
+  color: #fff;
+}
+
+/* Overlay transparente solo para sombrear, no bloquear */
+.md-overlay {
+  background-color: rgba(0,0,0,0.25) !important;
+  z-index: 1040 !important;
+  pointer-events: none; /* evita bloquear clics */
+}
+
+/* Forzar interacción activa en el drawer */
+.md-drawer--active,
+.md-sidebar--primary {
+  pointer-events: auto !important;
+}
+
+/* Enlaces del menú */
+.md-sidebar--primary a {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+.md-sidebar--primary a:hover {
+  color: #bcd9ff !important;
+}
