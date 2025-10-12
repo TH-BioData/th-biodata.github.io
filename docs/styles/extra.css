@@ -202,3 +202,28 @@ html, body { overflow-x: hidden; }
 .md-overlay {
   background-color: rgba(0, 0, 0, 0.35) !important;
 }
+/* ============================================================
+   FIX definitivo interacción menú móvil (z-index y eventos)
+   ============================================================ */
+
+/* Orden correcto de capas:
+   header (130) > drawer (120) > overlay (110) > contenido (1) > hero (0) */
+.md-header { z-index: 130 !important; }
+.md-drawer,
+.md-nav { z-index: 120 !important; }
+.md-overlay { z-index: 110 !important; }
+
+/* Asegura que el hero nunca bloquee clics por encima del menú */
+.hero,
+.hero__content,
+.hero__bg { z-index: 0 !important; }
+
+/* Cuando el drawer está abierto, anulá cualquier captura del hero */
+html[data-md-state="drawer"] .hero,
+html[data-md-state="drawer"] .hero__content,
+html[data-md-state="drawer"] .hero__bg {
+  pointer-events: none !important;
+}
+
+/* Drawer debe aceptar clics sí o sí */
+.md-drawer { pointer-events: auto !important; }
