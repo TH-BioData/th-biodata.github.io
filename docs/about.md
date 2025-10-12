@@ -5,6 +5,7 @@
   <div class="hero__content">
     <div>
       <div class="hero__title">About</div>
+      <div class="hero__tag">Who we are, what we do & our approach.</div>
     </div>
   </div>
 </div>
