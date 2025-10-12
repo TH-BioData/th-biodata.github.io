@@ -1,9 +1,8 @@
-```css
 /* ============================================================
-   TH BioData Consulting — Custom Styles (versión corregida móvil)
+   TH BioData Consulting — Custom Styles (fix hero visible + fade)
    ============================================================ */
 
-/* --- Ajustes generales de contenido --- */
+/* --- Contenido centrado --- */
 .md-content {
   max-width: 950px;
   margin: 0 auto;
@@ -13,40 +12,44 @@
 .md-header,
 .md-tabs {
   background-color: #0F3D73 !important;
-  z-index: 5; /* suficiente para estar sobre hero, pero debajo del drawer */
+  z-index: 20; /* por encima del hero */
 }
 
-/* ===== Variables para alto del hero ===== */
+/* ===== Variables ===== */
 :root {
-  --th-hero-height: 420px; /* alto del hero en desktop */
-  --th-hero-height-sm: 300px; /* alto del hero en móvil */
-  --md-header-h: var(--md-header-height, 3.6rem); /* alto header Material */
+  --th-hero-height: 420px;          /* desktop */
+  --th-hero-height-sm: 300px;       /* móvil */
+  --md-header-h: var(--md-header-height, 3.6rem);
 }
 
 /* ============================================================
    HERO full-width (debajo del header)
    ============================================================ */
 
-/* Solo en páginas que tienen .hero */
-/* --- Hero desplazable y full-width --- */
-body:has(.hero) .hero {
-  position: fixed;   /* antes era fixed */
-  top: auto;
-  left: auto;
-  right: auto;
-  bottom: auto;
-  z-index: 0;            /* opcional, para evitar superposición */
+/* Bloque hero (fijo y con tamaño) */
+.hero {
+  position: fixed;
+  top: var(--md-header-h); /* queda debajo del header */
+  left: 0;
+  right: 0;
+  height: var(--th-hero-height);
+  margin: 0;
+  z-index: 0;             /* por detrás del header */
+  overflow: hidden;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-
-body:has(.hero) .hero__bg {
-  height: var(--th-hero-height);
-  background-image: url('../assets/hero.jpg?v=6'); /* rompe caché */
+/* Imagen/fondo ocupando TODO el hero */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/hero.jpg?v=6');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
+/* Contenido centrado y con overlay sutil */
 .hero__content {
   position: absolute;
   inset: 0;
@@ -70,15 +73,15 @@ body:has(.hero) .hero__bg {
   text-decoration: none;
 }
 
-/* Empujar TODO el contenido (incluye sidebar) por debajo del hero */
-body:has(.hero) .md-main {
+/* Empujar TODO el contenido por debajo del hero + header */
+.md-main {
   padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
   position: relative;
   z-index: 1;
 }
 
 /* ============================================================
-   GRID CARDS (tarjetas de proyectos/servicios)
+   GRID CARDS
    ============================================================ */
 .grid.cards {
   display: grid;
@@ -101,7 +104,7 @@ body:has(.hero) .md-main {
 }
 
 /* ============================================================
-   BANNERS (ajuste simple)
+   BANNERS
    ============================================================ */
 .banner {
   display: block;
@@ -118,10 +121,8 @@ body:has(.hero) .md-main {
    Responsivo
    ============================================================ */
 @media (max-width: 768px) {
-  body:has(.hero) .hero__bg {
-    height: var(--th-hero-height-sm);
-  }
-  body:has(.hero) .md-main {
+  .hero { height: var(--th-hero-height-sm); }
+  .md-main {
     padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
   }
   .banner {
@@ -131,17 +132,12 @@ body:has(.hero) .md-main {
 }
 
 /* ============================================================
-   HERO CON EFECTO DE DESVANECIMIENTO AL HACER SCROLL
+   Efecto de desvanecimiento (requiere JS que ponga .scrolled)
    ============================================================ */
-.hero {
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
 body:not(.scrolled) .hero {
   opacity: 1;
   transform: translateY(0);
 }
-
 body.scrolled .hero {
   opacity: 0;
   transform: translateY(-80px);
@@ -149,6 +145,4 @@ body.scrolled .hero {
 }
 
 /* Evita scroll horizontal accidental */
-html, body {
-  overflow-x: hidden;
-}
+html, body { overflow-x: hidden; }
