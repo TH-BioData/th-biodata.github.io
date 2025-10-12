@@ -28,7 +28,7 @@
 
 /* Solo en páginas que tienen .hero */
 body:has(.hero) .hero {
-  position: relative;
+  position: static;
   top: var(--md-header-h);
   left: 0;
   right: 0;
