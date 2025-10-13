@@ -291,3 +291,32 @@ body.scrolled .hero {
   transform: translateY(-80px);
 }
 
+/* ============================================================
+   Scroll fade estable: transición sólo tras "ready"
+   ============================================================ */
+
+/* Estado inicial: sin transición para evitar parpadeo */
+.hero {
+  opacity: 1;
+  transform: translateY(0);
+  transition: none; /* sin !important para permitir override posterior */
+}
+
+/* Cuando el DOM está listo activamos las transiciones */
+body.ready .hero {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+/* El desvanecimiento se aplica sólo si además hay .ready */
+body.ready.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+
+/* Accesibilidad: respeta "reducir movimiento" */
+@media (prefers-reduced-motion: reduce) {
+  body.ready .hero {
+    transition: none;
+  }
+}
