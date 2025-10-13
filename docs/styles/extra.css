@@ -176,3 +176,37 @@ body:not(:has(.hero)) .md-main{padding-top:var(--md-header-h) !important;}
 @media (prefers-reduced-motion:reduce){
   .hero{transition:none;}
 }
+/* ============================================================
+   ENHANCEMENT: usar logo real en drawer móvil
+   ============================================================ */
+
+/* Drawer móvil: franja superior celeste con logo real */
+@media (max-width: 960px) {
+  .md-sidebar--primary .md-nav__title .md-logo {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 36px !important;
+    width: 36px !important;
+    border-radius: 6px;
+    background: transparent !important;
+  }
+
+  .md-sidebar--primary .md-nav__title .md-logo::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0) invert(1); /* mantiene el logo blanco sobre celeste */
+  }
+
+  /* Eliminamos cualquier filtro duplicado sobre img/svg internos */
+  .md-sidebar--primary .md-nav__title .md-logo img,
+  .md-sidebar--primary .md-nav__title .md-logo svg {
+    display: none !important;
+  }
+}
