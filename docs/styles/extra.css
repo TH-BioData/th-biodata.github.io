@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.11)
+   TH BioData Consulting — Estilos estables (v3.14)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -10,6 +10,9 @@
 
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
+
+  --th-logo-size: 28px;
+  --th-logo-size-mobile: clamp(40px, 9vw, 52px);
 
   /* Material primary */
   --md-primary-fg-color: var(--th-color-corporate-blue);
@@ -71,6 +74,7 @@
     height: calc(100vh - var(--md-header-h));
     left: 0;
     right: auto;
+    --th-logo-size: var(--th-logo-size-mobile);
   }
 
   /* Franja superior del drawer (celeste + texto blanco) */
@@ -79,6 +83,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    margin: 0;
     background-color: var(--md-primary-fg-color--light) !important;
     color: #fff !important;
     font-weight: 600;
@@ -87,8 +92,8 @@
     /* Layout */
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
+    gap: 12px;
+    padding: calc(.55rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
     min-height: 60px;
     line-height: 1.2;
   }
@@ -107,23 +112,25 @@
     display: none !important;
   }
 
-  /* Logo nativo más grande (44px) y margen */
+  /* Logo nativo ampliado en móvil y con margen */
   .md-sidebar--primary .md-nav__title .md-logo,
   .md-drawer .md-header .md-logo {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;                /* ← tamaño logo móvil */
-    height: 44px;
-    margin-right: 10px;
+    width: var(--th-logo-size);
+    height: var(--th-logo-size);
+    margin-right: 12px;
     background: transparent !important;
     border-radius: 0;
   }
   .md-sidebar--primary .md-nav__title .md-logo img,
   .md-drawer .md-header .md-logo img {
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    height: 100%;
+    max-width: var(--th-logo-size);
+    max-height: var(--th-logo-size);
     display: inline-block !important;
     vertical-align: middle;
     object-fit: contain;
@@ -143,7 +150,10 @@
 
   /* Evitar que contenido/hero tape el drawer */
   .md-main, .md-main__inner, .hero { z-index: var(--z-hero); }
-  .md-sidebar__scrollwrap { overflow: auto; }
+  .md-sidebar__scrollwrap {
+    overflow: auto;
+    padding-top: 0 !important;
+  }
 }
 
 /* Desktop: padding del título del sidebar */
@@ -156,8 +166,8 @@
    ============================================================ */
 .md-logo img,
 .md-header__button.md-logo img {
-  width: 28px;
-  height: 28px;
+  width: var(--th-logo-size);
+  height: var(--th-logo-size);
   display: inline-block !important;
   vertical-align: middle;
   object-fit: contain;
@@ -198,7 +208,7 @@
   inset: 0;
   z-index: 0;
   background-color: #0c2d57;
-  background-image: url('/assets/hero.jpg?v=11');
+  background-image: url('/assets/hero.jpg?v=9'); /* ruta absoluta */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -224,7 +234,7 @@
   text-decoration: none;
 }
 
-/* Fade controlado por scripts/scroll-fade.js */
+/* Fade controlado por scripts/scroll-fade.js (.scrolled en <body>) */
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); pointer-events: none; }
 
 /* ============================================================
