@@ -1,17 +1,19 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.9)
+   TH BioData Consulting — Estilos estables (v4.0)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
 :root {
   --th-hero-height: 420px;
   --th-hero-height-sm: 300px;
+
+  /* Altura real del header de Material (el tema la expone) */
   --md-header-h: var(--md-header-height, 3.6rem);
 
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
 
-  /* Material primary (evita el violeta por defecto) */
+  /* Paleta primaria (evita violeta por defecto) */
   --md-primary-fg-color: var(--th-color-corporate-blue);
   --md-primary-fg-color--light: var(--th-color-corporate-light-blue);
   --md-primary-fg-color--dark: #0B2C54;
@@ -62,23 +64,32 @@
    DRAWER (móvil)
    ============================================================ */
 @media (max-width: 960px) {
-  .md-drawer,
-  .md-nav,
-  .md-sidebar,
-  .md-sidebar--primary,
-  .md-sidebar__scrollwrap { position: fixed; z-index: var(--z-drawer); }
-
+  /* Asegura que el panel use todo el alto y se pegue al header sin “franjas” */
   .md-drawer,
   .md-sidebar--primary {
-    top: var(--md-header-h);
-    height: calc(100vh - var(--md-header-h));
+    position: fixed;
     left: 0;
     right: auto;
+    top: var(--md-header-h);                   /* pegado al header */
+    height: calc(100vh - var(--md-header-h));  /* ocupa el resto */
+    z-index: var(--z-drawer);
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;               /* ← quita halo/blanco superior */
+    background: #fff;
+  }
+
+  /* El contenedor interno también sin sombras/bordes para evitar líneas */
+  .md-sidebar__scrollwrap {
+    overflow: auto;
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 
   /* Franja superior del drawer (celeste + texto blanco) */
   .md-sidebar--primary .md-nav__title,
-  .md-drawer .md-header { /* compatibilidad de versiones */
+  .md-drawer .md-header { /* compatibilidad entre versiones */
     position: sticky;
     top: 0;
     z-index: 1;
@@ -87,14 +98,14 @@
     font-weight: 600;
     border-bottom: 1px solid rgba(255,255,255,.25);
 
-    /* --- Layout anti-superposición --- */
+    /* Layout anti-superposición */
     display: flex;
     align-items: center;
     gap: 10px;
     padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
   }
 
-  /* Logo nativo en la franja: tamaño fijo y margen a la derecha */
+  /* Logo nativo: tamaño fijo, no crece, con separación del texto */
   .md-sidebar--primary .md-nav__title .md-logo,
   .md-drawer .md-header .md-logo {
     flex: 0 0 auto;
@@ -103,9 +114,9 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    margin-right: 6px;       /* ← evita que toque el texto */
-    border-radius: 0;
+    margin-right: 8px;          /* ← evita que toque el título */
     background: transparent;
+    border: 0;
   }
   .md-sidebar--primary .md-nav__title .md-logo img,
   .md-drawer .md-header .md-logo img {
@@ -115,21 +126,17 @@
     vertical-align: middle;
   }
 
-  /* El texto del título ocupa el resto del espacio */
+  /* Título: ocupa el resto, puede partirse y jamás pisa el logo */
   .md-sidebar--primary .md-nav__title strong,
   .md-drawer .md-header__title {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;         /* ← permite salto de línea si hace falta */
+    line-height: 1.2;
     color: #fff !important;
   }
-
-  /* Evitar que contenido/hero tape el drawer */
-  .md-main, .md-main__inner, .hero { z-index: var(--z-hero); }
-
-  .md-sidebar__scrollwrap { overflow: auto; }
 }
 
 /* Desktop: limpia padding del título del sidebar */
@@ -184,8 +191,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: #0c2d57;                  /* color base anti-parpadeo */
-  background-image: url('/assets/hero.jpg?v=8'); /* ruta absoluta GitHub Pages */
+  background-color: #0c2d57;                   /* color base anti-parpadeo */
+  background-image: url('/assets/hero.jpg?v=9');/* ruta absoluta GitHub Pages */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
