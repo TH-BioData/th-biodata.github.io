@@ -1,74 +1,81 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v4)
+   TH BioData Consulting — CSS estable y compatible con Material
    ============================================================ */
 
 /* --- Variables globales --- */
 :root {
   --th-hero-height: 420px;
   --th-hero-height-sm: 300px;
-  --md-header-h: var(--md-header-height, 3.6rem);
-  --th-color-corporate-blue: #0F3D73;
-  --th-color-corporate-light-blue: #7CC6FF;
-}
-
-/* --- Contenido centrado --- */
-.md-content {
-  max-width: 950px;
-  margin: 0 auto;
+  --th-color-blue: #0F3D73;
+  --th-color-light-blue: #7CC6FF;
 }
 
 /* ============================================================
-   HEADER (azul) — no tocar mecánica del drawer/overlay
+   HEADER y navegación
    ============================================================ */
-.md-header,
-.md-tabs {
-  background-color: var(--th-color-corporate-blue) !important;
-  z-index: 20 !important; /* sobre el hero */
+.md-header, .md-tabs {
+  background-color: var(--th-color-blue) !important;
+  z-index: 10 !important;
 }
 
-/* Asegurá que el botón de menú sea visible en todos los anchos */
+/* Icono del menú SIEMPRE visible (desktop + móvil) */
 .md-header__button[for="__drawer"] {
   display: flex !important;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
-.md-header__button[for="__drawer"] .md-icon { color: #fff !important; }
+.md-header__button[for="__drawer"] .md-icon {
+  color: #fff !important;
+}
+
+/* Drawer */
+.md-nav__title {
+  background-color: var(--th-color-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+.md-nav__link, .md-nav__link span {
+  color: var(--th-color-blue) !important;
+}
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
+}
+.md-nav__icon, .md-icon {
+  color: var(--th-color-blue) !important;
+}
+.md-overlay {
+  background-color: rgba(0,0,0,0.35) !important;
+}
 
 /* ============================================================
-   HERO full-bleed, debajo del header, sin márgenes negativos
+   HERO — full-width y pegado al header
    ============================================================ */
-
-/* El hero ocupa TODO el ancho del viewport y queda pegado al header */
 .hero {
   position: relative;
-  width: 100vw;                /* full width real */
+  width: 100vw;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;          /* saca del contenedor */
-  margin-right: -50vw;         /* evita scroll lateral en algunos navegadores */
+  margin-left: -50vw;
   height: var(--th-hero-height);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 0;
-  transition: opacity .6s ease, transform .6s ease;
-  margin-top: 0;               /* sin offset raro arriba */
 }
 
-/* Fondo */
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-image: url('../assets/hero.jpg?v=6');
+  background-image: url('../assets/hero.jpg?v=7');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
 }
 
-/* Contenido */
 .hero__content {
   position: relative;
   text-align: center;
@@ -78,64 +85,56 @@
   z-index: 1;
 }
 
-.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag   { font-size: 18px; opacity: .95; }
-.hero__cta   {
+.hero__title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.hero__tag {
+  font-size: 18px;
+  opacity: .95;
+}
+.hero__cta {
   display: inline-block;
   margin-top: 16px;
   padding: 10px 18px;
-  background: var(--th-color-corporate-blue);
+  background: var(--th-color-blue);
   border-radius: 8px;
   color: #fff !important;
   text-decoration: none;
 }
 
 /* ============================================================
-   LAYOUT general: compensa solo el header; hero va justo debajo
+   CONTENIDO — compensa header fijo
    ============================================================ */
 .md-main {
-  padding-top: var(--md-header-h) !important;  /* header fijo */
+  padding-top: var(--md-header-height) !important;
   position: relative;
   z-index: 1;
 }
-
-/* Fade opcional del hero (no interfiere con el drawer) */
 body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
-   Drawer / Sidebar — SOLO colores (no tocar z-index/transform)
+   Páginas sin hero
    ============================================================ */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
+body:not(:has(.hero)) .md-main {
+  padding-top: var(--md-header-height) !important;
 }
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important;
-  color: #004B8E !important;
-}
-.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
-.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
 
 /* ============================================================
-   Páginas SIN hero
+   Ajustes visuales generales
    ============================================================ */
-body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
-
-/* Ajuste de títulos y anclas con header fijo */
-.md-typeset h1 { margin: 0.25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
+.md-typeset h1 {
+  margin: 0.25rem 0 1rem !important;
 }
-
-/* Evitar scroll horizontal */
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-height) + 0.5rem);
+}
 html, body { overflow-x: hidden; }
 
 /* ============================================================
-   Grid de cards (si lo usás)
+   Grid de cards (opcional)
    ============================================================ */
 .grid.cards {
   display: grid;
