@@ -250,3 +250,25 @@ body:not(:has(.hero)) .md-main {
   background-color: transparent !important;
   opacity: 1 !important;
 }
+/* ============================================================
+   OPTIMIZACIÓN DE CARGA DEL HERO (color base + transición)
+   ============================================================ */
+
+/* (2) Color base del hero para evitar fondo gris antes de cargar la imagen */
+.hero__bg {
+  background-color: #0c2d57 !important; /* color base similar al hero */
+  background-image: url('../assets/hero.jpg?v=6');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* (3) Evita que el hero parpadee al inicio antes de cargar la imagen */
+.hero {
+  transition: none !important; /* desactiva transición inicial */
+}
+
+/* Una vez que el DOM esté listo (JS agrega .ready al body), reactivamos la transición */
+body.ready .hero {
+  transition: opacity 0.6s ease, transform 0.6s ease !important;
+}
