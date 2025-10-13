@@ -231,3 +231,32 @@ body:not(:has(.hero)) .md-main {
 .md-typeset h2,
 .md-typeset h3,
 .md-typeset h4 {
+/* ============================================================
+   FIX: Logo blanco visible en franja celeste (menú móvil)
+   ============================================================ */
+
+/* Ajusta el área del título del drawer (celeste) */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.8rem 1rem !important;
+}
+
+/* Asegura que el logo sea visible en blanco */
+.md-nav__title img,
+.md-nav__title svg {
+  height: 28px !important;
+  width: auto !important;
+  filter: brightness(0) invert(1); /* convierte logos azules a blanco */
+  display: inline-block !important;
+}
+
+/* Si usás el texto TH BioData Consulting, mantenelo blanco */
+.md-nav__title span,
+.md-nav__title strong {
+  color: #fff !important;
+}
