@@ -363,3 +363,38 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
   background: linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.25));
   pointer-events: none;
 }
+/* ======= PALETA PRIMARIA (Material) ======= */
+:root{
+  /* Azul corporativo */
+  --md-primary-fg-color: #0F3D73;
+  --md-primary-fg-color--light: #7CC6FF;
+  --md-primary-fg-color--dark: #0B2C54;
+}
+
+/* Header (barra superior) */
+.md-header,
+.md-tabs { background-color: var(--md-primary-fg-color) !important; }
+
+/* Drawer (móvil) – franja superior: forzamos celeste y texto blanco */
+.md-drawer .md-header,
+.md-sidebar__title {
+  background-color: var(--md-primary-fg-color--light) !important;
+  color: #fff !important;
+}
+
+/* Logo en header y en drawer: asegurar ruta, tamaño y que no lo tape nada */
+.md-logo img,
+.md-header__button.md-logo img {
+  content: url("/assets/logo.png");     /* ruta absoluta para GitHub Pages */
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Evitar bordes/fondos blancos heredados en el contenedor del logo */
+.md-logo,
+.md-header__button.md-logo {
+  background: transparent !important;
+  box-shadow: none !important;
+}
