@@ -268,7 +268,26 @@ body:not(:has(.hero)) .md-main {
   transition: none !important; /* desactiva transición inicial */
 }
 
-/* Una vez que el DOM esté listo (JS agrega .ready al body), reactivamos la transición */
+/* ============================================================
+   RESTAURA EFECTO FADE AL SCROLLEAR
+   ============================================================ */
+
+/* Al cargar, sin transición (para evitar parpadeo) */
+.hero {
+  opacity: 1;
+  transform: translateY(0);
+  transition: none !important;
+}
+
+/* Cuando el DOM está listo (se agrega .ready al body), activamos transición */
 body.ready .hero {
   transition: opacity 0.6s ease, transform 0.6s ease !important;
 }
+
+/* Cuando el usuario hace scroll y se agrega .scrolled (por scroll-fade.js),
+   aplicamos el desvanecimiento */
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+
