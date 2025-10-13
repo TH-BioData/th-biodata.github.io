@@ -1,11 +1,11 @@
 /* ============================================================
-   TH BioData Consulting — Estilos finales (Hero full-width + menú retraíble)
+   TH BioData Consulting — Estilos finales (hero arriba + menú visible)
    ============================================================ */
 
 /* --- Variables globales --- */
 :root {
-  --th-hero-height: 420px;            /* desktop */
-  --th-hero-height-sm: 300px;         /* móvil */
+  --th-hero-height: 420px;
+  --th-hero-height-sm: 300px;
   --md-header-h: var(--md-header-height, 3.6rem);
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
@@ -26,15 +26,28 @@
   z-index: 20 !important;
 }
 
+/* --- Mostrar SIEMPRE el icono de menú (hamburguesa) --- */
+.md-header__button[for="__drawer"] {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* --- Opcional: mejorar contraste del ícono --- */
+.md-header__button[for="__drawer"] .md-icon {
+  color: #ffffff !important;
+}
+
 /* ============================================================
-   HERO full-bleed — ocupa todo el ancho de la ventana
+   HERO full-bleed (ocupa todo el ancho y empieza bien arriba)
    ============================================================ */
 .hero {
   position: relative;
-  width: 100vw;                         /* ocupa todo el viewport */
+  width: 100vw;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;                   /* saca del flujo limitado */
+  margin-left: -50vw;
   height: var(--th-hero-height);
   overflow: hidden;
   display: flex;
@@ -42,7 +55,7 @@
   justify-content: center;
   z-index: 0;
   transition: opacity .6s ease, transform .6s ease;
-  margin-top: 0 !important;
+  margin-top: calc(-1 * var(--md-header-h)); /* quita el espacio blanco superior */
 }
 
 .hero__bg {
@@ -86,10 +99,10 @@
 }
 
 /* ============================================================
-   Layout principal
+   LAYOUT y comportamiento de scroll
    ============================================================ */
 .md-main {
-  padding-top: var(--md-header-h) !important;
+  padding-top: 0 !important; /* ya compensamos con margin-top del hero */
   position: relative;
   z-index: 1;
 }
@@ -98,10 +111,8 @@ body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
-   Drawer retraíble (lateral ocultable)
+   DRAWER retraíble (menú desplegable)
    ============================================================ */
-
-/* Fondo del menú */
 .md-nav__title {
   background-color: var(--th-color-corporate-light-blue) !important;
   color: #fff !important;
@@ -109,7 +120,6 @@ body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* Enlaces y texto */
 .md-nav__link,
 .md-nav__link span {
   color: var(--th-color-corporate-blue) !important;
@@ -127,32 +137,12 @@ body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
   color: var(--th-color-corporate-blue) !important;
 }
 
-/* Overlay al abrir menú (gris suave y clickeable) */
 .md-overlay {
   background-color: rgba(0,0,0,0.35) !important;
 }
 
-/* Menú retraíble (drawer) — oculto por defecto en desktop */
-@media (min-width: 769px) {
-  .md-sidebar {
-    display: none !important;
-  }
-
-  /* Mostramos el botón del drawer (hamburguesa) en escritorio */
-  .md-header__button[for="__drawer"] {
-    display: block !important;
-  }
-}
-
 /* ============================================================
-   Páginas SIN hero
-   ============================================================ */
-body:not(:has(.hero)) .md-main {
-  padding-top: var(--md-header-h) !important;
-}
-
-/* ============================================================
-   Grid de cards
+   GRID DE CARDS
    ============================================================ */
 .grid.cards {
   display: grid;
@@ -175,7 +165,7 @@ body:not(:has(.hero)) .md-main {
 }
 
 /* ============================================================
-   Tipografía y márgenes
+   TITULOS Y MÁRGENES
    ============================================================ */
 .md-typeset h1 {
   margin: 0.25rem 0 1rem !important;
@@ -189,10 +179,10 @@ body:not(:has(.hero)) .md-main {
 }
 
 /* ============================================================
-   Responsivo
+   RESPONSIVO
    ============================================================ */
 @media (max-width: 768px) {
-  .hero { height: var(--th-hero-height-sm); }
+  .hero { height: var(--th-hero-height-sm); margin-top: calc(-1 * var(--md-header-h)); }
   .hero__title { font-size: 28px; }
   .hero__tag { font-size: 16px; }
   .hero__cta { padding: 8px 14px; }
