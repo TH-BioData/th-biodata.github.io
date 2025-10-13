@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos completos y estables (v3.2)
+   TH BioData Consulting — Estilos completos y estables (v3.3)
    ============================================================ */
 
 /* --- Variables globales --- */
@@ -52,7 +52,7 @@
   color: var(--th-color-corporate-blue) !important;
 }
 
-/* Overlay (por defecto sin bloquear ni oscurecer) */
+/* Overlay (por defecto sin oscurecer ni bloquear) */
 .md-overlay {
   background-color: transparent !important;
   pointer-events: none;
@@ -73,7 +73,7 @@
   background: #fff !important;
 }
 
-/* En móvil: aseguremos z-index del drawer */
+/* En móvil: asegurar z-index del drawer por encima del contenido */
 @media (max-width: 960px) {
   .md-sidebar,
   .md-sidebar--primary,
@@ -81,37 +81,43 @@
   .md-nav,
   .md-drawer {
     position: fixed;
-    z-index: 100 !important; /* por encima del header (20) y contenido */
+    z-index: 100 !important;
   }
   .md-main,
   .md-main__inner,
   .hero {
-    z-index: 0 !important; /* contenido bajo el drawer */
+    z-index: 0 !important;
   }
 }
 
 /* ============================================================
-   HERO full-bleed en el flujo, centrado y arriba
+   HERO full-bleed en el flujo (no sticky) + fondo optimizado
    ============================================================ */
 
 .hero {
-  position: relative;
-  margin-left: calc(50% - 50vw);
+  position: relative;                            /* en el flujo */
+  margin-left: calc(50% - 50vw);                 /* full-bleed */
   margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 0 !important;
   z-index: 0;
-  margin-top: 0 !important; /* evitar desplazamiento */
-  /* transición se controla más abajo (ready/fade) */
+
+  /* Estado visible por defecto (sin parpadeo) */
+  opacity: 1;
+  transform: translateY(0);
+
+  /* Transición SIEMPRE activa (evitamos flicker con color base, no desactivando transición) */
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .hero__bg {
   position: absolute;
   inset: 0;
-  /* Optimización: color base para evitar gris mientras carga */
+  /* Color base evita “gris” mientras carga la imagen */
   background-color: #0c2d57 !important;
   background-image: url('../assets/hero.jpg?v=6');
   background-size: cover;
@@ -152,6 +158,17 @@
 }
 
 /* ============================================================
+   FADE al scrollear (scroll-fade.js agrega/quita .scrolled)
+   ============================================================ */
+
+/* Cuando el body tiene .scrolled (umbral en tu JS), desvanecé el hero */
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+  pointer-events: none; /* no bloquea clics mientras está oculto */
+}
+
+/* ============================================================
    Layout principal (padding bajo header)
    ============================================================ */
 
@@ -170,6 +187,12 @@ body:has(.hero) .md-main {
 /* Páginas SIN hero: mantener padding normal */
 body:not(:has(.hero)) .md-main {
   padding-top: var(--md-header-h) !important;
+}
+
+/* Asegurar que el contenido quede sobre cualquier overlay/gradiente del hero */
+.md-main__inner {
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================================
@@ -208,111 +231,3 @@ body:not(:has(.hero)) .md-main {
 .md-typeset h2,
 .md-typeset h3,
 .md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
-}
-
-/* ============================================================
-   Responsivo
-   ============================================================ */
-
-@media (max-width: 768px) {
-  .hero { height: var(--th-hero-height-sm); }
-  .hero__title { font-size: 28px; }
-  .hero__tag { font-size: 16px; }
-  .hero__cta { padding: 8px 14px; }
-}
-
-/* ============================================================
-   OPTIMIZACIÓN + FADE CONTROLADO (sin parpadeo inicial)
-   ============================================================ */
-
-/* Estado inicial: sin transición para evitar parpadeo al primer render */
-.hero {
-  opacity: 1;
-  transform: translateY(0);
-  transition: none !important;  /* cancela transiciones previas */
-}
-
-/* Cuando el DOM está listo (ready.js agrega .ready), activamos transiciones */
-body.ready .hero {
-  transition: opacity 0.6s ease, transform 0.6s ease !important;
-  will-change: opacity, transform;
-}
-
-/* Fade SOLO cuando hay .ready y además .scrolled (lo maneja scroll-fade.js) */
-body.ready.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-}
-
-/* Seguridad: estado no scrolleado con ready */
-body.ready:not(.scrolled) .hero {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Accesibilidad: respeta preferencia de reducir movimiento */
-@media (prefers-reduced-motion: reduce) {
-  body.ready .hero {
-    transition: none !important;
-  }
-}
-
-/* ============================================================
-   HERO EN FLUJO + FADE AL SCROLL (no sticky)
-   ============================================================ */
-
-/* Hero vuelve al flujo normal, sin fijarse ni tapar contenido */
-.hero {
-  position: relative !important;   /* ← clave: no sticky */
-  top: auto !important;
-  z-index: 0 !important;           /* por debajo del header (20) y del drawer */
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  height: var(--th-hero-height);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0 !important;
-
-  /* Estado inicial: sin transición para evitar parpadeo */
-  opacity: 1;
-  transform: translateY(0);
-  transition: none !important;
-}
-
-/* Activamos la transición sólo cuando el DOM está listo (.ready la agrega ready.js) */
-body.ready .hero {
-  transition: opacity 0.6s ease, transform 0.6s ease !important;
-  will-change: opacity, transform;
-}
-
-/* Al scrollear (tu scroll-fade.js agrega .scrolled), se desvanece y sube un poco */
-body.ready.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-  pointer-events: none; /* evita que “tape” clics mientras está desvanecido */
-}
-
-/* El contenido debe quedar por encima del hero si hay overlays/gradientes */
-.md-main__inner {
-  position: relative;
-  z-index: 1;
-}
-
-/* Páginas con hero: sin padding-top extra (para que el hero arranque arriba) */
-body:has(.hero) .md-main {
-  padding-top: 0 !important;
-}
-
-/* Páginas sin hero: mantener el padding-top para no tapar por el header fijo */
-body:not(:has(.hero)) .md-main {
-  padding-top: var(--md-header-h) !important;
-}
-
-/* Accesibilidad */
-@media (prefers-reduced-motion: reduce) {
-  body.ready .hero { transition: none !important; }
-}
-
