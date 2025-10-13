@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos Custom (limpio y estable)
+   TH BioData Consulting — Estilos minimal y estables (Movil OK)
    ============================================================ */
 
 /* --- Variables globales --- */
@@ -7,7 +7,7 @@
   --th-hero-height: 420px;            /* desktop */
   --th-hero-height-sm: 300px;         /* móvil */
   --md-header-h: var(--md-header-height, 3.6rem);
-  --th-color-corporate-blue: #0F3D73;       /* barra superior / CTA */
+  --th-color-corporate-blue: #0F3D73;       /* barra / CTA */
   --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
 }
 
@@ -21,21 +21,20 @@
 .md-header,
 .md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: 10 !important; /* por encima del hero en flujo */
 }
 
 /* ============================================================
-   HERO full-bleed en el flujo (scroll normal, sin fixed)
+   HERO full-bleed en el flujo (no fixed)
    ============================================================ */
 
 .hero {
-  position: relative;                 
-  margin-left: calc(50% - 50vw);      /* full-bleed */
+  position: relative;
+  margin-left: calc(50% - 50vw);  /* full-bleed */
   margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
   overflow: hidden;
-  z-index: 0;                         /* detrás del header */
   transition: opacity .6s ease, transform .6s ease;
+  z-index: 0;
 }
 
 .hero__bg {
@@ -72,86 +71,41 @@
 }
 
 /* El contenido general sólo compensa el header fijo */
-.md-main {
-  padding-top: var(--md-header-h) !important;
-  position: relative;
-  z-index: 1;
-}
+.md-main { padding-top: var(--md-header-h) !important; }
 
-/* Desvanecimiento opcional del hero al scrollear (requiere JS) */
+/* Desvanecimiento opcional del hero al scrollear (no toca el drawer) */
 body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
-   Colores/estilos del menú móvil (sin tocar transform/z-index)
+   Drawer: SOLO colores (no tocamos z-index, transform, eventos)
    ============================================================ */
 
 .md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important; /* franja celeste */
-  color: #ffffff !important; 
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
   font-weight: 600;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.md-nav__link,
-.md-nav__link span {
-  color: var(--th-color-corporate-blue) !important;
-  background: transparent !important;
-}
-
-.md-nav__link:hover,
-.md-nav__link:focus {
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus {
   background-color: rgba(124,198,255,0.12) !important;
   color: #004B8E !important;
 }
+.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
 
-.md-nav__icon,
-.md-icon {
-  color: var(--th-color-corporate-blue) !important;
-}
-
-/* Overlay estándar, clickeable para cerrar */
-.md-overlay {
-  background-color: rgba(0, 0, 0, 0.35) !important;
-}
-
-/* Cuando el drawer está abierto:
-   - Bloqueá interacciones del contenido
-   - Mantené clickeables overlay y drawer
-   - No tocar .md-container ni transform del drawer */
-html[data-md-state="drawer"] .md-content,
-html[data-md-state="drawer"] .md-main__inner {
-  pointer-events: none !important;
-}
-
-html[data-md-state="drawer"] .md-overlay,
-html[data-md-state="drawer"] .md-drawer {
-  pointer-events: auto !important;
-}
-
-/* Evitar que el hero intercepte eventos cuando el drawer está abierto */
-html[data-md-state="drawer"] .hero,
-html[data-md-state="drawer"] .hero__content,
-html[data-md-state="drawer"] .hero__bg {
-  pointer-events: none !important;
-}
+/* Overlay estándar (no tocamos pointer-events ni z-index) */
+.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
 
 /* ============================================================
    Páginas SIN hero
    ============================================================ */
-
-body:not(:has(.hero)) .md-main {
-  padding-top: var(--md-header-h) !important;
-}
+body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
 
 /* Ajuste de títulos y anclas con header fijo */
-.md-typeset h1 {
-  margin: 0.25rem 0 1rem !important;
-}
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4 {
+.md-typeset h1 { margin: 0.25rem 0 1rem !important; }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
   scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
 }
 
@@ -159,15 +113,13 @@ body:not(:has(.hero)) .md-main {
 html, body { overflow-x: hidden; }
 
 /* ============================================================
-   Grid de cards
+   Grid de cards (lo usas en varias secciones)
    ============================================================ */
-
 .grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
-
 .grid.cards > * {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
@@ -176,48 +128,14 @@ html, body { overflow-x: hidden; }
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .grid.cards > *:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
 
 /* ============================================================
-   Banners
-   ============================================================ */
-
-.banner {
-  display: block;
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center 45%;
-  border-radius: 0;
-  margin: 0 auto 24px auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-/* ============================================================
    Responsivo
    ============================================================ */
-
 @media (max-width: 768px) {
   .hero { height: var(--th-hero-height-sm); }
-  .banner {
-    height: 160px;
-    object-position: center 40%;
-  }
-}
-
-/* ============================================================
-   Compatibilidad "hero--fixed" (si alguna página lo usa)
-   ============================================================ */
-/* Si por accidente una página conserva .hero--fixed, compensá el alto */
-body:has(.hero--fixed) .md-main__inner {
-  padding-top: var(--th-hero-height, 420px) !important;
-}
-@media (max-width: 768px) {
-  body:has(.hero--fixed) .md-main__inner {
-    padding-top: var(--th-hero-height-sm, 300px) !important;
-  }
 }
