@@ -259,15 +259,14 @@ body.ready:not(.scrolled) .hero {
 }
 
 /* ============================================================
-   HERO STICKY + FADE (debajo del header fijo)
+   HERO EN FLUJO + FADE AL SCROLL (no sticky)
    ============================================================ */
 
-/* 1) El hero se comporta como un bloque normal hasta que llega
-   debajo del header y ahí queda pegado (sticky). */
+/* Hero vuelve al flujo normal, sin fijarse ni tapar contenido */
 .hero {
-  position: sticky !important;
-  top: var(--md-header-h) !important;   /* pegado justo debajo del header */
-  z-index: 0;                            /* por debajo del header (que está en 20) */
+  position: relative !important;   /* ← clave: no sticky */
+  top: auto !important;
+  z-index: 0 !important;           /* por debajo del header (20) y del drawer */
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
@@ -276,50 +275,44 @@ body.ready:not(.scrolled) .hero {
   align-items: center;
   justify-content: center;
   margin-top: 0 !important;
-  /* estado inicial sin transición; la activamos tras ready */
+
+  /* Estado inicial: sin transición para evitar parpadeo */
   opacity: 1;
   transform: translateY(0);
   transition: none !important;
 }
 
-/* 2) Cuando la página está lista, habilitamos la transición.
-   (Asegurate que ready.js agregue .ready al <body>) */
+/* Activamos la transición sólo cuando el DOM está listo (.ready la agrega ready.js) */
 body.ready .hero {
   transition: opacity 0.6s ease, transform 0.6s ease !important;
   will-change: opacity, transform;
 }
 
-/* 3) Al pasar el umbral (tu scroll-fade.js agrega .scrolled),
-   aplicamos el desvanecimiento y leve desplazamiento. */
+/* Al scrollear (tu scroll-fade.js agrega .scrolled), se desvanece y sube un poco */
 body.ready.scrolled .hero {
   opacity: 0;
   transform: translateY(-80px);
+  pointer-events: none; /* evita que “tape” clics mientras está desvanecido */
 }
 
-/* 4) Layout del contenedor principal:
-   - Sin hero: mantené padding-top para no tapar por el header.
-   - Con hero: SIN padding-top (porque el hero ya “ocupa” y se pega). */
-.md-main {
-  padding-top: var(--md-header-h) !important;
+/* El contenido debe quedar por encima del hero si hay overlays/gradientes */
+.md-main__inner {
+  position: relative;
+  z-index: 1;
 }
+
+/* Páginas con hero: sin padding-top extra (para que el hero arranque arriba) */
 body:has(.hero) .md-main {
   padding-top: 0 !important;
 }
 
-/* 5) Accesibilidad: si el usuario prefiere menos movimiento */
+/* Páginas sin hero: mantener el padding-top para no tapar por el header fijo */
+body:not(:has(.hero)) .md-main {
+  padding-top: var(--md-header-h) !important;
+}
+
+/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
   body.ready .hero { transition: none !important; }
 }
 
-/* 6) Móvil: asegurar que el drawer quede por encima del hero sticky */
-@media (max-width: 960px) {
-  .md-sidebar,
-  .md-sidebar--primary,
-  .md-sidebar__scrollwrap,
-  .md-nav,
-  .md-drawer {
-    position: fixed;
-    z-index: 100 !important;
-  }
-  .hero { z-index: 0 !important; }
-}
