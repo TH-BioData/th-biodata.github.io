@@ -46,4 +46,5 @@ extra_css:
   - styles/extra.css
 extra_javascript:
   - scripts/scroll-fade.js
+  - scripts/ready.js
 
