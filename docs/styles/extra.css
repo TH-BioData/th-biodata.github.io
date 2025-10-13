@@ -1,14 +1,14 @@
 /* ============================================================
-   TH BioData Consulting — Estilos completos y estables (v3)
+   TH BioData Consulting — Estilos completos y estables (v3.1)
    ============================================================ */
 
 /* --- Variables globales --- */
 :root {
-  --th-hero-height: 420px;            
-  --th-hero-height-sm: 300px;         
+  --th-hero-height: 420px;
+  --th-hero-height-sm: 300px;
   --md-header-h: var(--md-header-height, 3.6rem);
-  --th-color-corporate-blue: #0F3D73;       
-  --th-color-corporate-light-blue: #7CC6FF; 
+  --th-color-corporate-blue: #0F3D73;
+  --th-color-corporate-light-blue: #7CC6FF;
 }
 
 /* --- Contenido centrado --- */
@@ -24,7 +24,7 @@
 .md-header,
 .md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: 20 !important;  /* ahora sobre el hero */
+  z-index: 20 !important; /* sobre el hero */
 }
 
 /* Drawer lateral */
@@ -127,14 +127,23 @@
    Ajustes de scroll y hero fade
    ============================================================ */
 
+/* Por defecto, Material agrega padding-top a .md-main para no tapar contenido con el header fijo.
+   Lo dejamos activo... */
 .md-main {
   padding-top: var(--md-header-h) !important;
   position: relative;
   z-index: 1;
 }
 
+/* ...pero si la página tiene hero, eliminamos ese padding para que el hero
+   arranque pegado al header y no se vea espacio blanco arriba. */
+body:has(.hero) .md-main {
+  padding-top: 0 !important;
+}
+
+/* Fade del hero al scrollear (si usás scroll-fade.js que agrega/remueve .scrolled) */
 body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
-body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
+body.scrolled .hero      { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
    Páginas SIN hero
