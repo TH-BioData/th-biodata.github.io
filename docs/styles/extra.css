@@ -278,3 +278,88 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
 @media (prefers-reduced-motion: reduce) {
   .hero { transition: none; }
 }
+/* ============================================================
+   FIX header/drawer + hero (Material for MkDocs)
+   ============================================================ */
+
+/* --- Variables corporativas (ajusta si ya existen) --- */
+:root{
+  --th-blue: #0F3D73;           /* azul corporativo (header) */
+  --th-light-blue: #7CC6FF;     /* celeste drawer */
+}
+
+/* HEADER (barra superior) */
+.md-header,
+.md-tabs {
+  background-color: var(--th-blue) !important;
+}
+
+/* DRAWER (panel lateral en móvil) — franja superior */
+.md-sidebar--primary .md-sidebar__scrollwrap .md-sidebar__title,
+.md-drawer .md-header { /* versiones recientes de Material usan .md-header dentro del drawer */
+  background-color: var(--th-light-blue) !important;
+  color: #fff !important;
+}
+
+/* Logo en el bloque superior del drawer (evita recuadro blanco) */
+.md-drawer .md-header__button.md-logo,
+.md-sidebar--primary .md-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background-image: url("/assets/logo.png"); /* ruta absoluta para GitHub Pages */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent !important;
+}
+
+/* Asegurar que no haya fondo blanco heredado en el ícono del logo */
+.md-header__button.md-logo img {
+  display: none; /* ocultamos <img> si lo hay, usamos background-image */
+}
+
+/* Texto de la franja superior del drawer en blanco */
+.md-sidebar__title,
+.md-drawer .md-header__title {
+  color: #fff !important;
+}
+
+/* --- Enlaces y items del menú (fondo blanco, texto azul) --- */
+.md-nav--primary,
+.md-nav--primary .md-nav__list {
+  background: #fff !important;
+}
+.md-nav__link {
+  color: var(--th-blue) !important;
+}
+
+/* ============================================================
+   HERO — imagen de fondo
+   ============================================================ */
+
+/* Hero full-bleed con imagen (asegura ruta y evita overrides) */
+.hero,
+.hero .hero__bg {
+  background-image: url("/assets/hero.jpg") !important; /* ruta absoluta */
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Alturas por dispositivo (si ya tenés variables, usalas) */
+.hero {
+  min-height: 420px;
+}
+@media (max-width: 768px){
+  .hero { min-height: 300px; }
+}
+
+/* Si usás un overlay oscuro en el hero, mantenelo sutil */
+.hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.25));
+  pointer-events: none;
+}
