@@ -1,19 +1,17 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v4.0)
+   TH BioData Consulting — Estilos estables (v3.10)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
 :root {
   --th-hero-height: 420px;
   --th-hero-height-sm: 300px;
-
-  /* Altura real del header de Material (el tema la expone) */
   --md-header-h: var(--md-header-height, 3.6rem);
 
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
 
-  /* Paleta primaria (evita violeta por defecto) */
+  /* Material primary (evita el violeta por defecto) */
   --md-primary-fg-color: var(--th-color-corporate-blue);
   --md-primary-fg-color--light: var(--th-color-corporate-light-blue);
   --md-primary-fg-color--dark: #0B2C54;
@@ -46,10 +44,7 @@
 .md-nav__icon,
 .md-icon { color: var(--th-color-corporate-blue); }
 .md-nav__link:hover,
-.md-nav__link:focus {
-  background-color: rgba(124,198,255,.12);
-  color: #004B8E;
-}
+.md-nav__link:focus { background-color: rgba(124,198,255,.12); color: #004B8E; }
 
 /* Overlay del drawer: clickeable sin velo visible */
 .md-overlay { background-color: transparent; pointer-events: none; opacity: 0; transition: opacity .2s ease; }
@@ -64,32 +59,23 @@
    DRAWER (móvil)
    ============================================================ */
 @media (max-width: 960px) {
-  /* Asegura que el panel use todo el alto y se pegue al header sin “franjas” */
+  .md-drawer,
+  .md-nav,
+  .md-sidebar,
+  .md-sidebar--primary,
+  .md-sidebar__scrollwrap { position: fixed; z-index: var(--z-drawer); }
+
   .md-drawer,
   .md-sidebar--primary {
-    position: fixed;
+    top: var(--md-header-h);
+    height: calc(100vh - var(--md-header-h));
     left: 0;
     right: auto;
-    top: var(--md-header-h);                   /* pegado al header */
-    height: calc(100vh - var(--md-header-h));  /* ocupa el resto */
-    z-index: var(--z-drawer);
-    margin: 0 !important;
-    border: 0 !important;
-    box-shadow: none !important;               /* ← quita halo/blanco superior */
-    background: #fff;
-  }
-
-  /* El contenedor interno también sin sombras/bordes para evitar líneas */
-  .md-sidebar__scrollwrap {
-    overflow: auto;
-    margin: 0 !important;
-    border: 0 !important;
-    box-shadow: none !important;
   }
 
   /* Franja superior del drawer (celeste + texto blanco) */
   .md-sidebar--primary .md-nav__title,
-  .md-drawer .md-header { /* compatibilidad entre versiones */
+  .md-drawer .md-header { /* compat versiones */
     position: sticky;
     top: 0;
     z-index: 1;
@@ -98,45 +84,60 @@
     font-weight: 600;
     border-bottom: 1px solid rgba(255,255,255,.25);
 
-    /* Layout anti-superposición */
+    /* --- Layout anti-superposición --- */
     display: flex;
     align-items: center;
     gap: 10px;
     padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
+    min-height: 56px;                 /* altura cómoda */
+    line-height: 1.1;
   }
 
-  /* Logo nativo: tamaño fijo, no crece, con separación del texto */
+  /* Quita cualquier "bloque" blanco heredado */
+  .md-sidebar--primary .md-nav__title *,
+  .md-drawer .md-header * {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Logo nativo en la franja: tamaño mayor (36px) y margen */
   .md-sidebar--primary .md-nav__title .md-logo,
   .md-drawer .md-header .md-logo {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;          /* ← evita que toque el título */
-    background: transparent;
-    border: 0;
+    width: 36px;                      /* ← tamaño logo */
+    height: 36px;
+    margin-right: 8px;                /* separa del texto */
+    border-radius: 0;
+    background: transparent !important;
   }
   .md-sidebar--primary .md-nav__title .md-logo img,
   .md-drawer .md-header .md-logo img {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     display: inline-block !important;
     vertical-align: middle;
+    object-fit: contain;
+    background: transparent !important;
   }
 
-  /* Título: ocupa el resto, puede partirse y jamás pisa el logo */
+  /* El texto del título ocupa el resto del espacio */
   .md-sidebar--primary .md-nav__title strong,
   .md-drawer .md-header__title {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;         /* ← permite salto de línea si hace falta */
-    line-height: 1.2;
+    white-space: nowrap;              /* si preferís 2 líneas, usa normal */
     color: #fff !important;
   }
+
+  /* Evitar que contenido/hero tape el drawer */
+  .md-main, .md-main__inner, .hero { z-index: var(--z-hero); }
+
+  .md-sidebar__scrollwrap { overflow: auto; }
 }
 
 /* Desktop: limpia padding del título del sidebar */
@@ -153,9 +154,11 @@
   height: 28px;
   display: inline-block !important;
   vertical-align: middle;
+  object-fit: contain;
+  background: transparent !important;
 }
 
-/* Alineación logo + texto en el header */
+/* Alineación logo + texto en el header (barra superior) */
 .md-header__title .md-ellipsis {
   display: inline-flex;
   align-items: center;
@@ -164,10 +167,7 @@
 
 /* Contenedor del logo siempre transparente */
 .md-logo,
-.md-header__button.md-logo {
-  background: transparent !important;
-  box-shadow: none !important;
-}
+.md-header__button.md-logo { background: transparent !important; box-shadow: none !important; }
 
 /* ============================================================
    HERO full-bleed en flujo + fade al scroll
@@ -191,8 +191,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: #0c2d57;                   /* color base anti-parpadeo */
-  background-image: url('/assets/hero.jpg?v=9');/* ruta absoluta GitHub Pages */
+  background-color: #0c2d57;
+  background-image: url('/assets/hero.jpg?v=9'); /* ruta absoluta */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -219,11 +219,7 @@
 }
 
 /* Fade controlado por scripts/scroll-fade.js (.scrolled en <body>) */
-body.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-  pointer-events: none;
-}
+body.scrolled .hero { opacity: 0; transform: translateY(-80px); pointer-events: none; }
 
 /* ============================================================
    Layout principal
@@ -236,11 +232,7 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
 /* ============================================================
    Grid de cards
    ============================================================ */
-.grid.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
+.grid.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .grid.cards > * {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
@@ -273,6 +265,4 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
 /* ============================================================
    Accesibilidad
    ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  .hero { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .hero { transition: none; } }
