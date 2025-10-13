@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos completos y estables (v3.1)
+   TH BioData Consulting — Estilos completos y estables (v3.2)
    ============================================================ */
 
 /* --- Variables globales --- */
@@ -52,16 +52,42 @@
   color: var(--th-color-corporate-blue) !important;
 }
 
+/* Overlay (por defecto sin bloquear ni oscurecer) */
 .md-overlay {
-  background-color: rgba(0, 0, 0, 0.35) !important;
+  background-color: transparent !important;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+/* Cuando el drawer está abierto (Material marca lock) */
+[data-md-state="lock"] .md-overlay {
+  pointer-events: auto;
+  opacity: 1;
 }
 
-/* En desktop: aseguramos que el menú lateral quede por encima del hero */
+/* En desktop: menú lateral por encima del hero */
 .md-sidebar,
 .md-sidebar--primary,
 .md-sidebar__scrollwrap {
   z-index: 30 !important;
   background: #fff !important;
+}
+
+/* En móvil: aseguremos z-index del drawer */
+@media (max-width: 960px) {
+  .md-sidebar,
+  .md-sidebar--primary,
+  .md-sidebar__scrollwrap,
+  .md-nav,
+  .md-drawer {
+    position: fixed;
+    z-index: 100 !important; /* por encima del header (20) y contenido */
+  }
+  .md-main,
+  .md-main__inner,
+  .hero {
+    z-index: 0 !important; /* contenido bajo el drawer */
+  }
 }
 
 /* ============================================================
@@ -78,13 +104,15 @@
   align-items: center;
   justify-content: center;
   z-index: 0;
-  transition: opacity .6s ease, transform .6s ease;
   margin-top: 0 !important; /* evitar desplazamiento */
+  /* transición se controla más abajo (ready/fade) */
 }
 
 .hero__bg {
   position: absolute;
   inset: 0;
+  /* Optimización: color base para evitar gris mientras carga */
+  background-color: #0c2d57 !important;
   background-image: url('../assets/hero.jpg?v=6');
   background-size: cover;
   background-position: center;
@@ -124,31 +152,22 @@
 }
 
 /* ============================================================
-   Ajustes de scroll y hero fade
+   Layout principal (padding bajo header)
    ============================================================ */
 
-/* Por defecto, Material agrega padding-top a .md-main para no tapar contenido con el header fijo.
-   Lo dejamos activo... */
+/* Por defecto, mantener padding para que el header fijo no tape contenido */
 .md-main {
   padding-top: var(--md-header-h) !important;
   position: relative;
   z-index: 1;
 }
 
-/* ...pero si la página tiene hero, eliminamos ese padding para que el hero
-   arranque pegado al header y no se vea espacio blanco arriba. */
+/* Si la página tiene hero, eliminar padding para que el hero arranque arriba */
 body:has(.hero) .md-main {
   padding-top: 0 !important;
 }
 
-/* Fade del hero al scrollear (si usás scroll-fade.js que agrega/remueve .scrolled) */
-body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
-body.scrolled .hero      { opacity: 0; transform: translateY(-80px); }
-
-/* ============================================================
-   Páginas SIN hero
-   ============================================================ */
-
+/* Páginas SIN hero: mantener padding normal */
 body:not(:has(.hero)) .md-main {
   padding-top: var(--md-header-h) !important;
 }
@@ -204,119 +223,37 @@ body:not(:has(.hero)) .md-main {
 }
 
 /* ============================================================
-   FIX móvil: drawer clickeable y sin capa gris bloqueando
+   OPTIMIZACIÓN + FADE CONTROLADO (sin parpadeo inicial)
    ============================================================ */
 
-/* 1) Asegurar que el drawer y su scroll wrapper estén por encima de todo */
-@media (max-width: 960px) {
-  .md-sidebar,
-  .md-sidebar--primary,
-  .md-sidebar__scrollwrap,
-  .md-nav,
-  .md-drawer {
-    position: fixed;
-    z-index: 100 !important; /* por encima del header (20) y del contenido/hero (0) */
-  }
-}
-
-/* 2) El overlay sólo debe capturar clics cuando el drawer está abierto */
-.md-overlay {
-  /* cuando está cerrado, no bloquea clics */
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .2s ease;
-}
-
-/* En Material for MkDocs, cuando el drawer está abierto el body recibe data-md-state="lock" */
-[data-md-state="lock"] .md-overlay {
-  pointer-events: auto;  /* ahora sí bloquea el fondo y permite cerrar al tocar fuera */
-  opacity: 1;
-}
-
-/* 3) Evitar que algún contenedor del contenido se superponga al menú en móvil */
-@media (max-width: 960px) {
-  .md-main,
-  .md-main__inner,
-  .hero {
-    z-index: 0 !important; /* el contenido queda por debajo del drawer */
-  }
-}
-/* Overlay transparente sin opacidad gris */
-.md-overlay {
-  background-color: transparent !important;
-  opacity: 0 !important;
-}
-[data-md-state="lock"] .md-overlay {
-  background-color: transparent !important;
-  opacity: 1 !important;
-}
-/* ============================================================
-   OPTIMIZACIÓN DE CARGA DEL HERO (color base + transición)
-   ============================================================ */
-
-/* (2) Color base del hero para evitar fondo gris antes de cargar la imagen */
-.hero__bg {
-  background-color: #0c2d57 !important; /* color base similar al hero */
-  background-image: url('../assets/hero.jpg?v=6');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* (3) Evita que el hero parpadee al inicio antes de cargar la imagen */
-.hero {
-  transition: none !important; /* desactiva transición inicial */
-}
-
-/* ============================================================
-   RESTAURA EFECTO FADE AL SCROLLEAR
-   ============================================================ */
-
-/* Al cargar, sin transición (para evitar parpadeo) */
+/* Estado inicial: sin transición para evitar parpadeo al primer render */
 .hero {
   opacity: 1;
   transform: translateY(0);
-  transition: none !important;
+  transition: none !important;  /* cancela transiciones previas */
 }
 
-/* Cuando el DOM está listo (se agrega .ready al body), activamos transición */
+/* Cuando el DOM está listo (ready.js agrega .ready), activamos transiciones */
 body.ready .hero {
   transition: opacity 0.6s ease, transform 0.6s ease !important;
-}
-
-/* Cuando el usuario hace scroll y se agrega .scrolled (por scroll-fade.js),
-   aplicamos el desvanecimiento */
-body.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-}
-
-/* ============================================================
-   Scroll fade estable: transición sólo tras "ready"
-   ============================================================ */
-
-/* Estado inicial: sin transición para evitar parpadeo */
-.hero {
-  opacity: 1;
-  transform: translateY(0);
-  transition: none; /* sin !important para permitir override posterior */
-}
-
-/* Cuando el DOM está listo activamos las transiciones */
-body.ready .hero {
-  transition: opacity 0.6s ease, transform 0.6s ease;
   will-change: opacity, transform;
 }
 
-/* El desvanecimiento se aplica sólo si además hay .ready */
+/* Fade SOLO cuando hay .ready y además .scrolled (lo maneja scroll-fade.js) */
 body.ready.scrolled .hero {
   opacity: 0;
   transform: translateY(-80px);
 }
 
-/* Accesibilidad: respeta "reducir movimiento" */
+/* Seguridad: estado no scrolleado con ready */
+body.ready:not(.scrolled) .hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accesibilidad: respeta preferencia de reducir movimiento */
 @media (prefers-reduced-motion: reduce) {
   body.ready .hero {
-    transition: none;
+    transition: none !important;
   }
 }
