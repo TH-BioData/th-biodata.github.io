@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.14)
+   TH BioData Consulting — Estilos estables (v3.11 - Corregido)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -11,10 +11,7 @@
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
 
-  --th-logo-size: 28px;
-  --th-logo-size-mobile: clamp(40px, 9vw, 52px);
-
-  /* Material primary */
+  /* Material primary (evita el violeta por defecto) */
   --md-primary-fg-color: var(--th-color-corporate-blue);
   --md-primary-fg-color--light: var(--th-color-corporate-light-blue);
   --md-primary-fg-color--dark: #0B2C54;
@@ -28,7 +25,10 @@
 }
 
 /* -------------------- Contenido centrado -------------------- */
-.md-content { max-width: 950px; margin: 0 auto; }
+.md-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
 
 /* ============================================================
    HEADER y NAVEGACIÓN
@@ -41,22 +41,40 @@
 
 /* Navegación (texto azul sobre fondo blanco) */
 .md-nav--primary,
-.md-nav--primary .md-nav__list { background: #fff !important; }
+.md-nav--primary .md-nav__list {
+  background: #fff !important;
+}
 .md-nav__link,
 .md-nav__link span,
 .md-nav__icon,
-.md-icon { color: var(--th-color-corporate-blue); }
+.md-icon {
+  color: var(--th-color-corporate-blue);
+}
 .md-nav__link:hover,
-.md-nav__link:focus { background-color: rgba(124,198,255,.12); color: #004B8E; }
+.md-nav__link:focus {
+  background-color: rgba(124, 198, 255, .12);
+  color: #004B8E;
+}
 
 /* Overlay del drawer: clickeable sin velo visible */
-.md-overlay { background-color: transparent; pointer-events: none; opacity: 0; transition: opacity .2s ease; }
-[data-md-state="lock"] .md-overlay { pointer-events: auto; opacity: 1; }
+.md-overlay {
+  background-color: transparent;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+[data-md-state="lock"] .md-overlay {
+  pointer-events: auto;
+  opacity: 1;
+}
 
 /* Sidebar desktop por encima del hero */
 .md-sidebar,
 .md-sidebar--primary,
-.md-sidebar__scrollwrap { z-index: var(--z-sidebar); background: #fff; }
+.md-sidebar__scrollwrap {
+  z-index: var(--z-sidebar);
+  background: #fff;
+}
 
 /* ============================================================
    DRAWER (móvil)
@@ -66,99 +84,101 @@
   .md-nav,
   .md-sidebar,
   .md-sidebar--primary,
-  .md-sidebar__scrollwrap { position: fixed; z-index: var(--z-drawer); }
+  .md-sidebar__scrollwrap {
+    position: fixed;
+    z-index: var(--z-drawer);
+  }
 
   .md-drawer,
   .md-sidebar--primary {
+    /* --- CORRECCIÓN [1/2]: Posicionamiento del drawer --- */
+    /* Se usa 'top' y 'bottom' para que el drawer ocupe toda la altura disponible
+       debajo del header, eliminando el espacio en blanco superior. Es más
+       robusto que usar height: calc(100vh - ...). */
     top: var(--md-header-h);
-    height: calc(100vh - var(--md-header-h));
+    bottom: 0;
+    height: auto; /* Anulamos el cálculo de altura original */
     left: 0;
     right: auto;
-    --th-logo-size: var(--th-logo-size-mobile);
   }
 
   /* Franja superior del drawer (celeste + texto blanco) */
   .md-sidebar--primary .md-nav__title,
-  .md-drawer .md-header {
+  .md-drawer .md-header { /* compat versiones */
     position: sticky;
     top: 0;
     z-index: 1;
-    margin: 0;
     background-color: var(--md-primary-fg-color--light) !important;
     color: #fff !important;
     font-weight: 600;
-    border-bottom: 1px solid rgba(255,255,255,.25);
+    border-bottom: 1px solid rgba(255, 255, 255, .25);
 
-    /* Layout */
+    /* --- Layout anti-superposición --- */
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: calc(.55rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
-    min-height: 60px;
-    line-height: 1.2;
+    padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
+    min-height: 56px;      /* altura cómoda */
+    line-height: 1.1;
   }
 
-  /* Quita cualquier “bloque” blanco o botón residual en el título */
+  /* Quita cualquier "bloque" blanco heredado */
   .md-sidebar--primary .md-nav__title *,
   .md-drawer .md-header * {
     background: transparent !important;
     box-shadow: none !important;
   }
-  /* Algunos temas insertan botones/íconos aquí: los ocultamos */
-  .md-sidebar--primary .md-nav__title .md-header__button,
-  .md-sidebar--primary .md-nav__title .md-nav__button,
-  .md-drawer .md-header .md-header__button,
-  .md-drawer .md-header .md-nav__button {
-    display: none !important;
-  }
 
-  /* Logo nativo ampliado en móvil y con margen */
+  /* --- CORRECCIÓN [2/2]: Logo más grande en el drawer --- */
+  /* Se aumenta el tamaño a 40px para mejor visibilidad. */
   .md-sidebar--primary .md-nav__title .md-logo,
   .md-drawer .md-header .md-logo {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--th-logo-size);
-    height: var(--th-logo-size);
-    margin-right: 12px;
-    background: transparent !important;
+    width: 40px;          /* ← tamaño logo */
+    height: 40px;
+    margin-right: 0;      /* el 'gap' del contenedor padre ya da el espacio */
     border-radius: 0;
+    background: transparent !important;
   }
   .md-sidebar--primary .md-nav__title .md-logo img,
   .md-drawer .md-header .md-logo img {
-    width: 100%;
-    height: 100%;
-    max-width: var(--th-logo-size);
-    max-height: var(--th-logo-size);
+    width: 40px;
+    height: 40px;
     display: inline-block !important;
     vertical-align: middle;
     object-fit: contain;
     background: transparent !important;
   }
 
-  /* Título: puede ocupar 2 líneas sin pisar el logo */
+  /* El texto del título ocupa el resto del espacio */
   .md-sidebar--primary .md-nav__title strong,
   .md-drawer .md-header__title {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;        /* ← permite salto de línea */
+    white-space: nowrap; /* si preferís 2 líneas, usa 'normal' */
     color: #fff !important;
   }
 
   /* Evitar que contenido/hero tape el drawer */
-  .md-main, .md-main__inner, .hero { z-index: var(--z-hero); }
+  .md-main, .md-main__inner, .hero {
+    z-index: var(--z-hero);
+  }
+
   .md-sidebar__scrollwrap {
     overflow: auto;
-    padding-top: 0 !important;
   }
 }
 
-/* Desktop: padding del título del sidebar */
+/* Desktop: limpia padding del título del sidebar */
 @media (min-width: 961px) {
-  .md-sidebar--primary .md-nav__title { padding-left: 1rem; }
+  .md-sidebar--primary .md-nav__title {
+    padding-left: 1rem;
+  }
 }
 
 /* ============================================================
@@ -166,15 +186,15 @@
    ============================================================ */
 .md-logo img,
 .md-header__button.md-logo img {
-  width: var(--th-logo-size);
-  height: var(--th-logo-size);
+  width: 28px;
+  height: 28px;
   display: inline-block !important;
   vertical-align: middle;
   object-fit: contain;
   background: transparent !important;
 }
 
-/* Alineación logo + texto en el header superior */
+/* Alineación logo + texto en el header (barra superior) */
 .md-header__title .md-ellipsis {
   display: inline-flex;
   align-items: center;
@@ -183,7 +203,10 @@
 
 /* Contenedor del logo siempre transparente */
 .md-logo,
-.md-header__button.md-logo { background: transparent !important; box-shadow: none !important; }
+.md-header__button.md-logo {
+  background: transparent !important;
+  box-shadow: none !important;
+}
 
 /* ============================================================
    HERO full-bleed en flujo + fade al scroll
@@ -218,12 +241,19 @@
   z-index: 1;
   text-align: center;
   color: #fff;
-  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+  background: linear-gradient(to bottom, rgba(10, 35, 80, .15), rgba(10, 35, 80, .55));
   padding: 48px 16px;
   border-radius: 0;
 }
-.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag   { font-size: 18px; opacity: .95; }
+.hero__title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.hero__tag {
+  font-size: 18px;
+  opacity: .95;
+}
 .hero__cta {
   display: inline-block;
   margin-top: 16px;
@@ -235,50 +265,88 @@
 }
 
 /* Fade controlado por scripts/scroll-fade.js (.scrolled en <body>) */
-body.scrolled .hero { opacity: 0; transform: translateY(-80px); pointer-events: none; }
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+  pointer-events: none;
+}
 
 /* ============================================================
    Layout principal
    ============================================================ */
-.md-main { padding-top: var(--md-header-h); position: relative; z-index: var(--z-content); }
-body:has(.hero) .md-main       { padding-top: 0; }
-body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
-.md-main__inner { position: relative; z-index: var(--z-content); }
+.md-main {
+  padding-top: var(--md-header-h);
+  position: relative;
+  z-index: var(--z-content);
+}
+body:has(.hero) .md-main {
+  padding-top: 0;
+}
+body:not(:has(.hero)) .md-main {
+  padding-top: var(--md-header-h);
+}
+.md-main__inner {
+  position: relative;
+  z-index: var(--z-content);
+}
 
 /* ============================================================
    Grid de cards
    ============================================================ */
-.grid.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
 .grid.cards > * {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 16px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.grid.cards > *:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,.08); }
+.grid.cards > *:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+}
 
 /* ============================================================
    Tipografía y márgenes
    ============================================================ */
-.md-typeset h1 { margin: .25rem 0 1rem; }
+.md-typeset h1 {
+  margin: .25rem 0 1rem;
+}
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
-.md-typeset h4 { scroll-margin-top: calc(var(--md-header-h) + .5rem); }
+.md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + .5rem);
+}
 
 /* ============================================================
    Responsivo
    ============================================================ */
 @media (max-width: 768px) {
-  .hero { height: var(--th-hero-height-sm); }
-  .hero__title { font-size: 28px; }
-  .hero__tag { font-size: 16px; }
-  .hero__cta { padding: 8px 14px; }
+  .hero {
+    height: var(--th-hero-height-sm);
+  }
+  .hero__title {
+    font-size: 28px;
+  }
+  .hero__tag {
+    font-size: 16px;
+  }
+  .hero__cta {
+    padding: 8px 14px;
+  }
 }
 
 /* ============================================================
    Accesibilidad
    ============================================================ */
-@media (prefers-reduced-motion: reduce) { .hero { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    transition: none;
+  }
+}
