@@ -1,25 +1,27 @@
 /* ============================================================
-   TH BioData Consulting — Custom Styles (fix hero visible + fade)
+   TH BioData Consulting — Estilos Custom y Optimización
    ============================================================ */
 
-/* --- Contenido centrado --- */
+/* --- Variables Globales --- */
+:root {
+  --th-hero-height: 420px;          /* desktop */
+  --th-hero-height-sm: 300px;       /* móvil */
+  --md-header-h: var(--md-header-height, 3.6rem);
+  --th-color-corporate-blue: #0F3D73;
+  --th-color-corporate-light-blue: #7CC6FF;
+}
+
+/* --- Contenido Centrado --- */
 .md-content {
   max-width: 950px;
   margin: 0 auto;
 }
 
-/* ===== TOP BAR (azul corporativo fijo) ===== */
+/* --- TOP BAR (azul corporativo fijo) --- */
 .md-header,
 .md-tabs {
-  background-color: #0F3D73 !important;
-  z-index: 20; /* por encima del hero */
-}
-
-/* ===== Variables ===== */
-:root {
-  --th-hero-height: 420px;          /* desktop */
-  --th-hero-height-sm: 300px;       /* móvil */
-  --md-header-h: var(--md-header-height, 3.6rem);
+  background-color: var(--th-color-corporate-blue) !important;
+  z-index: 20; /* Por encima del hero y el contenido base */
 }
 
 /* ============================================================
@@ -29,14 +31,15 @@
 /* Bloque hero (fijo y con tamaño) */
 .hero {
   position: fixed;
-  top: var(--md-header-h); /* queda debajo del header */
+  top: var(--md-header-h); /* Queda debajo del header */
   left: 0;
   right: 0;
   height: var(--th-hero-height);
   margin: 0;
-  z-index: 0;             /* por detrás del header */
+  z-index: 0 !important;   /* CAPA MÁS BAJA, por detrás del header/menú */
   overflow: hidden;
   transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: auto;    /* Por defecto, acepta clics */
 }
 
 /* Imagen/fondo ocupando TODO el hero */
@@ -67,7 +70,7 @@
   display: inline-block;
   margin-top: 16px;
   padding: 10px 18px;
-  background: #0F3D73;
+  background: var(--th-color-corporate-blue);
   border-radius: 8px;
   color: #fff !important;
   text-decoration: none;
@@ -77,7 +80,81 @@
 .md-main {
   padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Contenido por encima del hero */
+}
+
+/* ============================================================
+   FIX de Z-INDEX e Interacción (SOLUCIÓN al problema del menú móvil)
+   ============================================================ */
+
+/* 1. Asegurar el orden de capas correcto (Header/Menú siempre arriba) */
+.md-header { z-index: 10005 !important; }
+.md-drawer,
+.md-nav {
+  z-index: 10010 !important; /* Menú por encima del Header */
+  pointer-events: auto !important; /* El menú debe ser interactivo */
+}
+.md-overlay {
+  z-index: 10000 !important; /* Overlay debajo del menú, encima del contenido/hero */
+  pointer-events: auto !important; /* Debe capturar clics fuera del menú */
+}
+/* 2. El Hero DEBE estar en la capa más baja */
+.hero, .hero__content, .hero__bg {
+  z-index: 0 !important;
+}
+
+/* 3. CLAVE: Cuando el menú está abierto (estado 'drawer'), deshabilitar clics en el Hero */
+html[data-md-state="drawer"] .hero,
+html[data-md-state="drawer"] .hero__content,
+html[data-md-state="drawer"] .hero__bg {
+  pointer-events: none !important; /* ¡Ignorar clics en el hero! */
+}
+/* 4. El hero no acepta eventos si está oculto (scroll) */
+body.scrolled .hero {
+  pointer-events: none !important;
+}
+
+
+/* ============================================================
+   ESTILOS ADICIONALES DEL MENÚ MÓVIL (TH BioData Consulting)
+   ============================================================ */
+
+/* 1. Drawer general */
+.md-drawer {
+  background-color: #ffffff !important; /* Fondo blanco */
+  color: var(--th-color-corporate-blue) !important; /* Texto azul corporativo */
+}
+
+/* 2. Franja superior del Drawer */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important; /* Celeste corporativo */
+  color: #ffffff !important; /* Texto blanco */
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 3. Enlaces y texto del menú */
+.md-nav__link,
+.md-nav__link span {
+  color: var(--th-color-corporate-blue) !important;
+  background: transparent !important;
+}
+
+.md-nav__link:hover,
+.md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important; /* Hover leve celeste */
+  color: #004B8E !important;
+}
+
+/* 4. Íconos y flechas del menú */
+.md-nav__icon,
+.md-icon {
+  color: var(--th-color-corporate-blue) !important;
+}
+
+/* 5. Overlay al abrir el menú */
+.md-overlay {
+  background-color: rgba(0, 0, 0, 0.35) !important;
 }
 
 /* ============================================================
@@ -118,6 +195,19 @@
 }
 
 /* ============================================================
+   Efecto de desvanecimiento (requiere JS que ponga .scrolled)
+   ============================================================ */
+body:not(.scrolled) .hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+  /* pointer-events: none; - Movido a la sección FIX */
+}
+
+/* ============================================================
    Responsivo
    ============================================================ */
 @media (max-width: 768px) {
@@ -132,132 +222,13 @@
 }
 
 /* ============================================================
-   Efecto de desvanecimiento (requiere JS que ponga .scrolled)
+   FIX - Layout compacto cuando NO hay hero
    ============================================================ */
-body:not(.scrolled) .hero {
-  opacity: 1;
-  transform: translateY(0);
-}
-body.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-  pointer-events: none;
-}
-
-/* Evita scroll horizontal accidental */
-html, body { overflow-x: hidden; }
-
-/* ============================================================
-   FIX — Menú móvil TH BioData Consulting (franja celeste + fondo blanco)
-   ============================================================ */
-
-/* --- 1. Z-index y clics (asegura visibilidad e interacción) --- */
-.md-dialog,
-.md-overlay,
-.md-nav,
-.md-drawer,
-.md-header {
-  z-index: 50 !important;
-}
-
-.hero {
-  z-index: 0 !important; /* hero debajo del menú */
-}
-
-/* --- 2. Drawer general --- */
-.md-drawer {
-  background-color: #ffffff !important; /* fondo blanco */
-  color: #0F3D73 !important;            /* texto azul corporativo */
-  pointer-events: auto !important;      /* clics activos */
-}
-
-/* --- 3. Franja superior (barra con logo/título) --- */
-.md-nav__title {
-  background-color: #7CC6FF !important; /* celeste corporativo */
-  color: #ffffff !important;            /* texto blanco */
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-/* --- 4. Enlaces y texto del menú --- */
-.md-nav__link,
-.md-nav__link span {
-  color: #0F3D73 !important; /* texto azul corporativo */
-  background: transparent !important;
-}
-
-.md-nav__link:hover,
-.md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important; /* hover leve celeste */
-  color: #004B8E !important;
-}
-
-/* --- 5. Íconos y flechas del menú --- */
-.md-nav__icon,
-.md-icon {
-  color: #0F3D73 !important;
-}
-
-/* --- 6. Overlay al abrir el menú --- */
-.md-overlay {
-  background-color: rgba(0, 0, 0, 0.35) !important;
-}
-/* ============================================================
-   FIX definitivo interacción menú móvil (z-index y eventos)
-   ============================================================ */
-
-/* Orden correcto de capas:
-   header (130) > drawer (120) > overlay (110) > contenido (1) > hero (0) */
-.md-header { z-index: 130 !important; }
-.md-drawer,
-.md-nav { z-index: 120 !important; }
-.md-overlay { z-index: 110 !important; }
-
-/* Asegura que el hero nunca bloquee clics por encima del menú */
-.hero,
-.hero__content,
-.hero__bg { z-index: 0 !important; }
-
-/* Cuando el drawer está abierto, anulá cualquier captura del hero */
-html[data-md-state="drawer"] .hero,
-html[data-md-state="drawer"] .hero__content,
-html[data-md-state="drawer"] .hero__bg {
-  pointer-events: none !important;
-}
-
-/* Drawer debe aceptar clics sí o sí */
-.md-drawer { pointer-events: auto !important; }
-
-/* ========= Fix: páginas SIN hero no dejan hueco ========= */
 
 /* Si NO hay .hero, anulá cualquier padding/margen alto extra */
-body:not(:has(.hero)) .md-main,
-body:not(:has(.hero)) .md-main__inner,
-body:not(:has(.hero)) .md-content {
-  margin-top: 0 !important;
-  padding-top: var(--md-header-h, 3.6rem) !important; /* solo lo del header fijo */
-}
-
-/* Si usás un hero fijo (p.ej. .hero--fixed), reservá espacio SOLO ahí */
-body:has(.hero--fixed) .md-main__inner {
-  padding-top: var(--th-hero-height, 420px) !important;
-}
-@media (max-width: 768px) {
-  body:has(.hero--fixed) .md-main__inner {
-    padding-top: var(--th-hero-height-sm, 300px) !important;
-  }
-}
-/* ===== Layout compacto cuando NO hay hero ===== */
-:root {
-  --md-header-h: var(--md-header-height, 3.6rem);
-}
-
-/* Solo reservá el alto del header fijo */
 body:not(:has(.hero)) .md-main {
   padding-top: var(--md-header-h) !important;
 }
-
-/* No agregues padding redundante en contenedores internos */
 body:not(:has(.hero)) .md-main__inner,
 body:not(:has(.hero)) .md-content {
   padding-top: 0 !important;
@@ -283,45 +254,15 @@ body:not(:has(.hero)) .md-content .md-typeset > :first-child {
   scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
 }
 
-/* Si tenías reglas anteriores que añadían padding-top por .hero--fixed, mantenelas.
-   Pero asegúrate de que NO apliquen si no hay .hero. */
+/* Evita scroll horizontal accidental */
+html, body { overflow-x: hidden; }
 
-/* ============================================================
-   FIX hard — interacción menú móvil (capas y clics)
-   Orden deseado: HERO (0) < CONTENIDO (1) < OVERLAY (10000) < HEADER (10005) < DRAWER (10010)
-   ============================================================ */
-
-/* 1) Asegura que el hero jamás bloquee el menú */
-.hero, .hero__content, .hero__bg { z-index: 0 !important; }
-
-/* 2) Overlay por debajo del drawer, por encima del contenido */
-.md-overlay {
-  z-index: 10000 !important;
-  pointer-events: auto !important; /* debe captar clic fuera del menú */
+/* Regla del hero--fixed (mantener si se usa esa clase) */
+body:has(.hero--fixed) .md-main__inner {
+  padding-top: var(--th-hero-height, 420px) !important;
 }
-
-/* 3) Header por debajo del drawer (para que no tape el borde superior del menú) */
-.md-header { z-index: 10005 !important; }
-
-/* 4) Drawer SIEMPRE por encima del overlay y del header */
-.md-drawer, .md-nav {
-  position: relative;              /* evita stacking context extraño */
-  z-index: 10010 !important;
-  pointer-events: auto !important; /* clics activos dentro del menú */
-}
-
-/* 5) Asegura que los elementos internos del drawer también estén arriba */
-.md-drawer .md-nav__container,
-.md-drawer .md-nav__list,
-.md-drawer .md-nav__item,
-.md-drawer .md-nav__link {
-  position: relative;
-  z-index: 10011 !important;
-}
-
-/* 6) Cuando el menú está abierto, el hero NO recibe eventos */
-html[data-md-state="drawer"] .hero,
-html[data-md-state="drawer"] .hero__content,
-html[data-md-state="drawer"] .hero__bg {
-  pointer-events: none !important;
+@media (max-width: 768px) {
+  body:has(.hero--fixed) .md-main__inner {
+    padding-top: var(--th-hero-height-sm, 300px) !important;
+  }
 }
