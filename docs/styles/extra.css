@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.8)
+   TH BioData Consulting — Estilos estables (v3.9)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -25,10 +25,7 @@
 }
 
 /* -------------------- Contenido centrado -------------------- */
-.md-content {
-  max-width: 950px;
-  margin: 0 auto;
-}
+.md-content { max-width: 950px; margin: 0 auto; }
 
 /* ============================================================
    HEADER y NAVEGACIÓN
@@ -39,42 +36,27 @@
   z-index: var(--z-header);
 }
 
-/* Links e iconos del nav (fondo blanco, texto azul) */
+/* Navegación (texto azul sobre fondo blanco) */
 .md-nav--primary,
-.md-nav--primary .md-nav__list {
-  background: #fff !important;
-}
+.md-nav--primary .md-nav__list { background: #fff !important; }
 .md-nav__link,
 .md-nav__link span,
 .md-nav__icon,
-.md-icon {
-  color: var(--th-color-corporate-blue);
-}
+.md-icon { color: var(--th-color-corporate-blue); }
 .md-nav__link:hover,
 .md-nav__link:focus {
-  background-color: rgba(124, 198, 255, 0.12);
+  background-color: rgba(124,198,255,.12);
   color: #004B8E;
 }
 
 /* Overlay del drawer: clickeable sin velo visible */
-.md-overlay {
-  background-color: transparent;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .2s ease;
-}
-[data-md-state="lock"] .md-overlay {
-  pointer-events: auto;
-  opacity: 1;
-}
+.md-overlay { background-color: transparent; pointer-events: none; opacity: 0; transition: opacity .2s ease; }
+[data-md-state="lock"] .md-overlay { pointer-events: auto; opacity: 1; }
 
 /* Sidebar desktop por encima del hero */
 .md-sidebar,
 .md-sidebar--primary,
-.md-sidebar__scrollwrap {
-  z-index: var(--z-sidebar);
-  background: #fff;
-}
+.md-sidebar__scrollwrap { z-index: var(--z-sidebar); background: #fff; }
 
 /* ============================================================
    DRAWER (móvil)
@@ -84,10 +66,7 @@
   .md-nav,
   .md-sidebar,
   .md-sidebar--primary,
-  .md-sidebar__scrollwrap {
-    position: fixed;
-    z-index: var(--z-drawer);
-  }
+  .md-sidebar__scrollwrap { position: fixed; z-index: var(--z-drawer); }
 
   .md-drawer,
   .md-sidebar--primary {
@@ -99,7 +78,7 @@
 
   /* Franja superior del drawer (celeste + texto blanco) */
   .md-sidebar--primary .md-nav__title,
-  .md-drawer .md-header { /* compatibilidad con versiones */
+  .md-drawer .md-header { /* compatibilidad de versiones */
     position: sticky;
     top: 0;
     z-index: 1;
@@ -107,16 +86,48 @@
     color: #fff !important;
     font-weight: 600;
     border-bottom: 1px solid rgba(255,255,255,.25);
+
+    /* --- Layout anti-superposición --- */
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
   }
 
+  /* Logo nativo en la franja: tamaño fijo y margen a la derecha */
+  .md-sidebar--primary .md-nav__title .md-logo,
+  .md-drawer .md-header .md-logo {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-right: 6px;       /* ← evita que toque el texto */
+    border-radius: 0;
+    background: transparent;
+  }
+  .md-sidebar--primary .md-nav__title .md-logo img,
+  .md-drawer .md-header .md-logo img {
+    width: 28px;
+    height: 28px;
+    display: inline-block !important;
+    vertical-align: middle;
+  }
+
+  /* El texto del título ocupa el resto del espacio */
+  .md-sidebar--primary .md-nav__title strong,
+  .md-drawer .md-header__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #fff !important;
+  }
+
   /* Evitar que contenido/hero tape el drawer */
-  .md-main,
-  .md-main__inner,
-  .hero { z-index: var(--z-hero); }
+  .md-main, .md-main__inner, .hero { z-index: var(--z-hero); }
 
   .md-sidebar__scrollwrap { overflow: auto; }
 }
@@ -129,7 +140,6 @@
 /* ============================================================
    LOGO — usar SOLO el logo nativo del tema (sin duplicar)
    ============================================================ */
-/* Dimensiones del <img> nativo de Material (header + drawer) */
 .md-logo img,
 .md-header__button.md-logo img {
   width: 28px;
@@ -145,15 +155,7 @@
   gap: 8px;
 }
 
-/* Alineación logo + texto en la franja del drawer */
-.md-sidebar--primary .md-nav__title,
-.md-drawer .md-header__title {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Contenedor del logo siempre transparente (sin recuadros) */
+/* Contenedor del logo siempre transparente */
 .md-logo,
 .md-header__button.md-logo {
   background: transparent !important;
@@ -182,8 +184,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: #0c2d57;                 /* color base anti-parpadeo */
-  background-image: url('/assets/hero.jpg?v=7'); /* ruta absoluta GitHub Pages */
+  background-color: #0c2d57;                  /* color base anti-parpadeo */
+  background-image: url('/assets/hero.jpg?v=8'); /* ruta absoluta GitHub Pages */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -219,11 +221,7 @@ body.scrolled .hero {
 /* ============================================================
    Layout principal
    ============================================================ */
-.md-main {
-  padding-top: var(--md-header-h);
-  position: relative;
-  z-index: var(--z-content);
-}
+.md-main { padding-top: var(--md-header-h); position: relative; z-index: var(--z-content); }
 body:has(.hero) .md-main       { padding-top: 0; }
 body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
 .md-main__inner { position: relative; z-index: var(--z-content); }
@@ -244,10 +242,7 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
   box-shadow: 0 2px 6px rgba(0,0,0,.05);
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.grid.cards > *:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,.08);
-}
+.grid.cards > *:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,.08); }
 
 /* ============================================================
    Tipografía y márgenes
@@ -256,9 +251,7 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
-.md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + .5rem);
-}
+.md-typeset h4 { scroll-margin-top: calc(var(--md-header-h) + .5rem); }
 
 /* ============================================================
    Responsivo
