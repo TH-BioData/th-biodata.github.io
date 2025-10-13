@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos Custom y Optimización
+   TH BioData Consulting — Estilos Custom (Completo y Optimizado)
    ============================================================ */
 
 /* --- Variables Globales --- */
@@ -84,7 +84,7 @@
 }
 
 /* ============================================================
-   FIX de Z-INDEX e Interacción (SOLUCIÓN al problema del menú móvil)
+   FIX de Z-INDEX e Interacción (SOLUCIÓN FORZADA al conflicto del menú móvil)
    ============================================================ */
 
 /* 1. Asegurar el orden de capas correcto (Header/Menú siempre arriba) */
@@ -98,9 +98,11 @@
   z-index: 10000 !important; /* Overlay debajo del menú, encima del contenido/hero */
   pointer-events: auto !important; /* Debe capturar clics fuera del menú */
 }
+
 /* 2. El Hero DEBE estar en la capa más baja */
 .hero, .hero__content, .hero__bg {
   z-index: 0 !important;
+  pointer-events: auto; /* Por defecto, acepta clics */
 }
 
 /* 3. CLAVE: Cuando el menú está abierto (estado 'drawer'), deshabilitar clics en el Hero */
@@ -109,9 +111,26 @@ html[data-md-state="drawer"] .hero__content,
 html[data-md-state="drawer"] .hero__bg {
   pointer-events: none !important; /* ¡Ignorar clics en el hero! */
 }
-/* 4. El hero no acepta eventos si está oculto (scroll) */
-body.scrolled .hero {
+
+/* 4. SOLUCIÓN FORZADA: Anular completamente la interacción del CONTENIDO PRINCIPAL.
+   Esto anula cualquier elemento del lado derecho de la pantalla. */
+html[data-md-state="drawer"] .md-main,
+html[data-md-state="drawer"] .md-main__inner,
+html[data-md-state="drawer"] .md-content {
   pointer-events: none !important;
+}
+
+/* 5. Restaurar la interacción SÓLO a los elementos del menú y overlay */
+.md-drawer,
+.md-overlay,
+.md-nav__link {
+  pointer-events: auto !important;
+}
+
+/* 6. Solución al efecto 'gris opaco' y asegurarse de que el drawer sea opaco */
+.md-drawer {
+    background-color: #ffffff !important; /* Fondo blanco sólido */
+    opacity: 1 !important; /* Asegura que no haya transparencia */
 }
 
 
@@ -119,13 +138,7 @@ body.scrolled .hero {
    ESTILOS ADICIONALES DEL MENÚ MÓVIL (TH BioData Consulting)
    ============================================================ */
 
-/* 1. Drawer general */
-.md-drawer {
-  background-color: #ffffff !important; /* Fondo blanco */
-  color: var(--th-color-corporate-blue) !important; /* Texto azul corporativo */
-}
-
-/* 2. Franja superior del Drawer */
+/* 1. Franja superior del Drawer */
 .md-nav__title {
   background-color: var(--th-color-corporate-light-blue) !important; /* Celeste corporativo */
   color: #ffffff !important; /* Texto blanco */
@@ -133,7 +146,7 @@ body.scrolled .hero {
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* 3. Enlaces y texto del menú */
+/* 2. Enlaces y texto del menú */
 .md-nav__link,
 .md-nav__link span {
   color: var(--th-color-corporate-blue) !important;
@@ -146,13 +159,13 @@ body.scrolled .hero {
   color: #004B8E !important;
 }
 
-/* 4. Íconos y flechas del menú */
+/* 3. Íconos y flechas del menú */
 .md-nav__icon,
 .md-icon {
   color: var(--th-color-corporate-blue) !important;
 }
 
-/* 5. Overlay al abrir el menú */
+/* 4. Overlay al abrir el menú */
 .md-overlay {
   background-color: rgba(0, 0, 0, 0.35) !important;
 }
@@ -204,7 +217,7 @@ body:not(.scrolled) .hero {
 body.scrolled .hero {
   opacity: 0;
   transform: translateY(-80px);
-  /* pointer-events: none; - Movido a la sección FIX */
+  /* pointer-events: none; - Manejado en la sección FIX */
 }
 
 /* ============================================================
