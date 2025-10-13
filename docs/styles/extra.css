@@ -277,3 +277,73 @@ body:not(:has(.hero)) .md-main {
 @media (prefers-reduced-motion: reduce) {
   .hero { transition: none; }
 }
+
+/* ============================================================
+   FIX DEFINITIVO: logo visible en franja celeste del drawer móvil
+   ============================================================ */
+
+/* 1) El drawer va SIEMPRE por encima del header cuando está abierto */
+@media (max-width: 960px) {
+  .md-drawer {
+    position: fixed;
+    z-index: 200 !important;                  /* > header (20) */
+    top: var(--md-header-h) !important;       /* debajo del header */
+    height: calc(100vh - var(--md-header-h)) !important;
+    left: 0; right: auto;
+  }
+
+  /* Cuando el drawer está abierto, quitamos la sombra del header
+     que 'muerde' visualmente la franja celeste */
+  [data-md-state="lock"] .md-header {
+    box-shadow: none !important;
+  }
+
+  /* Asegurar que el scroll del contenido del drawer no recorte el título */
+  .md-sidebar__scrollwrap {
+    overflow: auto !important;
+  }
+}
+
+/* 2) Franja celeste del título del drawer (con logo) */
+.md-nav__title {
+  position: sticky;              /* queda fija arriba al scrollear el menú */
+  top: 0;
+  z-index: 1;
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: calc(0.6rem + env(safe-area-inset-top, 0)) 1rem 0.7rem 1rem !important;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+/* 3) Forzar visibilidad del logo en blanco dentro del título del drawer */
+.md-nav__title .md-logo,
+.md-nav__title .md-logo img,
+.md-nav__title .md-logo svg {
+  display: inline-block !important;
+  height: 28px !important;
+  width: auto !important;
+}
+
+/* Si el logo es oscuro, lo convertimos a blanco sobre celeste */
+.md-nav__title .md-logo img,
+.md-nav__title .md-logo svg {
+  filter: brightness(0) invert(1);
+}
+
+/* Texto a la derecha del logo siempre blanco */
+.md-nav__title span,
+.md-nav__title strong {
+  color: #fff !important;
+}
+
+/* 4) El overlay no debe tapar ni ensuciar la franja celeste */
+.md-overlay {
+  background-color: transparent !important;
+  opacity: 0 !important;
+}
+[data-md-state="lock"] .md-overlay {
+  opacity: 1 !important; /* permite cerrar al tocar fuera, sin gris */
+}
