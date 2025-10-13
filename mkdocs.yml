@@ -4,9 +4,7 @@ site_url: https://thbiodata.github.io
 theme:
   name: material
   logo: assets/logo.png        # (opcional: si subís el logo)
-  favicon: assets/favicon.png  # (opcional)
   features:
-    - navigation.instant
     - navigation.sections
     - navigation.indexes
     - content.code.copy
