@@ -1,14 +1,14 @@
 /* ============================================================
-   TH BioData Consulting — Estilos completos y estables (v3)
+   TH BioData Consulting — Estilos finales (Hero full-width + menú retraíble)
    ============================================================ */
 
 /* --- Variables globales --- */
 :root {
-  --th-hero-height: 420px;            
-  --th-hero-height-sm: 300px;         
+  --th-hero-height: 420px;            /* desktop */
+  --th-hero-height-sm: 300px;         /* móvil */
   --md-header-h: var(--md-header-height, 3.6rem);
-  --th-color-corporate-blue: #0F3D73;       
-  --th-color-corporate-light-blue: #7CC6FF; 
+  --th-color-corporate-blue: #0F3D73;
+  --th-color-corporate-light-blue: #7CC6FF;
 }
 
 /* --- Contenido centrado --- */
@@ -18,60 +18,23 @@
 }
 
 /* ============================================================
-   HEADER y NAVEGACIÓN
+   HEADER (azul fijo y sobre el hero)
    ============================================================ */
-
 .md-header,
 .md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: 20 !important;  /* ahora sobre el hero */
-}
-
-/* Drawer lateral */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.md-nav__link,
-.md-nav__link span {
-  color: var(--th-color-corporate-blue) !important;
-  background: transparent !important;
-}
-
-.md-nav__link:hover,
-.md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important;
-  color: #004B8E !important;
-}
-
-.md-nav__icon,
-.md-icon {
-  color: var(--th-color-corporate-blue) !important;
-}
-
-.md-overlay {
-  background-color: rgba(0, 0, 0, 0.35) !important;
-}
-
-/* En desktop: aseguramos que el menú lateral quede por encima del hero */
-.md-sidebar,
-.md-sidebar--primary,
-.md-sidebar__scrollwrap {
-  z-index: 30 !important;
-  background: #fff !important;
+  z-index: 20 !important;
 }
 
 /* ============================================================
-   HERO full-bleed en el flujo, centrado y arriba
+   HERO full-bleed — ocupa todo el ancho de la ventana
    ============================================================ */
-
 .hero {
   position: relative;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100vw;                         /* ocupa todo el viewport */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;                   /* saca del flujo limitado */
   height: var(--th-hero-height);
   overflow: hidden;
   display: flex;
@@ -79,7 +42,7 @@
   justify-content: center;
   z-index: 0;
   transition: opacity .6s ease, transform .6s ease;
-  margin-top: 0 !important; /* evitar desplazamiento */
+  margin-top: 0 !important;
 }
 
 .hero__bg {
@@ -98,7 +61,6 @@
   color: #fff;
   background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
   padding: 48px 16px;
-  border-radius: 0;
   z-index: 1;
 }
 
@@ -124,9 +86,8 @@
 }
 
 /* ============================================================
-   Ajustes de scroll y hero fade
+   Layout principal
    ============================================================ */
-
 .md-main {
   padding-top: var(--md-header-h) !important;
   position: relative;
@@ -137,9 +98,55 @@ body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
-   Páginas SIN hero
+   Drawer retraíble (lateral ocultable)
    ============================================================ */
 
+/* Fondo del menú */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Enlaces y texto */
+.md-nav__link,
+.md-nav__link span {
+  color: var(--th-color-corporate-blue) !important;
+  background: transparent !important;
+}
+
+.md-nav__link:hover,
+.md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
+}
+
+.md-nav__icon,
+.md-icon {
+  color: var(--th-color-corporate-blue) !important;
+}
+
+/* Overlay al abrir menú (gris suave y clickeable) */
+.md-overlay {
+  background-color: rgba(0,0,0,0.35) !important;
+}
+
+/* Menú retraíble (drawer) — oculto por defecto en desktop */
+@media (min-width: 769px) {
+  .md-sidebar {
+    display: none !important;
+  }
+
+  /* Mostramos el botón del drawer (hamburguesa) en escritorio */
+  .md-header__button[for="__drawer"] {
+    display: block !important;
+  }
+}
+
+/* ============================================================
+   Páginas SIN hero
+   ============================================================ */
 body:not(:has(.hero)) .md-main {
   padding-top: var(--md-header-h) !important;
 }
@@ -147,7 +154,6 @@ body:not(:has(.hero)) .md-main {
 /* ============================================================
    Grid de cards
    ============================================================ */
-
 .grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -171,7 +177,6 @@ body:not(:has(.hero)) .md-main {
 /* ============================================================
    Tipografía y márgenes
    ============================================================ */
-
 .md-typeset h1 {
   margin: 0.25rem 0 1rem !important;
 }
@@ -186,7 +191,6 @@ body:not(:has(.hero)) .md-main {
 /* ============================================================
    Responsivo
    ============================================================ */
-
 @media (max-width: 768px) {
   .hero { height: var(--th-hero-height-sm); }
   .hero__title { font-size: 28px; }
