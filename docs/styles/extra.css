@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos completos y estables (v3.5)
+   TH BioData Consulting — Estilos completos y estables (v3.6)
    ============================================================ */
 
 /* --- Variables globales --- */
@@ -30,12 +30,6 @@
   border-bottom:1px solid #e5e7eb;
   display:flex;align-items:center;gap:8px;
   padding:.8rem 1rem !important;
-}
-.md-nav__title img,
-.md-nav__title svg{
-  height:28px !important;width:auto !important;
-  display:inline-block !important;
-  filter:brightness(0) invert(1); /* fuerza blanco si el logo es oscuro */
 }
 .md-nav__title span,
 .md-nav__title strong{color:#fff !important;}
@@ -81,15 +75,28 @@
     padding:calc(.6rem + env(safe-area-inset-top,0)) 1rem .7rem 1rem !important;
     border-bottom:1px solid rgba(255,255,255,.25);
   }
-  .md-sidebar--primary .md-nav__title .md-logo,
-  .md-sidebar--primary .md-nav__title .md-logo img,
-  .md-sidebar--primary .md-nav__title .md-logo svg{
-    display:inline-block !important;height:28px !important;width:auto !important;filter:brightness(0) invert(1);
+  /* LOGO REAL en la franja celeste (assets/logo.png) */
+  .md-sidebar--primary .md-nav__title .md-logo{
+    display:inline-flex !important;align-items:center;justify-content:center;
+    height:36px !important;width:36px !important;border-radius:6px;background:transparent !important;
   }
+  .md-sidebar--primary .md-nav__title .md-logo::before{
+    content:"";display:block;width:100%;height:100%;
+    background-image:url('../assets/logo.png');
+    background-size:contain;background-repeat:no-repeat;background-position:center;
+    /* si tu logo ya es blanco, podés quitar el filter de la línea siguiente */
+    filter:brightness(0) invert(1);
+  }
+  /* Ocultamos cualquier img/svg interno que pueda traer el tema */
+  .md-sidebar--primary .md-nav__title .md-logo img,
+  .md-sidebar--primary .md-nav__title .md-logo svg{display:none !important;}
+
   /* Evitar que el contenido tape el drawer */
   .md-main,.md-main__inner,.hero{z-index:0 !important;}
+
   /* Quitar sombra del header cuando el drawer está abierto (evita “morder” la franja) */
   [data-md-state="lock"] .md-header{box-shadow:none !important;}
+
   .md-sidebar__scrollwrap{overflow:auto !important;}
 }
 
@@ -97,7 +104,7 @@
    DESKTOP — quitar recuadro blanco del logo en el sidebar
    ============================================================ */
 @media (min-width:961px){
-  .md-sidebar--primary .md-logo{display:none !important;}
+  .md-sidebar--primary .md-logo{display:none !important;}    /* evita el cuadro blanco */
   .md-sidebar--primary .md-nav__title{padding-left:1rem !important;}
 }
 
@@ -175,72 +182,4 @@ body:not(:has(.hero)) .md-main{padding-top:var(--md-header-h) !important;}
    ============================================================ */
 @media (prefers-reduced-motion:reduce){
   .hero{transition:none;}
-}
-/* ============================================================
-   ENHANCEMENT: usar logo real en drawer móvil
-   ============================================================ */
-
-/* Drawer móvil: franja superior celeste con logo real */
-@media (max-width: 960px) {
-  .md-sidebar--primary .md-nav__title .md-logo {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    height: 36px !important;
-    width: 36px !important;
-    border-radius: 6px;
-    background: transparent !important;
-  }
-
-  .md-sidebar--primary .md-nav__title .md-logo::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url('../assets/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: brightness(0) invert(1); /* mantiene el logo blanco sobre celeste */
-  }
-
-  /* Eliminamos cualquier filtro duplicado sobre img/svg internos */
-  .md-sidebar--primary .md-nav__title .md-logo img,
-  .md-sidebar--primary .md-nav__title .md-logo svg {
-    display: none !important;
-  }
-}
-/* ============================================================
-   ENHANCEMENT: usar logo real en drawer móvil
-   ============================================================ */
-
-/* Drawer móvil: franja superior celeste con logo real */
-@media (max-width: 960px) {
-  .md-sidebar--primary .md-nav__title .md-logo {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    height: 36px !important;
-    width: 36px !important;
-    border-radius: 6px;
-    background: transparent !important;
-  }
-
-  .md-sidebar--primary .md-nav__title .md-logo::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url('../assets/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: brightness(0) invert(1); /* mantiene el logo blanco sobre celeste */
-  }
-
-  /* Eliminamos cualquier filtro duplicado sobre img/svg internos */
-  .md-sidebar--primary .md-nav__title .md-logo img,
-  .md-sidebar--primary .md-nav__title .md-logo svg {
-    display: none !important;
-  }
 }
