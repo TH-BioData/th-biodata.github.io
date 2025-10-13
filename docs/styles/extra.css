@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.10)
+   TH BioData Consulting — Estilos estables (v3.11)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -11,7 +11,7 @@
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
 
-  /* Material primary (evita el violeta por defecto) */
+  /* Material primary */
   --md-primary-fg-color: var(--th-color-corporate-blue);
   --md-primary-fg-color--light: var(--th-color-corporate-light-blue);
   --md-primary-fg-color--dark: #0B2C54;
@@ -75,7 +75,7 @@
 
   /* Franja superior del drawer (celeste + texto blanco) */
   .md-sidebar--primary .md-nav__title,
-  .md-drawer .md-header { /* compat versiones */
+  .md-drawer .md-header {
     position: sticky;
     top: 0;
     z-index: 1;
@@ -84,63 +84,69 @@
     font-weight: 600;
     border-bottom: 1px solid rgba(255,255,255,.25);
 
-    /* --- Layout anti-superposición --- */
+    /* Layout */
     display: flex;
     align-items: center;
     gap: 10px;
     padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
-    min-height: 56px;                 /* altura cómoda */
-    line-height: 1.1;
+    min-height: 60px;
+    line-height: 1.2;
   }
 
-  /* Quita cualquier "bloque" blanco heredado */
+  /* Quita cualquier “bloque” blanco o botón residual en el título */
   .md-sidebar--primary .md-nav__title *,
   .md-drawer .md-header * {
     background: transparent !important;
     box-shadow: none !important;
   }
+  /* Algunos temas insertan botones/íconos aquí: los ocultamos */
+  .md-sidebar--primary .md-nav__title .md-header__button,
+  .md-sidebar--primary .md-nav__title .md-nav__button,
+  .md-drawer .md-header .md-header__button,
+  .md-drawer .md-header .md-nav__button {
+    display: none !important;
+  }
 
-  /* Logo nativo en la franja: tamaño mayor (36px) y margen */
+  /* Logo nativo más grande (44px) y margen */
   .md-sidebar--primary .md-nav__title .md-logo,
   .md-drawer .md-header .md-logo {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;                      /* ← tamaño logo */
-    height: 36px;
-    margin-right: 8px;                /* separa del texto */
-    border-radius: 0;
+    width: 44px;                /* ← tamaño logo móvil */
+    height: 44px;
+    margin-right: 10px;
     background: transparent !important;
+    border-radius: 0;
   }
   .md-sidebar--primary .md-nav__title .md-logo img,
   .md-drawer .md-header .md-logo img {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     display: inline-block !important;
     vertical-align: middle;
     object-fit: contain;
     background: transparent !important;
   }
 
-  /* El texto del título ocupa el resto del espacio */
+  /* Título: puede ocupar 2 líneas sin pisar el logo */
   .md-sidebar--primary .md-nav__title strong,
   .md-drawer .md-header__title {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;              /* si preferís 2 líneas, usa normal */
+    white-space: normal;        /* ← permite salto de línea */
     color: #fff !important;
   }
 
   /* Evitar que contenido/hero tape el drawer */
   .md-main, .md-main__inner, .hero { z-index: var(--z-hero); }
-
   .md-sidebar__scrollwrap { overflow: auto; }
 }
 
-/* Desktop: limpia padding del título del sidebar */
+/* Desktop: padding del título del sidebar */
 @media (min-width: 961px) {
   .md-sidebar--primary .md-nav__title { padding-left: 1rem; }
 }
@@ -158,7 +164,7 @@
   background: transparent !important;
 }
 
-/* Alineación logo + texto en el header (barra superior) */
+/* Alineación logo + texto en el header superior */
 .md-header__title .md-ellipsis {
   display: inline-flex;
   align-items: center;
@@ -192,7 +198,7 @@
   inset: 0;
   z-index: 0;
   background-color: #0c2d57;
-  background-image: url('/assets/hero.jpg?v=9'); /* ruta absoluta */
+  background-image: url('/assets/hero.jpg?v=11');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -218,7 +224,7 @@
   text-decoration: none;
 }
 
-/* Fade controlado por scripts/scroll-fade.js (.scrolled en <body>) */
+/* Fade controlado por scripts/scroll-fade.js */
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); pointer-events: none; }
 
 /* ============================================================
