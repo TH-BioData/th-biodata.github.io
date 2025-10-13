@@ -257,3 +257,69 @@ body.ready:not(.scrolled) .hero {
     transition: none !important;
   }
 }
+
+/* ============================================================
+   HERO STICKY + FADE (debajo del header fijo)
+   ============================================================ */
+
+/* 1) El hero se comporta como un bloque normal hasta que llega
+   debajo del header y ahí queda pegado (sticky). */
+.hero {
+  position: sticky !important;
+  top: var(--md-header-h) !important;   /* pegado justo debajo del header */
+  z-index: 0;                            /* por debajo del header (que está en 20) */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: var(--th-hero-height);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0 !important;
+  /* estado inicial sin transición; la activamos tras ready */
+  opacity: 1;
+  transform: translateY(0);
+  transition: none !important;
+}
+
+/* 2) Cuando la página está lista, habilitamos la transición.
+   (Asegurate que ready.js agregue .ready al <body>) */
+body.ready .hero {
+  transition: opacity 0.6s ease, transform 0.6s ease !important;
+  will-change: opacity, transform;
+}
+
+/* 3) Al pasar el umbral (tu scroll-fade.js agrega .scrolled),
+   aplicamos el desvanecimiento y leve desplazamiento. */
+body.ready.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+
+/* 4) Layout del contenedor principal:
+   - Sin hero: mantené padding-top para no tapar por el header.
+   - Con hero: SIN padding-top (porque el hero ya “ocupa” y se pega). */
+.md-main {
+  padding-top: var(--md-header-h) !important;
+}
+body:has(.hero) .md-main {
+  padding-top: 0 !important;
+}
+
+/* 5) Accesibilidad: si el usuario prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  body.ready .hero { transition: none !important; }
+}
+
+/* 6) Móvil: asegurar que el drawer quede por encima del hero sticky */
+@media (max-width: 960px) {
+  .md-sidebar,
+  .md-sidebar--primary,
+  .md-sidebar__scrollwrap,
+  .md-nav,
+  .md-drawer {
+    position: fixed;
+    z-index: 100 !important;
+  }
+  .hero { z-index: 0 !important; }
+}
