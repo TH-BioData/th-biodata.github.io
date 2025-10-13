@@ -84,19 +84,24 @@
 }
 
 /* ============================================================
-   FIX de Z-INDEX e Interacción (SOLUCIÓN FORZADA al conflicto del menú móvil)
+   FIX de Z-INDEX e Interacción (SOLUCIÓN DEFINITIVA/HARDCORE)
    ============================================================ */
 
-/* 1. Asegurar el orden de capas correcto (Header/Menú siempre arriba) */
-.md-header { z-index: 10005 !important; }
+/* 1. Definir Z-INDEX EXTREMO para los componentes del menú/interfaz */
+/* Esto garantiza que estén por encima de *cualquier* cosa. */
+.md-header { z-index: 99990 !important; }
+
 .md-drawer,
 .md-nav {
-  z-index: 10010 !important; /* Menú por encima del Header */
-  pointer-events: auto !important; /* El menú debe ser interactivo */
+  z-index: 99999 !important; /* MÁXIMA PRIORIDAD para el menú */
+  pointer-events: auto !important;
+  background-color: #ffffff !important; /* Fondo blanco sólido (eliminar opacidad gris) */
+  opacity: 1 !important;
 }
+
 .md-overlay {
-  z-index: 10000 !important; /* Overlay debajo del menú, encima del contenido/hero */
-  pointer-events: auto !important; /* Debe capturar clics fuera del menú */
+  z-index: 99998 !important; /* Justo debajo del menú, encima de todo lo demás */
+  pointer-events: auto !important;
 }
 
 /* 2. El Hero DEBE estar en la capa más baja */
@@ -105,33 +110,37 @@
   pointer-events: auto; /* Por defecto, acepta clics */
 }
 
-/* 3. CLAVE: Cuando el menú está abierto (estado 'drawer'), deshabilitar clics en el Hero */
+/* 3. CLAVE: Anulación de la interacción en la mayor parte de la página
+   cuando el menú está abierto (usando el estado 'drawer'). */
+
+/* Anular clics en el Hero */
 html[data-md-state="drawer"] .hero,
 html[data-md-state="drawer"] .hero__content,
 html[data-md-state="drawer"] .hero__bg {
-  pointer-events: none !important; /* ¡Ignorar clics en el hero! */
+  pointer-events: none !important;
 }
 
-/* 4. SOLUCIÓN FORZADA: Anular completamente la interacción del CONTENIDO PRINCIPAL.
-   Esto anula cualquier elemento del lado derecho de la pantalla. */
+/* Anular clics en el contenido principal (.md-main y sus hijos) */
 html[data-md-state="drawer"] .md-main,
 html[data-md-state="drawer"] .md-main__inner,
 html[data-md-state="drawer"] .md-content {
   pointer-events: none !important;
 }
 
-/* 5. Restaurar la interacción SÓLO a los elementos del menú y overlay */
+/* LA REGLA MÁS FORZADA: Anular clics en el contenedor principal de la página
+   Esto debería capturar cualquier elemento fijo que se haya escapado. */
+html[data-md-state="drawer"] .md-container {
+  pointer-events: none !important;
+}
+
+/* 4. Asegurar que los elementos del menú SIEMPRE sean clickeables */
 .md-drawer,
 .md-overlay,
-.md-nav__link {
+.md-nav__link,
+.md-nav__item {
   pointer-events: auto !important;
 }
 
-/* 6. Solución al efecto 'gris opaco' y asegurarse de que el drawer sea opaco */
-.md-drawer {
-    background-color: #ffffff !important; /* Fondo blanco sólido */
-    opacity: 1 !important; /* Asegura que no haya transparencia */
-}
 
 
 /* ============================================================
