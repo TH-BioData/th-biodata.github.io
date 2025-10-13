@@ -398,3 +398,43 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
   background: transparent !important;
   box-shadow: none !important;
 }
+/* ===== Logo junto al título en el HEADER ===== */
+.md-header__title .md-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.md-header__title .md-ellipsis::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url("/assets/logo.png"); /* ruta absoluta para GitHub Pages */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex: 0 0 24px;
+}
+
+/* ===== Logo junto al título en el DRAWER (móvil) ===== */
+.md-drawer .md-header__title,
+.md-sidebar__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.md-drawer .md-header__title::before,
+.md-sidebar__title::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url("/assets/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex: 0 0 24px;
+}
+
+/* Evitar que otro estilo tape el logo o lo reemplace */
+.md-logo img { display: inline; }
