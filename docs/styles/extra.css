@@ -1,48 +1,43 @@
 /* ============================================================
-   TH BioData Consulting — Estilos Custom (Completo y Optimizado)
+   TH BioData Consulting — Estilos Custom (limpio y estable)
    ============================================================ */
 
-/* --- Variables Globales --- */
+/* --- Variables globales --- */
 :root {
-  --th-hero-height: 420px;          /* desktop */
-  --th-hero-height-sm: 300px;       /* móvil */
+  --th-hero-height: 420px;            /* desktop */
+  --th-hero-height-sm: 300px;         /* móvil */
   --md-header-h: var(--md-header-height, 3.6rem);
-  --th-color-corporate-blue: #0F3D73;
-  --th-color-corporate-light-blue: #7CC6FF;
+  --th-color-corporate-blue: #0F3D73;       /* barra superior / CTA */
+  --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
 }
 
-/* --- Contenido Centrado --- */
+/* --- Contenido centrado --- */
 .md-content {
   max-width: 950px;
   margin: 0 auto;
 }
 
-/* --- TOP BAR (azul corporativo fijo) --- */
+/* --- Barra superior (azul corporativo) --- */
 .md-header,
 .md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: 20; /* Por encima del hero y el contenido base */
+  z-index: 10 !important; /* por encima del hero en flujo */
 }
 
 /* ============================================================
-   HERO full-width (debajo del header)
+   HERO full-bleed en el flujo (scroll normal, sin fixed)
    ============================================================ */
 
-/* Bloque hero (fijo y con tamaño) */
 .hero {
-  position: fixed;
-  top: var(--md-header-h); /* Queda debajo del header */
-  left: 0;
-  right: 0;
+  position: relative;                 
+  margin-left: calc(50% - 50vw);      /* full-bleed */
+  margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
-  margin: 0;
-  z-index: 0 !important;   /* CAPA MÁS BAJA, por detrás del header/menú */
   overflow: hidden;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  pointer-events: auto;    /* Por defecto, acepta clics */
+  z-index: 0;                         /* detrás del header */
+  transition: opacity .6s ease, transform .6s ease;
 }
 
-/* Imagen/fondo ocupando TODO el hero */
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -52,16 +47,16 @@
   background-repeat: no-repeat;
 }
 
-/* Contenido centrado y con overlay sutil */
 .hero__content {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+  min-height: 100%;
+  padding: 48px 16px;
   color: #fff;
+  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
 }
 
 .hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
@@ -76,23 +71,24 @@
   text-decoration: none;
 }
 
-/* Empujar TODO el contenido por debajo del hero + header */
+/* El contenido general sólo compensa el header fijo */
 .md-main {
-  padding-top: calc(var(--md-header-h) + var(--th-hero-height)) !important;
+  padding-top: var(--md-header-h) !important;
   position: relative;
-  z-index: 1; /* Contenido por encima del hero */
+  z-index: 1;
 }
 
+/* Desvanecimiento opcional del hero al scrollear (requiere JS) */
+body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
+body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
+/* ============================================================
+   Colores/estilos del menú móvil (sin tocar transform/z-index)
+   ============================================================ */
 
-
-/* ===== Drawer/Overlay — configuración segura ===== */
-
-/* No toques transform ni z-index propios del tema;
-   solo asegura colores/contraste del menú */
 .md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
+  background-color: var(--th-color-corporate-light-blue) !important; /* franja celeste */
+  color: #ffffff !important; 
   font-weight: 600;
   border-bottom: 1px solid #e5e7eb;
 }
@@ -114,79 +110,58 @@
   color: var(--th-color-corporate-blue) !important;
 }
 
-/* Overlay estándar, semitransparente y clickeable para cerrar */
+/* Overlay estándar, clickeable para cerrar */
 .md-overlay {
-  background-color: rgba(0,0,0,0.35) !important;
-  /* no forzar pointer-events ni z-index */
+  background-color: rgba(0, 0, 0, 0.35) !important;
 }
 
-/* Cuando el drawer está abierto, bloqueá SOLO el contenido principal,
-   no el contenedor que incluye al drawer */
+/* Cuando el drawer está abierto:
+   - Bloqueá interacciones del contenido
+   - Mantené clickeables overlay y drawer
+   - No tocar .md-container ni transform del drawer */
 html[data-md-state="drawer"] .md-content,
 html[data-md-state="drawer"] .md-main__inner {
   pointer-events: none !important;
 }
 
-/* Mantener clickeables: overlay y drawer */
 html[data-md-state="drawer"] .md-overlay,
 html[data-md-state="drawer"] .md-drawer {
   pointer-events: auto !important;
 }
 
-/* Hero: no interceptes clics cuando el drawer esté abierto */
+/* Evitar que el hero intercepte eventos cuando el drawer está abierto */
 html[data-md-state="drawer"] .hero,
 html[data-md-state="drawer"] .hero__content,
 html[data-md-state="drawer"] .hero__bg {
   pointer-events: none !important;
 }
 
-/* Header por encima del hero (sin exagerar) */
-.md-header, .md-tabs { z-index: 10 !important; }
-
-/* El hero debe permanecer detrás del contenido */
-.hero, .hero__content, .hero__bg { z-index: 0 !important; }
-
-
-
 /* ============================================================
-   ESTILOS ADICIONALES DEL MENÚ MÓVIL (TH BioData Consulting)
+   Páginas SIN hero
    ============================================================ */
 
-/* 1. Franja superior del Drawer */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important; /* Celeste corporativo */
-  color: #ffffff !important; /* Texto blanco */
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
+body:not(:has(.hero)) .md-main {
+  padding-top: var(--md-header-h) !important;
 }
 
-/* 2. Enlaces y texto del menú */
-.md-nav__link,
-.md-nav__link span {
-  color: var(--th-color-corporate-blue) !important;
-  background: transparent !important;
+/* Ajuste de títulos y anclas con header fijo */
+.md-typeset h1 {
+  margin: 0.25rem 0 1rem !important;
+}
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
 }
 
-.md-nav__link:hover,
-.md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important; /* Hover leve celeste */
-  color: #004B8E !important;
-}
-
-/* 3. Íconos y flechas del menú */
-.md-nav__icon,
-.md-icon {
-  color: var(--th-color-corporate-blue) !important;
-}
-
-/* 4. Overlay al abrir el menú */
-.md-overlay {
-  background-color: rgba(0, 0, 0, 0.35) !important;
-}
+/* Evita scroll horizontal accidental */
+html, body { overflow-x: hidden; }
 
 /* ============================================================
-   GRID CARDS
+   Grid de cards
    ============================================================ */
+
 .grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -208,8 +183,9 @@ html[data-md-state="drawer"] .hero__bg {
 }
 
 /* ============================================================
-   BANNERS
+   Banners
    ============================================================ */
+
 .banner {
   display: block;
   width: 100%;
@@ -222,26 +198,11 @@ html[data-md-state="drawer"] .hero__bg {
 }
 
 /* ============================================================
-   Efecto de desvanecimiento (requiere JS que ponga .scrolled)
-   ============================================================ */
-body:not(.scrolled) .hero {
-  opacity: 1;
-  transform: translateY(0);
-}
-body.scrolled .hero {
-  opacity: 0;
-  transform: translateY(-80px);
-  /* pointer-events: none; - Manejado en la sección FIX */
-}
-
-/* ============================================================
    Responsivo
    ============================================================ */
+
 @media (max-width: 768px) {
   .hero { height: var(--th-hero-height-sm); }
-  .md-main {
-    padding-top: calc(var(--md-header-h) + var(--th-hero-height-sm)) !important;
-  }
   .banner {
     height: 160px;
     object-position: center 40%;
@@ -249,42 +210,9 @@ body.scrolled .hero {
 }
 
 /* ============================================================
-   FIX - Layout compacto cuando NO hay hero
+   Compatibilidad "hero--fixed" (si alguna página lo usa)
    ============================================================ */
-
-/* Si NO hay .hero, anulá cualquier padding/margen alto extra */
-body:not(:has(.hero)) .md-main {
-  padding-top: var(--md-header-h) !important;
-}
-body:not(:has(.hero)) .md-main__inner,
-body:not(:has(.hero)) .md-content {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-
-/* Elimina el margen superior del primer bloque/título */
-body:not(:has(.hero)) .md-content .md-typeset > :first-child {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Ajusta márgenes globales del h1 (Material pone uno grande por defecto) */
-.md-typeset h1 {
-  margin: 0.25rem 0 1rem !important;
-}
-
-/* Compensa el header fijo cuando se navega por anclas/TOC */
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
-}
-
-/* Evita scroll horizontal accidental */
-html, body { overflow-x: hidden; }
-
-/* Regla del hero--fixed (mantener si se usa esa clase) */
+/* Si por accidente una página conserva .hero--fixed, compensá el alto */
 body:has(.hero--fixed) .md-main__inner {
   padding-top: var(--th-hero-height, 420px) !important;
 }
