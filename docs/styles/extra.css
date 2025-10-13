@@ -86,70 +86,66 @@
 
 
 
-/* ============================================================
-   FIX de Z-INDEX e Interacción (SOLUCIÓN EXTREMA y FINAL)
-   ============================================================ */
+/* ===== Drawer/Overlay — configuración segura ===== */
 
-/* 1. Definir Z-INDEX EXTREMO para los componentes del menú/interfaz */
-.md-header { z-index: 99990 !important; }
-
-.md-drawer,
-.md-nav {
-  z-index: 99999 !important; /* MÁXIMA PRIORIDAD para el menú */
-  pointer-events: auto !important;
-  background-color: #ffffff !important; /* Fondo blanco sólido (eliminar opacidad gris) */
-  opacity: 1 !important;
-  /* El transform a veces crea un nuevo 'stacking context' que anula z-index. Lo neutralizamos. */
-  transform: none !important; 
+/* No toques transform ni z-index propios del tema;
+   solo asegura colores/contraste del menú */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
 }
 
+.md-nav__link,
+.md-nav__link span {
+  color: var(--th-color-corporate-blue) !important;
+  background: transparent !important;
+}
+
+.md-nav__link:hover,
+.md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
+}
+
+.md-nav__icon,
+.md-icon {
+  color: var(--th-color-corporate-blue) !important;
+}
+
+/* Overlay estándar, semitransparente y clickeable para cerrar */
 .md-overlay {
-  z-index: 99998 !important; /* Justo debajo del menú, encima de todo lo demás */
+  background-color: rgba(0,0,0,0.35) !important;
+  /* no forzar pointer-events ni z-index */
+}
+
+/* Cuando el drawer está abierto, bloqueá SOLO el contenido principal,
+   no el contenedor que incluye al drawer */
+html[data-md-state="drawer"] .md-content,
+html[data-md-state="drawer"] .md-main__inner {
+  pointer-events: none !important;
+}
+
+/* Mantener clickeables: overlay y drawer */
+html[data-md-state="drawer"] .md-overlay,
+html[data-md-state="drawer"] .md-drawer {
   pointer-events: auto !important;
 }
 
-/* 2. El Hero DEBE estar en la capa más baja */
-.hero, .hero__content, .hero__bg {
-  z-index: 0 !important;
-}
-
-/* 3. CLAVE: Anular TODA interacción en la página fuera del menú/overlay */
-
-/* Anular clics en el Hero (fijo) */
+/* Hero: no interceptes clics cuando el drawer esté abierto */
 html[data-md-state="drawer"] .hero,
 html[data-md-state="drawer"] .hero__content,
 html[data-md-state="drawer"] .hero__bg {
   pointer-events: none !important;
 }
 
-/* Anular clics en TODO el contenido de la página (la columna de la derecha) */
-html[data-md-state="drawer"] .md-container,
-html[data-md-state="drawer"] .md-main,
-html[data-md-state="drawer"] .md-main__inner,
-html[data-md-state="drawer"] .md-content {
-  pointer-events: none !important;
-  /* Si el elemento es lo que se ve opaco, forzar opacidad completa/clara */
-  opacity: 1 !important; 
-}
+/* Header por encima del hero (sin exagerar) */
+.md-header, .md-tabs { z-index: 10 !important; }
 
-/* 4. RESTAURAR la interacción al menú/drawer y sus enlaces internos */
-.md-drawer,
-.md-nav__link,
-.md-nav__item,
-.md-overlay {
-  pointer-events: auto !important;
-  z-index: 99999 !important;
-}
-/* 5. Asegurarse que el cuerpo no tenga transforms (puede interferir con el drawer) */
-html[data-md-state="drawer"] body {
-    transform: none !important;
-}
+/* El hero debe permanecer detrás del contenido */
+.hero, .hero__content, .hero__bg { z-index: 0 !important; }
 
-/* 6. Fix del color opaco: Forzar que el elemento más bajo del drawer no tenga transparencia */
-.md-drawer > :first-child { 
-    background-color: #ffffff !important;
-    opacity: 1 !important;
-}
 
 
 /* ============================================================
