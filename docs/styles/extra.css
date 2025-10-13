@@ -285,3 +285,43 @@ body:not(:has(.hero)) .md-content .md-typeset > :first-child {
 
 /* Si tenías reglas anteriores que añadían padding-top por .hero--fixed, mantenelas.
    Pero asegúrate de que NO apliquen si no hay .hero. */
+
+/* ============================================================
+   FIX hard — interacción menú móvil (capas y clics)
+   Orden deseado: HERO (0) < CONTENIDO (1) < OVERLAY (10000) < HEADER (10005) < DRAWER (10010)
+   ============================================================ */
+
+/* 1) Asegura que el hero jamás bloquee el menú */
+.hero, .hero__content, .hero__bg { z-index: 0 !important; }
+
+/* 2) Overlay por debajo del drawer, por encima del contenido */
+.md-overlay {
+  z-index: 10000 !important;
+  pointer-events: auto !important; /* debe captar clic fuera del menú */
+}
+
+/* 3) Header por debajo del drawer (para que no tape el borde superior del menú) */
+.md-header { z-index: 10005 !important; }
+
+/* 4) Drawer SIEMPRE por encima del overlay y del header */
+.md-drawer, .md-nav {
+  position: relative;              /* evita stacking context extraño */
+  z-index: 10010 !important;
+  pointer-events: auto !important; /* clics activos dentro del menú */
+}
+
+/* 5) Asegura que los elementos internos del drawer también estén arriba */
+.md-drawer .md-nav__container,
+.md-drawer .md-nav__list,
+.md-drawer .md-nav__item,
+.md-drawer .md-nav__link {
+  position: relative;
+  z-index: 10011 !important;
+}
+
+/* 6) Cuando el menú está abierto, el hero NO recibe eventos */
+html[data-md-state="drawer"] .hero,
+html[data-md-state="drawer"] .hero__content,
+html[data-md-state="drawer"] .hero__bg {
+  pointer-events: none !important;
+}
