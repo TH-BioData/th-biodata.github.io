@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.7)
+   TH BioData Consulting — Estilos estables (v3.8)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -7,10 +7,16 @@
   --th-hero-height: 420px;
   --th-hero-height-sm: 300px;
   --md-header-h: var(--md-header-height, 3.6rem);
+
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
 
-  /* Z-index base para capas Material */
+  /* Material primary (evita el violeta por defecto) */
+  --md-primary-fg-color: var(--th-color-corporate-blue);
+  --md-primary-fg-color--light: var(--th-color-corporate-light-blue);
+  --md-primary-fg-color--dark: #0B2C54;
+
+  /* Z-index base */
   --z-header: 20;
   --z-drawer: 200;
   --z-sidebar: 30;
@@ -29,27 +35,28 @@
    ============================================================ */
 .md-header,
 .md-tabs {
-  background-color: var(--th-color-corporate-blue);
+  background-color: var(--md-primary-fg-color) !important;
   z-index: var(--z-header);
 }
 
-/* Links y iconos del nav (heredan color) */
+/* Links e iconos del nav (fondo blanco, texto azul) */
+.md-nav--primary,
+.md-nav--primary .md-nav__list {
+  background: #fff !important;
+}
 .md-nav__link,
-.md-nav__link span {
+.md-nav__link span,
+.md-nav__icon,
+.md-icon {
   color: var(--th-color-corporate-blue);
-  background: transparent;
 }
 .md-nav__link:hover,
 .md-nav__link:focus {
   background-color: rgba(124, 198, 255, 0.12);
   color: #004B8E;
 }
-.md-nav__icon,
-.md-icon {
-  color: var(--th-color-corporate-blue);
-}
 
-/* Overlay del drawer: sin velo gris visible pero clickeable cuando está abierto */
+/* Overlay del drawer: clickeable sin velo visible */
 .md-overlay {
   background-color: transparent;
   pointer-events: none;
@@ -61,7 +68,7 @@
   opacity: 1;
 }
 
-/* Sidebar en desktop por encima del hero */
+/* Sidebar desktop por encima del hero */
 .md-sidebar,
 .md-sidebar--primary,
 .md-sidebar__scrollwrap {
@@ -70,10 +77,9 @@
 }
 
 /* ============================================================
-   DRAWER (móvil) — debajo del header + logo visible
+   DRAWER (móvil)
    ============================================================ */
 @media (max-width: 960px) {
-  /* Paneles del drawer por encima del contenido */
   .md-drawer,
   .md-nav,
   .md-sidebar,
@@ -83,7 +89,6 @@
     z-index: var(--z-drawer);
   }
 
-  /* Colocar el panel lateral debajo del header y ajustar su alto útil */
   .md-drawer,
   .md-sidebar--primary {
     top: var(--md-header-h);
@@ -92,74 +97,67 @@
     right: auto;
   }
 
-  /* Título del drawer (franja celeste) */
-  .md-sidebar--primary .md-nav__title {
+  /* Franja superior del drawer (celeste + texto blanco) */
+  .md-sidebar--primary .md-nav__title,
+  .md-drawer .md-header { /* compatibilidad con versiones */
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: var(--th-color-corporate-light-blue);
-    color: #fff;
+    background-color: var(--md-primary-fg-color--light) !important;
+    color: #fff !important;
     font-weight: 600;
-    border-bottom: 1px solid rgba(255, 255, 255, .25);
+    border-bottom: 1px solid rgba(255,255,255,.25);
     display: flex;
     align-items: center;
     gap: 8px;
     padding: calc(.6rem + env(safe-area-inset-top, 0)) 1rem .7rem 1rem;
   }
-  .md-sidebar--primary .md-nav__title span,
-  .md-sidebar--primary .md-nav__title strong {
-    color: #fff;
-  }
-
-  /* Logo real en la franja celeste
-     NOTA: extra.css se sirve en /assets/stylesheets/extra.css → subir un nivel
-     hacia /assets/logo.png = ../logo.png  */
-  .md-sidebar--primary .md-nav__title .md-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    width: 36px;
-    border-radius: 6px;
-    background: transparent;
-  }
-  .md-sidebar--primary .md-nav__title .md-logo::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url('../logo.png'); /* ruta corregida */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* Quitar si tu logo NO necesita inversión a blanco */
-    filter: brightness(0) invert(1);
-  }
-  /* Ocultar cualquier img/svg interno que inyecte el tema */
-  .md-sidebar--primary .md-nav__title .md-logo img,
-  .md-sidebar--primary .md-nav__title .md-logo svg {
-    display: none;
-  }
 
   /* Evitar que contenido/hero tape el drawer */
   .md-main,
   .md-main__inner,
-  .hero {
-    z-index: var(--z-hero);
-  }
+  .hero { z-index: var(--z-hero); }
 
-  /* Scroll interno del panel */
-  .md-sidebar__scrollwrap {
-    overflow: auto;
-  }
+  .md-sidebar__scrollwrap { overflow: auto; }
+}
+
+/* Desktop: limpia padding del título del sidebar */
+@media (min-width: 961px) {
+  .md-sidebar--primary .md-nav__title { padding-left: 1rem; }
 }
 
 /* ============================================================
-   DESKTOP — sin recuadro blanco en el título del sidebar
+   LOGO — usar SOLO el logo nativo del tema (sin duplicar)
    ============================================================ */
-@media (min-width: 961px) {
-  .md-sidebar--primary .md-logo { display: none; }
-  .md-sidebar--primary .md-nav__title { padding-left: 1rem; }
+/* Dimensiones del <img> nativo de Material (header + drawer) */
+.md-logo img,
+.md-header__button.md-logo img {
+  width: 28px;
+  height: 28px;
+  display: inline-block !important;
+  vertical-align: middle;
+}
+
+/* Alineación logo + texto en el header */
+.md-header__title .md-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Alineación logo + texto en la franja del drawer */
+.md-sidebar--primary .md-nav__title,
+.md-drawer .md-header__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Contenedor del logo siempre transparente (sin recuadros) */
+.md-logo,
+.md-header__button.md-logo {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* ============================================================
@@ -184,8 +182,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: #0c2d57; /* color base para evitar parpadeo */
-  background-image: url('../hero.jpg?v=6'); /* relativo a /assets/stylesheets/ */
+  background-color: #0c2d57;                 /* color base anti-parpadeo */
+  background-image: url('/assets/hero.jpg?v=7'); /* ruta absoluta GitHub Pages */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -195,7 +193,7 @@
   z-index: 1;
   text-align: center;
   color: #fff;
-  background: linear-gradient(to bottom, rgba(10, 35, 80, .15), rgba(10, 35, 80, .55));
+  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
   padding: 48px 16px;
   border-radius: 0;
 }
@@ -211,7 +209,7 @@
   text-decoration: none;
 }
 
-/* Fade controlado por scripts/scroll-fade.js (toggle .scrolled en <body>) */
+/* Fade controlado por scripts/scroll-fade.js (.scrolled en <body>) */
 body.scrolled .hero {
   opacity: 0;
   transform: translateY(-80px);
@@ -243,12 +241,12 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
   border-radius: 12px;
   padding: 16px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .grid.cards > *:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+  box-shadow: 0 6px 12px rgba(0,0,0,.08);
 }
 
 /* ============================================================
@@ -278,163 +276,3 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h); }
 @media (prefers-reduced-motion: reduce) {
   .hero { transition: none; }
 }
-/* ============================================================
-   FIX header/drawer + hero (Material for MkDocs)
-   ============================================================ */
-
-/* --- Variables corporativas (ajusta si ya existen) --- */
-:root{
-  --th-blue: #0F3D73;           /* azul corporativo (header) */
-  --th-light-blue: #7CC6FF;     /* celeste drawer */
-}
-
-/* HEADER (barra superior) */
-.md-header,
-.md-tabs {
-  background-color: var(--th-blue) !important;
-}
-
-/* DRAWER (panel lateral en móvil) — franja superior */
-.md-sidebar--primary .md-sidebar__scrollwrap .md-sidebar__title,
-.md-drawer .md-header { /* versiones recientes de Material usan .md-header dentro del drawer */
-  background-color: var(--th-light-blue) !important;
-  color: #fff !important;
-}
-
-/* Logo en el bloque superior del drawer (evita recuadro blanco) */
-.md-drawer .md-header__button.md-logo,
-.md-sidebar--primary .md-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-  background-image: url("/assets/logo.png"); /* ruta absoluta para GitHub Pages */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent !important;
-}
-
-/* Asegurar que no haya fondo blanco heredado en el ícono del logo */
-.md-header__button.md-logo img {
-  display: none; /* ocultamos <img> si lo hay, usamos background-image */
-}
-
-/* Texto de la franja superior del drawer en blanco */
-.md-sidebar__title,
-.md-drawer .md-header__title {
-  color: #fff !important;
-}
-
-/* --- Enlaces y items del menú (fondo blanco, texto azul) --- */
-.md-nav--primary,
-.md-nav--primary .md-nav__list {
-  background: #fff !important;
-}
-.md-nav__link {
-  color: var(--th-blue) !important;
-}
-
-/* ============================================================
-   HERO — imagen de fondo
-   ============================================================ */
-
-/* Hero full-bleed con imagen (asegura ruta y evita overrides) */
-.hero,
-.hero .hero__bg {
-  background-image: url("/assets/hero.jpg") !important; /* ruta absoluta */
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-}
-
-/* Alturas por dispositivo (si ya tenés variables, usalas) */
-.hero {
-  min-height: 420px;
-}
-@media (max-width: 768px){
-  .hero { min-height: 300px; }
-}
-
-/* Si usás un overlay oscuro en el hero, mantenelo sutil */
-.hero::before{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.25));
-  pointer-events: none;
-}
-/* ======= PALETA PRIMARIA (Material) ======= */
-:root{
-  /* Azul corporativo */
-  --md-primary-fg-color: #0F3D73;
-  --md-primary-fg-color--light: #7CC6FF;
-  --md-primary-fg-color--dark: #0B2C54;
-}
-
-/* Header (barra superior) */
-.md-header,
-.md-tabs { background-color: var(--md-primary-fg-color) !important; }
-
-/* Drawer (móvil) – franja superior: forzamos celeste y texto blanco */
-.md-drawer .md-header,
-.md-sidebar__title {
-  background-color: var(--md-primary-fg-color--light) !important;
-  color: #fff !important;
-}
-
-/* Logo en header y en drawer: asegurar ruta, tamaño y que no lo tape nada */
-.md-logo img,
-.md-header__button.md-logo img {
-  content: url("/assets/logo.png");     /* ruta absoluta para GitHub Pages */
-  width: 28px;
-  height: 28px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-/* Evitar bordes/fondos blancos heredados en el contenedor del logo */
-.md-logo,
-.md-header__button.md-logo {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-/* ===== Logo junto al título en el HEADER ===== */
-.md-header__title .md-ellipsis {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.md-header__title .md-ellipsis::before {
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url("/assets/logo.png"); /* ruta absoluta para GitHub Pages */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex: 0 0 24px;
-}
-
-/* ===== Logo junto al título en el DRAWER (móvil) ===== */
-.md-drawer .md-header__title,
-.md-sidebar__title {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.md-drawer .md-header__title::before,
-.md-sidebar__title::before {
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url("/assets/logo.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex: 0 0 24px;
-}
-
-/* Evitar que otro estilo tape el logo o lo reemplace */
-.md-logo img { display: inline; }
