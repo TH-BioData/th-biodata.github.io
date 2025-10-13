@@ -1,44 +1,56 @@
 // ============================================================
-// TH BioData Consulting — scroll-fade.js (FIXED)
-// Activa/desactiva el efecto de desvanecimiento del hero.
-// IGNORA el scroll si el menú lateral (drawer) está abierto.
+// TH BioData Consulting — scroll-fade.js (defensivo)
+// Desvanece el hero al scrollear. Si el drawer está abierto,
+// no cambia el estado de desvanecimiento (ni interfiere).
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    const threshold = 80; // píxeles de scroll para empezar a desvanecer
-    let ticking = false;
-    const html = document.documentElement; // Referencia al <html>
+  const threshold = 80;
+  const html = document.documentElement;
+  let ticking = false;
 
-    const updateScrollState = () => {
-        // *** REGLA CRÍTICA: Ignorar la actualización si el drawer está abierto ***
-        if (html.getAttribute("data-md-state") === "drawer") {
-            ticking = false;
-            return;
-        }
+  function updateScrollState() {
+    // Si el menú lateral está abierto, no tocar estados de scroll
+    if (html.getAttribute("data-md-state") === "drawer") {
+      ticking = false;
+      return;
+    }
+    if (window.scrollY > threshold) {
+      document.body.classList.add("scrolled");
+    } else {
+      document.body.classList.remove("scrolled");
+    }
+    ticking = false;
+  }
 
-        if (window.scrollY > threshold) {
-            document.body.classList.add("scrolled");
-        } else {
-            document.body.classList.remove("scrolled");
-        }
-        ticking = false;
-    };
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateScrollState);
+      ticking = true;
+    }
+  }, { passive: true });
 
-    // Usa requestAnimationFrame para evitar sobrecarga en scroll
-    window.addEventListener("scroll", () => {
-        if (!ticking) {
-            window.requestAnimationFrame(updateScrollState);
-            ticking = true;
-        }
+  // Botón del drawer: el selector puede variar según tema/versión.
+  // Probamos varias opciones y chequeamos nulls.
+  const possibleSelectors = [
+    '.md-header__button.md-icon[for="__drawer"]',
+    'label[for="__drawer"]',
+    '.md-header__button[for="__drawer"]'
+  ];
+
+  let drawerBtn = null;
+  for (const sel of possibleSelectors) {
+    const el = document.querySelector(sel);
+    if (el) { drawerBtn = el; break; }
+  }
+
+  if (drawerBtn) {
+    drawerBtn.addEventListener('click', () => {
+      // Tras el toggle del drawer, re-evaluá estado de scroll
+      setTimeout(updateScrollState, 120);
     });
+  }
 
-    // MkDocs maneja los estados del drawer, podemos escuchar los clics del botón
-    document.querySelector('.md-header__button.md-icon[for="__drawer"]').addEventListener('click', () => {
-        // Forzamos una actualización inmediatamente después de que el drawer se abre/cierra,
-        // ya que el estado puede haber cambiado.
-        setTimeout(updateScrollState, 100);
-    });
-
-    // Ejecuta una vez al cargar (por si inicia scrolleado)
-    updateScrollState();
+  // Ejecuta una vez al cargar
+  updateScrollState();
 });
