@@ -1,5 +1,5 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero como Banner (SOLUCIÓN FINAL)
+TH BioData Consulting — Estilos con Hero como Banner (SOLUCIÓN FINAL v2)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -38,20 +38,22 @@ body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
     padding-top: var(--th-hero-height);
 }
 
-/* 2. El hero se "sube" con un margen negativo para ocupar ese espacio */
+/* 2. El hero se "sube" y se expande a ancho completo */
 .hero {
-    /* Mantiene el hero en el flujo del documento, evitando bugs */
+    /* Lo subimos con margen negativo para ocupar el espacio del padding */
     margin-top: calc(-1 * var(--th-hero-height));
-    
-    /* El truco para el ancho completo sigue siendo el mismo */
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+
+    /* ✅ MÉTODO CORREGIDO (más robusto) para el ancho completo */
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
     
     height: var(--th-hero-height);
     overflow: hidden;
-    position: relative; /* Para que el fondo y contenido se posicionen bien */
     z-index: 0;
 }
+
 
 /* Fondo del hero (sin cambios) */
 .hero__bg {
