@@ -46,6 +46,7 @@ nav:
   - Contact: contact.md
 extra_css:
   - styles/extra.css
-
-
-
+extra_javascript:
+  - scripts/drawer-fix.js
+  # - scripts/scroll-fade.js   # ← reactivar después de probar
+  # - scripts/ready.js         # ← reactivar después de probar
