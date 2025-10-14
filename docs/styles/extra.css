@@ -350,3 +350,71 @@ body:not(:has(.hero)) .md-main {
     transition: none;
   }
 }
+
+/* ===== PARCHE v3.11.1: drawer móvil ===== */
+
+/* 1) No ocultar el logo si viene como "md-header__button md-logo" */
+@media (max-width: 960px){
+  /* Oculta botones/íconos residuales, PERO respeta el logo */
+  .md-sidebar--primary .md-nav__title .md-header__button:not(.md-logo),
+  .md-sidebar--primary .md-nav__title .md-nav__button:not(.md-logo),
+  .md-drawer .md-header .md-header__button:not(.md-logo),
+  .md-drawer .md-header .md-nav__button:not(.md-logo){
+    display: none !important;
+  }
+
+  /* 2) Asegura que el logo se muestre y con buen tamaño */
+  .md-sidebar--primary .md-nav__title .md-logo,
+  .md-drawer .md-header .md-logo{
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;    /* tamaño del contenedor del logo */
+    height: 40px;
+    margin-right: 10px;
+    background: transparent !important;
+  }
+  .md-sidebar--primary .md-nav__title .md-logo img,
+  .md-drawer .md-header .md-logo img{
+    display: inline-block !important;
+    width: 40px;    /* tamaño real del logo */
+    height: 40px;
+    object-fit: contain;
+    background: transparent !important;
+  }
+
+  /* 3) Elimina cualquier fondo/borde que cause el “bloque blanco” */
+  .md-sidebar--primary .md-nav__title *,
+  .md-drawer .md-header *{
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* 4) Título en 1–2 líneas, sin pisar el logo */
+  .md-sidebar--primary .md-nav__title,
+  .md-drawer .md-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 60px;
+    line-height: 1.2;
+  }
+  .md-sidebar--primary .md-nav__title strong,
+  .md-drawer .md-header__title{
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;        /* permite salto de línea */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff !important;
+  }
+}
+
+/* 5) En desktop, por si el logo también es un "md-header__button md-logo" */
+.md-header__button.md-logo img{
+  display: inline-block !important;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  background: transparent !important;
+}
