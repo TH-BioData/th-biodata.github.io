@@ -24,20 +24,21 @@
 }
 
 /* ============================================================
-   HERO full-bleed en el flujo (no fixed)
+   HERO full-bleed (ocupa todo el ancho, centrado y arriba)
    ============================================================ */
 
-.hero {
+.hero{
   position: relative;
-  width: 100vw;                     /* ancho total de la ventana */
-  left: 50%;                        /* centrado horizontal */
-  transform: translateX(-50%);      /* corrección para mantener centrado */
+  margin-left: calc(50% - 50vw);   /* full-bleed real */
+  margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
   overflow: hidden;
   z-index: 0;
+  transition: opacity .6s ease, transform .6s ease;
 }
 
-.hero__bg {
+/* Fondo del hero */
+.hero__bg{
   position: absolute;
   inset: 0;
   background-image: url('../assets/hero.jpg?v=6');
@@ -46,7 +47,8 @@
   background-repeat: no-repeat;
 }
 
-.hero__content {
+/* Contenido centrado */
+.hero__content{
   position: relative;
   display: flex;
   align-items: center;
@@ -58,9 +60,9 @@
   background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
 }
 
-.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag   { font-size: 18px; opacity: .95; }
-.hero__cta   {
+.hero__title{ font-size: 36px; font-weight: 700; margin-bottom: 6px; }
+.hero__tag{   font-size: 18px; opacity: .95; }
+.hero__cta{
   display: inline-block;
   margin-top: 16px;
   padding: 10px 18px;
@@ -68,6 +70,25 @@
   border-radius: 8px;
   color: #fff !important;
   text-decoration: none;
+}
+
+/* -------- Quita el espacio/blanco y el H1 encima del hero -------- */
+/* Si el hero está en la página, ocultamos el primer H1 (p.ej. "Home")
+   y eliminamos márgenes superiores para que el hero quede arriba */
+.md-content__inner:has(.hero) > h1:first-child{ display: none; }
+.md-content__inner:has(.hero) > :first-child{ margin-top: 0; }
+
+/* Desvanecimiento opcional del hero al scrollear */
+body:not(.scrolled) .hero{ opacity: 1; transform: translateY(0); }
+body.scrolled .hero{ opacity: 0; transform: translateY(-80px); }
+
+/* ============================================================
+   Páginas SIN hero
+   ============================================================ */
+body:not(:has(.hero)) .md-main{ padding-top: var(--md-header-h) !important; }
+.md-typeset h1{ margin: .25rem 0 1rem !important; }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4{
+  scroll-margin-top: calc(var(--md-header-h) + .5rem);
 }
 
 /* ============================================================
