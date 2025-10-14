@@ -1,222 +1,128 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables (v3.17)
+   TH BioData Consulting — Estilos estables (v3.20)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
-:root {
-  --th-hero-height: 420px;             /* Desktop */
-  --th-hero-height-sm: 300px;          /* Móvil */
+:root{
+  --th-hero-height: 420px;
+  --th-hero-height-sm: 300px;
   --md-header-h: var(--md-header-height, 3.6rem);
 
-  --th-color-corporate-blue: #0F3D73;       /* barra / CTA */
-  --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
+  --th-color-corporate-blue: #0F3D73;
+  --th-color-corporate-light-blue: #7CC6FF;
 }
 
 /* -------------------- Contenido centrado -------------------- */
-.md-content {
-  max-width: 950px;
-  margin: 0 auto;
-}
+.md-content{max-width:950px;margin:0 auto;}
 
 /* -------------------- Barra superior -------------------- */
-.md-header,
-.md-tabs {
-  background-color: var(--th-color-corporate-blue) !important;
-  z-index: 20;
+.md-header,.md-tabs{
+  background-color:var(--th-color-corporate-blue) !important;
+  z-index:20;
 }
 
 /* ============================================================
-   HERO full-bleed sin márgenes blancos
+   HERO full-bleed robusto (sin hueco derecho)
    ============================================================ */
-.hero {
-  position: relative;
-  left: 50%;
-  right: 50%;
-  width: 100vw;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  height: var(--th-hero-height);
-  overflow: hidden;
-  z-index: 0;
-  transition: opacity .6s ease, transform .6s ease;
+/* Fallback para navegadores sin dvw */
+.hero{
+  position:relative;
+  left:50%;
+  width:100vw;
+  margin-left:-50vw;
+  height:var(--th-hero-height);
+  overflow:clip;
+  z-index:0;
+  transition:opacity .6s ease, transform .6s ease;
 }
-
-/* Fondo del hero */
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('../assets/hero.jpg?v=6');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* Preferir viewport dinámico si está disponible (evita sumar la scrollbar) */
+@supports (width: 100dvw){
+  .hero{
+    width:100dvw;
+    margin-left:calc(-50dvw + 50%);
+  }
 }
-
-/* Contenido centrado */
-.hero__content {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 100%;
-  padding: 48px 16px;
-  color: #fff;
-  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+.hero__bg{
+  position:absolute;inset:0;
+  background-image:url('../assets/hero.jpg?v=6');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
 }
-
-.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag { font-size: 18px; opacity: .95; }
-.hero__cta {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 10px 18px;
-  background: var(--th-color-corporate-blue);
-  border-radius: 8px;
-  color: #fff !important;
-  text-decoration: none;
+.hero__content{
+  position:relative;display:flex;align-items:center;justify-content:center;text-align:center;
+  min-height:100%;padding:48px 16px;color:#fff;
+  background:linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
 }
+.hero__title{font-size:36px;font-weight:700;margin-bottom:6px;}
+.hero__tag{font-size:18px;opacity:.95;}
+.hero__cta{display:inline-block;margin-top:16px;padding:10px 18px;background:var(--th-color-corporate-blue);
+  border-radius:8px;color:#fff !important;text-decoration:none;}
 
-/* Oculta el H1 redundante sobre el hero */
-.md-content__inner:has(.hero) > h1:first-child { display: none; }
-.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
+/* Quita H1 redundante encima del hero */
+.md-content__inner:has(.hero) > h1:first-child{display:none;}
+.md-content__inner:has(.hero) > :first-child{margin-top:0;}
 
-/* Desvanecimiento del hero al scrollear */
-body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
-body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
+/* Desvanecimiento al scroll */
+body:not(.scrolled) .hero{opacity:1;transform:translateY(0);}
+body.scrolled .hero{opacity:0;transform:translateY(-80px);}
 
 /* ============================================================
    Títulos y márgenes
    ============================================================ */
-body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
-.md-typeset h1 { margin: .25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + .5rem);
-}
+body:not(:has(.hero)) .md-main{padding-top:var(--md-header-h) !important;}
+.md-typeset h1{margin:.25rem 0 1rem !important;}
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4{scroll-margin-top:calc(var(--md-header-h) + .5rem);}
 
 /* ============================================================
-   Drawer (colores y estructura)
+   Drawer (colores)
    ============================================================ */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
+.md-nav__title{
+  background-color:var(--th-color-corporate-light-blue) !important;
+  color:#fff !important;font-weight:600;border-bottom:1px solid #e5e7eb;
 }
-
-.md-nav__link, .md-nav__link span {
-  color: var(--th-color-corporate-blue) !important;
-}
-.md-nav__link:hover, .md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important;
-  color: #004B8E !important;
-}
-.md-nav__icon, .md-icon {
-  color: var(--th-color-corporate-blue) !important;
-}
-
-.md-overlay {
-  background-color: rgba(0,0,0,0.35) !important;
-}
+.md-nav__link, .md-nav__link span{color:var(--th-color-corporate-blue) !important;}
+.md-nav__link:hover, .md-nav__link:focus{background-color:rgba(124,198,255,0.12) !important;color:#004B8E !important;}
+.md-nav__icon, .md-icon{color:var(--th-color-corporate-blue) !important;}
+.md-overlay{background-color:rgba(0,0,0,0.35) !important;pointer-events:auto;}
 
 /* ============================================================
    Drawer funcional en TODAS las resoluciones
    ============================================================ */
-
-/* 1) Botón hamburguesa visible y activo */
-.md-header__button[for="__drawer"] {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  color: white !important;
-  cursor: pointer;
-  z-index: 30;
+.md-header__button[for="__drawer"],
+.md-header__button[aria-label*="navigation" i],
+.md-header__button[aria-label*="menu" i]{
+  display:inline-flex !important;align-items:center;justify-content:center;
+  color:#fff !important;cursor:pointer;position:relative;z-index:1000;pointer-events:auto !important;
 }
 
-/* 2) Sidebar fija deshabilitada en escritorio */
-@media (min-width: 60rem) {
-  .md-sidebar--primary {
-    display: none !important;
-  }
-  .md-main__inner {
-    margin-left: 0 !important;
-  }
+/* Oculta la sidebar fija en desktop para usar solo drawer */
+@media (min-width:60rem){
+  .md-sidebar--primary{display:none !important;}
+  .md-main__inner{margin-left:0 !important;}
 }
 
-/* 3) Drawer ancho */
-@media (max-width: 100rem) {
-  .md-sidebar--primary .md-nav,
-  .md-nav--primary {
-    width: 280px;
-  }
+/* Ancho del drawer */
+@media (max-width:100rem){
+  .md-sidebar--primary .md-nav, .md-nav--primary{width:280px;}
 }
 
 /* ============================================================
    Ajustes globales
    ============================================================ */
-.md-main { padding-top: calc(var(--md-header-h) - 1.4rem) !important; }
-
-html, body {
-  overflow-x: hidden !important;
-  width: 100%;
-  max-width: 100vw;
-}
-
-/* Evita salto visual por scrollbars */
-body {
-  margin-right: 0 !important;
-}
+.md-main{padding-top:calc(var(--md-header-h) - 1.4rem) !important;}
+html,body{overflow-x:hidden;width:100%;max-width:100dvw;}
+body{margin-right:0 !important;}
 
 /* ============================================================
    Grid de cards
    ============================================================ */
-.grid.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+.grid.cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));gap:16px;}
+.grid.cards > *{
+  border:1px solid #e5e7eb;border-radius:12px;padding:16px;background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);transition:transform .2s ease, box-shadow .2s ease;
 }
-.grid.cards > * {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.grid.cards > *:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-}
+.grid.cards > *:hover{transform:translateY(-3px);box-shadow:0 6px 12px rgba(0,0,0,0.08);}
 
 /* ============================================================
    Responsivo
    ============================================================ */
-@media (max-width: 768px) {
-  .hero { height: var(--th-hero-height-sm); }
-}
-
-/* ===== Hero full-bleed sin hueco derecho ===== */
-.hero{
-  position: relative;
-  left: 50%;
-  width: 100vw;
-  margin-left: -50vw;            /* full-bleed real sin depender del contenedor */
-  height: var(--th-hero-height);
-  overflow: clip;                /* evita desbordes que crean scroll horizontal */
-  z-index: 0;
-}
-html, body { overflow-x: hidden; }
-
-/* ===== Botón hamburguesa: aseguro click por encima de todo ===== */
-.md-header__button[for="__drawer"]{
-  display: inline-flex !important;
-  align-items: center; justify-content: center;
-  color: #fff !important; cursor: pointer;
-  position: relative; z-index: 1000;   /* por si hay overlays */
-  pointer-events: auto !important;
-}
-
-/* ===== Ocultar sidebar fija en desktop para usar solo drawer ===== */
-@media (min-width: 60rem){
-  .md-sidebar--primary{ display:none !important; }
-  .md-main__inner{ margin-left:0 !important; }
-}
+@media (max-width:768px){.hero{height:var(--th-hero-height-sm);}}
