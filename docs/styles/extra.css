@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos Unificados
+   TH BioData Consulting — Estilos Unificados (v2: Hamburger Fix)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -21,10 +21,14 @@
 }
 
 /* -------------------- Barra superior (azul corporativo) -------------------- */
-.md-header,
-.md-tabs {
+.md-header {
   background-color: var(--th-color-corporate-blue) !important;
+  position: relative; /* Asegura que los elementos posicionados absolutos dentro de él se comporten correctamente */
 }
+.md-tabs {
+  background-color: var(--th-color-corporate-blue) !important; /* Mantener si aún usas tabs */
+}
+
 
 /* ============================================================
    Hamburguesa y Navegación Móvil (Drawer)
@@ -36,18 +40,30 @@
 }
 
 /* 2. Estilos para el ícono de la hamburguesa */
+/* Por defecto, está oculto y solo se mostrará en pantallas pequeñas vía media query */
 .menu-toggle {
-    display: none; /* Oculto por defecto en pantallas grandes */
-    position: absolute;
-    top: 0.9rem;
-    left: 1rem;
+    display: none; /* Oculto por defecto */
+    position: absolute; /* Posicionamiento absoluto relativo al .md-header */
+    top: 0.9rem;      /* Ajusta la posición vertical para centrarlo con el logo */
+    left: 1rem;       /* Ajusta la posición horizontal, cerca del logo */
     height: 2.2rem;
     width: 2.2rem;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1001;
+    /* Añadimos flexbox para centrar el SVG si fuera necesario */
+    display: flex; /* Lo activamos con display:flex para facilitar el centrado */
 }
+
+/* Aseguramos que el logo se mueva un poco a la derecha cuando el menú-toggle está visible,
+   para que no se superpongan si están en la misma línea horizontal */
+@media screen and (max-width: 76.1875em) { /* Este es el breakpoint de Material for MkDocs */
+    .md-header__button.md-logo {
+        margin-left: 3.5rem; /* Mueve el logo a la derecha para dar espacio al ícono */
+    }
+}
+
 
 .menu-toggle svg {
     fill: #fff; /* Color del ícono de hamburguesa */
@@ -63,7 +79,7 @@
     overflow-y: auto;
     background-color: #fff;
     box-shadow: 0 0 1rem rgba(0,0,0,0.4);
-    transform: translateX(-100%); /* Oculto por defecto */
+    transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
     z-index: 1000;
     will-change: transform;
@@ -77,17 +93,17 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.35) !important; /* Usando tu valor original */
+    background-color: rgba(0,0,0,0.35) !important;
     z-index: 999;
 }
 
 /* 5. Lógica de activación: Cuando el checkbox está marcado... */
 #_drawer:checked ~ .md-overlay {
-    display: block; /* ...mostramos el overlay */
+    display: block;
 }
 
 #_drawer:checked ~ .md-container .md-sidebar--primary {
-    transform: translateX(0); /* ...mostramos la barra lateral */
+    transform: translateX(0);
 }
 
 /* 6. Estilos internos del Drawer (Tus colores) */
@@ -103,6 +119,7 @@
   color: #004B8E !important;
 }
 .md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
+
 
 /* ============================================================
    HERO full-bleed (ocupa todo el ancho, centrado y arriba)
@@ -151,6 +168,7 @@
 body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
+
 /* ============================================================
    Páginas SIN hero y Ajustes de Padding
    ============================================================ */
@@ -192,14 +210,20 @@ html, body { overflow-x: hidden; }
 /* ============================================================
    Responsivo
    ============================================================ */
-@media (max-width: 768px) {
+/* Usamos el breakpoint estándar de Material for MkDocs */
+@media screen and (max-width: 76.1875em) {
+  /* Muestra el ícono de la hamburguesa */
+  .menu-toggle {
+    display: flex; /* Usamos flex para centrar el SVG y asegurarnos de que se muestre */
+  }
+
   /* Ajusta la altura del hero en móviles */
   .hero {
     height: var(--th-hero-height-sm);
   }
-  
-  /* Muestra el ícono de la hamburguesa en móviles */
-  .menu-toggle {
-    display: inline-flex;
+
+  /* Ocultamos el botón de la tabla de contenidos (si existe) para evitar conflictos */
+  .md-header__button.md-icon[for="__toc"] {
+      display: none;
   }
 }
