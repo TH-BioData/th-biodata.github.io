@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos Unificados (v3: Alineación Flexbox)
+   TH BioData Consulting — Estilos Unificados (v4: Absolute Forzado)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -17,20 +17,26 @@
 .md-header, .md-tabs { background-color: var(--th-color-corporate-blue) !important; }
 
 /* ============================================================
-   Hamburguesa y Navegación Móvil (Drawer) - SOLUCIÓN FINAL
+   Hamburguesa y Navegación Móvil (Drawer) - SOLUCIÓN REFORZADA
    ============================================================ */
 
 /* 1. Oculta el checkbox que controla el estado */
-#_drawer, #__drawer {
+#__drawer {
     display: none;
 }
 
 /* 2. Estilos para el ícono de la hamburguesa (el 'label') */
 .menu-toggle {
     display: none; /* Oculto por defecto en pantallas grandes */
+    position: absolute;
+    z-index: 1; /* Se asegura de que esté por encima del fondo del header */
+    
+    /* ALINEACIÓN PRECISA */
+    left: 0.8rem; /* Distancia desde la izquierda */
+    top: 50%; /* Lo baja a la mitad de la altura del header */
+    transform: translateY(-50%); /* Lo sube exactamente la mitad de su propia altura para un centrado vertical perfecto */
+
     cursor: pointer;
-    padding-left: 0.6rem;  /* Espacio a la izquierda del header */
-    padding-right: 0.6rem; /* Espacio entre el icono y el logo */
 }
 
 .menu-toggle svg {
@@ -42,53 +48,27 @@
 
 /* 3. Estilos de la barra lateral (el menú en sí) */
 .md-sidebar--primary {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 18.75rem;
-    overflow-y: auto;
-    background-color: #fff;
-    box-shadow: 0 0 1rem rgba(0,0,0,0.4);
+    position: fixed; top: 0; left: 0; height: 100%; width: 18.75rem;
+    overflow-y: auto; background-color: #fff; box-shadow: 0 0 1rem rgba(0,0,0,0.4);
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
-    z-index: 1000;
-    will-change: transform;
+    z-index: 1000; will-change: transform;
 }
 
 /* 4. Estilos del fondo oscuro (overlay) */
 .md-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.35) !important;
-    z-index: 999;
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.35) !important; z-index: 999;
 }
 
 /* 5. Lógica de activación: Cuando el checkbox está marcado... */
-#__drawer:checked ~ .md-overlay {
-    display: block; /* ...mostramos el overlay */
-}
-
-#__drawer:checked ~ .md-container .md-sidebar--primary {
-    transform: translateX(0); /* ...mostramos la barra lateral */
-}
+#__drawer:checked ~ .md-overlay { display: block; }
+#__drawer:checked ~ .md-container .md-sidebar--primary { transform: translateX(0); }
 
 /* 6. Estilos internos del Drawer (Tus colores) */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !import ant; }
-.md-nav__link:hover, .md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important;
-  color: #004B8E !important;
-}
+.md-nav__title { background-color: var(--th-color-corporate-light-blue) !important; color: #fff !important; font-weight: 600; border-bottom: 1px solid #e5e7eb; }
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus { background-color: rgba(124,198,255,0.12) !important; color: #004B8E !important; }
 .md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
 
 /* ============================================================
@@ -119,16 +99,14 @@ html, body { overflow-x: hidden; }
 
 /* ---- Media Query para Móviles ---- */
 @media screen and (max-width: 76.1875em) {
-  /* CAMBIO CLAVE: Hacemos que el header sea un contenedor flex para alinear el ícono */
-  .md-header__inner {
-      display: flex;
-      align-items: center;
-  }
-  
-  /* CAMBIO CLAVE: Mostramos el ícono y lo posicionamos como el primer elemento */
+  /* CAMBIO CLAVE: Forzamos la visualización del ícono */
   .menu-toggle {
-    display: inline-block;
-    order: -1; /* Esto fuerza al ícono a ser el primer elemento en el contenedor flex */
+    display: block !important;
+  }
+
+  /* Dejamos espacio para el ícono moviendo el logo */
+  .md-header__button.md-logo {
+      margin-left: 2.5rem; /* Aumenta este valor si el logo se superpone al ícono */
   }
 
   /* Ajusta la altura del hero en móviles */
