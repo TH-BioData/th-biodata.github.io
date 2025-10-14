@@ -1,153 +1,139 @@
 /* ============================================================
-   TH BioData Consulting — v4.4 (hero full-bleed + menú bajo)
+   TH BioData Consulting — Estilos minimal y estables (Movil OK)
    ============================================================ */
 
-/* -------------------- Variables -------------------- */
-:root{
-  --th-hero-height: 420px;        /* desktop */
-  --th-hero-height-sm: 300px;     /* móvil */
+/* --- Variables globales --- */
+:root {
+  --th-hero-height: 420px;            /* desktop */
+  --th-hero-height-sm: 300px;         /* móvil */
   --md-header-h: var(--md-header-height, 3.6rem);
-
-  --th-color-corporate-blue: #0F3D73;
-  --th-color-corporate-light-blue: #7CC6FF;
+  --th-color-corporate-blue: #0F3D73;       /* barra / CTA */
+  --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
 }
 
-/* -------------------- Base -------------------- */
-.md-content{ max-width: 950px; margin: 0 auto; }
+/* --- Contenido centrado --- */
+.md-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
 
+/* --- Barra superior (azul corporativo) --- */
 .md-header,
-.md-tabs{ background: var(--th-color-corporate-blue) !important; }
-
-.md-header{
-  position: sticky; top: 0; z-index: 20;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+.md-tabs {
+  background-color: var(--th-color-corporate-blue) !important;
 }
-
-/* Padding superior fino (lo mantenemos) */
-.md-main{ padding-top: calc(var(--md-header-h) - 1.4rem) !important; }
 
 /* ============================================================
-   HERO full-bleed real
+   HERO full-bleed en el flujo (no fixed)
    ============================================================ */
 
-/* El truco de 100vw + translateX evita el “recorte” por el grid */
-.hero{
+.hero {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-left: calc(50% - 50vw);  /* full-bleed */
+  margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
   overflow: hidden;
-  z-index: 0;           /* debajo del header (z=20) */
-  margin: 0;            /* sin márgenes del contenedor */
+  transition: opacity .6s ease, transform .6s ease;
+  z-index: 0;
 }
 
-/* Fondo inmediato: color sólido + imagen sin transiciones */
-.hero__bg{
-  position: absolute; inset: 0;
-  background-color: #0d2f59;                 /* visible al instante */
+.hero__bg {
+  position: absolute;
+  inset: 0;
   background-image: url('../assets/hero.jpg?v=6');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.hero__content{
+.hero__content {
   position: relative;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; min-height: 100%;
-  padding: 48px 16px; color: #fff;
-  /* overlay muy sutil, sin transición */
-  background: linear-gradient(to bottom, rgba(10,35,80,.05), rgba(10,35,80,.45));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100%;
+  padding: 48px 16px;
+  color: #fff;
+  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
 }
 
-.hero__title{ font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag{   font-size: 18px; opacity: .95; }
-.hero__cta{
-  display: inline-block; margin-top: 16px; padding: 10px 18px;
+.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
+.hero__tag   { font-size: 18px; opacity: .95; }
+.hero__cta   {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 18px;
   background: var(--th-color-corporate-blue);
-  border-radius: 8px; color: #fff !important; text-decoration: none;
+  border-radius: 8px;
+  color: #fff !important;
+  text-decoration: none;
 }
-
-/* Elimina el H1 “Home” encima del hero para que quede al tope */
-.md-content__inner:has(.hero) > h1:first-child{ display: none; }
-.md-content__inner:has(.hero) > :first-child{ margin-top: 0 !important; }
 
 /* ============================================================
-   MENÚ (sidebar primaria) BAJO EL HERO en DESKTOP
+   AJUSTE: Padding superior más fino
+   ============================================================ */
+.md-main {
+  padding-top: calc(var(--md-header-h) - 1.4rem) !important;
+}
+
+/* ============================================================
+   Drawer: SOLO colores (no tocamos z-index, transform, eventos)
    ============================================================ */
 
-/* En desktop, sidebar visible y empujada justo debajo del hero */
-@media (min-width: 1000px){
-  .md-sidebar--primary{ display: block !important; }
-
-  /* Empuje exacto = alto del hero – (padding fino ya restado) */
-  body:has(.hero) .md-sidebar--primary{
-    margin-top: calc(
-      var(--th-hero-height) - (var(--md-header-h) - 1.4rem)
-    ) !important;
-  }
-
-  /* Sidebar pegada al viewport con scroll interno */
-  .md-sidebar--primary .md-sidebar__scrollwrap{
-    position: sticky;
-    top: calc(var(--md-header-h) - 1.4rem);
-    max-height: calc(100vh - (var(--md-header-h) - 1.4rem));
-    overflow: auto;
-  }
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* En móvil dejamos el drawer nativo; sin empuje extra */
-@media (max-width: 999.98px){
-  .md-sidebar--primary{ margin-top: 0 !important; }
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
 }
+.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
 
-/* Estética navegación */
-.md-nav__title{
-  background: var(--th-color-corporate-light-blue) !important;
-  color:#fff !important; font-weight:600;
-  border-bottom:1px solid #e5e7eb;
-}
-.md-nav__link, .md-nav__link span{ color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus{
-  background-color: rgba(124,198,255,.12) !important;
-  color:#004B8E !important;
-}
-.md-nav__icon, .md-icon{ color: var(--th-color-corporate-blue) !important; }
-.md-overlay{ background-color: rgba(0,0,0,.35) !important; }
+.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
 
 /* ============================================================
    Páginas SIN hero
    ============================================================ */
-body:not(:has(.hero)) .md-main{ padding-top: var(--md-header-h) !important; }
-.md-typeset h1{ margin: .25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4{
-  scroll-margin-top: calc(var(--md-header-h) + .5rem);
+body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
+
+.md-typeset h1 { margin: 0.25rem 0 1rem !important; }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
 }
+
+/* Evita scroll horizontal accidental */
+html, body { overflow-x: hidden; }
 
 /* ============================================================
-   Utilidades / Cards
+   Grid de cards (lo usas en varias secciones)
    ============================================================ */
-html, body{ overflow-x: hidden; }
-
-.grid.cards{
+.grid.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
-.grid.cards > *{
-  border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px;
-  background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.05);
-  transition: transform .2s ease, box-shadow .2s ease;
+.grid.cards > * {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.grid.cards > *:hover{
+.grid.cards > *:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
 
 /* ============================================================
    Responsivo
    ============================================================ */
-@media (max-width: 768px){
-  .hero{ height: var(--th-hero-height-sm); }
+@media (max-width: 768px) {
+  .hero { height: var(--th-hero-height-sm); }
 }
