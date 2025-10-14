@@ -1,11 +1,10 @@
 // scripts/drawer-fix.js
 (function () {
-  // Espera a que el DOM esté listo
-  const onReady = (fn) =>
+  const ready = (fn) =>
     document.readyState !== "loading" ? fn() : document.addEventListener("DOMContentLoaded", fn);
 
-  onReady(() => {
-    // 1) Asegura que el checkbox del drawer exista; si no, lo crea
+  ready(() => {
+    // --- 1) Asegura el checkbox del drawer
     let drawer = document.getElementById("__drawer");
     if (!drawer) {
       drawer = document.createElement("input");
@@ -13,59 +12,67 @@
       drawer.id = "__drawer";
       drawer.className = "md-toggle";
       drawer.setAttribute("data-md-toggle", "drawer");
-      // Insertar al comienzo del body (como hace Material)
       document.body.insertBefore(drawer, document.body.firstChild);
     }
 
-    // 2) Encuentra cualquier botón/label que dispare el drawer
-    const triggers = Array.from(document.querySelectorAll('.md-header__button[for="__drawer"], label[for="__drawer"]'));
+    // --- 2) Overlay (créalo si falta)
+    let overlay = document.querySelector(".md-overlay");
+    if (!overlay) {
+      overlay = document.createElement("label");
+      overlay.className = "md-overlay";
+      overlay.setAttribute("data-md-component", "overlay");
+      overlay.setAttribute("for", "__drawer");
+      document.body.appendChild(overlay);
+    }
+    overlay.style.pointerEvents = "auto";
 
-    // 3) Enlaza manualmente el click → toggle del checkbox
-    const toggleDrawer = (ev) => {
-      try {
-        // Evita que otros listeners cancelen el click
-        ev.stopPropagation();
-        ev.preventDefault();
-      } catch (e) {}
-      drawer.checked = !drawer.checked;
+    // --- 3) Localiza el botón hamburguesa aunque no tenga `for="__drawer"`
+    const triggers = new Set([
+      ...document.querySelectorAll('.md-header__button[for="__drawer"]'),
+      ...document.querySelectorAll('.md-header__button[aria-label*="navigation" i]'),
+      ...document.querySelectorAll('.md-header__button[aria-label*="menu" i]'),
+      ...document.querySelectorAll('.md-header__button')
+    ]);
 
-      // Agrega/quita clase en <html> como hace Material (para estilos del overlay)
-      const html = document.documentElement;
-      if (drawer.checked) html.classList.add("md-locked");
-      else html.classList.remove("md-locked");
+    const html = document.documentElement;
 
-      // Dispara un evento por si algún estilo/script escucha cambios
+    const openDrawer = () => {
+      drawer.checked = true;
+      html.classList.add("md-locked");
       drawer.dispatchEvent(new Event("change", { bubbles: true }));
+    };
+    const closeDrawer = () => {
+      drawer.checked = false;
+      html.classList.remove("md-locked");
+      drawer.dispatchEvent(new Event("change", { bubbles: true }));
+    };
+    const toggleDrawer = (ev) => {
+      // forzamos que **siempre** funcione aunque otro JS haga preventDefault
+      try { ev.stopPropagation(); ev.preventDefault(); } catch (e) {}
+      drawer.checked ? closeDrawer() : openDrawer();
       return false;
     };
 
-    // Limpia listeners previos y engancha el nuestro
+    // Enlaza el click en fase de captura (se ejecuta antes que otros handlers)
     triggers.forEach((el) => {
-      el.onclick = toggleDrawer;
-      el.addEventListener("click", toggleDrawer, true); // fase de captura por si otro script hace preventDefault en burbujeo
       el.style.pointerEvents = "auto";
+      el.addEventListener("click", toggleDrawer, { capture: true });
     });
 
-    // 4) Cierra el drawer al hacer click en el overlay o en un link del menú
-    const closeDrawer = () => {
-      if (!drawer.checked) return;
-      drawer.checked = false;
-      document.documentElement.classList.remove("md-locked");
-      drawer.dispatchEvent(new Event("change", { bubbles: true }));
-    };
-
-    // overlay de Material
-    const overlay = document.querySelector(".md-overlay");
-    if (overlay) {
-      overlay.style.pointerEvents = "auto";
-      overlay.addEventListener("click", closeDrawer, true);
-      overlay.addEventListener("touchstart", closeDrawer, { passive: true, capture: true });
-    }
-
-    // cierra al navegar dentro del menú
+    // Cierra al tocar overlay o un enlace del menú
+    overlay.addEventListener("click", () => closeDrawer(), { capture: true });
     document.addEventListener("click", (e) => {
       const a = e.target.closest(".md-nav a");
       if (a) closeDrawer();
-    }, true);
+    }, { capture: true });
+
+    // Seguridad: si un SPA reemplaza el DOM, vuelve a enganchar
+    const mo = new MutationObserver(() => {
+      if (!document.contains(drawer)) {
+        // reinyecta si fue removido
+        document.body.insertBefore(drawer, document.body.firstChild);
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
   });
 })();
