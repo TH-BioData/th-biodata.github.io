@@ -1,36 +1,40 @@
 /* ============================================================
-   TH BioData Consulting — Estilos minimal y estables (Movil OK)
+   TH BioData Consulting — Estilos minimal y estables (v3.15)
    ============================================================ */
 
-/* --- Variables globales --- */
+/* -------------------- Variables globales -------------------- */
 :root {
-  --th-hero-height: 420px;            /* desktop */
-  --th-hero-height-sm: 300px;         /* móvil */
+  --th-hero-height: 420px;             /* Desktop */
+  --th-hero-height-sm: 300px;          /* Móvil */
   --md-header-h: var(--md-header-height, 3.6rem);
+
   --th-color-corporate-blue: #0F3D73;       /* barra / CTA */
   --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
 }
 
-/* --- Contenido centrado --- */
+/* -------------------- Contenido centrado -------------------- */
 .md-content {
   max-width: 950px;
   margin: 0 auto;
 }
 
-/* --- Barra superior (azul corporativo) --- */
+/* -------------------- Barra superior -------------------- */
 .md-header,
 .md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
+  z-index: 12;
 }
 
 /* ============================================================
    HERO full-bleed (ocupa todo el ancho, centrado y arriba)
    ============================================================ */
-
-.hero{
+.hero {
   position: relative;
-  margin-left: calc(50% - 50vw);   /* full-bleed real */
-  margin-right: calc(50% - 50vw);
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   height: var(--th-hero-height);
   overflow: hidden;
   z-index: 0;
@@ -38,7 +42,7 @@
 }
 
 /* Fondo del hero */
-.hero__bg{
+.hero__bg {
   position: absolute;
   inset: 0;
   background-image: url('../assets/hero.jpg?v=6');
@@ -48,7 +52,7 @@
 }
 
 /* Contenido centrado */
-.hero__content{
+.hero__content {
   position: relative;
   display: flex;
   align-items: center;
@@ -60,9 +64,9 @@
   background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
 }
 
-.hero__title{ font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag{   font-size: 18px; opacity: .95; }
-.hero__cta{
+.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
+.hero__tag { font-size: 18px; opacity: .95; }
+.hero__cta {
   display: inline-block;
   margin-top: 16px;
   padding: 10px 18px;
@@ -72,36 +76,32 @@
   text-decoration: none;
 }
 
-/* -------- Quita el espacio/blanco y el H1 encima del hero -------- */
-/* Si el hero está en la página, ocultamos el primer H1 (p.ej. "Home")
-   y eliminamos márgenes superiores para que el hero quede arriba */
-.md-content__inner:has(.hero) > h1:first-child{ display: none; }
-.md-content__inner:has(.hero) > :first-child{ margin-top: 0; }
+/* Quita el H1 redundante sobre el hero */
+.md-content__inner:has(.hero) > h1:first-child { display: none; }
+.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
 
-/* Desvanecimiento opcional del hero al scrollear */
-body:not(.scrolled) .hero{ opacity: 1; transform: translateY(0); }
-body.scrolled .hero{ opacity: 0; transform: translateY(-80px); }
+/* Desvanecimiento del hero al scrollear */
+body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
+body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
-   Páginas SIN hero
+   Ajustes generales de márgenes y títulos
    ============================================================ */
-body:not(:has(.hero)) .md-main{ padding-top: var(--md-header-h) !important; }
-.md-typeset h1{ margin: .25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4{
+body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
+
+.md-typeset h1 { margin: .25rem 0 1rem !important; }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
   scroll-margin-top: calc(var(--md-header-h) + .5rem);
 }
 
 /* ============================================================
-   AJUSTE: Padding superior más fino
+   Ajuste: Padding superior más fino
    ============================================================ */
-.md-main {
-  padding-top: calc(var(--md-header-h) - 1.4rem) !important;
-}
+.md-main { padding-top: calc(var(--md-header-h) - 1.4rem) !important; }
 
 /* ============================================================
-   Drawer: SOLO colores (no tocamos z-index, transform, eventos)
+   Drawer (menú desplegable) — Colores y estilo
    ============================================================ */
-
 .md-nav__title {
   background-color: var(--th-color-corporate-light-blue) !important;
   color: #fff !important;
@@ -109,30 +109,52 @@ body:not(:has(.hero)) .md-main{ padding-top: var(--md-header-h) !important; }
   border-bottom: 1px solid #e5e7eb;
 }
 
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link, .md-nav__link span {
+  color: var(--th-color-corporate-blue) !important;
+}
 .md-nav__link:hover, .md-nav__link:focus {
   background-color: rgba(124,198,255,0.12) !important;
   color: #004B8E !important;
 }
-.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
+.md-nav__icon, .md-icon {
+  color: var(--th-color-corporate-blue) !important;
+}
 
 .md-overlay { background-color: rgba(0,0,0,0.35) !important; }
 
 /* ============================================================
-   Páginas SIN hero
+   Drawer funcional en TODAS las resoluciones
    ============================================================ */
-body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
 
-.md-typeset h1 { margin: 0.25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
+/* 1) Muestra el botón hamburguesa en desktop también */
+.md-header__button[for="__drawer"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.25rem;
+  color: white !important;
 }
 
-/* Evita scroll horizontal accidental */
-html, body { overflow-x: hidden; }
+/* 2) En escritorio: ocultamos la barra lateral fija */
+@media (min-width: 60rem) {
+  .md-sidebar--primary {
+    display: none !important;
+  }
+  .md-main__inner {
+    margin-left: 0 !important;
+  }
+}
+
+/* 3) Ajuste de ancho del drawer */
+@media (max-width: 100rem) {
+  .md-sidebar--primary .md-nav,
+  .md-nav--primary {
+    width: 280px;
+  }
+}
 
 /* ============================================================
-   Grid de cards (lo usas en varias secciones)
+   Grid de cards (usado en secciones)
    ============================================================ */
 .grid.cards {
   display: grid;
@@ -158,52 +180,3 @@ html, body { overflow-x: hidden; }
 @media (max-width: 768px) {
   .hero { height: var(--th-hero-height-sm); }
 }
-
-/* ============================================================
-   Drawer en TODAS las resoluciones (forzamos botón hamburguesa)
-   ============================================================ */
-
-/* 1) Muestra el botón hamburguesa del header también en desktop */
-.md-header__button[for="__drawer"] {
-  display: inline-flex !important;        /* en móvil ya se ve; en desktop estaba oculto */
-  align-items: center;
-  justify-content: center;
-}
-
-/* 2) En pantallas >= 60rem (≈960px), ocultamos la sidebar fija
-      para que el menú solo exista como drawer desplegable */
-@media (min-width: 60rem) {
-  .md-sidebar--primary {
-    display: none !important;             /* quita el panel fijo de la izquierda */
-  }
-  /* Ajusta el contenedor para ocupar el ancho completo al no haber sidebar */
-  .md-main__inner {
-    margin-left: 0 !important;
-  }
-}
-
-/* 3) Estética del drawer: ancho y colores coherentes con tu paleta */
-.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
-
-@media (max-width: 100rem) {
-  .md-sidebar--primary .md-nav,          /* drawer interno */
-  .md-nav--primary {
-    width: 280px;                         /* ancho cómodo del menú */
-  }
-}
-
-/* Encabezado del drawer (tu franja celeste) */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-/* Links e iconos del menú */
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important;
-  color: #004B8E !important;
-}
-.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
