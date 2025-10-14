@@ -1,5 +1,5 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero como Banner (FINAL)
+TH BioData Consulting — Estilos con Hero como Banner (SOLUCIÓN FINAL)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -10,8 +10,6 @@ TH BioData Consulting — Estilos con Hero como Banner (FINAL)
 
     --th-color-corporate-blue: #0F3D73; /* barra / CTA */
     --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
-    
-    --th-top-padding-offset: 1.0rem;
 }
 
 /* -------------------- Contenido centrado -------------------- */
@@ -32,27 +30,27 @@ TH BioData Consulting — Estilos con Hero como Banner (FINAL)
 }
 
 /* ============================================================
-✅ LAYOUT FINAL: HERO COMO BANNER DEBAJO DEL HEADER
+✅ LA SOLUCIÓN DEFINITIVA: TÉCNICA DE MARGEN NEGATIVO
 ============================================================ */
 
-/* 1. El hero se posiciona de forma absoluta respecto a la página */
-.hero {
-    position: absolute;
-    /* ✅ LO MÁS IMPORTANTE: Se ubica justo debajo del header */
-    top: var(--md-header-h); 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: var(--th-hero-height);
-    overflow: hidden;
-    z-index: 0;
-    transition: opacity .6s ease, transform .6s ease;
+/* 1. En páginas con hero, creamos un espacio arriba del contenido */
+body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
+    padding-top: var(--th-hero-height);
 }
 
-/* 2. Empujamos el contenido (menú y texto) hacia abajo con un margen */
-body:has(.hero) .md-grid {
-    /* ✅ Usamos margen para crear el espacio para el hero flotante */
-    margin-top: var(--th-hero-height);
+/* 2. El hero se "sube" con un margen negativo para ocupar ese espacio */
+.hero {
+    /* Mantiene el hero en el flujo del documento, evitando bugs */
+    margin-top: calc(-1 * var(--th-hero-height));
+    
+    /* El truco para el ancho completo sigue siendo el mismo */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    
+    height: var(--th-hero-height);
+    overflow: hidden;
+    position: relative; /* Para que el fondo y contenido se posicionen bien */
+    z-index: 0;
 }
 
 /* Fondo del hero (sin cambios) */
@@ -94,22 +92,13 @@ body:has(.hero) .md-grid {
 .md-content__inner:has(.hero) > h1:first-child { display: none; }
 .md-content__inner:has(.hero) > :first-child { margin-top: 0; }
 
-/* Desvanecimiento opcional del hero al scrollear */
-body:not(.scrolled) .hero { opacity: 1; transform: translateX(-50%) translateY(0); }
-body.scrolled .hero { opacity: 0; transform: translateX(-50%) translateY(-80px); }
-
 /* ============================================================
-Páginas SIN hero
+Páginas SIN hero (Sin cambios)
 ============================================================ */
 body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
 .md-typeset h1 { margin: .25rem 0 1rem !important; }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
     scroll-margin-top: calc(var(--md-header-h) + .5rem);
-}
-
-/* Padding superior más fino en páginas sin hero */
-body:not(:has(.hero)) .md-main {
-    padding-top: calc(var(--md-header-h) - var(--th-top-padding-offset)) !important;
 }
 
 /* ============================================================
@@ -133,7 +122,7 @@ Drawer: SOLO colores (sin cambios)
 html, body { overflow-x: hidden; }
 
 /* ============================================================
-Grid de cards (reutilizable)
+Grid de cards (reutilizable) (Sin cambios)
 ============================================================ */
 .grid.cards {
     display: grid;
@@ -157,9 +146,12 @@ Grid de cards (reutilizable)
 Responsivo
 ============================================================ */
 @media (max-width: 768px) {
-    .hero { height: var(--th-hero-height-sm); }
-    /* Ajustamos el margen en móvil para que coincida con el alto del hero */
-    body:has(.hero) .md-grid {
-        margin-top: var(--th-hero-height-sm);
+    .hero { 
+        height: var(--th-hero-height-sm);
+        margin-top: calc(-1 * var(--th-hero-height-sm));
+    }
+    
+    body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
+        padding-top: var(--th-hero-height-sm);
     }
 }
