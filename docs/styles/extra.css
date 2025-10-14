@@ -277,3 +277,11 @@ body.scrolled .hero {
 @media (max-width: 768px){
   .menu-toggle { display: inline-flex; }
 }
+.menu-toggle{display:inline-flex;align-items:center;margin-left:.5rem;cursor:pointer;color:#fff}
+.menu-toggle .md-icon{color:#fff}
+
+.md-sidebar--primary{transition:transform .25s ease;will-change:transform;background:#fff;box-shadow:2px 0 12px rgba(0,0,0,.18);transform:translateX(-100%)}
+#\__drawer:checked ~ .md-container .md-sidebar--primary{transform:translateX(0)}
+.md-overlay{background-color:rgba(0,0,0,.35)!important}
+
+@media (max-width:768px){.menu-toggle{display:inline-flex}}
