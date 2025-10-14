@@ -6,7 +6,6 @@ theme:
   logo: assets/logo.png        # (opcional: si subís el logo)
   favicon: assets/logo.png
   features:
-    - navigation.instant
     - navigation.sections
     - navigation.indexes
     - content.code.copy
