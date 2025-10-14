@@ -3,7 +3,6 @@ site_description: Transforming biological complexity into clear, data-driven ins
 site_url: https://thbiodata.github.io
 theme:
   name: material
-  custom_dir: custom_dir
   logo: assets/logo.png        
   favicon: assets/logo.png
   features:
