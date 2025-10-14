@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+
+  <label class="md-overlay" for="__drawer"></label>
+
+  {{ super() }}
+{% endblock %}
+
+
+{% block header %}
+  <label for="__drawer" class="menu-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+  </label>
+
+  {{ super() }}
+{% endblock %}
