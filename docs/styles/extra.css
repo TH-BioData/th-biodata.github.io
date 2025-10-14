@@ -1,287 +1,158 @@
 /* ============================================================
-   TH BioData Consulting — Estilos v4.0 (Hero full-width + Drawer overlay)
+   Drawer/Overlay — MkDocs Material (TH BioData)
    ============================================================ */
 
-/* -------------------- Variables globales -------------------- */
-:root {
-  --th-hero-height: 420px;
-  --th-hero-height-sm: 300px;
-  --md-header-h: var(--md-header-height, 3.6rem);
-
+/* ---- Colores y z-index base ---- */
+:root{
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
-
-  --th-top-padding-offset: 1.0rem;
+  --th-header-h: var(--md-header-height, 3.6rem);
+  --th-drawer-w: 290px;
+  --th-z-header: 50;
+  --th-z-drawer: 60;
+  --th-z-overlay: 55;
 }
 
-/* -------------------- Contenido centrado -------------------- */
-.md-content {
-  max-width: 950px;
-  margin: 0 auto;
-}
-
-/* ============================================================
-   HEADER (barra superior azul)
-   ============================================================ */
-.md-header,
-.md-tabs {
+/* ---- Barra superior (azul corporativo) ---- */
+.md-header, .md-tabs{
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: 100;
-}
-
-/* Logo + botón de menú (hamburguesa) */
-.md-header__button {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.md-header__button .md-logo {
-  height: 28px;
-  width: auto;
-}
-
-.md-header__button .menu-toggle {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 1.6rem;
-  display: inline-flex;
-  align-items: center;
-}
-
-.menu-toggle:hover {
-  color: var(--th-color-corporate-light-blue);
+  z-index: var(--th-z-header) !important;
 }
 
 /* ============================================================
-   DRAWER overlay (menú lateral)
+   1) Botón hamburguesa SIEMPRE visible al lado del logo
    ============================================================ */
-.md-sidebar {
-  position: fixed;
-  top: var(--md-header-h);
-  left: -260px;
-  width: 240px;
-  height: calc(100vh - var(--md-header-h));
-  background: #fff;
-  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
-  transition: left 0.3s ease;
-  z-index: 99;
-  overflow-y: auto;
-}
 
-/* Overlay visible cuando está abierto */
-body.menu-open .md-sidebar {
-  left: 0;
-}
-
-/* Fondo oscuro de overlay */
-.md-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.35);
-  z-index: 98;
-}
-
-body.menu-open .md-overlay {
-  display: block;
-}
-
-/* Colores del drawer */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.md-nav__link,
-.md-nav__link span {
-  color: var(--th-color-corporate-blue) !important;
-}
-
-.md-nav__link:hover,
-.md-nav__link:focus {
-  background-color: rgba(124, 198, 255, 0.12) !important;
-  color: #004B8E !important;
-}
-
-/* ============================================================
-   HERO full-width y centrado
-   ============================================================ */
-.hero {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  height: var(--th-hero-height);
-  overflow: hidden;
-  z-index: 0;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('../assets/hero.jpg?v=6');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.hero__content {
-  position: relative;
-  display: flex;
+/* Muestra el botón de hamburguesa de Material en todos los anchos */
+.md-header__button.md-icon[data-md-toggle="drawer"]{
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  min-height: 100%;
-  padding: 48px 16px;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-left: .25rem;
   color: #fff;
-  background: linear-gradient(to bottom, rgba(10, 35, 80, 0.15), rgba(10, 35, 80, 0.55));
 }
 
-.hero__title {
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 6px;
+/* Asegura orden: [hamburguesa] [logo] [titulo] */
+.md-header__inner{
+  display: flex;
+  align-items: center;
 }
+.md-header__button[data-md-toggle="drawer"]{ order: 0; }
+.md-header__button.md-logo{ order: 1; margin-left: .5rem; }
+.md-header__title{ order: 2; }
 
-.hero__tag {
-  font-size: 18px;
-  opacity: 0.95;
-}
-
-.hero__cta {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 10px 18px;
-  background: var(--th-color-corporate-blue);
-  border-radius: 8px;
+/* Icono en blanco */
+.md-header__button .md-icon,
+.md-header__button[data-md-toggle="drawer"] .md-icon{
   color: #fff !important;
-  text-decoration: none;
+  fill: currentColor !important;
 }
 
-/* Oculta el H1 duplicado cuando hay hero */
-.md-content__inner:has(.hero) > h1:first-child {
+/* ============================================================
+   2) Sidebar primario como off-canvas overlay
+   ============================================================ */
+
+.md-sidebar--primary{
+  position: fixed;
+  top: var(--th-header-h);
+  left: 0;
+  height: calc(100vh - var(--th-header-h));
+  width: var(--th-drawer-w);
+  background: #fff;
+  box-shadow: 2px 0 18px rgba(0,0,0,.18);
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  will-change: transform;
+  z-index: var(--th-z-drawer);
+  overscroll-behavior: contain;
+}
+
+/* Cuando el checkbox nativo está activo, muestra el drawer */
+#__drawer:checked ~ .md-container .md-sidebar--primary{
+  transform: translateX(0);
+}
+
+/* Oculta el secundario si te estorba en modo overlay (opcional) */
+.md-sidebar--secondary{
   display: none;
 }
-.md-content__inner:has(.hero) > :first-child {
-  margin-top: 0;
-}
 
-/* Desvanecimiento del hero */
-body:not(.scrolled) .hero {
-  opacity: 1;
-  transform: translateY(0);
-}
-body.scrolled .hero {
+/* ============================================================
+   3) Overlay clicable detrás del menú
+   ============================================================ */
+
+.md-overlay{
+  position: fixed;
+  top: var(--th-header-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.35);
   opacity: 0;
-  transform: translateY(-80px);
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: var(--th-z-overlay) !important;
+}
+
+/* Activa overlay con el mismo checkbox del drawer */
+#__drawer:checked ~ .md-overlay{
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ============================================================
-   Ajuste global de padding superior
+   4) Ajustes responsivos (móvil/desktop)
    ============================================================ */
-.md-main {
-  padding-top: calc(var(--md-header-h) - var(--th-top-padding-offset)) !important;
-}
 
-/* ============================================================
-   Grid de cards
-   ============================================================ */
-.grid.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.grid.cards > * {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.grid.cards > *:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* ============================================================
-   RESPONSIVO
-   ============================================================ */
-@media (max-width: 768px) {
-  .hero {
-    height: var(--th-hero-height-sm);
-  }
-
-  .md-header__button .menu-toggle {
-    display: inline-flex;
+/* En móvil, conserva el mismo comportamiento */
+@media (max-width: 768px){
+  .md-sidebar--primary{
+    width: calc(100vw - 56px); /* deja un poco de aire */
+    max-width: var(--th-drawer-w);
   }
 }
-/* === Botón hamburguesa visible en desktop y móvil === */
-.menu-toggle {
+
+/* Si quisieras que en pantallas muuy grandes vuelva a ser fijo,
+   puedes comentar este bloque y se mantendrá overlay siempre. */
+@media (min-width: 1220px){
+  /* Mantener overlay también en desktop → NO cambiamos nada */
+}
+
+/* ============================================================
+   5) Detalles visuales del título del drawer y links
+   ============================================================ */
+
+/* Franja de título del drawer con tu celeste */
+.md-nav__title{
+  background: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+}
+
+/* Links del menú en azul corporativo sobre fondo blanco */
+.md-nav__link{
+  color: var(--th-color-corporate-blue);
+}
+.md-nav__link:hover{
+  color: #072849;
+}
+
+/* Botón de cierre dentro del drawer (si lo hubiera) en blanco */
+.md-nav__title .md-icon{
+  color: #fff !important;
+}
+
+/* ============================================================
+   6) Botón hamburguesa alternativo (por si usas clase propia)
+   ============================================================ */
+
+/* Si estás usando un botón custom .menu-toggle, lo estilamos también */
+.menu-toggle{
   display: inline-flex;
   align-items: center;
   margin-left: .5rem;
   cursor: pointer;
   color: #fff;
 }
-.menu-toggle .md-icon { color: #fff; }
-
-/* === Usa el sidebar primario de Material como drawer === */
-.md-sidebar--primary {
-  transition: transform .25s ease;
-  will-change: transform;
-  background: #fff;
-  box-shadow: 2px 0 12px rgba(0,0,0,.18);
-}
-
-/* Estado cerrado (cuando el checkbox nativo no está marcado) */
-.md-sidebar--primary {
-  transform: translateX(-100%);
-}
-
-/* Estado abierto: cuando el toggle __drawer está checkeado */
-#\__drawer:checked ~ .md-container .md-sidebar--primary {
-  transform: translateX(0);
-}
-
-/* Overlay nativo */
-.md-overlay { background-color: rgba(0,0,0,.35) !important; }
-
-/* Encabezado del drawer + links (tus colores) */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus {
-  background-color: rgba(124,198,255,.12) !important;
-  color: #004B8E !important;
-}
-
-/* Evita que el drawer tape el header */
-.md-header, .md-tabs { z-index: 100; }
-
-/* Responsive: asegura visibilidad del botón */
-@media (max-width: 768px){
-  .menu-toggle { display: inline-flex; }
-}
-.menu-toggle{display:inline-flex;align-items:center;margin-left:.5rem;cursor:pointer;color:#fff}
-.menu-toggle .md-icon{color:#fff}
-
-.md-sidebar--primary{transition:transform .25s ease;will-change:transform;background:#fff;box-shadow:2px 0 12px rgba(0,0,0,.18);transform:translateX(-100%)}
-#\__drawer:checked ~ .md-container .md-sidebar--primary{transform:translateX(0)}
-.md-overlay{background-color:rgba(0,0,0,.35)!important}
-
-@media (max-width:768px){.menu-toggle{display:inline-flex}}
+.menu-toggle .md-icon{ color:#fff; }
