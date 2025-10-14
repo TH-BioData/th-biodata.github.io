@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos Unificados (v6: Solución Definitiva.)
+   TH BioData Consulting — Estilos Unificados (v7: Nativo)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -17,29 +17,18 @@
 .md-header, .md-tabs { background-color: var(--th-color-corporate-blue) !important; }
 
 /* ============================================================
-   Hamburguesa y Navegación Móvil (Drawer) - MÉTODO CORRECTO
+   Navegación Móvil (Drawer)
    ============================================================ */
 
-/* 1. Oculta el checkbox que controla el estado */
+/* El tema Material ya se encarga del ícono. Solo necesitamos
+   estilizar el menú una vez que se abre. */
+
+/* 1. Oculta el checkbox que controla el estado (buena práctica) */
 #__drawer {
     display: none;
 }
 
-/* 2. Estilos para el ícono de la hamburguesa (mucho más simple) */
-.menu-toggle {
-    display: none; /* Oculto por defecto en pantallas grandes */
-    padding: 0 0.6rem; /* Añade espacio a los lados del ícono */
-    cursor: pointer;
-}
-
-.menu-toggle svg {
-    display: block;
-    width: 1.2rem;
-    height: 1.2rem;
-    fill: #fff; /* Color del ícono */
-}
-
-/* 3. Estilos de la barra lateral (sin cambios) */
+/* 2. Estilos de la barra lateral (sin cambios) */
 .md-sidebar--primary {
     position: fixed; top: 0; left: 0; height: 100%; width: 18.75rem;
     overflow-y: auto; background-color: #fff; box-shadow: 0 0 1rem rgba(0,0,0,0.4);
@@ -48,17 +37,17 @@
     z-index: 1000; will-change: transform;
 }
 
-/* 4. Estilos del fondo oscuro (sin cambios) */
+/* 3. Estilos del fondo oscuro (sin cambios) */
 .md-overlay {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.35) !important; z-index: 999;
 }
 
-/* 5. Lógica de activación (sin cambios) */
+/* 4. Lógica de activación (sin cambios) */
 #__drawer:checked ~ .md-overlay { display: block; }
 #__drawer:checked ~ .md-container .md-sidebar--primary { transform: translateX(0); }
 
-/* 6. Estilos internos del Drawer (Tus colores) */
+/* 5. Estilos internos del Drawer (Tus colores) */
 .md-nav__title { background-color: var(--th-color-corporate-light-blue) !important; color: #fff !important; font-weight: 600; border-bottom: 1px solid #e5e7eb; }
 .md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
 .md-nav__link:hover, .md-nav__link:focus { background-color: rgba(124,198,255,0.12) !important; color: #004B8E !important; }
@@ -83,23 +72,12 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
 .md-main { padding-top: calc(var(--md-header-h) - var(--th-top-padding-offset)) !important; }
 
 /* ============================================================
-   Utilidades y Responsivo
+   Utilidades y Responsivo (Sin cambios)
    ============================================================ */
 html, body { overflow-x: hidden; }
 .grid.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .grid.cards > * { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .grid.cards > *:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
-
-/* ---- Media Query para Móviles ---- */
 @media screen and (max-width: 76.1875em) {
-  /* Mostramos el ícono de hamburguesa */
-  .menu-toggle {
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  /* Ajusta la altura del hero en móviles */
-  .hero {
-    height: var(--th-hero-height-sm);
-  }
+  .hero { height: var(--th-hero-height-sm); }
 }
