@@ -158,3 +158,52 @@ html, body { overflow-x: hidden; }
 @media (max-width: 768px) {
   .hero { height: var(--th-hero-height-sm); }
 }
+
+/* ============================================================
+   Drawer en TODAS las resoluciones (forzamos botón hamburguesa)
+   ============================================================ */
+
+/* 1) Muestra el botón hamburguesa del header también en desktop */
+.md-header__button[for="__drawer"] {
+  display: inline-flex !important;        /* en móvil ya se ve; en desktop estaba oculto */
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2) En pantallas >= 60rem (≈960px), ocultamos la sidebar fija
+      para que el menú solo exista como drawer desplegable */
+@media (min-width: 60rem) {
+  .md-sidebar--primary {
+    display: none !important;             /* quita el panel fijo de la izquierda */
+  }
+  /* Ajusta el contenedor para ocupar el ancho completo al no haber sidebar */
+  .md-main__inner {
+    margin-left: 0 !important;
+  }
+}
+
+/* 3) Estética del drawer: ancho y colores coherentes con tu paleta */
+.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
+
+@media (max-width: 100rem) {
+  .md-sidebar--primary .md-nav,          /* drawer interno */
+  .md-nav--primary {
+    width: 280px;                         /* ancho cómodo del menú */
+  }
+}
+
+/* Encabezado del drawer (tu franja celeste) */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Links e iconos del menú */
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
+}
+.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
