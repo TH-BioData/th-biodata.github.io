@@ -226,3 +226,54 @@ body.scrolled .hero {
     display: inline-flex;
   }
 }
+/* === Botón hamburguesa visible en desktop y móvil === */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-left: .5rem;
+  cursor: pointer;
+  color: #fff;
+}
+.menu-toggle .md-icon { color: #fff; }
+
+/* === Usa el sidebar primario de Material como drawer === */
+.md-sidebar--primary {
+  transition: transform .25s ease;
+  will-change: transform;
+  background: #fff;
+  box-shadow: 2px 0 12px rgba(0,0,0,.18);
+}
+
+/* Estado cerrado (cuando el checkbox nativo no está marcado) */
+.md-sidebar--primary {
+  transform: translateX(-100%);
+}
+
+/* Estado abierto: cuando el toggle __drawer está checkeado */
+#\__drawer:checked ~ .md-container .md-sidebar--primary {
+  transform: translateX(0);
+}
+
+/* Overlay nativo */
+.md-overlay { background-color: rgba(0,0,0,.35) !important; }
+
+/* Encabezado del drawer + links (tus colores) */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: rgba(124,198,255,.12) !important;
+  color: #004B8E !important;
+}
+
+/* Evita que el drawer tape el header */
+.md-header, .md-tabs { z-index: 100; }
+
+/* Responsive: asegura visibilidad del botón */
+@media (max-width: 768px){
+  .menu-toggle { display: inline-flex; }
+}
