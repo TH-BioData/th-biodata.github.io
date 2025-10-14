@@ -193,3 +193,30 @@ body {
 @media (max-width: 768px) {
   .hero { height: var(--th-hero-height-sm); }
 }
+
+/* ===== Hero full-bleed sin hueco derecho ===== */
+.hero{
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;            /* full-bleed real sin depender del contenedor */
+  height: var(--th-hero-height);
+  overflow: clip;                /* evita desbordes que crean scroll horizontal */
+  z-index: 0;
+}
+html, body { overflow-x: hidden; }
+
+/* ===== Botón hamburguesa: aseguro click por encima de todo ===== */
+.md-header__button[for="__drawer"]{
+  display: inline-flex !important;
+  align-items: center; justify-content: center;
+  color: #fff !important; cursor: pointer;
+  position: relative; z-index: 1000;   /* por si hay overlays */
+  pointer-events: auto !important;
+}
+
+/* ===== Ocultar sidebar fija en desktop para usar solo drawer ===== */
+@media (min-width: 60rem){
+  .md-sidebar--primary{ display:none !important; }
+  .md-main__inner{ margin-left:0 !important; }
+}
