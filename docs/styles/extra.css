@@ -29,11 +29,11 @@
 
 .hero {
   position: relative;
-  margin-left: calc(50% - 50vw);  /* full-bleed */
-  margin-right: calc(50% - 50vw);
+  width: 100vw;                     /* ancho total de la ventana */
+  left: 50%;                        /* centrado horizontal */
+  transform: translateX(-50%);      /* corrección para mantener centrado */
   height: var(--th-hero-height);
   overflow: hidden;
-  transition: opacity .6s ease, transform .6s ease;
   z-index: 0;
 }
 
