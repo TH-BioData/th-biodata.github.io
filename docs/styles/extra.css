@@ -1,5 +1,5 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero como Banner (CORREGIDO)
+TH BioData Consulting — Estilos con Hero como Banner (FINAL)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -11,7 +11,6 @@ TH BioData Consulting — Estilos con Hero como Banner (CORREGIDO)
     --th-color-corporate-blue: #0F3D73; /* barra / CTA */
     --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
     
-    /* Padding superior del contenido en páginas SIN hero */
     --th-top-padding-offset: 1.0rem;
 }
 
@@ -33,30 +32,27 @@ TH BioData Consulting — Estilos con Hero como Banner (CORREGIDO)
 }
 
 /* ============================================================
-✅ NUEVO LAYOUT: HERO COMO BANNER SUPERIOR
+✅ LAYOUT FINAL: HERO COMO BANNER DEBAJO DEL HEADER
 ============================================================ */
 
-/* 1. Preparamos el contenedor principal para anclar el hero */
-body:has(.hero) .md-main {
-    position: relative;
-}
-
-/* 2. El hero se saca del flujo normal y se posiciona como un banner */
+/* 1. El hero se posiciona de forma absoluta respecto a la página */
 .hero {
     position: absolute;
-    top: 0;
+    /* ✅ LO MÁS IMPORTANTE: Se ubica justo debajo del header */
+    top: var(--md-header-h); 
     left: 50%;
     transform: translateX(-50%);
-    width: 100vw; /* Ocupa el 100% del ancho de la ventana */
+    width: 100vw;
     height: var(--th-hero-height);
     overflow: hidden;
-    z-index: 0; /* Por debajo del header */
+    z-index: 0;
     transition: opacity .6s ease, transform .6s ease;
 }
 
-/* 3. Empujamos TODO el contenido (menú y texto) hacia abajo */
+/* 2. Empujamos el contenido (menú y texto) hacia abajo con un margen */
 body:has(.hero) .md-grid {
-    padding-top: var(--th-hero-height);
+    /* ✅ Usamos margen para crear el espacio para el hero flotante */
+    margin-top: var(--th-hero-height);
 }
 
 /* Fondo del hero (sin cambios) */
@@ -94,14 +90,13 @@ body:has(.hero) .md-grid {
     text-decoration: none;
 }
 
-/* -------- Quita el H1 de arriba del contenido (el hero lo reemplaza) -------- */
+/* -------- Quita el H1 de arriba del contenido -------- */
 .md-content__inner:has(.hero) > h1:first-child { display: none; }
 .md-content__inner:has(.hero) > :first-child { margin-top: 0; }
 
 /* Desvanecimiento opcional del hero al scrollear */
 body:not(.scrolled) .hero { opacity: 1; transform: translateX(-50%) translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateX(-50%) translateY(-80px); }
-
 
 /* ============================================================
 Páginas SIN hero
@@ -163,8 +158,8 @@ Responsivo
 ============================================================ */
 @media (max-width: 768px) {
     .hero { height: var(--th-hero-height-sm); }
-    /* ✅ Ajustamos el espacio en móvil para que coincida con el alto del hero */
+    /* Ajustamos el margen en móvil para que coincida con el alto del hero */
     body:has(.hero) .md-grid {
-        padding-top: var(--th-hero-height-sm);
+        margin-top: var(--th-hero-height-sm);
     }
 }
