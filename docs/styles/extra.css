@@ -1,5 +1,5 @@
 /* ============================================================
-TH BioData Consulting — Estilos minimal y estables 
+TH BioData Consulting — Estilos con Hero como Banner (CORREGIDO)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -10,8 +10,9 @@ TH BioData Consulting — Estilos minimal y estables
 
     --th-color-corporate-blue: #0F3D73; /* barra / CTA */
     --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
-
-    --th-top-padding-offset: 1.0rem; /* ajusta este valor si querés más/menos espacio */
+    
+    /* Padding superior del contenido en páginas SIN hero */
+    --th-top-padding-offset: 1.0rem;
 }
 
 /* -------------------- Contenido centrado -------------------- */
@@ -26,31 +27,39 @@ TH BioData Consulting — Estilos minimal y estables
     background-color: var(--th-color-corporate-blue) !important;
 }
 
-/* ============================================================
-✅ LA SOLUCIÓN: ASEGURAR QUE EL HEADER ESTÉ POR ENCIMA
-============================================================ */
 .md-header {
-    /* Establece un contexto de apilamiento y lo pone en una capa superior */
     position: relative; 
-    z-index: 10; 
+    z-index: 10;
 }
-/* ============================================================ */
-
 
 /* ============================================================
-HERO full-bleed (ocupa todo el ancho, centrado y arriba)
+✅ NUEVO LAYOUT: HERO COMO BANNER SUPERIOR
 ============================================================ */
-.hero {
+
+/* 1. Preparamos el contenedor principal para anclar el hero */
+body:has(.hero) .md-main {
     position: relative;
-    margin-left: calc(50% - 50vw); /* full-bleed original */
-    margin-right: calc(50% - 50vw);
+}
+
+/* 2. El hero se saca del flujo normal y se posiciona como un banner */
+.hero {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw; /* Ocupa el 100% del ancho de la ventana */
     height: var(--th-hero-height);
     overflow: hidden;
-    z-index: 0; /* Este z-index es más bajo que el del header, lo cual es correcto */
+    z-index: 0; /* Por debajo del header */
     transition: opacity .6s ease, transform .6s ease;
 }
 
-/* Fondo del hero */
+/* 3. Empujamos TODO el contenido (menú y texto) hacia abajo */
+body:has(.hero) .md-grid {
+    padding-top: var(--th-hero-height);
+}
+
+/* Fondo del hero (sin cambios) */
 .hero__bg {
     position: absolute;
     inset: 0;
@@ -60,7 +69,7 @@ HERO full-bleed (ocupa todo el ancho, centrado y arriba)
     background-repeat: no-repeat;
 }
 
-/* Contenido centrado */
+/* Contenido centrado del hero (sin cambios) */
 .hero__content {
     position: relative;
     display: flex;
@@ -85,13 +94,14 @@ HERO full-bleed (ocupa todo el ancho, centrado y arriba)
     text-decoration: none;
 }
 
-/* -------- Quita el espacio/blanco y el H1 encima del hero -------- */
+/* -------- Quita el H1 de arriba del contenido (el hero lo reemplaza) -------- */
 .md-content__inner:has(.hero) > h1:first-child { display: none; }
 .md-content__inner:has(.hero) > :first-child { margin-top: 0; }
 
 /* Desvanecimiento opcional del hero al scrollear */
-body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
-body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
+body:not(.scrolled) .hero { opacity: 1; transform: translateX(-50%) translateY(0); }
+body.scrolled .hero { opacity: 0; transform: translateX(-50%) translateY(-80px); }
+
 
 /* ============================================================
 Páginas SIN hero
@@ -102,16 +112,13 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
     scroll-margin-top: calc(var(--md-header-h) + .5rem);
 }
 
-/* ============================================================
-Padding superior más fino (afecta todo)
-============================================================ */
-.md-main {
-    /* resta un offset al alto del header para subir el contenido */
+/* Padding superior más fino en páginas sin hero */
+body:not(:has(.hero)) .md-main {
     padding-top: calc(var(--md-header-h) - var(--th-top-padding-offset)) !important;
 }
 
 /* ============================================================
-Drawer: SOLO colores (sin z-index, sin eventos, sin layout)
+Drawer: SOLO colores (sin cambios)
 ============================================================ */
 .md-nav__title {
     background-color: var(--th-color-corporate-light-blue) !important;
@@ -156,4 +163,8 @@ Responsivo
 ============================================================ */
 @media (max-width: 768px) {
     .hero { height: var(--th-hero-height-sm); }
+    /* ✅ Ajustamos el espacio en móvil para que coincida con el alto del hero */
+    body:has(.hero) .md-grid {
+        padding-top: var(--th-hero-height-sm);
+    }
 }
