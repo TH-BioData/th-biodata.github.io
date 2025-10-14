@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — Estilos minimal y estables (v3.15)
+   TH BioData Consulting — Estilos estables (v3.16 — Drawer funcional y hero full-width)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -22,19 +22,17 @@
 .md-header,
 .md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: 12;
+  z-index: 20;
 }
 
 /* ============================================================
-   HERO full-bleed (ocupa todo el ancho, centrado y arriba)
+   HERO full-bleed real (sin márgenes blancos)
    ============================================================ */
 .hero {
   position: relative;
   width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   height: var(--th-hero-height);
   overflow: hidden;
   z-index: 0;
@@ -76,7 +74,7 @@
   text-decoration: none;
 }
 
-/* Quita el H1 redundante sobre el hero */
+/* Oculta el H1 redundante sobre el hero */
 .md-content__inner:has(.hero) > h1:first-child { display: none; }
 .md-content__inner:has(.hero) > :first-child { margin-top: 0; }
 
@@ -85,22 +83,16 @@ body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
 body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
 
 /* ============================================================
-   Ajustes generales de márgenes y títulos
+   Títulos y márgenes
    ============================================================ */
 body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
-
 .md-typeset h1 { margin: .25rem 0 1rem !important; }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
   scroll-margin-top: calc(var(--md-header-h) + .5rem);
 }
 
 /* ============================================================
-   Ajuste: Padding superior más fino
-   ============================================================ */
-.md-main { padding-top: calc(var(--md-header-h) - 1.4rem) !important; }
-
-/* ============================================================
-   Drawer (menú desplegable) — Colores y estilo
+   Drawer (colores y estructura)
    ============================================================ */
 .md-nav__title {
   background-color: var(--th-color-corporate-light-blue) !important;
@@ -120,22 +112,27 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
   color: var(--th-color-corporate-blue) !important;
 }
 
-.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
+.md-overlay {
+  background-color: rgba(0,0,0,0.35) !important;
+  pointer-events: all !important; /* asegura interacción */
+}
 
 /* ============================================================
    Drawer funcional en TODAS las resoluciones
    ============================================================ */
 
-/* 1) Muestra el botón hamburguesa en desktop también */
+/* 1) Botón hamburguesa activo y funcional */
 .md-header__button[for="__drawer"] {
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  margin-left: 0.25rem;
   color: white !important;
+  cursor: pointer !important;
+  z-index: 30;
+  pointer-events: all !important;
 }
 
-/* 2) En escritorio: ocultamos la barra lateral fija */
+/* 2) Sidebar fija deshabilitada en escritorio */
 @media (min-width: 60rem) {
   .md-sidebar--primary {
     display: none !important;
@@ -145,7 +142,7 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
   }
 }
 
-/* 3) Ajuste de ancho del drawer */
+/* 3) Ancho del drawer */
 @media (max-width: 100rem) {
   .md-sidebar--primary .md-nav,
   .md-nav--primary {
@@ -154,7 +151,18 @@ body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
 }
 
 /* ============================================================
-   Grid de cards (usado en secciones)
+   Ajustes visuales y responsivo
+   ============================================================ */
+.md-main { padding-top: calc(var(--md-header-h) - 1.4rem) !important; }
+
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+}
+
+/* ============================================================
+   Grid de cards
    ============================================================ */
 .grid.cards {
   display: grid;
