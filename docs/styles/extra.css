@@ -1,11 +1,11 @@
 /* ============================================================
-   TH BioData Consulting — Estilos estables v4 (web + móvil OK)
+   TH BioData Consulting — Estilos estables v4.1 (web + móvil)
    ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
-:root{
-  --th-hero-height: 420px;          /* desktop */
-  --th-hero-height-sm: 300px;       /* móvil */
+:root {
+  --th-hero-height: 420px;        /* desktop */
+  --th-hero-height-sm: 300px;     /* móvil */
   --md-header-h: var(--md-header-height, 3.6rem);
 
   --th-color-corporate-blue: #0F3D73;       /* barra / CTA */
@@ -13,57 +13,78 @@
 }
 
 /* -------------------- Contenido centrado -------------------- */
-.md-content{ max-width: 950px; margin: 0 auto; }
+.md-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
 
-/* -------------------- Header fijo (azul) -------------------- */
+/* -------------------- Header fijo (azul corporativo) -------------------- */
 .md-header,
-.md-tabs{
+.md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
 }
-.md-header{ position: sticky; top: 0; z-index: 10; }
 
-/* Compensación global por header fijo */
-.md-main{ padding-top: var(--md-header-h) !important; }
-
-/* ============================================================
-   HAMBURGUESA SIEMPRE VISIBLE + DRAWER EN DESKTOP
-   ============================================================ */
-
-/* Muestra el botón de menú (hamburguesa) en todas las anchuras */
-.md-header__button.md-icon{
-  display: inline-flex !important;
-  align-items: center; justify-content: center;
+.md-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* Oculta la barra lateral fija en pantallas grandes para
-   forzar el patrón de "cajón desplegable" */
-.md-sidebar--primary{ display: none; }
+/* Reducimos el padding-top para que el hero quede más arriba */
+.md-main {
+  padding-top: calc(var(--md-header-h) - 1.4rem) !important;
+}
 
-/* Mantén la secundaria (índice a la derecha) si te gusta; quítala si no
-   .md-sidebar--secondary{ display:none; } */
+/* ============================================================
+   MENÚ HAMBURGUESA SIEMPRE ACTIVO
+   ============================================================ */
 
-/* Estética del cajón (drawer) */
-.md-nav__title{
+/* Fuerza a que el ícono de menú sea visible en todas las resoluciones */
+.md-header__button.md-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Oculta la barra lateral izquierda fija (si la hubiera) */
+.md-sidebar--primary {
+  display: none !important;
+}
+
+/* Drawer (menú lateral desplegable) */
+.md-nav__title {
   background-color: var(--th-color-corporate-light-blue) !important;
   color: #fff !important;
   font-weight: 600;
   border-bottom: 1px solid #e5e7eb;
 }
-.md-nav__link, .md-nav__link span{ color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus{
+
+.md-nav__link, .md-nav__link span {
+  color: var(--th-color-corporate-blue) !important;
+}
+
+.md-nav__link:hover, .md-nav__link:focus {
   background-color: rgba(124,198,255,0.12) !important;
   color: #004B8E !important;
 }
-.md-nav__icon, .md-icon{ color: var(--th-color-corporate-blue) !important; }
-.md-overlay{ background-color: rgba(0,0,0,0.35) !important; } /* sin tocar z-index/pointer-events */
+
+.md-nav__icon, .md-icon {
+  color: var(--th-color-corporate-blue) !important;
+}
+
+.md-overlay {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+}
 
 /* ============================================================
    HERO full-bleed (ocupa todo el ancho, centrado y arriba)
    ============================================================ */
 
-.hero{
+.hero {
   position: relative;
-  margin-left: calc(50% - 50vw);   /* full-bleed real */
+  margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   height: var(--th-hero-height);
   overflow: hidden;
@@ -71,8 +92,8 @@
   transition: opacity .6s ease, transform .6s ease;
 }
 
-/* Fondo del hero */
-.hero__bg{
+/* Fondo */
+.hero__bg {
   position: absolute;
   inset: 0;
   background-image: url('../assets/hero.jpg?v=6');
@@ -82,7 +103,7 @@
 }
 
 /* Contenido centrado */
-.hero__content{
+.hero__content {
   position: relative;
   display: flex;
   align-items: center;
@@ -91,12 +112,21 @@
   min-height: 100%;
   padding: 48px 16px;
   color: #fff;
-  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+  background: linear-gradient(to bottom, rgba(10,35,80,.1), rgba(10,35,80,.55));
 }
 
-.hero__title{ font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag{   font-size: 18px; opacity: .95; }
-.hero__cta{
+.hero__title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.hero__tag {
+  font-size: 18px;
+  opacity: .95;
+}
+
+.hero__cta {
   display: inline-block;
   margin-top: 16px;
   padding: 10px 18px;
@@ -106,45 +136,64 @@
   text-decoration: none;
 }
 
-/* -------- Quita el espacio/blanco y el H1 encima del hero -------- */
-/* Si el hero está en la página, ocultamos el primer H1 (p.ej. "Home")
-   y eliminamos márgenes superiores para que el hero quede arriba */
-.md-content__inner:has(.hero) > h1:first-child{ display: none; }
-.md-content__inner:has(.hero) > :first-child{ margin-top: 0; }
+/* Elimina el espacio blanco encima del hero */
+.md-content__inner:has(.hero) > h1:first-child {
+  display: none;
+}
 
-/* Desvanecimiento opcional del hero al scrollear */
-body:not(.scrolled) .hero{ opacity: 1; transform: translateY(0); }
-body.scrolled .hero{ opacity: 0; transform: translateY(-80px); }
+.md-content__inner:has(.hero) > :first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Efecto fade opcional */
+body:not(.scrolled) .hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.scrolled .hero {
+  opacity: 0;
+  transform: translateY(-80px);
+}
 
 /* ============================================================
    Páginas SIN hero
    ============================================================ */
-body:not(:has(.hero)) .md-main{ padding-top: var(--md-header-h) !important; }
-.md-typeset h1{ margin: .25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4{
-  scroll-margin-top: calc(var(--md-header-h) + .5rem);
+body:not(:has(.hero)) .md-main {
+  padding-top: var(--md-header-h) !important;
+}
+
+.md-typeset h1 {
+  margin: 0.25rem 0 1rem !important;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + 0.5rem);
 }
 
 /* ============================================================
-   Utilidades
+   GRID DE CARDS
    ============================================================ */
-html, body{ overflow-x: hidden; }  /* sin scroll horizontal */
-
-/* Grid de cards */
-.grid.cards{
+.grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
-.grid.cards > *{
+
+.grid.cards > * {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 16px;
   background: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform .2s ease, box-shadow .2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.grid.cards > *:hover{
+
+.grid.cards > *:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
@@ -152,6 +201,8 @@ html, body{ overflow-x: hidden; }  /* sin scroll horizontal */
 /* ============================================================
    Responsivo
    ============================================================ */
-@media (max-width: 768px){
-  .hero{ height: var(--th-hero-height-sm); }
+@media (max-width: 768px) {
+  .hero {
+    height: var(--th-hero-height-sm);
+  }
 }
