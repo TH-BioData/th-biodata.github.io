@@ -1,8 +1,5 @@
 /* ============================================================
-   TH BioData Consulting — v4.3
-   - Hero full-bleed real
-   - Menú fijo en desktop que inicia debajo del hero
-   - Header compacto
+   TH BioData Consulting — v4.4 (hero full-bleed + menú bajo)
    ============================================================ */
 
 /* -------------------- Variables -------------------- */
@@ -15,41 +12,44 @@
   --th-color-corporate-light-blue: #7CC6FF;
 }
 
-/* -------------------- Layout base -------------------- */
+/* -------------------- Base -------------------- */
 .md-content{ max-width: 950px; margin: 0 auto; }
 
 .md-header,
-.md-tabs{ background-color: var(--th-color-corporate-blue) !important; }
+.md-tabs{ background: var(--th-color-corporate-blue) !important; }
 
 .md-header{
   position: sticky; top: 0; z-index: 20;
   box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
-/* Padding fino bajo el header (lo pediste así) */
+/* Padding superior fino (lo mantenemos) */
 .md-main{ padding-top: calc(var(--md-header-h) - 1.4rem) !important; }
 
 /* ============================================================
-   HERO full-bleed (100% ancho, arriba del todo)
+   HERO full-bleed real
    ============================================================ */
 
+/* El truco de 100vw + translateX evita el “recorte” por el grid */
 .hero{
   position: relative;
-  /* Saca el hero del contenedor y lo lleva a ancho de viewport */
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
   height: var(--th-hero-height);
   overflow: hidden;
-  z-index: 0;        /* header está por encima (z=20) */
-  /* sin transiciones: aparece inmediato */
+  z-index: 0;           /* debajo del header (z=20) */
+  margin: 0;            /* sin márgenes del contenedor */
 }
 
+/* Fondo inmediato: color sólido + imagen sin transiciones */
 .hero__bg{
   position: absolute; inset: 0;
+  background-color: #0d2f59;                 /* visible al instante */
   background-image: url('../assets/hero.jpg?v=6');
-  background-size: cover; background-position: center;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-color: #0d2f59; /* fallback mientras carga */
 }
 
 .hero__content{
@@ -57,7 +57,8 @@
   display: flex; align-items: center; justify-content: center;
   text-align: center; min-height: 100%;
   padding: 48px 16px; color: #fff;
-  background: linear-gradient(to bottom, rgba(10,35,80,.10), rgba(10,35,80,.55));
+  /* overlay muy sutil, sin transición */
+  background: linear-gradient(to bottom, rgba(10,35,80,.05), rgba(10,35,80,.45));
 }
 
 .hero__title{ font-size: 36px; font-weight: 700; margin-bottom: 6px; }
@@ -68,7 +69,7 @@
   border-radius: 8px; color: #fff !important; text-decoration: none;
 }
 
-/* Quita el H1 “Home” sobre el hero para que quede bien arriba */
+/* Elimina el H1 “Home” encima del hero para que quede al tope */
 .md-content__inner:has(.hero) > h1:first-child{ display: none; }
 .md-content__inner:has(.hero) > :first-child{ margin-top: 0 !important; }
 
@@ -76,36 +77,34 @@
    MENÚ (sidebar primaria) BAJO EL HERO en DESKTOP
    ============================================================ */
 
-/* En desktop se muestra la sidebar fija */
+/* En desktop, sidebar visible y empujada justo debajo del hero */
 @media (min-width: 1000px){
   .md-sidebar--primary{ display: block !important; }
 
-  /* 1) Ubica el inicio del menú justo donde termina el hero */
+  /* Empuje exacto = alto del hero – (padding fino ya restado) */
   body:has(.hero) .md-sidebar--primary{
-    /* Compensamos que el contenido ya tiene padding-top reducido */
     margin-top: calc(
-      var(--th-hero-height)             /* alto del hero */
-      - (var(--md-header-h) - 1.4rem)   /* header ya restado en .md-main */
-    );
+      var(--th-hero-height) - (var(--md-header-h) - 1.4rem)
+    ) !important;
   }
 
-  /* 2) Mantiene el menú pegado al viewport al hacer scroll */
+  /* Sidebar pegada al viewport con scroll interno */
   .md-sidebar--primary .md-sidebar__scrollwrap{
     position: sticky;
-    top: calc(var(--md-header-h) - 1.4rem); /* debajo de la barra azul */
+    top: calc(var(--md-header-h) - 1.4rem);
     max-height: calc(100vh - (var(--md-header-h) - 1.4rem));
     overflow: auto;
   }
 }
 
-/* En móvil dejamos drawer nativo de Material (hamburguesa) */
+/* En móvil dejamos el drawer nativo; sin empuje extra */
 @media (max-width: 999.98px){
-  .md-sidebar--primary{ margin-top: 0 !important; } /* sin empuje extra */
+  .md-sidebar--primary{ margin-top: 0 !important; }
 }
 
-/* Estética de navegación */
+/* Estética navegación */
 .md-nav__title{
-  background-color: var(--th-color-corporate-light-blue) !important;
+  background: var(--th-color-corporate-light-blue) !important;
   color:#fff !important; font-weight:600;
   border-bottom:1px solid #e5e7eb;
 }
