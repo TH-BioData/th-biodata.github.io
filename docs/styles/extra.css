@@ -1,158 +1,205 @@
 /* ============================================================
-   Drawer/Overlay — MkDocs Material (TH BioData)
+   TH BioData Consulting — Estilos Unificados
    ============================================================ */
 
-/* ---- Colores y z-index base ---- */
-:root{
+/* -------------------- Variables globales -------------------- */
+:root {
+  --th-hero-height: 420px;            /* desktop */
+  --th-hero-height-sm: 300px;         /* móvil */
+  --md-header-h: var(--md-header-height, 3.6rem);
+
   --th-color-corporate-blue: #0F3D73;
   --th-color-corporate-light-blue: #7CC6FF;
-  --th-header-h: var(--md-header-height, 3.6rem);
-  --th-drawer-w: 290px;
-  --th-z-header: 50;
-  --th-z-drawer: 60;
-  --th-z-overlay: 55;
+
+  --th-top-padding-offset: 1.0rem;
 }
 
-/* ---- Barra superior (azul corporativo) ---- */
-.md-header, .md-tabs{
+/* -------------------- Contenido centrado -------------------- */
+.md-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* -------------------- Barra superior (azul corporativo) -------------------- */
+.md-header,
+.md-tabs {
   background-color: var(--th-color-corporate-blue) !important;
-  z-index: var(--th-z-header) !important;
 }
 
 /* ============================================================
-   1) Botón hamburguesa SIEMPRE visible al lado del logo
+   Hamburguesa y Navegación Móvil (Drawer)
    ============================================================ */
 
-/* Muestra el botón de hamburguesa de Material en todos los anchos */
-.md-header__button.md-icon[data-md-toggle="drawer"]{
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-left: .25rem;
-  color: #fff;
+/* 1. Oculta el checkbox que controla el estado del menú */
+#_drawer {
+    display: none;
 }
 
-/* Asegura orden: [hamburguesa] [logo] [titulo] */
-.md-header__inner{
+/* 2. Estilos para el ícono de la hamburguesa */
+.menu-toggle {
+    display: none; /* Oculto por defecto en pantallas grandes */
+    position: absolute;
+    top: 0.9rem;
+    left: 1rem;
+    height: 2.2rem;
+    width: 2.2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle svg {
+    fill: #fff; /* Color del ícono de hamburguesa */
+}
+
+/* 3. Estilos de la barra lateral (el menú en sí) */
+.md-sidebar--primary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 18.75rem;
+    overflow-y: auto;
+    background-color: #fff;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.4);
+    transform: translateX(-100%); /* Oculto por defecto */
+    transition: transform 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
+    z-index: 1000;
+    will-change: transform;
+}
+
+/* 4. Estilos del fondo oscuro (overlay) */
+.md-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.35) !important; /* Usando tu valor original */
+    z-index: 999;
+}
+
+/* 5. Lógica de activación: Cuando el checkbox está marcado... */
+#_drawer:checked ~ .md-overlay {
+    display: block; /* ...mostramos el overlay */
+}
+
+#_drawer:checked ~ .md-container .md-sidebar--primary {
+    transform: translateX(0); /* ...mostramos la barra lateral */
+}
+
+/* 6. Estilos internos del Drawer (Tus colores) */
+.md-nav__title {
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
+}
+.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
+
+/* ============================================================
+   HERO full-bleed (ocupa todo el ancho, centrado y arriba)
+   ============================================================ */
+.hero {
+  position: relative;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: var(--th-hero-height);
+  overflow: hidden;
+  z-index: 0;
+  transition: opacity .6s ease, transform .6s ease;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/hero.jpg?v=6');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero__content {
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100%;
+  padding: 48px 16px;
+  color: #fff;
+  background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
 }
-.md-header__button[data-md-toggle="drawer"]{ order: 0; }
-.md-header__button.md-logo{ order: 1; margin-left: .5rem; }
-.md-header__title{ order: 2; }
-
-/* Icono en blanco */
-.md-header__button .md-icon,
-.md-header__button[data-md-toggle="drawer"] .md-icon{
+.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
+.hero__tag { font-size: 18px; opacity: .95; }
+.hero__cta {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: var(--th-color-corporate-blue);
+  border-radius: 8px;
   color: #fff !important;
-  fill: currentColor !important;
+  text-decoration: none;
+}
+.md-content__inner:has(.hero) > h1:first-child { display: none; }
+.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
+body:not(.scrolled) .hero { opacity: 1; transform: translateY(0); }
+body.scrolled .hero { opacity: 0; transform: translateY(-80px); }
+
+/* ============================================================
+   Páginas SIN hero y Ajustes de Padding
+   ============================================================ */
+body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
+.md-typeset h1 { margin: .25rem 0 1rem !important; }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + .5rem);
+}
+.md-main {
+  padding-top: calc(var(--md-header-h) - var(--th-top-padding-offset)) !important;
 }
 
 /* ============================================================
-   2) Sidebar primario como off-canvas overlay
+   Utilidades Generales
    ============================================================ */
 
-.md-sidebar--primary{
-  position: fixed;
-  top: var(--th-header-h);
-  left: 0;
-  height: calc(100vh - var(--th-header-h));
-  width: var(--th-drawer-w);
+/* Evita scroll horizontal accidental */
+html, body { overflow-x: hidden; }
+
+/* Grid de cards (reutilizable) */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.grid.cards > * {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
   background: #fff;
-  box-shadow: 2px 0 18px rgba(0,0,0,.18);
-  transform: translateX(-100%);
-  transition: transform .25s ease;
-  will-change: transform;
-  z-index: var(--th-z-drawer);
-  overscroll-behavior: contain;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
-/* Cuando el checkbox nativo está activo, muestra el drawer */
-#__drawer:checked ~ .md-container .md-sidebar--primary{
-  transform: translateX(0);
-}
-
-/* Oculta el secundario si te estorba en modo overlay (opcional) */
-.md-sidebar--secondary{
-  display: none;
+.grid.cards > *:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
 
 /* ============================================================
-   3) Overlay clicable detrás del menú
+   Responsivo
    ============================================================ */
-
-.md-overlay{
-  position: fixed;
-  top: var(--th-header-h);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,.35);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .25s ease;
-  z-index: var(--th-z-overlay) !important;
-}
-
-/* Activa overlay con el mismo checkbox del drawer */
-#__drawer:checked ~ .md-overlay{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ============================================================
-   4) Ajustes responsivos (móvil/desktop)
-   ============================================================ */
-
-/* En móvil, conserva el mismo comportamiento */
-@media (max-width: 768px){
-  .md-sidebar--primary{
-    width: calc(100vw - 56px); /* deja un poco de aire */
-    max-width: var(--th-drawer-w);
+@media (max-width: 768px) {
+  /* Ajusta la altura del hero en móviles */
+  .hero {
+    height: var(--th-hero-height-sm);
+  }
+  
+  /* Muestra el ícono de la hamburguesa en móviles */
+  .menu-toggle {
+    display: inline-flex;
   }
 }
-
-/* Si quisieras que en pantallas muuy grandes vuelva a ser fijo,
-   puedes comentar este bloque y se mantendrá overlay siempre. */
-@media (min-width: 1220px){
-  /* Mantener overlay también en desktop → NO cambiamos nada */
-}
-
-/* ============================================================
-   5) Detalles visuales del título del drawer y links
-   ============================================================ */
-
-/* Franja de título del drawer con tu celeste */
-.md-nav__title{
-  background: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-}
-
-/* Links del menú en azul corporativo sobre fondo blanco */
-.md-nav__link{
-  color: var(--th-color-corporate-blue);
-}
-.md-nav__link:hover{
-  color: #072849;
-}
-
-/* Botón de cierre dentro del drawer (si lo hubiera) en blanco */
-.md-nav__title .md-icon{
-  color: #fff !important;
-}
-
-/* ============================================================
-   6) Botón hamburguesa alternativo (por si usas clase propia)
-   ============================================================ */
-
-/* Si estás usando un botón custom .menu-toggle, lo estilamos también */
-.menu-toggle{
-  display: inline-flex;
-  align-items: center;
-  margin-left: .5rem;
-  cursor: pointer;
-  color: #fff;
-}
-.menu-toggle .md-icon{ color:#fff; }
