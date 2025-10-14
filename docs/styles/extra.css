@@ -1,5 +1,5 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero como Banner (SOLUCIÓN FINAL v2)
+TH BioData Consulting — Estilos con Hero Banner (SOLUCIÓN FINAL v3)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
@@ -30,28 +30,38 @@ TH BioData Consulting — Estilos con Hero como Banner (SOLUCIÓN FINAL v2)
 }
 
 /* ============================================================
-✅ LA SOLUCIÓN DEFINITIVA: TÉCNICA DE MARGEN NEGATIVO
+✅ LAYOUT FINAL: HERO CON POSICIONAMIENTO ABSOLUTO Y ANIMACIÓN
 ============================================================ */
 
-/* 1. En páginas con hero, creamos un espacio arriba del contenido */
+/* 1. Hacemos que el contenedor principal sea el punto de referencia */
 body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
-    padding-top: var(--th-hero-height);
+    position: relative; /* Clave para que el hero se posicione correctamente */
+    padding-top: var(--th-hero-height); /* Crea el espacio vertical para el hero */
 }
 
-/* 2. El hero se "sube" y se expande a ancho completo */
+/* 2. El hero se posiciona de forma absoluta dentro del espacio creado */
 .hero {
-    /* Lo subimos con margen negativo para ocupar el espacio del padding */
-    margin-top: calc(-1 * var(--th-hero-height));
-
-    /* ✅ MÉTODO CORREGIDO (más robusto) para el ancho completo */
-    position: relative;
-    width: 100vw;
+    position: absolute;
+    top: 0;
     left: 50%;
-    transform: translateX(-50%);
-    
+    width: 100vw;
     height: var(--th-hero-height);
-    overflow: hidden;
     z-index: 0;
+    overflow: hidden;
+    
+    /* ✅ LA CLAVE: Se define la transición para la opacidad y la transformación */
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+/* 3. Se combinan las transformaciones de centrado (X) y animación (Y) */
+body:not(.scrolled) .hero {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+body.scrolled .hero {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-80px); /* Centrado + Desplazamiento */
 }
 
 
@@ -148,12 +158,11 @@ Grid de cards (reutilizable) (Sin cambios)
 Responsivo
 ============================================================ */
 @media (max-width: 768px) {
-    .hero { 
-        height: var(--th-hero-height-sm);
-        margin-top: calc(-1 * var(--th-hero-height-sm));
-    }
-    
     body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
         padding-top: var(--th-hero-height-sm);
+    }
+    
+    .hero {
+        height: var(--th-hero-height-sm);
     }
 }
