@@ -1,0 +1,28 @@
+{# overrides/partials/header.html #}
+{% extends "partials/header.html" %}
+
+{% block header %}
+  {{ super() }}
+  <script>
+    /* Cierra el menú al clickear un link (útil en móvil) */
+    document.addEventListener("DOMContentLoaded", () => {
+      const drawer = document.getElementById("__drawer");
+      document.body.addEventListener("click", (e) => {
+        const a = e.target.closest(".md-nav a");
+        if (a && drawer && drawer.checked) drawer.checked = false;
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block header_start %}
+  {{ super() }}
+
+  {# Botón hamburguesa al lado del logo: usa el checkbox nativo __drawer #}
+  <label class="md-header__button menu-toggle" for="__drawer" aria-label="Open menu">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+         aria-hidden="true" class="md-icon">
+      <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+    </svg>
+  </label>
+{% endblock %}
