@@ -4,7 +4,7 @@ hide:
   - toc
 ---
 
-<div class="hero hero--fullscreen" style="--th-hero-img:url('assets/hero_home.jpg')">
+<div class="hero hero--fullscreen" style="--th-hero-img:url('assets/home_hero_v1.jpg')">
   <div class="hero__inner">
     <h1>TH BioData Consulting</h1>
     <p>Transforming biological complexity into clear, data-driven insight.</p>
