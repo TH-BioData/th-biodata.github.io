@@ -37,70 +37,82 @@
   scroll-margin-top: calc(var(--md-header-height, 3.6rem) + .5rem);
 }
 
-/* ===== 4) HERO opcional (bloque sencillo en index.md) =====
-   Uso:
-   <div class="hero">
-     <div class="hero__inner">
-       <h1>TH BioData Consulting</h1>
-       <p>Transforming biological complexity into clear, data-driven insight.</p>
-       <a class="hero__cta" href="projects/geobio/">Ver proyectos</a>
-     </div>
-   </div>
-   ------------------------------------------------------------------- */
-.hero {
-  margin: 0 0 2rem 0;
-  border-radius: var(--th-radius-lg);
-  background: linear-gradient(180deg,
-              var(--md-primary-fg-color--light) 0%,
-              rgba(10, 102, 194, .08) 100%);
-  box-shadow: var(--th-shadow-sm);
+/* ===== Full-bleed + Full-viewport hero como en la home de Material ===== */
+
+/* Altura mínima: 100vh menos la barra fija de Material */
+:root { --th-hero-min-h: calc(100vh - var(--md-header-height, 3.6rem)); }
+
+/* Contenedor full-bleed (rompe el ancho de la grid para ocupar 100vw) */
+.hero--fullscreen {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+
+  min-height: var(--th-hero-min-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  /* Imagen + overlay para legibilidad (ajustá la opacidad si querés) */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 100%),
+    var(--th-hero-img, none);
+  background-size: cover;
+  background-position: center;
+
+  /* Sin bordes redondeados ni sombras: estilo landing */
+  border-radius: 0;
+  box-shadow: none;
+  color: #fff;
 }
+
+/* Inner con espaciado cómodo */
 .hero__inner {
   padding: 3.5rem 1.25rem;
-  text-align: center;
+  max-width: 980px; /* consistente con el ancho de contenido del theme */
 }
-.hero h1 {
-  margin: 0 0 .5rem 0;
+
+/* Tipos y CTA consistentes con Material */
+.hero--fullscreen h1 {
+  margin: 0 0 .6rem 0;
   font-weight: 800;
   letter-spacing: .2px;
 }
-.hero p {
+.hero--fullscreen p {
   margin: 0;
-  opacity: .92;
+  opacity: .95;
   font-size: 1.05rem;
 }
 .hero__cta {
   display: inline-block;
   margin-top: 1rem;
-  padding: .65rem 1rem;
+  padding: .7rem 1.1rem;
   border-radius: .75rem;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   background: var(--md-accent-fg-color);
-  color: #0b1220 !important;   /* buena legibilidad sobre acento */
-  box-shadow: var(--th-shadow-sm);
+  color: #0b1220 !important; /* alto contraste sobre el acento */
   transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
-.hero__cta:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--th-shadow-md);
-}
+.hero__cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
 
-/* Hero con imagen (opcional): añade data-hero-bg en index.md si querés imagen
-   <div class="hero hero--img" style="--th-hero-img:url('../assets/hero.jpg');">... */
-.hero--img {
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 100%),
-    var(--th-hero-img, none);
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-}
-[data-md-color-scheme="slate"] .hero--img {
+/* Modo oscuro: subí un poco el overlay para más contraste si querés */
+[data-md-color-scheme="slate"] .hero--fullscreen {
   background:
     linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 100%),
     var(--th-hero-img, none);
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero__inner { padding: 2.25rem 1rem; }
+}
+
 
 /* ===== 5) Grid de cards “Material-like” (reutilizable) =====
    Uso:
