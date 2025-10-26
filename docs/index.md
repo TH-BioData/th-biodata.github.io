@@ -22,7 +22,7 @@ Desarrollamos herramientas analíticas en Python que conectan la biología con l
 
 ---
 
-### 🌍 Main areas / Áreas principales
+### 🌍 Main areas / Áreas principales:
 
 - **🧫 Image Analysis** · Lesion detection, segmentation, severity quantification.  
   **Análisis de Imágenes** · Detección de lesiones, segmentación, cuantificación de severidad.  
