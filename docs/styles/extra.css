@@ -50,7 +50,7 @@ TH BioData Consulting — Estilos con Hero Banner (FULLSCREEN v4)
 .hero__bg {
     position: absolute;
     inset: 0;
-    background-image: url('../assets/home_hero_v1.jpg'); /* ajusta si cambia el archivo */
+    background-image: url('../assets/home_hero_v1.png'); /* ajusta si cambia el archivo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
