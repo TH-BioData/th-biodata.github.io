@@ -1,20 +1,41 @@
 site_name: TH BioData Consulting
 site_description: Transforming biological complexity into clear, data-driven insight.
 site_url: https://thbiodata.github.io
+
 theme:
   name: material
-  logo: assets/logo.png        
+  language: es
+  logo: assets/logo.png
   favicon: assets/logo.png
+  font:
+    text: Roboto
+    code: Roboto Mono
   features:
-    - navigation.sections
-    - navigation.indexes
-    - content.code.copy
+    - navigation.top          # barra superior fija
+    - navigation.tabs         # tabs de primer nivel (como el demo)
+    - navigation.sections     # secciones anidadas en sidebar
+    - navigation.indexes      # index.md como landing de cada sección
+    - navigation.footer       # enlaces Prev/Next al pie
+    - toc.integrate           # TOC integrado en el contenido
+    - content.code.copy       # botón copiar en bloques de código
     - search.suggest
     - search.highlight
   palette:
-    - scheme: default
+    - scheme: default         # modo claro
       primary: custom
       accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Modo oscuro
+    - scheme: slate           # modo oscuro
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+
+plugins:
+  - search
 
 markdown_extensions:
   - attr_list
@@ -22,13 +43,18 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:       # reemplaza codehilite para Material
+      anchor_linenums: true
+      linenums: false
+  - pymdownx.inlinehilite
   - pymdownx.emoji:
       emoji_generator: !!python/name:materialx.emoji.to_svg
-  - admonition
   - toc:
       permalink: true
   - tables
-  - codehilite
+
 nav:
   - Home: index.md
   - About: about.md
@@ -44,8 +70,17 @@ nav:
       - LLS-SevEst: projects/lls-sevest.md
       - CorkyScab: projects/corkyscab.md
   - Contact: contact.md
+
+extra:
+  social:
+    - icon: material/email
+      link: mailto:thbiodata@gmail.com
+    - icon: fontawesome/brands/github
+      link: https://github.com/th-biodata
+
 extra_css:
   - styles/extra.css
+
 extra_javascript:
-  - scripts/scroll-fade.js   # ← reactivar después de probar
-  - scripts/ready.js         # ← reactivar después de probar
+  - scripts/scroll-fade.js
+  - scripts/ready.js
