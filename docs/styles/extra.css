@@ -1,157 +1,130 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero Banner (FULLSCREEN v4)
+TH BioData Consulting — Estilos con Hero Banner (FULLSCREEN v4.1)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
 :root {
-    --th-hero-height: 420px; /* fallback (no se usa en fullscreen) */
-    --th-hero-height-sm: 300px; /* fallback móvil */
-    --md-header-h: var(--md-header-height, 3.6rem);
-
-    --th-color-corporate-blue: #0F3D73; /* barra / CTA */
-    --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
+  --th-hero-height: 420px; /* fallback */
+  --th-hero-height-sm: 300px; /* fallback móvil */
+  --md-header-h: var(--md-header-height, 3.6rem);
+  --th-color-corporate-blue: #0F3D73;
+  --th-color-corporate-light-blue: #7CC6FF;
 }
 
 /* -------------------- Contenido centrado -------------------- */
-.md-content {
-    max-width: 950px;
-    margin: 0 auto;
-}
+.md-content { max-width: 950px; margin: 0 auto; }
 
-/* -------------------- Barra superior (azul corporativo) -------------------- */
-.md-header,
-.md-tabs {
-    background-color: var(--th-color-corporate-blue) !important;
-}
-
-.md-header {
-    position: relative;
-    z-index: 10;
-}
+/* -------------------- Barra superior -------------------- */
+.md-header, .md-tabs { background-color: var(--th-color-corporate-blue) !important; }
+.md-header { position: relative; z-index: 10; }
 
 /* ============================================================
-✅ HERO A PANTALLA COMPLETA (inspirado en Material for MkDocs)
+✅ HERO FULLSCREEN (full-bleed sin desplazamientos)
 ============================================================ */
 
-/* El hero ahora es full-bleed y no empuja el grid */
+/* Quita espacios del layout cuando hay hero */
+body:has(.hero) .md-main { padding-top: 0 !important; }
+body:has(.hero) .md-main > .md-grid { padding-top: 0 !important; }
+.md-content__inner:has(.hero) { padding-top: 0 !important; }
+.md-content__inner:has(.hero) > h1:first-child { display: none; }
+.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
+
+/* Full-bleed de verdad dentro de un grid centrado (sin left/transform) */
 .hero {
-    position: relative;
-    left: 50%;                    /* para descentrar el grid */
-    transform: translateX(-50%);  /* full-bleed */
-    width: 100vw;
-    height: 100vh;                /* ocupa toda la ventana */
-    height: 100svh;               /* mejor manejo en móvil */
-    overflow: hidden;
-    z-index: 0;
-    transition: opacity .6s ease, transform .6s ease;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;                 /* mejor en mobile */
+  margin-left: calc(50% - 50vw);  /* 🔑 rompe el centrado del grid */
+  margin-right: calc(50% - 50vw); /* 🔑 idem a la derecha */
+  overflow: hidden;
+  z-index: 0;
+  transition: opacity .6s ease, transform .6s ease;
 }
 
-/* Fondo del hero (imagen a pantalla completa) */
+/* Fondo */
 .hero__bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('../assets/home_hero_v1.png'); /* ajusta si cambia el archivo */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: transform 20s linear, filter 2s ease;
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/home_hero_v1.jpg'); /* ajusta si cambias el archivo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 20s linear, filter 2s ease;
 }
 
-/* Efecto sutil al pasar el mouse (opcional) */
-.hero__bg:hover {
-    transform: scale(1.05);
-    filter: brightness(1.08);
-}
+/* Efecto sutil */
+.hero__bg:hover { transform: scale(1.05); filter: brightness(1.08); }
 
-/* Contenido del hero (gradiente lateral + texto alineado) */
+/* Contenido */
 .hero__content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    height: 100%;
-    padding: 0 5%;
-    color: #fff;
-    background: linear-gradient(to right, rgba(10,35,80,.6) 15%, rgba(10,35,80,0) 70%);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  height: 100%;
+  padding: 0 5%;
+  color: #fff;
+  background: linear-gradient(to right, rgba(10,35,80,.6) 15%, rgba(10,35,80,0) 70%);
 }
 
 .hero__title {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .hero__tag {
-    font-size: 20px;
-    opacity: .95;
-    max-width: 640px;
-    line-height: 1.45;
+  font-size: 20px;
+  opacity: .95;
+  max-width: 640px;
+  line-height: 1.45;
 }
 
 .hero__cta {
-    display: inline-block;
-    margin-top: 24px;
-    padding: 12px 22px;
-    background: var(--th-color-corporate-blue);
-    border-radius: 8px;
-    color: #fff !important;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-    transition: background .3s ease, transform .3s ease;
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 22px;
+  background: var(--th-color-corporate-blue);
+  border-radius: 8px;
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: background .3s ease, transform .3s ease;
 }
+.hero__cta:hover { background: #004B8E; transform: translateY(-3px); }
 
-.hero__cta:hover {
-    background: #004B8E;
-    transform: translateY(-3px);
-}
-
-/* (Opcional) Si usás una clase .scrolled desde JS, mantenemos el fade-out */
-body.scrolled .hero {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-60px);
-}
-
-/* -------- Quita el H1 de arriba del contenido -------- */
-.md-content__inner:has(.hero) > h1:first-child { display: none; }
-.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
+/* (Opcional) soporte a clase .scrolled si la usás desde JS */
+body.scrolled .hero { opacity: 0; transform: translateY(-60px); }
 
 /* ============================================================
 Páginas SIN hero
 ============================================================ */
 body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
-
 .md-typeset h1 { margin: .25rem 0 1rem !important; }
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4 { scroll-margin-top: calc(var(--md-header-h) + .5rem); }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-h) + .5rem);
+}
 
 /* ============================================================
 Drawer: SOLO colores
 ============================================================ */
 .md-nav__title {
-    background-color: var(--th-color-corporate-light-blue) !important;
-    color: #fff !important;
-    font-weight: 600;
-    border-bottom: 1px solid #e5e7eb;
+  background-color: var(--th-color-corporate-light-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
 }
-
-.md-nav__link,
-.md-nav__link span { color: var(--th-color-corporate-blue) !important; }
-
-.md-nav__link:hover,
-.md-nav__link:focus {
-    background-color: rgba(124,198,255,0.12) !important;
-    color: #004B8E !important;
+.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: rgba(124,198,255,0.12) !important;
+  color: #004B8E !important;
 }
-
-.md-nav__icon,
-.md-icon { color: var(--th-color-corporate-blue) !important; }
-
+.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
 .md-overlay { background-color: rgba(0,0,0,0.35) !important; }
 
 /* Evita scroll horizontal accidental */
@@ -161,34 +134,31 @@ html, body { overflow-x: hidden; }
 Grid de cards (reutilizable)
 ============================================================ */
 .grid.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
-
 .grid.cards > * {
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 16px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .grid.cards > *:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
 
 /* ============================================================
 Responsivo
 ============================================================ */
 @media (max-width: 768px) {
-    .hero__title { font-size: 34px; }
-    .hero__tag { font-size: 16px; max-width: 520px; }
-
-    .hero__content {
-        text-align: center;
-        background: linear-gradient(to bottom, rgba(10,35,80,.6) 10%, rgba(10,35,80,0) 80%);
-    }
+  .hero__title { font-size: 34px; }
+  .hero__tag { font-size: 16px; max-width: 520px; }
+  .hero__content {
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(10,35,80,.6) 10%, rgba(10,35,80,0) 80%);
+  }
 }
