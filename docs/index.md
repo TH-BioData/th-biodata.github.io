@@ -4,13 +4,14 @@ hide:
   - toc
 ---
 
-<div class="hero hero--img" style="--th-hero-img:url('assets/hero.jpg');">
+<div class="hero hero--fullscreen" style="--th-hero-img:url('assets/hero.jpg')">
   <div class="hero__inner">
     <h1>TH BioData Consulting</h1>
     <p>Transforming biological complexity into clear, data-driven insight.</p>
     <a class="hero__cta" href="projects/index/">Ver proyectos</a>
   </div>
 </div>
+
 
 
 **EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
