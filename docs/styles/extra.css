@@ -1,12 +1,13 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero Banner (SOLUCIÓN FINAL v3)
+TH BioData Consulting — Estilos con Hero Banner (FULLSCREEN v4)
 ============================================================ */
 
 /* -------------------- Variables globales -------------------- */
 :root {
-    --th-hero-height: 420px; /* desktop */
-    --th-hero-height-sm: 300px; /* móvil */
+    --th-hero-height: 420px; /* fallback (no se usa en fullscreen) */
+    --th-hero-height-sm: 300px; /* fallback móvil */
     --md-header-h: var(--md-header-height, 3.6rem);
+
     --th-color-corporate-blue: #0F3D73; /* barra / CTA */
     --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
 }
@@ -29,108 +30,105 @@ TH BioData Consulting — Estilos con Hero Banner (SOLUCIÓN FINAL v3)
 }
 
 /* ============================================================
-✅ LAYOUT FINAL: HERO CON POSICIONAMIENTO ABSOLUTO Y ANIMACIÓN
+✅ HERO A PANTALLA COMPLETA (inspirado en Material for MkDocs)
 ============================================================ */
 
-/* 1. Hacemos que el contenedor principal sea el punto de referencia */
-body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
-    position: relative;
-    padding-top: var(--th-hero-height);
-}
-
-/* 2. El hero se posiciona de forma absoluta dentro del espacio creado */
+/* El hero ahora es full-bleed y no empuja el grid */
 .hero {
-    position: absolute;
-    top: 0;
-    left: 50%;
+    position: relative;
+    left: 50%;                    /* para descentrar el grid */
+    transform: translateX(-50%);  /* full-bleed */
     width: 100vw;
-    height: var(--th-hero-height);
-    z-index: 0;
+    height: 100vh;                /* ocupa toda la ventana */
+    height: 100svh;               /* mejor manejo en móvil */
     overflow: hidden;
+    z-index: 0;
     transition: opacity .6s ease, transform .6s ease;
 }
 
-/* 3. Se combinan las transformaciones de centrado (X) y animación (Y) */
-body:not(.scrolled) .hero {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-body.scrolled .hero {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-80px);
-}
-
-/* Fondo del hero */
+/* Fondo del hero (imagen a pantalla completa) */
 .hero__bg {
     position: absolute;
     inset: 0;
-    background-image: url('../assets/home_hero_v1.jpg');
+    background-image: url('../assets/home_hero_v1.jpg'); /* ajusta si cambia el archivo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: transform 20s linear, filter 2s ease;
 }
 
-/* Contenido centrado del hero */
+/* Efecto sutil al pasar el mouse (opcional) */
+.hero__bg:hover {
+    transform: scale(1.05);
+    filter: brightness(1.08);
+}
+
+/* Contenido del hero (gradiente lateral + texto alineado) */
 .hero__content {
     position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    min-height: 100%;
-    padding: 48px 16px;
+    text-align: left;
+    height: 100%;
+    padding: 0 5%;
     color: #fff;
-    background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
+    background: linear-gradient(to right, rgba(10,35,80,.6) 15%, rgba(10,35,80,0) 70%);
 }
 
 .hero__title {
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .hero__tag {
-    font-size: 18px;
+    font-size: 20px;
     opacity: .95;
+    max-width: 640px;
+    line-height: 1.45;
 }
 
 .hero__cta {
     display: inline-block;
-    margin-top: 16px;
-    padding: 10px 18px;
+    margin-top: 24px;
+    padding: 12px 22px;
     background: var(--th-color-corporate-blue);
     border-radius: 8px;
     color: #fff !important;
     text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: background .3s ease, transform .3s ease;
+}
+
+.hero__cta:hover {
+    background: #004B8E;
+    transform: translateY(-3px);
+}
+
+/* (Opcional) Si usás una clase .scrolled desde JS, mantenemos el fade-out */
+body.scrolled .hero {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-60px);
 }
 
 /* -------- Quita el H1 de arriba del contenido -------- */
-.md-content__inner:has(.hero) > h1:first-child {
-    display: none;
-}
-
-.md-content__inner:has(.hero) > :first-child {
-    margin-top: 0;
-}
+.md-content__inner:has(.hero) > h1:first-child { display: none; }
+.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
 
 /* ============================================================
 Páginas SIN hero
 ============================================================ */
-body:not(:has(.hero)) .md-main {
-    padding-top: var(--md-header-h) !important;
-}
+body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
 
-.md-typeset h1 {
-    margin: .25rem 0 1rem !important;
-}
-
+.md-typeset h1 { margin: .25rem 0 1rem !important; }
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
-.md-typeset h4 {
-    scroll-margin-top: calc(var(--md-header-h) + .5rem);
-}
+.md-typeset h4 { scroll-margin-top: calc(var(--md-header-h) + .5rem); }
 
 /* ============================================================
 Drawer: SOLO colores
@@ -143,9 +141,7 @@ Drawer: SOLO colores
 }
 
 .md-nav__link,
-.md-nav__link span {
-    color: var(--th-color-corporate-blue) !important;
-}
+.md-nav__link span { color: var(--th-color-corporate-blue) !important; }
 
 .md-nav__link:hover,
 .md-nav__link:focus {
@@ -154,19 +150,12 @@ Drawer: SOLO colores
 }
 
 .md-nav__icon,
-.md-icon {
-    color: var(--th-color-corporate-blue) !important;
-}
+.md-icon { color: var(--th-color-corporate-blue) !important; }
 
-.md-overlay {
-    background-color: rgba(0,0,0,0.35) !important;
-}
+.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
 
 /* Evita scroll horizontal accidental */
-html,
-body {
-    overflow-x: hidden;
-}
+html, body { overflow-x: hidden; }
 
 /* ============================================================
 Grid de cards (reutilizable)
@@ -195,11 +184,11 @@ Grid de cards (reutilizable)
 Responsivo
 ============================================================ */
 @media (max-width: 768px) {
-    body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
-        padding-top: var(--th-hero-height-sm);
-    }
+    .hero__title { font-size: 34px; }
+    .hero__tag { font-size: 16px; max-width: 520px; }
 
-    .hero {
-        height: var(--th-hero-height-sm);
+    .hero__content {
+        text-align: center;
+        background: linear-gradient(to bottom, rgba(10,35,80,.6) 10%, rgba(10,35,80,0) 80%);
     }
 }
