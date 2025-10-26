@@ -1,168 +1,147 @@
-/* ============================================================
-TH BioData Consulting — Estilos con Hero Banner (SOLUCIÓN FINAL v3)
-============================================================ */
+/* ==========================================================================
+   TH BioData Consulting — Estilos Material (limpios, coherentes y responsivos)
+   ========================================================================== */
 
-/* -------------------- Variables globales -------------------- */
+/* ===== 1) Paleta (enlazada a mkdocs.yml -> primary: custom / accent: custom) ===== */
 :root {
-    --th-hero-height: 420px; /* desktop */
-    --th-hero-height-sm: 300px; /* móvil */
-    --md-header-h: var(--md-header-height, 3.6rem);
+  /* Primario corporativo y derivados */
+  --md-primary-fg-color: #0A66C2;
+  --md-primary-fg-color--light: #e8f1fd;
+  --md-primary-fg-color--dark: #084b8a;
 
-    --th-color-corporate-blue: #0F3D73; /* barra / CTA */
-    --th-color-corporate-light-blue: #7CC6FF; /* franja título del drawer */
+  /* Acento (celeste/sky) */
+  --md-accent-fg-color: #38BDF8;
+
+  /* Opcional: radio y sombras suaves usadas en hero/cards */
+  --th-radius-lg: 16px;
+  --th-shadow-sm: 0 2px 6px rgba(0,0,0,.06);
+  --th-shadow-md: 0 6px 16px rgba(0,0,0,.1);
 }
 
-/* -------------------- Contenido centrado -------------------- */
+/* Ajustes finos para modo oscuro (slate) */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #87B7FF;
+  --md-primary-fg-color--light: #0d1b2a; /* leve lift del fondo del hero */
+  --md-accent-fg-color: #7CC6FF;
+}
+
+/* ===== 2) Contenedor de contenido: ancho cómodo como en el demo ===== */
 .md-content {
-    max-width: 950px;
-    margin: 0 auto;
+  max-width: 980px;           /* similar al demo */
+  margin: 0 auto;
 }
 
-/* -------------------- Barra superior (azul corporativo) -------------------- */
-.md-header,
-.md-tabs {
-    background-color: var(--th-color-corporate-blue) !important;
+/* ===== 3) Tipografía y ritmos (respetando escalas de Material) ===== */
+.md-typeset h1 { margin: .25rem 0 1rem; }
+.md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  scroll-margin-top: calc(var(--md-header-height, 3.6rem) + .5rem);
 }
 
-.md-header {
-    position: relative; 
-    z-index: 10;
-}
-
-/* ============================================================
-✅ LAYOUT FINAL: HERO CON POSICIONAMIENTO ABSOLUTO Y ANIMACIÓN
-============================================================ */
-
-/* 1. Hacemos que el contenedor principal sea el punto de referencia */
-body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
-    position: relative; /* Clave para que el hero se posicione correctamente */
-    padding-top: var(--th-hero-height); /* Crea el espacio vertical para el hero */
-}
-
-/* 2. El hero se posiciona de forma absoluta dentro del espacio creado */
+/* ===== 4) HERO opcional (bloque sencillo en index.md) =====
+   Uso:
+   <div class="hero">
+     <div class="hero__inner">
+       <h1>TH BioData Consulting</h1>
+       <p>Transforming biological complexity into clear, data-driven insight.</p>
+       <a class="hero__cta" href="projects/geobio/">Ver proyectos</a>
+     </div>
+   </div>
+   ------------------------------------------------------------------- */
 .hero {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 100vw;
-    height: var(--th-hero-height);
-    z-index: 0;
-    overflow: hidden;
-    
-    /* ✅ LA CLAVE: Se define la transición para la opacidad y la transformación */
-    transition: opacity .6s ease, transform .6s ease;
+  margin: 0 0 2rem 0;
+  border-radius: var(--th-radius-lg);
+  background: linear-gradient(180deg,
+              var(--md-primary-fg-color--light) 0%,
+              rgba(10, 102, 194, .08) 100%);
+  box-shadow: var(--th-shadow-sm);
 }
-
-/* 3. Se combinan las transformaciones de centrado (X) y animación (Y) */
-body:not(.scrolled) .hero {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+.hero__inner {
+  padding: 3.5rem 1.25rem;
+  text-align: center;
 }
-
-body.scrolled .hero {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-80px); /* Centrado + Desplazamiento */
+.hero h1 {
+  margin: 0 0 .5rem 0;
+  font-weight: 800;
+  letter-spacing: .2px;
 }
-
-
-/* Fondo del hero (sin cambios) */
-.hero__bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('../assets/hero.jpg?v=6');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.hero p {
+  margin: 0;
+  opacity: .92;
+  font-size: 1.05rem;
 }
-
-/* Contenido centrado del hero (sin cambios) */
-.hero__content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 100%;
-    padding: 48px 16px;
-    color: #fff;
-    background: linear-gradient(to bottom, rgba(10,35,80,.15), rgba(10,35,80,.55));
-}
-
-.hero__title { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.hero__tag { font-size: 18px; opacity: .95; }
 .hero__cta {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 10px 18px;
-    background: var(--th-color-corporate-blue);
-    border-radius: 8px;
-    color: #fff !important;
-    text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .65rem 1rem;
+  border-radius: .75rem;
+  text-decoration: none;
+  font-weight: 600;
+  background: var(--md-accent-fg-color);
+  color: #0b1220 !important;   /* buena legibilidad sobre acento */
+  box-shadow: var(--th-shadow-sm);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.hero__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--th-shadow-md);
 }
 
-/* -------- Quita el H1 de arriba del contenido -------- */
-.md-content__inner:has(.hero) > h1:first-child { display: none; }
-.md-content__inner:has(.hero) > :first-child { margin-top: 0; }
-
-/* ============================================================
-Páginas SIN hero (Sin cambios)
-============================================================ */
-body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
-.md-typeset h1 { margin: .25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
-    scroll-margin-top: calc(var(--md-header-h) + .5rem);
+/* Hero con imagen (opcional): añade data-hero-bg en index.md si querés imagen
+   <div class="hero hero--img" style="--th-hero-img:url('../assets/hero.jpg');">... */
+.hero--img {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 100%),
+    var(--th-hero-img, none);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+[data-md-color-scheme="slate"] .hero--img {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 100%),
+    var(--th-hero-img, none);
 }
 
-/* ============================================================
-Drawer: SOLO colores (sin cambios)
-============================================================ */
-.md-nav__title {
-    background-color: var(--th-color-corporate-light-blue) !important;
-    color: #fff !important;
-    font-weight: 600;
-    border-bottom: 1px solid #e5e7eb;
-}
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus {
-    background-color: rgba(124,198,255,0.12) !important;
-    color: #004B8E !important;
-}
-.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
-.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
-
-/* Evita scroll horizontal accidental */
-html, body { overflow-x: hidden; }
-
-/* ============================================================
-Grid de cards (reutilizable) (Sin cambios)
-============================================================ */
+/* ===== 5) Grid de cards “Material-like” (reutilizable) =====
+   Uso:
+   <div class="grid cards">
+     <a class="card" href="..."><h3>Título</h3><p>Texto…</p></a>
+     ...
+   </div> */
 .grid.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
-.grid.cards > * {
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 16px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.grid.cards .card, .grid.cards > * {
+  display: block;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--md-default-bg-color);
+  box-shadow: var(--th-shadow-sm);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  color: inherit;
+  text-decoration: none;
 }
-.grid.cards > *:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+.grid.cards .card:hover, .grid.cards > *:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--th-shadow-md);
+  border-color: rgba(0,0,0,.12);
 }
 
-/* ============================================================
-Responsivo
-============================================================ */
+/* ===== 6) Navegación y elementos nativos: mantén lo Material por defecto =====
+   (No forzamos colores de header/tabs/drawer: los maneja el tema vía palette)
+   Si querés retocar levemente el hover del sidebar: */
+.md-nav__link:hover, .md-nav__link:focus {
+  background-color: color-mix(in srgb, var(--md-accent-fg-color) 12%, transparent);
+}
+
+/* ===== 7) Utilidades y pequeños fixes ===== */
+html, body { overflow-x: hidden; }                  /* evitar desbordes horizontales */
+.md-typeset .admonition { border-radius: 12px; }    /* suaviza admonitions */
+
+/* ===== 8) Responsivo ===== */
 @media (max-width: 768px) {
-    body:has(.hero) .md-main[data-md-component="main"] > .md-grid {
-        padding-top: var(--th-hero-height-sm);
-    }
-    
-    .hero {
-        height: var(--th-hero-height-sm);
-    }
+  .hero__inner { padding: 2.25rem 1rem; }
 }
