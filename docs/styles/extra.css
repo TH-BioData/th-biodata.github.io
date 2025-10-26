@@ -65,7 +65,7 @@ body.scrolled .hero {
 .hero__bg {
     position: absolute;
     inset: 0;
-    background-image: url('../assets/hero.jpg?v=6');
+    background-image: url('../assets/home_hero_v1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
