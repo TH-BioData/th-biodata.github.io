@@ -1,11 +1,11 @@
 /* ============================================================
-TH BioData — HOME: Fullscreen hero + navbar visible + azul global
+TH BioData — HOME: Fullscreen hero + navbar azul uniforme
 ============================================================ */
 
-/* -------------------- Paleta global (Material for MkDocs) -------------------- */
+/* -------------------- Paleta global -------------------- */
 :root {
-  --th-color-corporate-blue: #0F3D73;      /* primario */
-  --th-color-corporate-light-blue: #7CC6FF;/* acento */
+  --th-color-corporate-blue: #0F3D73;      /* Azul corporativo */
+  --th-color-corporate-light-blue: #7CC6FF;
 }
 
 /* Tema claro */
@@ -13,7 +13,6 @@ TH BioData — HOME: Fullscreen hero + navbar visible + azul global
   --md-primary-fg-color: var(--th-color-corporate-blue);
   --md-primary-fg-color--light: #1E5AA6;
   --md-primary-fg-color--dark: #0A2350;
-
   --md-accent-fg-color: var(--th-color-corporate-light-blue);
 }
 
@@ -22,17 +21,26 @@ TH BioData — HOME: Fullscreen hero + navbar visible + azul global
   --md-primary-fg-color: var(--th-color-corporate-blue);
   --md-primary-fg-color--light: #2A6BBE;
   --md-primary-fg-color--dark: #071B3A;
-
   --md-accent-fg-color: var(--th-color-corporate-light-blue);
+}
+
+/* -------------------- Barras superiores -------------------- */
+/* Hace que ambas (logo + tabs) usen el mismo azul */
+.md-header,
+.md-tabs {
+  background-color: var(--th-color-corporate-blue) !important;
+  color: #fff !important;
 }
 
 /* -------------------- Ajustes específicos de HOME -------------------- */
 
-/* 0) Oculta sidebars en Home, pero DEJA visibles los tabs/navbar */
+/* Oculta sidebars en Home */
 body:has(#th-hero) .md-sidebar--primary,
-body:has(#th-hero) .md-sidebar--secondary { display: none !important; }
+body:has(#th-hero) .md-sidebar--secondary {
+  display: none !important;
+}
 
-/* 1) Layout ancho completo SOLO en Home */
+/* Layout ancho completo */
 body:has(#th-hero) .md-main { padding-top: 0 !important; }
 body:has(#th-hero) .md-main > .md-grid {
   max-width: 100% !important;
@@ -52,7 +60,7 @@ body:has(#th-hero) .md-typeset {
 /* Evita reflujo por barra de scroll */
 html { scrollbar-gutter: stable; }
 
-/* 2) HERO fullscreen */
+/* -------------------- HERO fullscreen -------------------- */
 #th-hero {
   position: relative;
   width: 100% !important;
@@ -70,7 +78,19 @@ html { scrollbar-gutter: stable; }
   background: url('../assets/home_hero_v2.jpg') center / cover no-repeat;
   transition: transform 15s linear, filter 2s ease;
 }
-#th-hero .hero__bg:hover { transform: scale(1.05); filter: brightness(1.06); }
+#th-hero .hero__bg:hover {
+  transform: scale(1.05);
+  filter: brightness(1.06);
+}
+
+/* Rectángulo semitransparente: ahora cubre toda la imagen */
+#th-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 35, 80, 0.55); /* Azul oscuro con transparencia */
+  z-index: 0;
+}
 
 /* Contenido */
 #th-hero .hero__content {
@@ -84,7 +104,6 @@ html { scrollbar-gutter: stable; }
   text-align: center;
   color: #fff;
   padding: 0 5%;
-  background: linear-gradient(to bottom, rgba(10,35,80,.30), rgba(10,35,80,.60));
 }
 
 /* Tipografías */
@@ -92,7 +111,7 @@ html { scrollbar-gutter: stable; }
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 12px;
-  text-shadow: 0 2px 6px rgba(0,0,0,.45);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .45);
 }
 .hero__tag {
   font-size: 20px;
@@ -109,15 +128,18 @@ html { scrollbar-gutter: stable; }
   color: #fff !important;
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 3px 6px rgba(0,0,0,.3);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
   transition: transform .25s ease, background .25s ease;
 }
-.hero__cta:hover { transform: translateY(-3px); background: #004B8E; }
+.hero__cta:hover {
+  transform: translateY(-3px);
+  background: #004B8E;
+}
 
-/* Header semitransparente sobre el hero (opcional) */
+/* Header sobre el hero (transparente/blur opcional) */
 body:has(#th-hero) .md-header {
-  background-color: rgba(15,61,115,.92) !important;
-  backdrop-filter: saturate(120%) blur(6px);
+  background-color: rgba(15, 61, 115, .95) !important;
+  backdrop-filter: saturate(120%) blur(4px);
 }
 
 /* Responsivo */
