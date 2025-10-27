@@ -69,6 +69,7 @@ nav:
       - GeoBio: projects/geobio.md
       - LLS-SevEst: projects/lls-sevest.md
       - CorkyScab: projects/corkyscab.md
+      - TadpoleNet: projects/tadpolenet.md
   - Contact: contact.md
 
 extra:
