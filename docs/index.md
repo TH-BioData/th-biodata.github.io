@@ -13,18 +13,6 @@ hide:
     </div>
 </div>
 
-## Main areas / Áreas principales:
-
-**EN —**  
-Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
-We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.  
-
-**ES —**  
-Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
-Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
-
----
-
 ## Main areas / Áreas principales
 
 **EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
