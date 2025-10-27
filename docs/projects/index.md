@@ -25,6 +25,6 @@
 
 -   :frog: **TadpoleNet**  
     Semantic segmentation of Xenopus embryos.  
-    [:arrow_right: Open](./corkyscab/)
+    [:arrow_right: Open](./tadpolenet/)
 
 </div>
