@@ -82,5 +82,5 @@ extra_css:
   - styles/extra.css
 
 extra_javascript:
-  - scripts/scroll-fade.js
+  - scripts/hero-fade.js
   - scripts/ready.js
