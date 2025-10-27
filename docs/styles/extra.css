@@ -1,88 +1,84 @@
 /* ============================================================
-TH BioData Consulting — Estilos con Hero Banner (FULLSCREEN v4.1)
+TH BioData — HERO FULLSCREEN + sin sidebars SOLO en Home
 ============================================================ */
 
-/* -------------------- Variables globales -------------------- */
-:root {
-  --th-hero-height: 420px; /* fallback */
-  --th-hero-height-sm: 300px; /* fallback móvil */
-  --md-header-h: var(--md-header-height, 3.6rem);
-  --th-color-corporate-blue: #0F3D73;
-  --th-color-corporate-light-blue: #7CC6FF;
+/* 0) Oculta sidebars cuando hay hero en la página */
+body:has(#th-hero) .md-sidebar--primary,
+body:has(#th-hero) .md-sidebar--secondary {
+  display: none !important;
 }
 
-/* -------------------- Contenido centrado -------------------- */
-.md-content { max-width: 950px; margin: 0 auto; }
-
-/* -------------------- Barra superior -------------------- */
-.md-header, .md-tabs { background-color: var(--th-color-corporate-blue) !important; }
-.md-header { position: relative; z-index: 10; }
-
-/* --- Quita rellenos del grid cuando hay hero --- */
-body:has(.hero) .md-main > .md-grid {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  padding-top: 0 !important;
+/* 1) Anula límites del layout para esta página */
+body:has(#th-hero) .md-main { padding-top: 0 !important; }
+body:has(#th-hero) .md-main > .md-grid {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
-.md-content__inner:has(.hero) { padding-top: 0 !important; }
-.md-content__inner:has(.hero) > h1:first-child { display: none; }
+body:has(#th-hero) .md-content {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.md-content__inner:has(#th-hero) > h1:first-child { display: none; } /* por si acaso */
 
-/* ============================================================
-TH BioData Consulting — HERO FULLSCREEN (Layout fix)
-============================================================ */
+/* 2) HERO fullscreen real (full-bleed desde dentro del grid) */
+.md-typeset #th-hero { margin: 0; } /* quita margen tipográfico de Material */
 
-/* Asegura que no haya límites del grid */
 #th-hero {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  height: 100svh;
+
+  /* 🔑 full-bleed robusto: ignora el ancho del contenedor centrado */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;   /* expande al ancho del viewport */
+  margin-right: -50vw;
+
+  width: 100vw;
+  height: 100vh;        /* ocupa toda la pantalla */
+  height: 100svh;       /* mejor en mobile */
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  z-index: 0;
 }
 
-/* Imagen de fondo */
+/* 3) Fondo del hero */
 #th-hero .hero__bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/home_hero_v2.jpg') center/cover no-repeat;
-  z-index: 0;
+  background: url('../assets/home_hero_v1.jpg') center / cover no-repeat;
   transition: transform 15s linear, filter 2s ease;
 }
-#th-hero .hero__bg:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
+#th-hero .hero__bg:hover { transform: scale(1.05); filter: brightness(1.06); }
 
-/* Contenido del hero */
+/* 4) Contenido centrado y legible */
 #th-hero .hero__content {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;   /* centrado; cambia a 'flex-start' para alinear a izq */
   flex-direction: column;
   height: 100%;
   text-align: center;
   color: #fff;
-  background: linear-gradient(to bottom, rgba(10,35,80,.3), rgba(10,35,80,.6));
   padding: 0 5%;
+  background: linear-gradient(to bottom, rgba(10,35,80,.30), rgba(10,35,80,.60));
 }
 
 .hero__title {
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 12px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 6px rgba(0,0,0,.45);
 }
 .hero__tag {
   font-size: 20px;
-  max-width: 650px;
+  max-width: 680px;
+  line-height: 1.45;
   opacity: .95;
-  line-height: 1.4;
 }
 .hero__cta {
+  display: inline-block;
   margin-top: 24px;
   padding: 12px 24px;
   background: var(--th-color-corporate-blue);
@@ -90,86 +86,23 @@ TH BioData Consulting — HERO FULLSCREEN (Layout fix)
   color: #fff !important;
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,.3);
+  transition: transform .25s ease, background .25s ease;
 }
-.hero__cta:hover {
-  background: #004B8E;
-  transform: translateY(-3px);
-}
+.hero__cta:hover { transform: translateY(-3px); background: #004B8E; }
 
-/* Header semitransparente sobre hero */
+/* 5) Header semitransparente sobre hero (opcional) */
 body:has(#th-hero) .md-header {
-  background-color: rgba(15, 61, 115, 0.9) !important;
+  background-color: rgba(15,61,115,.92) !important;
   backdrop-filter: saturate(120%) blur(6px);
 }
 
-/* Móvil */
+/* 6) Responsivo */
 @media (max-width: 768px) {
   .hero__title { font-size: 32px; }
   .hero__tag { font-size: 16px; }
-}
-
-
-
-/* ============================================================
-Páginas SIN hero
-============================================================ */
-body:not(:has(.hero)) .md-main { padding-top: var(--md-header-h) !important; }
-.md-typeset h1 { margin: .25rem 0 1rem !important; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
-  scroll-margin-top: calc(var(--md-header-h) + .5rem);
-}
-
-/* ============================================================
-Drawer: SOLO colores
-============================================================ */
-.md-nav__title {
-  background-color: var(--th-color-corporate-light-blue) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-.md-nav__link, .md-nav__link span { color: var(--th-color-corporate-blue) !important; }
-.md-nav__link:hover, .md-nav__link:focus {
-  background-color: rgba(124,198,255,0.12) !important;
-  color: #004B8E !important;
-}
-.md-nav__icon, .md-icon { color: var(--th-color-corporate-blue) !important; }
-.md-overlay { background-color: rgba(0,0,0,0.35) !important; }
-
-/* Evita scroll horizontal accidental */
-html, body { overflow-x: hidden; }
-
-/* ============================================================
-Grid de cards (reutilizable)
-============================================================ */
-.grid.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-.grid.cards > * {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.grid.cards > *:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-}
-
-/* ============================================================
-Responsivo
-============================================================ */
-@media (max-width: 768px) {
-  .hero__title { font-size: 34px; }
-  .hero__tag { font-size: 16px; max-width: 520px; }
-  .hero__content {
+  #th-hero .hero__content {
     text-align: center;
-    background: linear-gradient(to bottom, rgba(10,35,80,.6) 10%, rgba(10,35,80,0) 80%);
+    background: linear-gradient(to bottom, rgba(10,35,80,.45), rgba(10,35,80,.35));
   }
 }
