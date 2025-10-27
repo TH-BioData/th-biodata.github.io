@@ -1,7 +1,7 @@
 /* ============================================================
-TH BioData — Estilos finales
-Hero fullscreen + barras azul uniforme + overlays
-Texto del hero centrado, blanco y con alto contraste
+TH BioData — Estilos finales depurados
+Hero fullscreen + barras azul uniforme + overlay degradado
+Centrado absoluto de título y botón, sin recuadros extra
 ============================================================ */
 
 /* -------------------- Paleta global -------------------- */
@@ -33,14 +33,14 @@ Texto del hero centrado, blanco y con alto contraste
   color: #fff !important;
 }
 
-/* En Home: sin blur/transparencia para que sean idénticas al resto */
+/* En Home: sin blur/transparencia */
 body:has(#th-hero) .md-header {
   background-color: #0F3D73 !important;
   backdrop-filter: none !important;
 }
 
 /* -------------------- Ajustes exclusivos de HOME -------------------- */
-/* Ocultar sidebars en Home (borra estas dos líneas si querés verlas) */
+/* Ocultar sidebars en Home (borra estas líneas si querés verlas) */
 body:has(#th-hero) .md-sidebar--primary,
 body:has(#th-hero) .md-sidebar--secondary { display: none !important; }
 
@@ -81,7 +81,7 @@ html { scrollbar-gutter: stable; }
   filter: brightness(1.06);
 }
 
-/* Overlay general (gradiente vertical sobre toda la imagen) */
+/* Overlay general (degradado vertical) */
 #th-hero::before {
   content: "";
   position: absolute;
@@ -96,62 +96,51 @@ html { scrollbar-gutter: stable; }
 }
 
 /* -------------------- Contenido del hero -------------------- */
+/* CENTRADO ABSOLUTO: independiza de paddings/alturas del layout */
 #th-hero .hero__content {
-  position: relative;
-  z-index: 2;               /* por encima del overlay general */
+  position: absolute;       /* <— clave para centrado perfecto */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;               /* por encima del overlay */
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* centra vertical */
-  align-items: center;      /* centra horizontal */
-  height: 100%;
-  width: 100%;
+  align-items: center;
   text-align: center;
-  padding: 0 5%;
   color: #fff;
+  padding: 0 5%;
+  width: min(1100px, 92vw); /* ancho máximo legible */
 }
 
-/* Scrim local detrás del texto para contraste (radial suave) */
-#th-hero .hero__content::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    1200px 600px at center,
-    rgba(5, 15, 35, 0.55) 0%,
-    rgba(5, 15, 35, 0.40) 45%,
-    rgba(5, 15, 35, 0.00) 70%
-  );
-  z-index: 0;              /* detrás del texto, encima del overlay general */
-  pointer-events: none;
-}
+/* Eliminamos cualquier scrim local adicional (evita “recuadro azul”) */
+#th-hero .hero__content::before { content: none !important; }
 
-/* -------------------- Tipografías y CTA del hero -------------------- */
-/* Forzamos blanco con mayor especificidad para ganarle a .md-typeset h1/p */
+/* -------------------- Tipografías y CTA -------------------- */
 #th-hero .hero__content .hero__title {
   color: #FFFFFF !important;
-  font-size: 72px;          /* más grande */
+  font-size: clamp(40px, 7vw, 72px); /* responsivo fluido */
   font-weight: 800;
   line-height: 1.1;
   margin: 0 0 20px 0;
   letter-spacing: 0.4px;
   text-shadow: 0 4px 18px rgba(0,0,0,0.65);
 }
+
 #th-hero .hero__content .hero__tag {
   color: #FFFFFF !important;
-  font-size: 26px;
+  font-size: clamp(18px, 2.2vw, 26px);
   font-weight: 400;
   line-height: 1.6;
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 0 38px 0;
   opacity: 0.98;
   text-shadow: 0 3px 14px rgba(0,0,0,0.6);
 }
 
-/* Botón CTA */
 #th-hero .hero__content .hero__cta {
   display: inline-block;
   padding: 16px 36px;
-  font-size: 20px;
+  font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 700;
   border-radius: 10px;
   color: #fff !important;
@@ -166,13 +155,10 @@ html { scrollbar-gutter: stable; }
   box-shadow: 0 10px 22px rgba(0,0,0,0.45);
 }
 
-/* -------------------- Responsivo -------------------- */
+/* -------------------- Breakpoints adicionales -------------------- */
 @media (max-width: 1024px) {
-  #th-hero .hero__content .hero__title { font-size: 56px; }
-  #th-hero .hero__content .hero__tag   { font-size: 22px; max-width: 92vw; }
+  #th-hero .hero__content { width: min(900px, 94vw); }
 }
 @media (max-width: 768px) {
-  #th-hero .hero__content .hero__title { font-size: 40px; }
-  #th-hero .hero__content .hero__tag   { font-size: 18px; margin-bottom: 28px; }
-  #th-hero .hero__content .hero__cta   { font-size: 17px; padding: 12px 28px; }
+  #th-hero .hero__content { width: 92vw; }
 }
