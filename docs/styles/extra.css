@@ -43,7 +43,7 @@ html { scrollbar-gutter: stable; }
 #th-hero .hero__bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/home_hero_v1.jpg') center / cover no-repeat;
+  background: url('../assets/home_hero_v2.jpg') center / cover no-repeat;
   transition: transform 15s linear, filter 2s ease;
 }
 #th-hero .hero__bg:hover { transform: scale(1.05); filter: brightness(1.06); }
