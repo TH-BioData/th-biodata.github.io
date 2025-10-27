@@ -11,7 +11,7 @@
   // (elige el menor entre 65% del alto del hero y 600px)
   function getFadeDistance() {
     const h = hero.offsetHeight || window.innerHeight;
-    return Math.min(h * 0.65, 600);
+    return Math.min(h * 1.4, 1400);
   }
 
   let fadeDist = 0;
