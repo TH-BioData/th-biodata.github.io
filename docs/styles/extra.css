@@ -1,111 +1,103 @@
 /* ============================================================
-TH BioData — HERO FULLSCREEN + sin sidebars SOLO en Home
+TH BioData — HOME: Fullscreen hero + sin sidebars/tabs
 ============================================================ */
 
-/* 0) Oculta sidebars cuando hay hero en la página */
+/* 0) Oculta sidebars y tabs en la Home */
 body:has(#th-hero) .md-sidebar--primary,
-body:has(#th-hero) .md-sidebar--secondary {
-  display: none !important;
-}
+body:has(#th-hero) .md-sidebar--secondary { display: none !important; }
+body:has(#th-hero) .md-tabs { display: none !important; }
 
-/* 1) Anula límites del layout para esta página */
+/* 1) Quita límites de ancho/espaciado del layout SOLO en Home */
 body:has(#th-hero) .md-main { padding-top: 0 !important; }
 body:has(#th-hero) .md-main > .md-grid {
-  max-width: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
-body:has(#th-hero) .md-content {
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
+body:has(#th-hero) .md-content,
+body:has(#th-hero) .md-content__inner,
+body:has(#th-hero) .md-typeset {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
-.md-content__inner:has(#th-hero) > h1:first-child { display: none; } /* por si acaso */
 
-/* 2) HERO fullscreen real (full-bleed desde dentro del grid) */
-.md-typeset #th-hero { margin: 0; } /* quita margen tipográfico de Material */
+/* (opcional) evita reflujo por la barra de scroll */
+html { scrollbar-gutter: stable; }
 
+/* 2) HERO fullscreen real (sin usar left/translate) */
 #th-hero {
-  position: relative;
-
-  /* 🔑 NOTA: Se eliminaron las reglas conflictivas de full-bleed:
-   * left: 50%;
-   * right: 50%;
-   * margin-left: -50vw;
-   * margin-right: -50vw;
-   *    * Esto es porque tu CSS en (1) ya hace que el contenedor
-   * padre (.md-grid) ocupe el ancho completo.
-   */
-
-  width: 100%; /* Ajustado de 100vw a 100% para que llene el padre (que ya es full-width) */
-  height: 100vh;        /* ocupa toda la pantalla */
-  height: 100svh;       /* mejor en mobile */
-  overflow: hidden;
-  z-index: 0;
+  position: relative;
+  width: 100% !important;
+  min-height: 100vh;           /* alto total de pantalla */
+  min-height: 100svh;          /* móvil con barras dinámicas */
+  overflow: hidden;
+  z-index: 0;
+  /* elimina el margen top que añade Material a los primeros bloques */
 }
+.md-typeset #th-hero { margin: 0 !important; }
 
-/* 3) Fondo del hero */
+/* Fondo de la imagen */
 #th-hero .hero__bg {
-  position: absolute;
-  inset: 0;
-  background: url('../assets/home_hero_v2.jpg') center / cover no-repeat;
-  transition: transform 15s linear, filter 2s ease;
+  position: absolute;
+  inset: 0;
+  background: url('../assets/home_hero_v1.jpg') center / cover no-repeat;
+  transition: transform 15s linear, filter 2s ease;
 }
 #th-hero .hero__bg:hover { transform: scale(1.05); filter: brightness(1.06); }
 
-/* 4) Contenido centrado y legible */
+/* Contenido centrado */
 #th-hero .hero__content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;   /* centrado; cambia a 'flex-start' para alinear a izq */
-  flex-direction: column;
-  height: 100%;
-  text-align: center;
-  color: #fff;
-  padding: 0 5%;
-  background: linear-gradient(to bottom, rgba(10,35,80,.30), rgba(10,35,80,.60));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* cambia a flex-start para alinear a izq */
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  padding: 0 5%;
+  background: linear-gradient(to bottom, rgba(10,35,80,.30), rgba(10,35,80,.60));
 }
 
+/* Tipografías del hero */
 .hero__title {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  text-shadow: 0 2px 6px rgba(0,0,0,.45);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 6px rgba(0,0,0,.45);
 }
 .hero__tag {
-  font-size: 20px;
-  max-width: 680px;
-  line-height: 1.45;
-  opacity: .95;
+  font-size: 20px;
+  max-width: 680px;
+  line-height: 1.45;
+  opacity: .95;
 }
 .hero__cta {
-  display: inline-block;
-  margin-top: 24px;
-  padding: 12px 24px;
-  background: var(--th-color-corporate-blue);
-  border-radius: 8px;
-  color: #fff !important;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 3px 6px rgba(0,0,0,.3);
-  transition: transform .25s ease, background .25s ease;
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background: var(--th-color-corporate-blue);
+  border-radius: 8px;
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0,0,0,.3);
+  transition: transform .25s ease, background .25s ease;
 }
 .hero__cta:hover { transform: translateY(-3px); background: #004B8E; }
 
-/* 5) Header semitransparente sobre hero (opcional) */
+/* Header semitransparente encima del hero (opcional) */
 body:has(#th-hero) .md-header {
-  background-color: rgba(15,61,115,.92) !important;
-  backdrop-filter: saturate(120%) blur(6px);
+  background-color: rgba(15,61,115,.92) !important;
+  backdrop-filter: saturate(120%) blur(6px);
 }
 
-/* 6) Responsivo */
+/* Responsivo */
 @media (max-width: 768px) {
-  .hero__title { font-size: 32px; }
-  .hero__tag { font-size: 16px; }
-  #th-hero .hero__content {
-    text-align: center;
-    background: linear-gradient(to bottom, rgba(10,35,80,.45), rgba(10,35,80,.35));
-  }
+  .hero__title { font-size: 32px; }
+  .hero__tag   { font-size: 16px; }
 }
