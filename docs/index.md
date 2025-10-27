@@ -1,3 +1,184 @@
+/* ============================================================
+TH BioData — Estilos finales depurados
+Hero fullscreen + barras azul uniforme + overlay degradado
+Centrado absoluto + Fade al scrollear
+============================================================ */
+
+/* -------------------- Paleta global -------------------- */
+:root {
+    --th-color-corporate-blue: #0F3D73; /* primario */
+    --th-color-corporate-light-blue: #7CC6FF; /* acento */
+}
+
+/* Tema claro */
+[data-md-color-scheme="default"] {
+    --md-primary-fg-color: var(--th-color-corporate-blue);
+    --md-primary-fg-color--light: #1E5AA6;
+    --md-primary-fg-color--dark: #0A2350;
+    --md-accent-fg-color: var(--th-color-corporate-light-blue);
+}
+
+/* Tema oscuro */
+[data-md-color-scheme="slate"] {
+    --md-primary-fg-color: var(--th-color-corporate-blue);
+    --md-primary-fg-color--light: #2A6BBE;
+    --md-primary-fg-color--dark: #071B3A;
+    --md-accent-fg-color: var(--th-color-corporate-light-blue);
+}
+
+/* -------------------- Barras superiores (header + tabs) -------------------- */
+.md-header,
+.md-tabs {
+    background-color: #0F3D73 !important;
+    color: #fff !important;
+}
+
+/* En Home: sin blur/transparencia */
+body:has(#th-hero) .md-header {
+    background-color: #0F3D73 !important;
+    backdrop-filter: none !important;
+}
+
+/* -------------------- Ajustes exclusivos de HOME -------------------- */
+/* Ocultar sidebars en Home */
+body:has(#th-hero) .md-sidebar--primary,
+body:has(#th-hero) .md-sidebar--secondary {
+    display: none !important;
+}
+
+/* Layout ancho completo sólo en Home */
+body:has(#th-hero) .md-main {
+    padding-top: 0 !important;
+}
+
+body:has(#th-hero) .md-main > .md-grid,
+body:has(#th-hero) .md-content,
+body:has(#th-hero) .md-content__inner,
+body:has(#th-hero) .md-typeset {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Evita reflujo por la barra de scroll */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* -------------------- HERO fullscreen -------------------- */
+#th-hero {
+    position: relative;
+    width: 100% !important;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    will-change: opacity, transform;
+    transition: opacity 0.12s linear, transform 0.12s linear;
+}
+
+/* Imagen de fondo */
+#th-hero .hero__bg {
+    position: absolute;
+    inset: 0;
+    background: url('../assets/home_hero_v2.jpg') center / cover no-repeat;
+    z-index: 0;
+    transition: transform 15s linear, filter 2s ease;
+}
+
+#th-hero .hero__bg:hover {
+    transform: scale(1.05);
+    filter: brightness(1.06);
+}
+
+/* Overlay general (degradado vertical) */
+#th-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 35, 80, 0.25) 0%,
+        rgba(10, 35, 80, 0.45) 40%,
+        rgba(10, 35, 80, 0.62) 100%
+    );
+    z-index: 1;
+}
+
+/* -------------------- Contenido del hero -------------------- */
+#th-hero .hero__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 5%;
+    width: min(1100px, 92vw);
+}
+
+/* Sin recuadro adicional */
+#th-hero .hero__content::before {
+    content: none !important;
+}
+
+/* -------------------- Tipografías y CTA -------------------- */
+#th-hero .hero__title {
+    color: #FFFFFF !important;
+    font-size: clamp(40px, 7vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    letter-spacing: 0.4px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+}
+
+#th-hero .hero__tag {
+    color: #FFFFFF !important;
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0 0 38px 0;
+    opacity: 0.98;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+}
+
+#th-hero .hero__cta {
+    display: inline-block;
+    padding: 16px 36px;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 700;
+    border-radius: 10px;
+    color: #fff !important;
+    background: var(--th-color-corporate-blue);
+    text-decoration: none;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+#th-hero .hero__cta:hover {
+    background: #004B8E;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* -------------------- Breakpoints -------------------- */
+@media (max-width: 1024px) {
+    #th-hero .hero__content {
+        width: min(900px, 94vw);
+    }
+}
+
+@media (max-width: 768px) {
+    #th-hero .hero__content {
+        width: 92vw;
+    }
+}
+
 ---
 title: Home
 hide:
@@ -5,47 +186,42 @@ hide:
 ---
 
 <div id="th-hero">
-  <div class="hero__bg"></div>
-  <div class="hero__content">
-    <h1 class="hero__title">TH BioData Consulting</h1>
-    <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
-    <a href="projects/" class="hero__cta">View Projects</a>
-  </div>
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+        <h1 class="hero__title">TH BioData Consulting</h1>
+        <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
+        <a href="projects/" class="hero__cta">View Projects</a>
+    </div>
 </div>
 
 ## Main areas / Áreas principales
 
-!!! abstract "Overview / Resumen" class="lead-box"
-    **EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
-    We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.
+**EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
+We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.  
 
-    **ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
-    Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
-
----
-
-<div class="home-cards">
-
-!!! tip ":material-brain: Image Analysis / Análisis de Imágenes"
-    **EN:** Lesion detection, segmentation, severity quantification.  
-    **ES:** Detección de lesiones, segmentación y cuantificación de severidad.
-
-!!! tip ":material-dna: Bioinformatics / Bioinformática"
-    **EN:** Omics data workflows, statistics, reproducible pipelines.  
-    **ES:** Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
-
-!!! tip ":material-earth: Geospatial Modeling / Modelado Geoespacial"
-    **EN:** CHELSA extraction, environmental layers, distribution mapping.  
-    **ES:** Extracción de CHELSA, capas ambientales y mapas de distribución.
-
-!!! tip ":material-chart-line: Research Consulting / Consultoría en Investigación"
-    **EN:** Project integration, automation, and data visualization.  
-    **ES:** Integración de proyectos, automatización y visualización de datos.
-
-</div>
+**ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
+Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
 
 ---
 
-<div class="th-signoff">
-  Transforming biological complexity into clear, data-driven insight.
+###  Image Analysis / Análisis de Imágenes
+**EN:** Lesion detection, segmentation, severity quantification.  
+**ES:** Detección de lesiones, segmentación, cuantificación de severidad.
+
+###  Bioinformatics / Bioinformática
+**EN:** Omics data workflows, statistics, reproducible pipelines.  
+**ES:** Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
+
+###  Geospatial Modeling / Modelado Geoespacial
+**EN:** CHELSA extraction, environmental layers, distribution mapping.  
+**ES:** Extracción de CHELSA, capas ambientales, mapas de distribución.
+
+###  Research Consulting / Consultoría en Investigación
+**EN:** Project integration, automation, and data visualization.  
+**ES:** Integración de proyectos, automatización y visualización de datos.
+
+---
+
+<div align="center" style="margin-top: 20px;">
+  <em>Transforming biological complexity into clear, data-driven insight.</em>
 </div>
