@@ -1,6 +1,6 @@
 # 🔬 TadpoleNet
 
-![TadpoleNet example](../assets/tadpolenet_overlay_example.jpg){ width="800" }
+![TadpoleNet example](../assets/tadpolenet_figure.png){ width="800" }
 
 *Example of semantic segmentation and area quantification on an embryo using TadpoleNet.*
 
