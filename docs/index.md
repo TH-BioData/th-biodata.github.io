@@ -14,9 +14,6 @@ hide:
 </div>
 
 ## Main areas / Áreas principales:
-...
-
-<!-- Resto del contenido de la página -->
 
 **EN —**  
 Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
@@ -28,19 +25,31 @@ Desarrollamos herramientas analíticas en Python que conectan la biología con l
 
 ---
 
-### 🌍 Main areas / Áreas principales:
+## Main areas / Áreas principales
 
-- **🧫 Image Analysis** · Lesion detection, segmentation, severity quantification.  
-  **Análisis de Imágenes** · Detección de lesiones, segmentación, cuantificación de severidad.
+**EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
+We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.  
 
-- **🧬 Bioinformatics** · Omics data workflows, statistics, reproducible pipelines.  
-  **Bioinformática** · Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
+**ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
+Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
 
-- **📊 Geospatial Modeling** · CHELSA extraction, environmental layers, distribution mapping.  
-  **Modelado Geoespacial** · Extracción de CHELSA, capas ambientales, mapas de distribución.
+---
 
-- **💡 Research Consulting** · Project integration, automation, and data visualization.  
-  **Consultoría en Investigación** · Integración de proyectos, automatización y visualización de datos.
+###  Image Analysis / Análisis de Imágenes
+**EN:** Lesion detection, segmentation, severity quantification.  
+**ES:** Detección de lesiones, segmentación, cuantificación de severidad.
+
+###  Bioinformatics / Bioinformática
+**EN:** Omics data workflows, statistics, reproducible pipelines.  
+**ES:** Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
+
+###  Geospatial Modeling / Modelado Geoespacial
+**EN:** CHELSA extraction, environmental layers, distribution mapping.  
+**ES:** Extracción de CHELSA, capas ambientales, mapas de distribución.
+
+###  Research Consulting / Consultoría en Investigación
+**EN:** Project integration, automation, and data visualization.  
+**ES:** Integración de proyectos, automatización y visualización de datos.
 
 ---
 
