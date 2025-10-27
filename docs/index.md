@@ -4,18 +4,19 @@ hide:
   - toc
 ---
 
-<div class="hero hero--fullscreen">
+<!-- HERO: fuera del flujo de la md-content -->
+<div id="th-hero">
   <div class="hero__bg"></div>
   <div class="hero__content">
     <div>
       <h1 class="hero__title">TH BioData Consulting</h1>
       <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
-      <a class="hero__cta" href="projects/index.md/">View Projects</a>
+      <a class="hero__cta" href="projects/index/">View Projects</a>
     </div>
   </div>
 </div>
 
-
+<!-- Resto del contenido de la página -->
 
 **EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
 We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.  
