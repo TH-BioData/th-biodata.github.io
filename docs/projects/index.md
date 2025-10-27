@@ -23,4 +23,8 @@
     Tuber lesion detection & quantification.  
     [:arrow_right: Open](./corkyscab/)
 
+-   :frog: **TadpoleNet**  
+    Semantic segmentation of Xenopus embryos.  
+    [:arrow_right: Open](./corkyscab/)
+
 </div>
