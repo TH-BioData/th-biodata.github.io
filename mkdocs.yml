@@ -12,17 +12,17 @@ theme:
     code: Roboto Mono
   features:
     - navigation.top          # barra superior fija
-    - navigation.tabs         # tabs de primer nivel (como el demo)
-    - navigation.sections     # secciones anidadas en sidebar
+    - navigation.tabs         # tabs de primer nivel
+    - navigation.sections     # secciones en sidebar
     - navigation.indexes      # index.md como landing de cada sección
     - navigation.footer       # enlaces Prev/Next al pie
-    - toc.integrate           # TOC integrado en el contenido
-    - content.code.copy       # botón copiar en bloques de código
+    - toc.integrate           # TOC integrado
+    - content.code.copy       # botón copiar
     - search.suggest
     - search.highlight
   palette:
     - scheme: default         # modo claro
-      primary: custom
+      primary: custom         # colores definidos en extra.css (variables --md-primary-*)
       accent: custom
       toggle:
         icon: material/weather-night
@@ -45,7 +45,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
-  - pymdownx.highlight:       # reemplaza codehilite para Material
+  - pymdownx.highlight:
       anchor_linenums: true
       linenums: false
   - pymdownx.inlinehilite
