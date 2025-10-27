@@ -1,13 +1,38 @@
 /* ============================================================
-TH BioData — HOME: Fullscreen hero + sin sidebars/tabs
+TH BioData — HOME: Fullscreen hero + navbar visible + azul global
 ============================================================ */
 
-/* 0) Oculta sidebars y tabs en la Home */
+/* -------------------- Paleta global (Material for MkDocs) -------------------- */
+:root {
+  --th-color-corporate-blue: #0F3D73;      /* primario */
+  --th-color-corporate-light-blue: #7CC6FF;/* acento */
+}
+
+/* Tema claro */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--th-color-corporate-blue);
+  --md-primary-fg-color--light: #1E5AA6;
+  --md-primary-fg-color--dark: #0A2350;
+
+  --md-accent-fg-color: var(--th-color-corporate-light-blue);
+}
+
+/* Tema oscuro */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--th-color-corporate-blue);
+  --md-primary-fg-color--light: #2A6BBE;
+  --md-primary-fg-color--dark: #071B3A;
+
+  --md-accent-fg-color: var(--th-color-corporate-light-blue);
+}
+
+/* -------------------- Ajustes específicos de HOME -------------------- */
+
+/* 0) Oculta sidebars en Home, pero DEJA visibles los tabs/navbar */
 body:has(#th-hero) .md-sidebar--primary,
 body:has(#th-hero) .md-sidebar--secondary { display: none !important; }
-body:has(#th-hero) .md-tabs { display: none !important; }
 
-/* 1) Quita límites de ancho/espaciado del layout SOLO en Home */
+/* 1) Layout ancho completo SOLO en Home */
 body:has(#th-hero) .md-main { padding-top: 0 !important; }
 body:has(#th-hero) .md-main > .md-grid {
   max-width: 100% !important;
@@ -24,22 +49,21 @@ body:has(#th-hero) .md-typeset {
   margin: 0 !important;
 }
 
-/* (opcional) evita reflujo por la barra de scroll */
+/* Evita reflujo por barra de scroll */
 html { scrollbar-gutter: stable; }
 
-/* 2) HERO fullscreen real (sin usar left/translate) */
+/* 2) HERO fullscreen */
 #th-hero {
   position: relative;
   width: 100% !important;
-  min-height: 100vh;           /* alto total de pantalla */
-  min-height: 100svh;          /* móvil con barras dinámicas */
+  min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   z-index: 0;
-  /* elimina el margen top que añade Material a los primeros bloques */
 }
 .md-typeset #th-hero { margin: 0 !important; }
 
-/* Fondo de la imagen */
+/* Fondo */
 #th-hero .hero__bg {
   position: absolute;
   inset: 0;
@@ -48,13 +72,13 @@ html { scrollbar-gutter: stable; }
 }
 #th-hero .hero__bg:hover { transform: scale(1.05); filter: brightness(1.06); }
 
-/* Contenido centrado */
+/* Contenido */
 #th-hero .hero__content {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: center;     /* cambia a flex-start para alinear a izq */
+  justify-content: center;
   flex-direction: column;
   height: 100%;
   text-align: center;
@@ -63,7 +87,7 @@ html { scrollbar-gutter: stable; }
   background: linear-gradient(to bottom, rgba(10,35,80,.30), rgba(10,35,80,.60));
 }
 
-/* Tipografías del hero */
+/* Tipografías */
 .hero__title {
   font-size: 48px;
   font-weight: 700;
@@ -90,7 +114,7 @@ html { scrollbar-gutter: stable; }
 }
 .hero__cta:hover { transform: translateY(-3px); background: #004B8E; }
 
-/* Header semitransparente encima del hero (opcional) */
+/* Header semitransparente sobre el hero (opcional) */
 body:has(#th-hero) .md-header {
   background-color: rgba(15,61,115,.92) !important;
   backdrop-filter: saturate(120%) blur(6px);
