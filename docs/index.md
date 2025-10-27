@@ -13,55 +13,39 @@ hide:
   </div>
 </div>
 
-<!-- IMPORTANTE: markdown="1" permite que los ### y ** se procesen dentro del div -->
-<div class="th-content" markdown="1">
-
 ## Main areas / Áreas principales
 
-<div class="th-lead">
+!!! abstract "Overview / Resumen" class="lead-box"
+    **EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
+    We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.
 
-**EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
-We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.
+    **ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
+    Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
 
-**ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
-Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
+---
 
-</div>
+<div class="home-cards">
 
-<div class="th-rule"></div>
+!!! tip ":material-brain: Image Analysis / Análisis de Imágenes"
+    **EN:** Lesion detection, segmentation, severity quantification.  
+    **ES:** Detección de lesiones, segmentación y cuantificación de severidad.
 
-<div class="th-grid">
+!!! tip ":material-dna: Bioinformatics / Bioinformática"
+    **EN:** Omics data workflows, statistics, reproducible pipelines.  
+    **ES:** Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
 
-<div class="th-card" markdown="1">
-### Image Analysis / Análisis de Imágenes
-**EN:** Lesion detection, segmentation, severity quantification.  
-**ES:** Detección de lesiones, segmentación y cuantificación de severidad.
-</div>
+!!! tip ":material-earth: Geospatial Modeling / Modelado Geoespacial"
+    **EN:** CHELSA extraction, environmental layers, distribution mapping.  
+    **ES:** Extracción de CHELSA, capas ambientales y mapas de distribución.
 
-<div class="th-card" markdown="1">
-### Bioinformatics / Bioinformática
-**EN:** Omics data workflows, statistics, reproducible pipelines.  
-**ES:** Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
-</div>
-
-<div class="th-card" markdown="1">
-### Geospatial Modeling / Modelado Geoespacial
-**EN:** CHELSA extraction, environmental layers, distribution mapping.  
-**ES:** Extracción de CHELSA, capas ambientales y mapas de distribución.
-</div>
-
-<div class="th-card" markdown="1">
-### Research Consulting / Consultoría en Investigación
-**EN:** Project integration, automation, and data visualization.  
-**ES:** Integración de proyectos, automatización y visualización de datos.
-</div>
+!!! tip ":material-chart-line: Research Consulting / Consultoría en Investigación"
+    **EN:** Project integration, automation, and data visualization.  
+    **ES:** Integración de proyectos, automatización y visualización de datos.
 
 </div>
 
-<div class="th-rule"></div>
+---
 
 <div class="th-signoff">
   Transforming biological complexity into clear, data-driven insight.
-</div>
-
 </div>
