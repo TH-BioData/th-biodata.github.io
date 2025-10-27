@@ -5,43 +5,63 @@ hide:
 ---
 
 <div id="th-hero">
-    <div class="hero__bg"></div>
-    <div class="hero__content">
-        <h1 class="hero__title">TH BioData Consulting</h1>
-        <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
-        <a href="projects/" class="hero__cta">View Projects</a>
-    </div>
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <h1 class="hero__title">TH BioData Consulting</h1>
+    <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
+    <a href="projects/" class="hero__cta">View Projects</a>
+  </div>
 </div>
 
-<div class="th-content">
+<!-- IMPORTANTE: markdown="1" permite que los ### y ** se procesen dentro del div -->
+<div class="th-content" markdown="1">
 
 ## Main areas / Áreas principales
 
 <div class="th-lead">
-<p><span class="th-lang">EN —</span> Data science and bioinformatics applied to biological, environmental, and private-sector projects. We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.</p>
 
-<p><span class="th-lang">ES —</span> Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado. Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.</p>
+**EN —** Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
+We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.
+
+**ES —** Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
+Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
+
 </div>
 
 <div class="th-rule"></div>
 
+<div class="th-grid">
+
+<div class="th-card" markdown="1">
 ### Image Analysis / Análisis de Imágenes
 **EN:** Lesion detection, segmentation, severity quantification.  
 **ES:** Detección de lesiones, segmentación y cuantificación de severidad.
+</div>
 
+<div class="th-card" markdown="1">
 ### Bioinformatics / Bioinformática
 **EN:** Omics data workflows, statistics, reproducible pipelines.  
 **ES:** Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.
+</div>
 
+<div class="th-card" markdown="1">
 ### Geospatial Modeling / Modelado Geoespacial
 **EN:** CHELSA extraction, environmental layers, distribution mapping.  
 **ES:** Extracción de CHELSA, capas ambientales y mapas de distribución.
+</div>
 
+<div class="th-card" markdown="1">
 ### Research Consulting / Consultoría en Investigación
 **EN:** Project integration, automation, and data visualization.  
 **ES:** Integración de proyectos, automatización y visualización de datos.
+</div>
+
+</div>
 
 <div class="th-rule"></div>
 
 <div class="th-signoff">
-  Transf
+  Transforming biological complexity into clear, data-driven insight.
+</div>
+
+</div>
