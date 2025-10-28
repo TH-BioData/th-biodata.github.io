@@ -13,6 +13,7 @@ Our mission is to make biological and environmental data **accessible, interpret
 
 ### What We Do
 We develop **Python-based analytical tools and workflows** for:
+
 - Image analysis and plant pathology.  
 - Omics data processing and bioinformatics modeling.  
 - Geospatial and ecological data extraction.  
@@ -20,6 +21,7 @@ We develop **Python-based analytical tools and workflows** for:
 
 ### Our Approach
 We believe in:
+
 - **Open-source science** as a foundation for collaboration.  
 - **Reproducibility and transparency** as drivers of progress.  
 - **Creativity and innovation** in every code line we write.
@@ -37,6 +39,7 @@ Nuestra misión es hacer que los datos biológicos y ambientales sean **accesibl
 
 ### Qué Hacemos
 Desarrollamos **herramientas y flujos de trabajo en Python** para:
+
 - Análisis de imágenes y patología vegetal.  
 - Procesamiento de datos ómicos y modelado bioinformático.  
 - Extracción y modelado de datos geoespaciales y ecológicos.  
@@ -44,6 +47,7 @@ Desarrollamos **herramientas y flujos de trabajo en Python** para:
 
 ### Nuestro Enfoque
 Creemos en:
+
 - La **ciencia abierta** como base de la colaboración.  
 - La **reproducibilidad** como pilar de la investigación moderna.  
 - La **creatividad** como motor de la innovación científica.
