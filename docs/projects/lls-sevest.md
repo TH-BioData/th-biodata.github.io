@@ -22,8 +22,8 @@ LLS-SevEst automates what traditionally requires manual assessment, providing **
 `Python`, `OpenCV`, `Scikit-learn`, `NumPy`, `Pandas`, `Matplotlib`
 
 ### 📂 Repository
-🔗 [TH BioData – LLS-SevEst](https://github.com/TH-BioData/LLS-SevEst)  
-📘 Documentation: https://tiagoalejoh.github.io/LLS-SevEst
+🔗 [TH BioData – LLS-SevEst](https://github.com/TH-BioData/lls_sev_est)  
+
 
 ---
 
