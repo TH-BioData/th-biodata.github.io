@@ -1,4 +1,4 @@
-# 🔬 TadpoleNet
+# 🥔 TadpoleNet
 
 ![TadpoleNet example](../assets/tadpolenet_figure.png){ width="800" }
 
