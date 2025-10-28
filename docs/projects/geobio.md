@@ -21,7 +21,7 @@ These functionalities make GeoBio a versatile tool for **species distribution mo
 
 ### 📂 Repository
 🔗 [TH BioData – GeoBio](https://github.com/TH-BioData/GeoBio)  
-📘 Documentation: https://tiagoalejoh.github.io/GeoBio
+
 
 ---
 
