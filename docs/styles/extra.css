@@ -202,3 +202,23 @@ body:has(#th-hero) .md-typeset hr {
   body:has(#th-hero) .md-content { padding: 1.2rem .9rem !important; }
   #th-hero .hero__content { width: 92vw; }
 }
+
+
+/* Elimina la franja blanca entre header y hero SOLO en Home */
+body:has(#th-hero) .md-header ~ .md-container .md-main {
+  margin-top: 0 !important;   /* anula margen que deja el header fijo */
+  padding-top: 0 !important;  /* por si el tema usa padding en vez de margin */
+}
+
+body:has(#th-hero) .md-main__inner {
+  margin-top: 0 !important;   /* algunos builds aplican el offset aquí */
+}
+
+body:has(#th-hero) .md-content {
+  margin-top: 0 !important;   /* evita que el primer bloque empuje hacia abajo */
+}
+
+/* Asegura que el hero arranque inmediatamente debajo del header */
+#th-hero {
+  margin-top: 0 !important;
+}
