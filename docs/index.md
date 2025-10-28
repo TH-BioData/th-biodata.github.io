@@ -4,7 +4,6 @@
         <h1 class="hero__title">TH BioData Consulting</h1>
         <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
         <a href="projects/" class="hero__cta">View Projects</a>
-        <a href="contact.md" class="hero__cta">Contact Us</a>
     </div>
 </div>
 
