@@ -1,16 +1,5 @@
 # 🧬 About / Sobre Nosotros
 
-<div class="hero hero--full">
-  <div class="hero__bg"></div>
-  <div class="hero__content">
-    <div>
-      <div class="hero__title">About</div>
-      <div class="hero__tag">Who we are, what we do & our approach.</div>
-    </div>
-  </div>
-</div>
-
-
 **TH BioData Consulting** is a data science and bioinformatics consulting firm founded by **Tiago Alejo Herrador**, dedicated to transforming biological complexity into clear, reproducible, and actionable insights.  
 We bridge the gap between **biology, data, and technology**, providing customized computational solutions for research and industry.
 
