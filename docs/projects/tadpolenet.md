@@ -1,4 +1,4 @@
-# 🥔 TadpoleNet
+# 🐸 TadpoleNet
 
 ![TadpoleNet example](../assets/tadpolenet_figure.png){ width="800" }
 
@@ -21,8 +21,7 @@ TadpoleNet provides a fast, objective, and reproducible method for quantifying k
 `Python`, `PyTorch`, `segmentation-models-pytorch`, `Albumentations`, `OpenCV`, `NumPy`, `Pandas`, `Matplotlib`
 
 ### 📂 Repository
-🔗 [Your-GitHub-User/TadpoleNet](https://github.com/Your-GitHub-User/TadpoleNet)  
-📘 Documentation: (Add link to documentation if available)
+🔗 [Your-GitHub-User/TadpoleNet](https://github.com/TH-BioData/TadpoleNet)  
 
 ---
 
