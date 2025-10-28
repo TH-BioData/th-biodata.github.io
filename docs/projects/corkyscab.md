@@ -22,7 +22,7 @@ CorkyScab offers a reliable and replicable approach for quantifying plant diseas
 
 ### 📂 Repository
 🔗 [TH BioData – CorkyScab](https://github.com/TH-BioData/CorkyScab)  
-📘 Documentation: https://tiagoalejoh.github.io/CorkyScab
+
 
 ---
 
