@@ -9,7 +9,7 @@
 **LLS-SevEst (Late Leaf Spot Severity Estimator)** is a Python package developed to **quantify the severity of leaf lesions** caused by *Nothopassalora personata* in peanut (*Arachis hypogaea*).  
 It combines **K-Means image segmentation** with a **defoliation-adjustment algorithm** to calculate both lesion coverage and effective severity on each leaf sample.
 
-# **Publications:**
+### **Publications:**
 
 - Herrador, T. A. & al. 2025. [LLS-SevEst 2.0: Camino hacia una estimación más precisa de la severidad de la viruela del maní.](https://ciacabrera.com.ar/revista40/?fbclid=PAZXh0bgNhZW0CMTEAAaeFsd9JidXcBtdBx9KLZbz8Dt_7WLDQuZrMWu5EbOHVb7fdcGIOgqg-1OK3pg_aem_zTjLnvjpmCPYUP4E_Oibgg#page/46)
 - Herrador, T. A. & al. 2024. [LLS-SevEst – Late leaf spot severity estimator. A machine learning approach to assessing Nothopassalora personata in peanut](https://ria.inta.gob.ar/lls-sevest-late-leaf-spot-severity-estimator-a-machine-learning-approach-to-assessing-nothopassalora-personata-in-peanut)
@@ -36,7 +36,7 @@ LLS-SevEst automates what traditionally requires manual assessment, providing **
 **LLS-SevEst (Late Leaf Spot Severity Estimator)** es un paquete de Python desarrollado para **cuantificar la severidad de lesiones foliares** causadas por *Nothopassalora personata* en hojas de maní (*Arachis hypogaea*).  
 Combina **segmentación de imágenes por K-Means** con un **ajuste por defoliación** que permite estimar con precisión el impacto real de la enfermedad en cada muestra.
 
-# **Publicaciones:**
+### **Publicaciones:**
 
 - Herrador, T. A. & al. 2025. [LLS-SevEst 2.0: Camino hacia una estimación más precisa de la severidad de la viruela del maní.](https://ciacabrera.com.ar/revista40/?fbclid=PAZXh0bgNhZW0CMTEAAaeFsd9JidXcBtdBx9KLZbz8Dt_7WLDQuZrMWu5EbOHVb7fdcGIOgqg-1OK3pg_aem_zTjLnvjpmCPYUP4E_Oibgg#page/46)
 - Herrador, T. A. & al. 2024. [LLS-SevEst – Late leaf spot severity estimator. A machine learning approach to assessing Nothopassalora personata in peanut](https://ria.inta.gob.ar/lls-sevest-late-leaf-spot-severity-estimator-a-machine-learning-approach-to-assessing-nothopassalora-personata-in-peanut)
