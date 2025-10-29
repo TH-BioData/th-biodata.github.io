@@ -7,42 +7,67 @@
     </div>
 </div>
 
-<section class="th-section">
-<h2>Main areas / Áreas principales</h2>
-<p class="th-paragraph">
-  <strong>EN —</strong> Data science and bioinformatics applied to biological, environmental, and private-sector projects.  
-  We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.
+## <span class="lang lang-en">Main areas</span><span class="lang lang-es">Áreas principales</span>
+
+<p class="lang lang-en">
+<strong>Data science and bioinformatics</strong> applied to biological, environmental, and private-sector projects.  
+We develop Python-based analytical tools that bridge biology and data, integrating image analysis, bioinformatics, and geospatial modeling to deliver reproducible, data-driven insight.
 </p>
-<p class="th-paragraph">
-  <strong>ES —</strong> Ciencia de datos y bioinformática aplicadas a proyectos biológicos, ambientales y del sector privado.  
-  Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
+
+<p class="lang lang-es">
+<strong>Ciencia de datos y bioinformática</strong> aplicadas a proyectos biológicos, ambientales y del sector privado.  
+Desarrollamos herramientas analíticas en Python que conectan la biología con los datos, integrando análisis de imágenes, bioinformática y modelado geoespacial para ofrecer conocimiento reproducible y basado en evidencia.
 </p>
-</section>
+
 
 <section class="th-cards">
-  <div class="th-card">
-    <h3>🧬 Image Analysis / Análisis de Imágenes</h3>
-    <p><strong>EN:</strong> Lesion detection, segmentation, severity quantification.<br>
-    <strong>ES:</strong> Detección de lesiones, segmentación, cuantificación de severidad.</p>
+  <div class="th-cards">
+
+  <!-- Image Analysis -->
+  <div class="th-card lang lang-en">
+    <h3>🧬 Image Analysis</h3>
+    <p><strong>Lesion detection, segmentation, severity quantification.</strong></p>
   </div>
 
-  <div class="th-card">
-    <h3>💻 Bioinformatics / Bioinformática</h3>
-    <p><strong>EN:</strong> Omics data workflows, statistics, reproducible pipelines.<br>
-    <strong>ES:</strong> Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.</p>
+  <div class="th-card lang lang-es">
+    <h3>🧬 Análisis de Imágenes</h3>
+    <p><strong>Detección de lesiones, segmentación y cuantificación de severidad.</strong></p>
   </div>
 
-  <div class="th-card">
-    <h3>🌍 Geospatial Modeling / Modelado Geoespacial</h3>
-    <p><strong>EN:</strong> CHELSA extraction, environmental layers, distribution mapping.<br>
-    <strong>ES:</strong> Extracción de CHELSA, capas ambientales, mapas de distribución.</p>
+  <!-- Bioinformatics -->
+  <div class="th-card lang lang-en">
+    <h3>💻 Bioinformatics</h3>
+    <p><strong>Omics data workflows, statistics, reproducible pipelines.</strong></p>
   </div>
 
-  <div class="th-card">
-    <h3>📊 Research Consulting / Consultoría en Investigación</h3>
-    <p><strong>EN:</strong> Project integration, automation, and data visualization.<br>
-    <strong>ES:</strong> Integración de proyectos, automatización y visualización de datos.</p>
+  <div class="th-card lang lang-es">
+    <h3>💻 Bioinformática</h3>
+    <p><strong>Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.</strong></p>
   </div>
+
+  <!-- Geospatial Modeling -->
+  <div class="th-card lang lang-en">
+    <h3>🌍 Geospatial Modeling</h3>
+    <p><strong>CHELSA extraction, environmental layers, distribution mapping.</strong></p>
+  </div>
+
+  <div class="th-card lang lang-es">
+    <h3>🌍 Modelado Geoespacial</h3>
+    <p><strong>Extracción de CHELSA, capas ambientales y mapas de distribución.</strong></p>
+  </div>
+
+  <!-- Research Consulting -->
+  <div class="th-card lang lang-en">
+    <h3>📊 Research Consulting</h3>
+    <p><strong>Project integration, automation, and data visualization.</strong></p>
+  </div>
+
+  <div class="th-card lang lang-es">
+    <h3>📊 Consultoría en Investigación</h3>
+    <p><strong>Integración de proyectos, automatización y visualización de datos.</strong></p>
+  </div>
+
+</div>
 </section>
 
 <div align="center" class="th-footer-quote">
