@@ -323,3 +323,27 @@ Botones "View" uniformes (todos llenos)
 [data-md-color-scheme="slate"] .th-card a.md-button--primary{
   box-shadow: 0 2px 10px rgba(0,0,0,.35);
 }
+
+
+
+/* === Limpieza de espaciado en secciones bilingües === */
+.lang {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Eliminar espacio vertical entre párrafos contiguos */
+p.lang {
+  margin-block: 0.4em !important;
+}
+
+/* Corrige comportamiento del TOC (sidebar) para mostrar un solo idioma */
+.md-nav__link span.lang-es {
+  display: none;
+}
+html[lang="es"] .md-nav__link span.lang-en {
+  display: none;
+}
+html[lang="es"] .md-nav__link span.lang-es {
+  display: inline;
+}
