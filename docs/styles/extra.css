@@ -167,44 +167,48 @@ TH BioData — Estética Home bajo Hero
   color: #222;
 }
 
-/* --- Tarjetas de servicios --- */
-.th-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+/* --- Tarjetas de servicios (GRID robusto) --- */
+.md-content .th-cards,
+.md-typeset .th-cards {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
   max-width: var(--th-content-max);
   margin: 2.5rem auto 3rem;
   padding: 0 1.5rem;
+  align-items: stretch;
 }
 
-.th-card {
-  background: #f9fbfd;
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform .25s ease, box-shadow .25s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
+/* Las tarjetas no ocupan 100% forzado */
+.md-content .th-card,
+.md-typeset .th-card {
+  width: auto !important;
+  max-width: none !important;
+  height: 100%;
+  text-align: left;
+  box-sizing: border-box;
 }
 
-.th-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+/* Breakpoints explícitos (opcional) */
+@media (min-width: 1280px){
+  .md-content .th-cards,
+  .md-typeset .th-cards{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px){
+  .md-content .th-cards,
+  .md-typeset .th-cards{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px){
+  .md-content .th-cards,
+  .md-typeset .th-cards{
+    grid-template-columns: 1fr;
+  }
 }
 
-.th-card h3 {
-  color: var(--th-color-corporate-blue);
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: .8rem;
-  transition: color .3s ease;
-}
-
-.th-card p {
-  font-size: .95rem;
-  line-height: 1.55;
-  color: #333;
-  transition: color .3s ease;
-}
 
 /* --- Frase final --- */
 .th-footer-quote {
@@ -286,42 +290,3 @@ Accesibilidad: respeta usuarios con “reducir movimiento”
   * { transition: none !important; }
 }
 
-/* ===== FIX FINAL: tarjetas verticales lado a lado (layout responsive) ===== */
-.md-content .th-cards,
-.md-typeset .th-cards {
-  display: flex !important;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  gap: 1.5rem;
-  max-width: var(--th-content-max);
-  margin: 2rem auto 3rem;
-  padding: 0 1rem;
-}
-
-/* Cada tarjeta con ancho adaptable */
-.md-content .th-card,
-.md-typeset .th-card {
-  flex: 1 1 300px;
-  max-width: 360px;
-  height: 100%;
-  text-align: left;
-  box-sizing: border-box;
-}
-
-/* Asegurar consistencia en pantallas grandes */
-@media (min-width: 1280px) {
-  .md-content .th-cards,
-  .md-typeset .th-cards {
-    justify-content: space-between;
-  }
-}
-
-/* En móviles, una tarjeta por fila */
-@media (max-width: 640px) {
-  .md-content .th-cards,
-  .md-typeset .th-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-}
