@@ -167,20 +167,52 @@ Accesibilidad
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; }
 }
-/* ==== Forzar 4 tarjetas por fila en pantallas grandes ==== */
-:root { --th-gap: 24px; }                   /* mismo valor que gap del contenedor */
-.md-content .th-cards,
-.md-typeset .th-cards { gap: var(--th-gap); }
+/* --- Tarjetas de servicios --- */
+.th-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: var(--th-content-max);
+  margin: 2.5rem auto 3rem;
+  padding: 0 1.5rem;
+}
 
-@media (min-width: 1280px){
-  .md-content .th-cards,
-  .md-typeset .th-cards{
-    justify-content: space-between;        /* reparte el espacio horizontal */
-  }
-  .md-content .th-card,
-  .md-typeset .th-card{
-    flex: 0 0 calc((100% - 3*var(--th-gap)) / 4);  /* 4 columnas exactas */
-    min-width: 0;                          /* evita que el min-width bloquee el ajuste */
-    max-width: none;                       /* permite ocupar exactamente el cálculo */
-  }
+.th-card {
+  background: #f9fbfd;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform .25s ease, box-shadow .25s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.th-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.th-card h3 {
+  color: var(--th-color-corporate-blue);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: .8rem;
+  transition: color .3s ease;
+}
+
+.th-card p {
+  font-size: .95rem;
+  line-height: 1.55;
+  color: #333;
+  transition: color .3s ease;
+}
+
+/* --- Frase final --- */
+.th-footer-quote {
+  margin: 2.5rem auto 1.5rem;
+  font-size: 1rem;
+  color: #0F3D73;
+  opacity: .8;
+  transition: color .3s ease, opacity .3s ease;
+}
+
 }
