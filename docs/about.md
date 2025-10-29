@@ -107,20 +107,22 @@ hide:
   <h2 class="lang lang-en">Founder</h2>
   <h2 class="lang lang-es">Fundador</h2>
 
-  <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-top:6px;">
-    <div style="flex-shrink:0;">
-      <img src="/assets/tiago_profile.png" alt="Tiago Alejo Herrador" width="140"
-           style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.15);">
-    </div>
-    <div style="max-width:650px;">
-      <strong>Tiago Alejo Herrador</strong><br>
-      <span class="lang lang-en">Founder · Data Scientist · Bioinformatician</span>
-      <span class="lang lang-es">Fundador · Científico de Datos · Bioinformático</span><br>
-      <em class="lang lang-en">Bridging biology and data through code and creativity.</em>
-      <em class="lang lang-es">Uniendo biología y datos con código y creatividad.</em><br><br>
-      📍 Córdoba, Argentina · 📧 <a href="mailto:thbiodata@gmail.com">thbiodata@gmail.com</a><br>
-      🔗 <a href="https://www.linkedin.com/in/tiago-alejo-herrador-425090316" target="_blank">LinkedIn</a> ·
-      🔗 <a href="https://github.com/tiagoalejoh" target="_blank">GitHub</a>
+  <div class="th-card th-card--founder">
+    <div class="th-card__body" style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;">
+      <div style="flex-shrink:0;">
+        <img src="/assets/tiago_profile.png" alt="Tiago Alejo Herrador" width="140"
+             style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+      </div>
+      <div style="max-width:650px;">
+        <strong>Tiago Alejo Herrador</strong><br>
+        <span class="lang lang-en">Founder · Data Scientist · Bioinformatician</span>
+        <span class="lang lang-es">Fundador · Científico de Datos · Bioinformático</span><br>
+        <em class="lang lang-en">Bridging biology and data through code and creativity.</em>
+        <em class="lang lang-es">Uniendo biología y datos con código y creatividad.</em><br><br>
+        📍 Córdoba, Argentina · 📧 <a href="mailto:thbiodata@gmail.com">thbiodata@gmail.com</a><br>
+        🔗 <a href="https://www.linkedin.com/in/tiago-alejo-herrador-425090316" target="_blank">LinkedIn</a> ·
+        🔗 <a href="https://github.com/tiagoalejoh" target="_blank">GitHub</a>
+      </div>
     </div>
   </div>
 
