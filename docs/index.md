@@ -36,51 +36,48 @@ hide:
 
 <!-- ====================== TARJETAS / CAJONES ====================== -->
 
-<!-- Grid EN -->
-<div class="th-cards lang lang-en">
-  <div class="th-card">
-    <h3>🧬 Image Analysis</h3>
-    <p><strong>Lesion detection, segmentation, severity quantification.</strong></p>
+<div class="th-cards">
+  <div class="th-card th-card--tall">
+    <h3 class="lang lang-en">Image Analysis & Computer Vision</h3>
+    <h3 class="lang lang-es">Análisis de Imágenes & Visión</h3>
+    <div class="th-card__body">
+      <p class="lang lang-en">Segmentation, UNet fine-tuning, QA overlays…</p>
+      <p class="lang lang-es">Segmentación, fine-tuning de UNet, overlays…</p>
+    </div>
+    <a href="services/image-analysis/" class="md-button md-button--primary">View</a>
   </div>
 
-  <div class="th-card">
-    <h3>💻 Bioinformatics</h3>
-    <p><strong>Omics data workflows, statistics, reproducible pipelines.</strong></p>
+  <div class="th-card th-card--tall">
+    <h3 class="lang lang-en">Bioinformatics & Data Science</h3>
+    <h3 class="lang lang-es">Bioinformática & Ciencia de Datos</h3>
+    <div class="th-card__body">
+      <p class="lang lang-en">Pipelines, clustering, stats, reproducibility.</p>
+      <p class="lang lang-es">Pipelines, clustering, estadística, reproducibilidad.</p>
+    </div>
+    <a href="services/bioinformatics/" class="md-button">View</a>
   </div>
 
-  <div class="th-card">
-    <h3>🌍 Geospatial Modeling</h3>
-    <p><strong>CHELSA extraction, environmental layers, distribution mapping.</strong></p>
+  <div class="th-card th-card--tall">
+    <h3 class="lang lang-en">Geospatial Modeling</h3>
+    <h3 class="lang lang-es">Modelado Geoespacial</h3>
+    <div class="th-card__body">
+      <p class="lang lang-en">CHELSA layers, eBird, Folium maps.</p>
+      <p class="lang lang-es">Capas CHELSA, eBird, mapas Folium.</p>
+    </div>
+    <a href="services/geospatial/" class="md-button">View</a>
   </div>
 
-  <div class="th-card">
-    <h3>📊 Research Consulting</h3>
-    <p><strong>Project integration, automation, and data visualization.</strong></p>
+  <div class="th-card th-card--tall">
+    <h3 class="lang lang-en">Research Consulting</h3>
+    <h3 class="lang lang-es">Consultoría en Investigación</h3>
+    <div class="th-card__body">
+      <p class="lang lang-en">Design, analysis, and integration.</p>
+      <p class="lang lang-es">Diseño, análisis e integración.</p>
+    </div>
+    <a href="services/consulting/" class="md-button">View</a>
   </div>
 </div>
 
-<!-- Grid ES -->
-<div class="th-cards lang lang-es">
-  <div class="th-card">
-    <h3>🧬 Análisis de Imágenes</h3>
-    <p><strong>Detección de lesiones, segmentación y cuantificación de severidad.</strong></p>
-  </div>
-
-  <div class="th-card">
-    <h3>💻 Bioinformática</h3>
-    <p><strong>Flujos de datos ómicos, análisis estadístico y pipelines reproducibles.</strong></p>
-  </div>
-
-  <div class="th-card">
-    <h3>🌍 Modelado Geoespacial</h3>
-    <p><strong>Extracción de CHELSA, capas ambientales y mapas de distribución.</strong></p>
-  </div>
-
-  <div class="th-card">
-    <h3>📊 Consultoría en Investigación</h3>
-    <p><strong>Integración de proyectos, automatización y visualización de datos.</strong></p>
-  </div>
-</div>
 
 <!-- ====================== FRASE FINAL ====================== -->
 <div align="center" class="th-footer-quote lang lang-en">
