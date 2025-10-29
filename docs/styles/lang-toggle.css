@@ -1,0 +1,44 @@
+/* ============================================================
+TH BioData — Selector global de idioma (EN/ES)
+============================================================ */
+
+/* Oculta por defecto todo el contenido con clase .lang */
+.lang { display: none; }
+
+/* Muestra según atributo global data-lang en <html> */
+:root[data-lang="en"] .lang-en { display: contents; }
+:root[data-lang="es"] .lang-es { display: contents; }
+
+/* Botón flotante superior */
+.th-lang-switch {
+  position: fixed;
+  top: 0.7rem;
+  right: 1.2rem;
+  z-index: 9999;
+  background: var(--th-color-corporate-blue, #0F3D73);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.th-lang-switch:hover {
+  background: var(--th-color-corporate-light-blue, #7CC6FF);
+  color: #0F3D73;
+  transform: translateY(-2px);
+}
+
+/* Adaptación al modo oscuro */
+[data-md-color-scheme="slate"] .th-lang-switch {
+  background: #1d3664;
+  color: #fff;
+}
+[data-md-color-scheme="slate"] .th-lang-switch:hover {
+  background: var(--th-color-corporate-light-blue, #7CC6FF);
+  color: #0F3D73;
+}
