@@ -4,13 +4,30 @@ hide:
   - toc
 ---
 
-<!-- ====================== HERO (no tocar) ====================== -->
+<!-- ====================== HERO (bilingüe) ====================== -->
 <div id="th-hero">
   <div class="hero__bg"></div>
+
   <div class="hero__content">
-    <h1 class="hero__title">TH BioData Consulting</h1>
-    <p class="hero__tag">Transforming biological complexity into clear, data-driven insight.</p>
-    <a href="projects/" class="hero__cta">View Projects</a>
+
+    <!-- Título bilingüe -->
+    <h1 class="hero__title">
+      <span class="lang lang-en">TH BioData Consulting</span>
+      <span class="lang lang-es">TH BioData Consulting</span> <!-- mantiene el nombre igual -->
+    </h1>
+
+    <!-- Subtítulo bilingüe -->
+    <p class="hero__tag">
+      <span class="lang lang-en">Transforming biological complexity into clear, data-driven insight.</span>
+      <span class="lang lang-es">Transformando la complejidad biológica en conocimiento claro y basado en datos.</span>
+    </p>
+
+    <!-- Botón bilingüe -->
+    <a href="projects/" class="hero__cta">
+      <span class="lang lang-en">View Projects</span>
+      <span class="lang lang-es">Ver Proyectos</span>
+    </a>
+
   </div>
 </div>
 
@@ -35,8 +52,8 @@ hide:
 </section>
 
 <!-- ====================== TARJETAS / CAJONES ====================== -->
-
 <div class="th-cards">
+
   <div class="th-card th-card--tall">
     <h3 class="lang lang-en">Image Analysis & Computer Vision</h3>
     <h3 class="lang lang-es">Análisis de Imágenes & Visión</h3>
@@ -44,7 +61,10 @@ hide:
       <p class="lang lang-en">Segmentation, UNet fine-tuning, QA overlays…</p>
       <p class="lang lang-es">Segmentación, fine-tuning de UNet, overlays…</p>
     </div>
-    <a href="services/image-analysis/" class="md-button md-button--primary">View</a>
+    <a href="services/image-analysis/" class="md-button md-button--primary">
+      <span class="lang lang-en">View</span>
+      <span class="lang lang-es">Ver</span>
+    </a>
   </div>
 
   <div class="th-card th-card--tall">
@@ -54,7 +74,10 @@ hide:
       <p class="lang lang-en">Pipelines, clustering, stats, reproducibility.</p>
       <p class="lang lang-es">Pipelines, clustering, estadística, reproducibilidad.</p>
     </div>
-    <a href="services/bioinformatics/" class="md-button">View</a>
+    <a href="services/bioinformatics/" class="md-button">
+      <span class="lang lang-en">View</span>
+      <span class="lang lang-es">Ver</span>
+    </a>
   </div>
 
   <div class="th-card th-card--tall">
@@ -64,7 +87,10 @@ hide:
       <p class="lang lang-en">CHELSA layers, eBird, Folium maps.</p>
       <p class="lang lang-es">Capas CHELSA, eBird, mapas Folium.</p>
     </div>
-    <a href="services/geospatial/" class="md-button">View</a>
+    <a href="services/geospatial/" class="md-button">
+      <span class="lang lang-en">View</span>
+      <span class="lang lang-es">Ver</span>
+    </a>
   </div>
 
   <div class="th-card th-card--tall">
@@ -74,10 +100,13 @@ hide:
       <p class="lang lang-en">Design, analysis, and integration.</p>
       <p class="lang lang-es">Diseño, análisis e integración.</p>
     </div>
-    <a href="services/consulting/" class="md-button">View</a>
+    <a href="services/consulting/" class="md-button">
+      <span class="lang lang-en">View</span>
+      <span class="lang lang-es">Ver</span>
+    </a>
   </div>
-</div>
 
+</div>
 
 <!-- ====================== FRASE FINAL ====================== -->
 <div align="center" class="th-footer-quote lang lang-en">
