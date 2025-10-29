@@ -1,6 +1,6 @@
 /* ============================================================
-TH BioData Consulting — Hero full-bleed + contenido con márgenes (v12)
-Hero sin franja blanca + texto blanco opaco + tarjetas 4 por fila
+TH BioData Consulting — Hero full-bleed + contenido con márgenes (v13)
+Hero sin franja blanca + texto blanco opaco + tarjetas 4 por fila (desktop) / 2x2 (móvil)
 ============================================================ */
 
 /* ---------- Paleta ---------- */
@@ -136,60 +136,102 @@ body:has(#th-hero) #th-hero ~ * h2{
 }
 
 /* ============================================================
-Tarjetas — 4 por fila en escritorio
+Tarjetas — Grid: 4 columnas desktop / 2 columnas móvil (2x2)
 ============================================================ */
 .md-content .th-cards,
 .md-typeset .th-cards{
-  display:flex !important;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:stretch;
-  gap:var(--th-gap);
-  max-width:var(--th-content-max);
-  margin:2.5rem auto 3rem;
-  padding:0 1rem;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* Desktop: 4 fijas */
+  gap: var(--th-gap, 24px);
+  align-items: stretch;
+  max-width: var(--th-content-max, 1600px);
+  margin: 2.5rem auto 3rem;
+  padding: 0 1rem;
+  overflow: visible; /* sin scroll horizontal */
 }
 
-/* Cada tarjeta */
+/* Tarjeta base */
 .md-content .th-card,
 .md-typeset .th-card{
-  flex:0 0 calc((100% - 3*var(--th-gap))/4);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  text-align:left;
-  background:#f9fbfd;
-  border:1px solid rgba(0,0,0,.06);
-  border-radius:14px;
-  padding:1.5rem;
-  box-shadow:0 2px 6px rgba(0,0,0,.05);
-  transition:transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #f9fbfd;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  transition: transform .25s, box-shadow .25s;
+  padding: 1.25rem;
 }
-.th-card:hover{ transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.08); }
-.th-card h3{ color:var(--th-color-corporate-blue); font-size:1.2rem; font-weight:700; margin-bottom:.8rem; }
-.th-card p{ font-size:.95rem; color:#333; line-height:1.55; }
 
-/* Responsive */
-@media (max-width:1024px){
-  .th-card{ flex:0 0 calc((100% - var(--th-gap))/2); }
+/* Hover */
+.th-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
 }
-@media (max-width:640px){
-  .th-card{ flex:0 0 100%; }
+
+/* Alturas por proporción (elige UNO por tarjeta en tu HTML) */
+.th-card--tall{        /* Rectángulo alto ≈ 3:4 */
+  aspect-ratio: 3 / 4;
+  min-height: 360px;   /* respaldo */
+}
+.th-card--square{      /* Cuadrada 1:1 */
+  aspect-ratio: 1 / 1;
+  min-height: 300px;
+}
+
+/* Contenido interno crece y respeta padding */
+.th-card__body{ flex: 1; }
+
+/* Títulos y textos */
+.th-card h3{
+  color: var(--th-color-corporate-blue, #0F3D73);
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 .6rem;
+}
+.th-card p{
+  color: #2a2f35;
+  font-size: .96rem;
+  line-height: 1.55;
+}
+
+/* ---------- Responsive: 2x2 en móvil/tablet ---------- */
+@media (max-width: 1024px){
+  .md-content .th-cards,
+  .md-typeset .th-cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columnas */
+    gap: 20px;
+    padding: 0 .75rem;
+  }
+  .th-card--tall{ min-height: 320px; }
+  .th-card--square{ min-height: 260px; }
+}
+
+@media (max-width: 640px){
+  .md-content .th-cards,
+  .md-typeset .th-cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columnas (2x2) */
+    gap: 16px;
+    padding: 0 .5rem;
+  }
+  .th-card--tall{ min-height: 300px; }
+  .th-card--square{ min-height: 240px; }
 }
 
 /* ============================================================
 Modo oscuro
 ============================================================ */
 [data-md-color-scheme="slate"] .th-card{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
 }
 [data-md-color-scheme="slate"] .th-card:hover{
-  background:rgba(255,255,255,.10);
-  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  background: rgba(255,255,255,.10);
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
-[data-md-color-scheme="slate"] .th-card h3{ color:var(--th-color-corporate-light-blue)!important; }
+[data-md-color-scheme="slate"] .th-card h3{ color: var(--th-color-corporate-light-blue)!important; }
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
 
 /* ============================================================
