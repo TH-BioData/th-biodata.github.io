@@ -109,7 +109,7 @@ body:has(#th-hero){ overflow-x:hidden; }
 body:has(#th-hero) #th-hero ~ *{
   max-width:var(--th-content-max);
   margin:0 auto;
-  padding:2.5rem 1.5rem;
+  padding:2rem 0.5rem;
   box-sizing:border-box;
 }
 
