@@ -1,6 +1,6 @@
 /* ============================================================
-TH BioData Consulting — Hero full-bleed + contenido con márgenes (v11)
-Incluye: tarjetas horizontales, modo oscuro, transición 0.3s
+TH BioData Consulting — Hero full-bleed + contenido con márgenes (v12)
+Hero sin franja blanca + texto blanco opaco + tarjetas 4 por fila
 ============================================================ */
 
 /* ---------- Paleta ---------- */
@@ -8,6 +8,7 @@ Incluye: tarjetas horizontales, modo oscuro, transición 0.3s
   --th-color-corporate-blue:#0F3D73;
   --th-color-corporate-light-blue:#7CC6FF;
   --th-content-max:1600px;
+  --th-gap:24px;
 }
 
 /* ---------- Tokens del tema ---------- */
@@ -25,107 +26,137 @@ Incluye: tarjetas horizontales, modo oscuro, transición 0.3s
 .md-tabs{ background:#0F3D73!important; color:#fff!important; }
 body:has(#th-hero) .md-header{ backdrop-filter:none!important; }
 
-/* ---------- Ocultar sidebars SOLO en Home ---------- */
+/* Ocultar sidebars SOLO en Home */
 body:has(#th-hero) .md-sidebar--primary,
 body:has(#th-hero) .md-sidebar--secondary{
   display:none!important; visibility:hidden!important; width:0!important;
 }
 
-/* ---------- Evitar scroll horizontal ---------- */
+/* Evitar scroll horizontal */
 body:has(#th-hero){ overflow-x:hidden; }
 
 /* ============================================================
-HERO full-bleed
+HERO full-bleed (sin franja blanca)
 ============================================================ */
 #th-hero{
   position:relative;
   width:100vw;
   left:50%; right:50%;
   margin-left:-50vw; margin-right:-50vw;
+  margin-top:0!important; padding:0!important;
   min-height:100vh;
   overflow:hidden;
+  z-index:0;
+  background-color:#0F3D73; /* fallback sólido bajo imagen */
 }
+
+/* Fondo hero */
 #th-hero .hero__bg{
   position:absolute; inset:0; z-index:0;
   background:url('../assets/home_hero_v2.jpg') center/cover no-repeat;
   transition:transform 15s linear, filter 2s ease;
 }
+#th-hero .hero__bg:hover{ transform:scale(1.05); filter:brightness(1.06); }
+
+/* Overlay degradado */
 #th-hero::before{
   content:""; position:absolute; inset:0; z-index:1;
   background:linear-gradient(to bottom,
-    rgba(10,35,80,.25) 0%,
+    rgba(10,35,80,.2) 0%,
     rgba(10,35,80,.45) 40%,
-    rgba(10,35,80,.62) 100%);
+    rgba(10,35,80,.75) 100%);
 }
+
+/* Contenido centrado */
 #th-hero .hero__content{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  z-index:2; text-align:center; color:#fff;
-  width:min(1100px,92vw);
+  z-index:2; display:flex; flex-direction:column; align-items:center;
+  text-align:center; color:#fff;
+  padding:0 5%; width:min(1100px,92vw);
 }
+
+/* Título blanco sólido */
 #th-hero .hero__title{
-  font-size:clamp(40px,7vw,72px); font-weight:800;
-  margin:0 0 20px; text-shadow:0 4px 18px rgba(0,0,0,.65);
+  color:#ffffff!important;
+  font-size:clamp(40px,7vw,72px);
+  font-weight:800; line-height:1.1;
+  margin:0 0 20px;
+  letter-spacing:.4px;
+  text-shadow:0 6px 18px rgba(0,0,0,.75);
+  opacity:1;
 }
+
+/* Subtítulo */
 #th-hero .hero__tag{
-  font-size:clamp(18px,2vw,26px); font-weight:400; margin:0 0 38px;
-  text-shadow:0 3px 14px rgba(0,0,0,.6);
+  color:#ffffff!important;
+  font-size:clamp(18px,2vw,26px);
+  font-weight:400;
+  line-height:1.6;
+  margin:0 0 38px;
+  text-shadow:0 4px 14px rgba(0,0,0,.65);
+  opacity:.98;
 }
+
+/* Botón CTA */
 #th-hero .hero__cta{
   display:inline-block; padding:16px 36px;
-  border-radius:10px; color:#fff!important;
+  font-size:clamp(16px,1.8vw,20px);
+  font-weight:700;
+  border-radius:10px;
+  color:#fff!important;
   background:var(--th-color-corporate-blue);
-  text-decoration:none; font-weight:700;
-  transition:.25s;
+  text-decoration:none;
+  box-shadow:0 5px 14px rgba(0,0,0,.35);
+  transition:transform .25s, background .25s, box-shadow .25s;
 }
-#th-hero .hero__cta:hover{ background:#004B8E; transform:translateY(-4px); }
+#th-hero .hero__cta:hover{
+  background:#004B8E;
+  transform:translateY(-4px);
+  box-shadow:0 10px 22px rgba(0,0,0,.45);
+}
 
 /* ============================================================
-Márgenes bajo hero
+Contenido bajo hero
 ============================================================ */
 body:has(#th-hero) #th-hero ~ *{
   max-width:var(--th-content-max);
   margin:0 auto;
-  padding:1.5rem 0.5rem;
+  padding:2rem 1rem;
   box-sizing:border-box;
 }
 
-/* ============================================================
-Títulos y párrafos
-============================================================ */
 body:has(#th-hero) #th-hero ~ * h2{
   color:var(--md-primary-fg-color);
   font-weight:800;
-  margin:1.6rem 0 .6rem;
+  margin-top:1.6rem;
+  margin-bottom:.6rem;
   border-bottom:3px solid var(--th-color-corporate-light-blue);
   display:inline-block;
   padding-bottom:.4rem;
 }
-body:has(#th-hero) #th-hero ~ * p{ line-height:1.7; font-size:.98rem; }
 
 /* ============================================================
-Tarjetas horizontales (corrección definitiva)
+Tarjetas — 4 por fila en escritorio
 ============================================================ */
 .md-content .th-cards,
 .md-typeset .th-cards{
   display:flex !important;
   flex-wrap:wrap;
-  justify-content:center;
+  justify-content:space-between;
   align-items:stretch;
-  gap:1.5rem;
+  gap:var(--th-gap);
   max-width:var(--th-content-max);
   margin:2.5rem auto 3rem;
   padding:0 1rem;
 }
 
-/* Neutralizar bloque Markdown */
+/* Cada tarjeta */
 .md-content .th-card,
 .md-typeset .th-card{
-  display:inline-flex !important;
+  flex:0 0 calc((100% - 3*var(--th-gap))/4);
+  display:flex;
   flex-direction:column;
   justify-content:flex-start;
-  flex:1 1 22%;
-  min-width:280px;
-  max-width:360px;
   text-align:left;
   background:#f9fbfd;
   border:1px solid rgba(0,0,0,.06);
@@ -140,10 +171,10 @@ Tarjetas horizontales (corrección definitiva)
 
 /* Responsive */
 @media (max-width:1024px){
-  .th-card{ flex:1 1 45%; }
+  .th-card{ flex:0 0 calc((100% - var(--th-gap))/2); }
 }
 @media (max-width:640px){
-  .th-card{ flex:1 1 90%; }
+  .th-card{ flex:0 0 100%; }
 }
 
 /* ============================================================
@@ -166,53 +197,4 @@ Accesibilidad
 ============================================================ */
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; }
-}
-/* --- Tarjetas de servicios --- */
-.th-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  max-width: var(--th-content-max);
-  margin: 2.5rem auto 3rem;
-  padding: 0 1.5rem;
-}
-
-.th-card {
-  background: #f9fbfd;
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform .25s ease, box-shadow .25s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
-}
-
-.th-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-.th-card h3 {
-  color: var(--th-color-corporate-blue);
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: .8rem;
-  transition: color .3s ease;
-}
-
-.th-card p {
-  font-size: .95rem;
-  line-height: 1.55;
-  color: #333;
-  transition: color .3s ease;
-}
-
-/* --- Frase final --- */
-.th-footer-quote {
-  margin: 2.5rem auto 1.5rem;
-  font-size: 1rem;
-  color: #0F3D73;
-  opacity: .8;
-  transition: color .3s ease, opacity .3s ease;
-}
-
 }
