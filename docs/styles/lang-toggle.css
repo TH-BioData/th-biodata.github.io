@@ -5,10 +5,6 @@ TH BioData — Selector global de idioma (EN/ES)
 /* Oculta por defecto todo el contenido con clase .lang */
 .lang { display: none; }
 
-/* Muestra según atributo global data-lang en <html> */
-:root[data-lang="en"] .lang-en { display: contents; }
-:root[data-lang="es"] .lang-es { display: contents; }
-
 /* Botón flotante superior */
 .th-lang-switch {
   position: fixed;
@@ -49,5 +45,3 @@ TH BioData — Selector global de idioma (EN/ES)
 :root[data-lang="es"] .lang-es { display: block !important; }
 :root[data-lang="es"] .lang-en { display: none  !important; }
 
-/* opcional: asegura ancho completo cuando se muestra */
-.lang.lang-en, .lang.lang-es { width: 100%; }
