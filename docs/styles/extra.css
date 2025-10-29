@@ -1,7 +1,5 @@
 /* ============================================================
-TH BioData Consulting — Full theme tweaks (v14)
-Hero sin franja + texto blanco opaco + tarjetas 4 por fila (desktop) / 2x2 (móvil)
-Sidebar TOC bilingüe (muestra 1 idioma según :root[data-lang])
+TH BioData Consulting — v15 (Hero limpio + TOC bilingüe funcional)
 ============================================================ */
 
 /* ---------- Paleta ---------- */
@@ -12,11 +10,8 @@ Sidebar TOC bilingüe (muestra 1 idioma según :root[data-lang])
   --th-gap:24px;
 }
 
-/* ---------- Tokens del tema ---------- */
-[data-md-color-scheme="default"]{
-  --md-primary-fg-color:var(--th-color-corporate-blue);
-  --md-accent-fg-color:var(--th-color-corporate-light-blue);
-}
+/* ---------- Tokens ---------- */
+[data-md-color-scheme="default"],
 [data-md-color-scheme="slate"]{
   --md-primary-fg-color:var(--th-color-corporate-blue);
   --md-accent-fg-color:var(--th-color-corporate-light-blue);
@@ -26,40 +21,28 @@ Sidebar TOC bilingüe (muestra 1 idioma según :root[data-lang])
 .md-header,
 .md-tabs{ background:#0F3D73!important; color:#fff!important; }
 body:has(#th-hero) .md-header{ backdrop-filter:none!important; }
-
-/* Ocultar sidebars SOLO en Home */
+body:has(#th-hero){ overflow-x:hidden; }
 body:has(#th-hero) .md-sidebar--primary,
 body:has(#th-hero) .md-sidebar--secondary{
-  display:none!important; visibility:hidden!important; width:0!important;
+  display:none!important;
 }
-
-/* Evitar scroll horizontal */
-body:has(#th-hero){ overflow-x:hidden; }
 
 /* ============================================================
-HERO full-bleed (sin franja blanca)
+HERO — full bleed sin franja
 ============================================================ */
 #th-hero{
-  position:relative;
-  width:100vw;
-  left:50%; right:50%;
-  margin-left:-50vw; margin-right:-50vw;
+  position:relative; width:100vw;
+  left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;
   margin-top:0!important; padding:0!important;
-  min-height:100vh;
-  overflow:hidden;
-  z-index:0;
-  background-color:#0F3D73; /* fallback sólido */
+  min-height:100vh; background:#0F3D73;
+  overflow:hidden; z-index:0;
 }
-
-/* Fondo hero */
 #th-hero .hero__bg{
   position:absolute; inset:0; z-index:0;
   background:url('../assets/home_hero_v2.jpg') center/cover no-repeat;
   transition:transform 15s linear, filter 2s ease;
 }
-#th-hero .hero__bg:hover{ transform:scale(1.05); filter:brightness(1.06); }
-
-/* Overlay degradado */
+#th-hero .hero__bg:hover{ transform:scale(1.05); filter:brightness(1.08); }
 #th-hero::before{
   content:""; position:absolute; inset:0; z-index:1;
   background:linear-gradient(to bottom,
@@ -67,37 +50,22 @@ HERO full-bleed (sin franja blanca)
     rgba(10,35,80,.45) 40%,
     rgba(10,35,80,.75) 100%);
 }
-
-/* Contenido centrado */
 #th-hero .hero__content{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
   z-index:2; display:flex; flex-direction:column; align-items:center;
-  text-align:center; color:#fff;
-  padding:0 5%; width:min(1100px,92vw);
+  text-align:center; color:#fff; width:min(1100px,92vw);
 }
-
-/* Título blanco sólido */
 #th-hero .hero__title{
-  color:#ffffff!important;
-  font-size:clamp(40px,7vw,72px);
-  font-weight:800; line-height:1.1;
-  margin:0 0 20px; letter-spacing:.4px;
+  color:#fff!important; font-size:clamp(40px,7vw,72px);
+  font-weight:800; margin:0 0 20px;
   text-shadow:0 6px 18px rgba(0,0,0,.75);
-  opacity:1;
 }
-
-/* Subtítulo */
 #th-hero .hero__tag{
-  color:#ffffff!important;
-  font-size:clamp(18px,2vw,26px);
-  font-weight:400;
-  line-height:1.6;
-  margin:0 0 38px;
+  color:#fff!important; font-size:clamp(18px,2vw,26px);
+  font-weight:400; margin:0 0 38px;
   text-shadow:0 4px 14px rgba(0,0,0,.65);
-  opacity:.98;
 }
-
-/* Botón CTA */
 #th-hero .hero__cta{
   display:inline-block; padding:16px 36px;
   font-size:clamp(16px,1.8vw,20px);
@@ -111,13 +79,21 @@ HERO full-bleed (sin franja blanca)
   box-shadow:0 10px 22px rgba(0,0,0,.45);
 }
 
+/* FIX franja blanca */
+body:has(#th-hero) .md-main,
+body:has(#th-hero) .md-main__inner,
+body:has(#th-hero) .md-container{
+  margin-top:0!important; padding-top:0!important;
+}
+.md-header + .md-container{ margin-top:0!important; padding-top:0!important; }
+body:has(#th-hero) #th-hero{ margin-top:-1px!important; }
+
 /* ============================================================
-Contenido bajo hero
+Bloque principal bajo hero
 ============================================================ */
 body:has(#th-hero) #th-hero ~ *{
   max-width:var(--th-content-max);
-  margin:0 auto; padding:2rem 1rem;
-  box-sizing:border-box;
+  margin:0 auto; padding:2rem 1rem; box-sizing:border-box;
 }
 body:has(#th-hero) #th-hero ~ * h2{
   color:var(--md-primary-fg-color);
@@ -128,60 +104,35 @@ body:has(#th-hero) #th-hero ~ * h2{
 }
 
 /* ============================================================
-Tarjetas — Grid: 4 columnas desktop / 2 columnas tablet/móvil
+Tarjetas
 ============================================================ */
-.md-content .th-cards,
-.md-typeset .th-cards{
-  display:grid !important;
-  grid-template-columns:repeat(4, minmax(0,1fr));
+.th-cards{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:var(--th-gap,24px);
   align-items:stretch;
-  max-width:var(--th-content-max,1600px);
+  max-width:var(--th-content-max);
   margin:2.5rem auto 3rem;
   padding:0 1rem;
-  overflow:visible;
 }
-
-/* Tarjeta base */
-.md-content .th-card,
-.md-typeset .th-card{
-  display:flex; flex-direction:column; justify-content:flex-start;
-  background:#f9fbfd;
+.th-card{
+  display:flex; flex-direction:column; background:#f9fbfd;
   border:1px solid rgba(0,0,0,.06);
-  border-radius:14px;
-  box-shadow:0 2px 6px rgba(0,0,0,.05);
+  border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.05);
   transition:transform .25s, box-shadow .25s;
   padding:1.25rem;
 }
 .th-card:hover{ transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.08); }
-
-/* Proporciones opcionales */
-.th-card--tall{ aspect-ratio:3/4; min-height:360px; }
-.th-card--square{ aspect-ratio:1/1; min-height:300px; }
-
 .th-card__body{ flex:1; }
-.th-card h3{
-  color:var(--th-color-corporate-blue,#0F3D73);
-  font-size:1.15rem; font-weight:800; margin:0 0 .6rem;
-}
+.th-card h3{ color:var(--th-color-corporate-blue); font-size:1.15rem; font-weight:800; margin:0 0 .6rem; }
 .th-card p{ color:#2a2f35; font-size:.96rem; line-height:1.55; }
 
-/* Responsive: 2 columnas */
-@media (max-width:1024px){
-  .md-content .th-cards, .md-typeset .th-cards{
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:20px; padding:0 .75rem;
-  }
-  .th-card--tall{ min-height:320px; }
-  .th-card--square{ min-height:260px; }
+/* Responsivo */
+@media(max-width:1024px){
+  .th-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
 }
-@media (max-width:640px){
-  .md-content .th-cards, .md-typeset .th-cards{
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:16px; padding:0 .5rem;
-  }
-  .th-card--tall{ min-height:300px; }
-  .th-card--square{ min-height:240px; }
+@media(max-width:640px){
+  .th-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
 }
 
 /* ============================================================
@@ -200,76 +151,74 @@ Modo oscuro
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
 
 /* ============================================================
-Accesibilidad
+Texto principal y márgenes
 ============================================================ */
-@media (prefers-reduced-motion: reduce){ *{ transition:none!important; } }
-
-/* ============================================================
-FIX — eliminar franja blanca entre barra y hero
-============================================================ */
-body:has(#th-hero) .md-main,
-body:has(#th-hero) .md-main__inner,
-body:has(#th-hero) .md-container{
-  margin-top:0!important; padding-top:0!important;
-}
-.md-header + .md-container{ margin-top:0!important; padding-top:0!important; }
-body:has(#th-hero) #th-hero{ margin-top:-1px!important; } /* corrige 1px residual */
-
-/* ============================================================
-Tipografía y alineación del bloque principal
-============================================================ */
-.th-section{
-  margin-left:0!important;
-  max-width:var(--th-content-max);
-  padding-left:2rem!important; /* mismo margen que el título */
-  padding-right:2rem;
-}
+.th-section{ padding:0 2rem; max-width:var(--th-content-max); margin:0 auto; }
 .th-section h2{
-  font-size:2.1rem!important; font-weight:900; margin-bottom:1.6rem;
+  font-size:2.1rem!important;
+  font-weight:900;
+  margin-bottom:1.6rem;
 }
 .th-paragraph{
-  font-size:.93rem!important; line-height:1.65; color:#1e1e1e;
-  margin-left:0!important; text-align:left!important;
+  font-size:.93rem!important;
+  line-height:1.65;
+  color:#1e1e1e;
 }
 [data-md-color-scheme="slate"] .th-paragraph{ color:#e0e5ef!important; }
 
 /* ============================================================
-Botones "View" uniformes
+Botones uniformes
 ============================================================ */
 .th-card a.md-button,
 .th-card a.md-button--primary{
   display:inline-block;
-  background:var(--th-color-corporate-blue,#0F3D73)!important;
-  color:#fff!important; border:none!important; border-radius:10px;
-  padding:.75rem 1.25rem; font-weight:700;
+  background:var(--th-color-corporate-blue)!important;
+  color:#fff!important; border:none!important;
+  border-radius:10px;
+  padding:.75rem 1.25rem;
+  font-weight:700;
   box-shadow:0 5px 14px rgba(0,0,0,.12);
   transition:transform .2s, box-shadow .2s, background .2s;
 }
-.th-card a.md-button:hover,
-.th-card a.md-button--primary:hover{
-  background:#004B8E!important; transform:translateY(-2px);
-  box-shadow:0 8px 18px rgba(0,0,0,.18);
-}
-[data-md-color-scheme="slate"] .th-card a.md-button,
-[data-md-color-scheme="slate"] .th-card a.md-button--primary{
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
-}
+.th-card a.md-button:hover{ background:#004B8E!important; transform:translateY(-2px); }
 
 /* ============================================================
-Bilingüe — limpiar espaciados y TOC con un solo idioma
+Bilingüe — espaciado + TOC
 ============================================================ */
 
-/* Limpieza de espaciado en bloques bilingües */
+/* Limpieza de espaciado */
 .lang{ margin:0!important; padding:0!important; }
 p.lang{ margin-block:.4em!important; }
 ul.lang{ margin-top:.2em!important; margin-bottom:.4em!important; }
 
-/* TOC/Sidebar: por defecto oculta .lang en enlaces */
-.md-nav__link .lang{ display:none!important; }
+/* Ocultar duplicados del TOC (sidebar) */
+.md-nav__link .lang{
+  opacity:0; visibility:hidden; height:0; overflow:hidden;
+  transition:opacity .2s ease;
+}
 
-/* Muestra el idioma activo según el atributo global del toggle */
-:root[data-lang="en"] .md-nav__link .lang-en{ display:inline!important; }
-:root[data-lang="en"] .md-nav__link .lang-es{ display:none!important; }
+/* Mostrar solo idioma activo */
+:root[data-lang="en"] .md-nav__link .lang-en{
+  opacity:1!important; visibility:visible!important; height:auto!important;
+}
+:root[data-lang="en"] .md-nav__link .lang-es{
+  opacity:0!important; visibility:hidden!important; height:0!important;
+}
 
-:root[data-lang="es"] .md-nav__link .lang-en{ display:none!important; }
-:root[data-lang="es"] .md-nav__link .lang-es{ display:inline!important; }
+:root[data-lang="es"] .md-nav__link .lang-en{
+  opacity:0!important; visibility:hidden!important; height:0!important;
+}
+:root[data-lang="es"] .md-nav__link .lang-es{
+  opacity:1!important; visibility:visible!important; height:auto!important;
+}
+
+/* Reforzar también en títulos renderizados */
+:root[data-lang="en"] .lang-en{ display:inline!important; }
+:root[data-lang="en"] .lang-es{ display:none!important; }
+:root[data-lang="es"] .lang-en{ display:none!important; }
+:root[data-lang="es"] .lang-es{ display:inline!important; }
+
+/* ============================================================
+Accesibilidad
+============================================================ */
+@media(prefers-reduced-motion:reduce){ *{ transition:none!important; } }
