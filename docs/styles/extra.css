@@ -167,3 +167,20 @@ Accesibilidad
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; }
 }
+/* ==== Forzar 4 tarjetas por fila en pantallas grandes ==== */
+:root { --th-gap: 24px; }                   /* mismo valor que gap del contenedor */
+.md-content .th-cards,
+.md-typeset .th-cards { gap: var(--th-gap); }
+
+@media (min-width: 1280px){
+  .md-content .th-cards,
+  .md-typeset .th-cards{
+    justify-content: space-between;        /* reparte el espacio horizontal */
+  }
+  .md-content .th-card,
+  .md-typeset .th-card{
+    flex: 0 0 calc((100% - 3*var(--th-gap)) / 4);  /* 4 columnas exactas */
+    min-width: 0;                          /* evita que el min-width bloquee el ajuste */
+    max-width: none;                       /* permite ocupar exactamente el cálculo */
+  }
+}
