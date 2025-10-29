@@ -42,3 +42,12 @@ TH BioData — Selector global de idioma (EN/ES)
   background: var(--th-color-corporate-light-blue, #7CC6FF);
   color: #0F3D73;
 }
+/* Visibilidad de idioma con máxima prioridad */
+:root[data-lang="en"] .lang-en { display: block !important; }
+:root[data-lang="en"] .lang-es { display: none  !important; }
+
+:root[data-lang="es"] .lang-es { display: block !important; }
+:root[data-lang="es"] .lang-en { display: none  !important; }
+
+/* opcional: asegura ancho completo cuando se muestra */
+.lang.lang-en, .lang.lang-es { width: 100%; }
