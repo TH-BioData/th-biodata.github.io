@@ -1,6 +1,7 @@
 /* ============================================================
-TH BioData Consulting — Hero full-bleed + contenido con márgenes (v13)
-Hero sin franja blanca + texto blanco opaco + tarjetas 4 por fila (desktop) / 2x2 (móvil)
+TH BioData Consulting — Full theme tweaks (v14)
+Hero sin franja + texto blanco opaco + tarjetas 4 por fila (desktop) / 2x2 (móvil)
+Sidebar TOC bilingüe (muestra 1 idioma según :root[data-lang])
 ============================================================ */
 
 /* ---------- Paleta ---------- */
@@ -47,7 +48,7 @@ HERO full-bleed (sin franja blanca)
   min-height:100vh;
   overflow:hidden;
   z-index:0;
-  background-color:#0F3D73; /* fallback sólido bajo imagen */
+  background-color:#0F3D73; /* fallback sólido */
 }
 
 /* Fondo hero */
@@ -80,8 +81,7 @@ HERO full-bleed (sin franja blanca)
   color:#ffffff!important;
   font-size:clamp(40px,7vw,72px);
   font-weight:800; line-height:1.1;
-  margin:0 0 20px;
-  letter-spacing:.4px;
+  margin:0 0 20px; letter-spacing:.4px;
   text-shadow:0 6px 18px rgba(0,0,0,.75);
   opacity:1;
 }
@@ -101,17 +101,13 @@ HERO full-bleed (sin franja blanca)
 #th-hero .hero__cta{
   display:inline-block; padding:16px 36px;
   font-size:clamp(16px,1.8vw,20px);
-  font-weight:700;
-  border-radius:10px;
-  color:#fff!important;
-  background:var(--th-color-corporate-blue);
-  text-decoration:none;
-  box-shadow:0 5px 14px rgba(0,0,0,.35);
+  font-weight:700; border-radius:10px;
+  color:#fff!important; background:var(--th-color-corporate-blue);
+  text-decoration:none; box-shadow:0 5px 14px rgba(0,0,0,.35);
   transition:transform .25s, background .25s, box-shadow .25s;
 }
 #th-hero .hero__cta:hover{
-  background:#004B8E;
-  transform:translateY(-4px);
+  background:#004B8E; transform:translateY(-4px);
   box-shadow:0 10px 22px rgba(0,0,0,.45);
 }
 
@@ -120,230 +116,160 @@ Contenido bajo hero
 ============================================================ */
 body:has(#th-hero) #th-hero ~ *{
   max-width:var(--th-content-max);
-  margin:0 auto;
-  padding:2rem 1rem;
+  margin:0 auto; padding:2rem 1rem;
   box-sizing:border-box;
 }
-
 body:has(#th-hero) #th-hero ~ * h2{
   color:var(--md-primary-fg-color);
   font-weight:800;
-  margin-top:1.6rem;
-  margin-bottom:.6rem;
+  margin-top:1.6rem; margin-bottom:.6rem;
   border-bottom:3px solid var(--th-color-corporate-light-blue);
-  display:inline-block;
-  padding-bottom:.4rem;
+  display:inline-block; padding-bottom:.4rem;
 }
 
 /* ============================================================
-Tarjetas — Grid: 4 columnas desktop / 2 columnas móvil (2x2)
+Tarjetas — Grid: 4 columnas desktop / 2 columnas tablet/móvil
 ============================================================ */
 .md-content .th-cards,
 .md-typeset .th-cards{
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* Desktop: 4 fijas */
-  gap: var(--th-gap, 24px);
-  align-items: stretch;
-  max-width: var(--th-content-max, 1600px);
-  margin: 2.5rem auto 3rem;
-  padding: 0 1rem;
-  overflow: visible; /* sin scroll horizontal */
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:var(--th-gap,24px);
+  align-items:stretch;
+  max-width:var(--th-content-max,1600px);
+  margin:2.5rem auto 3rem;
+  padding:0 1rem;
+  overflow:visible;
 }
 
 /* Tarjeta base */
 .md-content .th-card,
 .md-typeset .th-card{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: #f9fbfd;
-  border: 1px solid rgba(0,0,0,.06);
-  border-radius: 14px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.05);
-  transition: transform .25s, box-shadow .25s;
-  padding: 1.25rem;
+  display:flex; flex-direction:column; justify-content:flex-start;
+  background:#f9fbfd;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:14px;
+  box-shadow:0 2px 6px rgba(0,0,0,.05);
+  transition:transform .25s, box-shadow .25s;
+  padding:1.25rem;
 }
+.th-card:hover{ transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.08); }
 
-/* Hover */
-.th-card:hover{
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,.08);
-}
+/* Proporciones opcionales */
+.th-card--tall{ aspect-ratio:3/4; min-height:360px; }
+.th-card--square{ aspect-ratio:1/1; min-height:300px; }
 
-/* Alturas por proporción (elige UNO por tarjeta en tu HTML) */
-.th-card--tall{        /* Rectángulo alto ≈ 3:4 */
-  aspect-ratio: 3 / 4;
-  min-height: 360px;   /* respaldo */
-}
-.th-card--square{      /* Cuadrada 1:1 */
-  aspect-ratio: 1 / 1;
-  min-height: 300px;
-}
-
-/* Contenido interno crece y respeta padding */
-.th-card__body{ flex: 1; }
-
-/* Títulos y textos */
+.th-card__body{ flex:1; }
 .th-card h3{
-  color: var(--th-color-corporate-blue, #0F3D73);
-  font-size: 1.15rem;
-  font-weight: 800;
-  margin: 0 0 .6rem;
+  color:var(--th-color-corporate-blue,#0F3D73);
+  font-size:1.15rem; font-weight:800; margin:0 0 .6rem;
 }
-.th-card p{
-  color: #2a2f35;
-  font-size: .96rem;
-  line-height: 1.55;
-}
+.th-card p{ color:#2a2f35; font-size:.96rem; line-height:1.55; }
 
-/* ---------- Responsive: 2x2 en móvil/tablet ---------- */
-@media (max-width: 1024px){
-  .md-content .th-cards,
-  .md-typeset .th-cards{
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columnas */
-    gap: 20px;
-    padding: 0 .75rem;
+/* Responsive: 2 columnas */
+@media (max-width:1024px){
+  .md-content .th-cards, .md-typeset .th-cards{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:20px; padding:0 .75rem;
   }
-  .th-card--tall{ min-height: 320px; }
-  .th-card--square{ min-height: 260px; }
+  .th-card--tall{ min-height:320px; }
+  .th-card--square{ min-height:260px; }
 }
-
-@media (max-width: 640px){
-  .md-content .th-cards,
-  .md-typeset .th-cards{
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columnas (2x2) */
-    gap: 16px;
-    padding: 0 .5rem;
+@media (max-width:640px){
+  .md-content .th-cards, .md-typeset .th-cards{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:16px; padding:0 .5rem;
   }
-  .th-card--tall{ min-height: 300px; }
-  .th-card--square{ min-height: 240px; }
+  .th-card--tall{ min-height:300px; }
+  .th-card--square{ min-height:240px; }
 }
 
 /* ============================================================
 Modo oscuro
 ============================================================ */
 [data-md-color-scheme="slate"] .th-card{
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.15);
-  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
 [data-md-color-scheme="slate"] .th-card:hover{
-  background: rgba(255,255,255,.10);
-  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  background:rgba(255,255,255,.10);
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
 }
-[data-md-color-scheme="slate"] .th-card h3{ color: var(--th-color-corporate-light-blue)!important; }
+[data-md-color-scheme="slate"] .th-card h3{ color:var(--th-color-corporate-light-blue)!important; }
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
 
 /* ============================================================
 Accesibilidad
 ============================================================ */
-@media (prefers-reduced-motion: reduce){
-  *{ transition:none !important; }
-}
+@media (prefers-reduced-motion: reduce){ *{ transition:none!important; } }
 
 /* ============================================================
-FIX FINAL — eliminar franja blanca entre barra y hero
+FIX — eliminar franja blanca entre barra y hero
 ============================================================ */
-
-/* Quita el margen/padding del primer contenedor debajo del header */
 body:has(#th-hero) .md-main,
 body:has(#th-hero) .md-main__inner,
-body:has(#th-hero) .md-container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+body:has(#th-hero) .md-container{
+  margin-top:0!important; padding-top:0!important;
 }
-
-/* Elimina cualquier espacio residual del tema en el primer hijo tras el header */
-.md-header + .md-container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Asegura que el hero toque exactamente el borde inferior del header */
-body:has(#th-hero) #th-hero {
-  margin-top: -1px !important;  /* corrige 1px de borde invisible */
-}
+.md-header + .md-container{ margin-top:0!important; padding-top:0!important; }
+body:has(#th-hero) #th-hero{ margin-top:-1px!important; } /* corrige 1px residual */
 
 /* ============================================================
-TH BioData — Ajustes tipográficos y alineación del bloque principal
+Tipografía y alineación del bloque principal
 ============================================================ */
-
-/* Alinea el texto exactamente con el título "Main areas" */
-.th-section {
-  margin-left: 0 !important;
-  max-width: var(--th-content-max);
-  padding-left: 2rem !important;  /* mismo margen que el título */
-  padding-right: 2rem;
+.th-section{
+  margin-left:0!important;
+  max-width:var(--th-content-max);
+  padding-left:2rem!important; /* mismo margen que el título */
+  padding-right:2rem;
 }
-
-/* Aumenta tamaño del título principal */
-.th-section h2 {
-  font-size: 2.1rem !important;   /* más grande que antes */
-  font-weight: 900;
-  margin-bottom: 1.6rem;
+.th-section h2{
+  font-size:2.1rem!important; font-weight:900; margin-bottom:1.6rem;
 }
-
-/* Ajusta tipografía del texto descriptivo debajo */
-.th-paragraph {
-  font-size: 0.93rem !important;  /* ligeramente más chico */
-  line-height: 1.65;
-  color: #1e1e1e;
-  margin-left: 0 !important;
-  text-align: left !important;
+.th-paragraph{
+  font-size:.93rem!important; line-height:1.65; color:#1e1e1e;
+  margin-left:0!important; text-align:left!important;
 }
+[data-md-color-scheme="slate"] .th-paragraph{ color:#e0e5ef!important; }
 
-/* Versión oscura coherente */
-[data-md-color-scheme="slate"] .th-paragraph {
-  color: #e0e5ef !important;
-}
-
-
-/* =========================
-Botones "View" uniformes (todos llenos)
-========================= */
+/* ============================================================
+Botones "View" uniformes
+============================================================ */
 .th-card a.md-button,
 .th-card a.md-button--primary{
-  display: inline-block;
-  background: var(--th-color-corporate-blue, #0F3D73) !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: 10px;
-  padding: .75rem 1.25rem;
-  font-weight: 700;
-  box-shadow: 0 5px 14px rgba(0,0,0,.12);
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  display:inline-block;
+  background:var(--th-color-corporate-blue,#0F3D73)!important;
+  color:#fff!important; border:none!important; border-radius:10px;
+  padding:.75rem 1.25rem; font-weight:700;
+  box-shadow:0 5px 14px rgba(0,0,0,.12);
+  transition:transform .2s, box-shadow .2s, background .2s;
 }
 .th-card a.md-button:hover,
 .th-card a.md-button--primary:hover{
-  background: #004B8E !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+  background:#004B8E!important; transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
 }
 [data-md-color-scheme="slate"] .th-card a.md-button,
 [data-md-color-scheme="slate"] .th-card a.md-button--primary{
-  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  box-shadow:0 2px 10px rgba(0,0,0,.35);
 }
 
+/* ============================================================
+Bilingüe — limpiar espaciados y TOC con un solo idioma
+============================================================ */
 
+/* Limpieza de espaciado en bloques bilingües */
+.lang{ margin:0!important; padding:0!important; }
+p.lang{ margin-block:.4em!important; }
+ul.lang{ margin-top:.2em!important; margin-bottom:.4em!important; }
 
-/* === Limpieza de espaciado en secciones bilingües === */
-.lang {
-  margin: 0 !important;
-  padding: 0 !important;
-}
+/* TOC/Sidebar: por defecto oculta .lang en enlaces */
+.md-nav__link .lang{ display:none!important; }
 
-/* Eliminar espacio vertical entre párrafos contiguos */
-p.lang {
-  margin-block: 0.4em !important;
-}
+/* Muestra el idioma activo según el atributo global del toggle */
+:root[data-lang="en"] .md-nav__link .lang-en{ display:inline!important; }
+:root[data-lang="en"] .md-nav__link .lang-es{ display:none!important; }
 
-/* Corrige comportamiento del TOC (sidebar) para mostrar un solo idioma */
-.md-nav__link span.lang-es {
-  display: none;
-}
-html[lang="es"] .md-nav__link span.lang-en {
-  display: none;
-}
-html[lang="es"] .md-nav__link span.lang-es {
-  display: inline;
-}
+:root[data-lang="es"] .md-nav__link .lang-en{ display:none!important; }
+:root[data-lang="es"] .md-nav__link .lang-es{ display:inline!important; }
