@@ -264,20 +264,39 @@ body:has(#th-hero) #th-hero {
   margin-top: -1px !important;  /* corrige 1px de borde invisible */
 }
 
-/* =========================
-Main areas: párrafos más grandes
-========================= */
-.th-section .th-paragraph{
-  /* tamaño un poco mayor y cómodo en todas las pantallas */
-  font-size: clamp(1.02rem, 0.9rem + 0.5vw, 1.18rem);
-  line-height: 1.75;
-  max-width: 980px;
-  margin: .35rem auto 1.25rem; /* centrado y respiro */
-  color: #1f2a37;
+/* ============================================================
+TH BioData — Ajustes tipográficos y alineación del bloque principal
+============================================================ */
+
+/* Alinea el texto exactamente con el título "Main areas" */
+.th-section {
+  margin-left: 0 !important;
+  max-width: var(--th-content-max);
+  padding-left: 2rem !important;  /* mismo margen que el título */
+  padding-right: 2rem;
 }
-[data-md-color-scheme="slate"] .th-section .th-paragraph{
-  color: #e8eef6;
+
+/* Aumenta tamaño del título principal */
+.th-section h2 {
+  font-size: 2.1rem !important;   /* más grande que antes */
+  font-weight: 900;
+  margin-bottom: 1.6rem;
 }
+
+/* Ajusta tipografía del texto descriptivo debajo */
+.th-paragraph {
+  font-size: 0.93rem !important;  /* ligeramente más chico */
+  line-height: 1.65;
+  color: #1e1e1e;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+/* Versión oscura coherente */
+[data-md-color-scheme="slate"] .th-paragraph {
+  color: #e0e5ef !important;
+}
+
 
 /* =========================
 Botones "View" uniformes (todos llenos)
