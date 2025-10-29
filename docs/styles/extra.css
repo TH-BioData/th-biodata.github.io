@@ -1,5 +1,6 @@
 /* ============================================================
-TH BioData Consulting — Hero full-bleed + contenido con márgenes (v7)
+TH BioData Consulting — Hero full-bleed + contenido con márgenes (v8)
+Incluye: modo oscuro legible + transición 0.3s entre temas
 ============================================================ */
 
 /* Paleta */
@@ -9,7 +10,7 @@ TH BioData Consulting — Hero full-bleed + contenido con márgenes (v7)
   --th-content-max:1600px; /* ancho del texto bajo el hero */
 }
 
-/* Tema claro/oscuro */
+/* Tema claro/oscuro - tokens del tema */
 [data-md-color-scheme="default"]{
   --md-primary-fg-color:var(--th-color-corporate-blue);
   --md-primary-fg-color--light:#1E5AA6;
@@ -134,7 +135,6 @@ body:has(#th-hero) #th-hero ~ * hr{ border:none; height:1px; background:rgba(0,0
   #th-hero .hero__content{ width:92vw; }
 }
 
-
 /* ============================================================
 TH BioData — Estética Home bajo Hero
 ============================================================ */
@@ -183,7 +183,7 @@ TH BioData — Estética Home bajo Hero
   border-radius: 14px;
   padding: 1.5rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: transform .25s ease, box-shadow .25s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
 }
 
 .th-card:hover {
@@ -196,12 +196,14 @@ TH BioData — Estética Home bajo Hero
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: .8rem;
+  transition: color .3s ease;
 }
 
 .th-card p {
   font-size: .95rem;
   line-height: 1.55;
   color: #333;
+  transition: color .3s ease;
 }
 
 /* --- Frase final --- */
@@ -210,4 +212,76 @@ TH BioData — Estética Home bajo Hero
   font-size: 1rem;
   color: #0F3D73;
   opacity: .8;
+  transition: color .3s ease, opacity .3s ease;
+}
+
+/* ============================================================
+MODO OSCURO — tipografía clara + tarjetas contrastadas
+============================================================ */
+
+/* Transición suave de 0.3s del tema (aplicada a bloques personalizados) */
+[data-md-color-scheme="default"] .th-section,
+[data-md-color-scheme="slate"] .th-section,
+[data-md-color-scheme="default"] #th-hero ~ *,
+[data-md-color-scheme="slate"] #th-hero ~ * {
+  transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+[data-md-color-scheme="slate"] {
+  color-scheme: dark;
+}
+
+/* Texto general bajo el hero en oscuro */
+[data-md-color-scheme="slate"] .th-section,
+[data-md-color-scheme="slate"] #th-hero ~ * {
+  color: #f4f6fa !important;
+}
+
+/* Títulos en oscuro */
+[data-md-color-scheme="slate"] .th-section h2 {
+  color: #ffffff !important;
+  border-bottom-color: var(--th-color-corporate-light-blue);
+}
+
+/* Párrafos en oscuro */
+[data-md-color-scheme="slate"] .th-paragraph {
+  color: #eaeaea !important;
+}
+
+/* Tarjetas en oscuro */
+[data-md-color-scheme="slate"] .th-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+[data-md-color-scheme="slate"] .th-card:hover {
+  background: rgba(255,255,255,0.10);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+[data-md-color-scheme="slate"] .th-card h3 {
+  color: var(--th-color-corporate-light-blue) !important;
+}
+
+[data-md-color-scheme="slate"] .th-card p {
+  color: #f2f4f8 !important;
+}
+
+/* Frase final en oscuro */
+[data-md-color-scheme="slate"] .th-footer-quote {
+  color: #e2e7ef !important;
+  opacity: 0.9;
+}
+
+/* Separadores en oscuro (los <hr> dentro del contenido bajo hero) */
+[data-md-color-scheme="slate"] #th-hero ~ * hr {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ============================================================
+Accesibilidad: respeta usuarios con “reducir movimiento”
+============================================================ */
+@media (prefers-reduced-motion: reduce){
+  * { transition: none !important; }
 }
