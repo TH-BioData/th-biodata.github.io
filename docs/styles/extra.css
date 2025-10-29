@@ -285,3 +285,39 @@ Accesibilidad: respeta usuarios con “reducir movimiento”
 @media (prefers-reduced-motion: reduce){
   * { transition: none !important; }
 }
+
+/* ===== FIX: hacer que las tarjetas se muestren en columnas (no apiladas) ===== */
+.md-content .th-cards,
+.md-typeset .th-cards {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem 1.25rem;
+  max-width: var(--th-content-max);
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+  align-items: stretch;
+}
+
+/* Cada tarjeta ocupa toda la altura de su celda */
+.md-content .th-card,
+.md-typeset .th-card {
+  height: 100%;
+}
+
+/* Opcional: versión algo más compacta en pantallas grandes */
+@media (min-width: 1280px) {
+  .md-content .th-cards,
+  .md-typeset .th-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* En móviles, 1 por fila (legible) */
+@media (max-width: 640px) {
+  .md-content .th-cards,
+  .md-typeset .th-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 .75rem;
+  }
+}
