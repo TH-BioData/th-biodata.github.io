@@ -1,6 +1,6 @@
 /* ============================================================
-TH BioData Consulting — Estilos finales depurados (v5)
-Hero full-width, sin franja blanca, sin sidebars
+TH BioData Consulting — Estilos finales depurados (v6)
+Hero full-width sin franja blanca + contenido centrado
 ============================================================ */
 
 /* -------------------- Paleta global -------------------- */
@@ -30,13 +30,12 @@ Hero full-width, sin franja blanca, sin sidebars
   background-color: #0F3D73 !important;
   color: #fff !important;
 }
-body:has(#th-hero) .md-header { backdrop-filter: none !important; }
-
-/* Evita reflujo por la barra de scroll */
-html { scrollbar-gutter: stable; }
+body:has(#th-hero) .md-header {
+  backdrop-filter: none !important;
+}
 
 /* ============================================================
-HOME: eliminar sidebars y márgenes del contenedor principal
+HOME: quitar sidebars, márgenes y offsets del header
 ============================================================ */
 body:has(#th-hero) .md-sidebar--primary,
 body:has(#th-hero) .md-sidebar--secondary {
@@ -45,31 +44,13 @@ body:has(#th-hero) .md-sidebar--secondary {
   width: 0 !important;
 }
 
-/* Elimina cualquier espacio entre header y hero */
+/* Elimina cualquier espacio o franja entre header y hero */
 body:has(#th-hero) .md-main,
 body:has(#th-hero) .md-main__inner,
-body:has(#th-hero) .md-header + .md-container,
-body:has(#th-hero) .md-header ~ .md-container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Quita offset residual del tema Material */
 body:has(#th-hero) .md-container {
   margin: 0 !important;
   padding: 0 !important;
   max-width: 100% !important;
-}
-
-/* Contenedor del contenido (bajo el hero) */
-body:has(#th-hero) .md-content {
-  max-width: var(--th-content-max) !important;
-  margin: 0 auto !important;
-  padding: 2rem 1.2rem !important;
-}
-body:has(#th-hero) .md-content__inner,
-body:has(#th-hero) .md-typeset {
-  max-width: 100%;
 }
 
 /* ============================================================
@@ -78,17 +59,15 @@ HERO — Full width y alineado bajo la barra azul
 #th-hero {
   position: relative;
   width: 100%;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  top: 0;
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
   overflow: hidden;
-  will-change: opacity, transform;
-  transition: opacity .12s linear, transform .12s linear;
+  top: 0;
   z-index: 0;
 }
 
-/* Fondo del hero */
+/* Imagen de fondo */
 #th-hero .hero__bg {
   position: absolute;
   inset: 0;
@@ -130,9 +109,8 @@ HERO — Full width y alineado bajo la barra azul
   padding: 0 5%;
   width: min(1100px, 92vw);
 }
-#th-hero .hero__content::before { content: none !important; }
 
-/* Título */
+/* Texto del hero */
 #th-hero .hero__title {
   color: #fff !important;
   font-size: clamp(40px, 7vw, 72px);
@@ -140,10 +118,9 @@ HERO — Full width y alineado bajo la barra azul
   line-height: 1.1;
   margin: 0 0 20px 0;
   letter-spacing: .4px;
-  text-shadow: 0 4px 18px rgba(0,0,0,.65);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, .65);
 }
 
-/* Subtítulo */
 #th-hero .hero__tag {
   color: #fff !important;
   font-size: clamp(18px, 2.2vw, 26px);
@@ -151,10 +128,9 @@ HERO — Full width y alineado bajo la barra azul
   line-height: 1.6;
   margin: 0 0 38px 0;
   opacity: .98;
-  text-shadow: 0 3px 14px rgba(0,0,0,.6);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, .6);
 }
 
-/* Botón CTA */
 #th-hero .hero__cta {
   display: inline-block;
   padding: 16px 36px;
@@ -164,18 +140,30 @@ HERO — Full width y alineado bajo la barra azul
   color: #fff !important;
   background: var(--th-color-corporate-blue);
   text-decoration: none;
-  box-shadow: 0 5px 14px rgba(0,0,0,.35);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .35);
   transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
 }
 #th-hero .hero__cta:hover {
   background: #004B8E;
   transform: translateY(-4px);
-  box-shadow: 0 10px 22px rgba(0,0,0,.45);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .45);
 }
 
 /* ============================================================
-Legibilidad del contenido bajo el hero
+CONTENIDO BAJO EL HERO (centrado con márgenes)
 ============================================================ */
+body:has(#th-hero) .md-content {
+  max-width: var(--th-content-max) !important;
+  margin: 0 auto !important;
+  padding: 3rem 1.5rem !important; /* margen lateral */
+  box-sizing: border-box;
+}
+body:has(#th-hero) .md-content__inner,
+body:has(#th-hero) .md-typeset {
+  max-width: 100%;
+}
+
+/* Tipografía y espaciado */
 body:has(#th-hero) .md-typeset h2,
 body:has(#th-hero) .md-typeset h3 {
   color: var(--md-primary-fg-color);
@@ -205,7 +193,7 @@ Breakpoints
 ============================================================ */
 @media (max-width: 1024px) {
   body:has(#th-hero) .md-content {
-    padding: 1.6rem 1rem !important;
+    padding: 2rem 1rem !important;
   }
   #th-hero .hero__content {
     width: min(900px, 94vw);
@@ -213,7 +201,7 @@ Breakpoints
 }
 @media (max-width: 768px) {
   body:has(#th-hero) .md-content {
-    padding: 1.2rem .9rem !important;
+    padding: 1.8rem .9rem !important;
   }
   #th-hero .hero__content {
     width: 92vw;
