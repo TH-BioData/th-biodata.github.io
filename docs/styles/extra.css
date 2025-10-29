@@ -259,3 +259,89 @@ Bloque Founder estilo tarjeta
   background: rgba(255,255,255,.10);
   box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
+
+/* ====== Layout índice + contenido ====== */
+.th-about-layout{
+  display:grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+}
+
+/* Sidebar manual bilingüe */
+.th-sideindex{
+  position: sticky;
+  top: 96px; /* despega del header */
+  align-self: start;
+  padding: .75rem .75rem .9rem;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius: 12px;
+  background: #f9fbfd;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+}
+[data-md-color-scheme="slate"] .th-sideindex{
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.th-sideindex__label{
+  font-weight:800;
+  color: var(--th-color-corporate-blue);
+  margin: .1rem 0 .35rem;
+}
+
+.th-sideindex ul{
+  list-style:none;
+  padding:0; margin:0;
+}
+.th-sideindex li{ margin:.2rem 0; }
+.th-sideindex a{
+  display:block;
+  padding:.35rem .5rem;
+  border-radius:8px;
+  text-decoration:none;
+  color:#1f2a37;
+  border:1px solid transparent;
+}
+.th-sideindex a:hover{
+  background:#eef5ff;
+  border-color:#cfe3ff;
+}
+[data-md-color-scheme="slate"] .th-sideindex a{
+  color:#e5eaf3;
+}
+[data-md-color-scheme="slate"] .th-sideindex a:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.18);
+}
+
+/* ====== Franja azul fina sobre el h1 ====== */
+.th-page-title{
+  position:relative;
+  padding-top:.9rem;   /* deja lugar para la franja */
+  margin-top:.2rem;
+}
+.th-page-title::before{
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:84px; height:6px;
+  background: var(--th-color-corporate-blue);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+
+/* ====== Responsive ====== */
+@media(max-width: 1100px){
+  .th-about-layout{
+    grid-template-columns: 1fr;
+  }
+  .th-sideindex{
+    position:relative;
+    top:auto;
+    margin-bottom: .75rem;
+  }
+}
+
+/* Suaviza el anclado al hacer click en el índice */
+html{ scroll-behavior:smooth; }
+
