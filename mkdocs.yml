@@ -20,6 +20,7 @@ theme:
     - content.code.copy       # botón copiar
     - search.suggest
     - search.highlight
+    - content.tabs.link
   palette:
     - scheme: default         # modo claro
       primary: custom         # colores definidos en extra.css (variables --md-primary-*)
