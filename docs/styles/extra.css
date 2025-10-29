@@ -6,7 +6,7 @@ TH BioData Consulting — Hero full-bleed + contenido con márgenes (v7)
 :root{
   --th-color-corporate-blue:#0F3D73;
   --th-color-corporate-light-blue:#7CC6FF;
-  --th-content-max:1200px; /* ancho del texto bajo el hero */
+  --th-content-max:1600px; /* ancho del texto bajo el hero */
 }
 
 /* Tema claro/oscuro */
@@ -109,7 +109,7 @@ body:has(#th-hero){ overflow-x:hidden; }
 body:has(#th-hero) #th-hero ~ *{
   max-width:var(--th-content-max);
   margin:0 auto;
-  padding:2rem 0.5rem;
+  padding:1.5rem 0.5rem;
   box-sizing:border-box;
 }
 
