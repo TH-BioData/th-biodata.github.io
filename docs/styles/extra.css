@@ -201,3 +201,33 @@ TH BioData — Botón flotante EN/ES
 .th-lang-switch:hover{ background:var(--th-color-corporate-light-blue,#7CC6FF); color:#0F3D73; transform:translateY(-2px); }
 [data-md-color-scheme="slate"] .th-lang-switch{ background:#1d3664; color:#fff; }
 [data-md-color-scheme="slate"] .th-lang-switch:hover{ background:var(--th-color-corporate-light-blue,#7CC6FF); color:#0F3D73; }
+
+
+
+/* ============================================================
+Títulos azules estilo Home
+============================================================ */
+.th-section h1,
+.th-section h2,
+.th-section h3 {
+  color: var(--th-color-corporate-blue) !important;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.th-section h1 {
+  font-size: 2.4rem;
+  margin-top: 1rem;
+}
+
+.th-section h2 {
+  font-size: 1.7rem;
+  border-bottom: 3px solid var(--th-color-corporate-light-blue);
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+.th-section h3 {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
