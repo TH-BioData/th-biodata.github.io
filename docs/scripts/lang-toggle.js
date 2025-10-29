@@ -1,5 +1,5 @@
 /* ============================================================
-   TH BioData — Toggle global EN/ES (v2)
+   TH BioData — Toggle global EN/ES 
    ============================================================ */
 (function () {
   const root = document.documentElement;
