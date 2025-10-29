@@ -83,7 +83,7 @@ extra:
 
 extra_css:
   - styles/extra.css
-  - css/lang-toggle.css
+  - styles/lang-toggle.css
 extra_javascript:
   - scripts/hero-fade.js
   - scripts/ready.js
