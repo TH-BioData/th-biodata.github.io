@@ -231,3 +231,31 @@ Títulos azules estilo Home
   font-size: 1.2rem;
   margin-top: 0.5rem;
 }
+
+/* ============================================================
+Bloque Founder estilo tarjeta
+============================================================ */
+.th-card--founder {
+  background: #f9fbfd;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0 1.5rem;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.th-card--founder:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+[data-md-color-scheme="slate"] .th-card--founder {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+[data-md-color-scheme="slate"] .th-card--founder:hover {
+  background: rgba(255,255,255,.10);
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
