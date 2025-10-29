@@ -13,7 +13,6 @@ hide:
   We bridge the gap between <strong>biology, data, and technology</strong>, providing customized computational
   solutions for research and industry.
 </p>
-
 <p class="lang lang-es">
   <strong>TH BioData Consulting</strong> es una consultora de ciencia de datos y bioinformática fundada por
   <strong>Tiago Alejo Herrador</strong>, dedicada a transformar la complejidad biológica en conocimiento claro,
@@ -31,7 +30,6 @@ hide:
   Our mission is to make biological and environmental data <strong>accessible, interpretable, and scientifically robust</strong>,
   empowering researchers and organizations to make better decisions through quantitative analysis.
 </p>
-
 <p class="lang lang-es">
   TH BioData Consulting integra la investigación biológica con la ciencia de datos moderna.
   Nuestra misión es hacer que los datos biológicos y ambientales sean
