@@ -198,3 +198,26 @@ Accesibilidad
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; }
 }
+
+/* ============================================================
+FIX FINAL — eliminar franja blanca entre barra y hero
+============================================================ */
+
+/* Quita el margen/padding del primer contenedor debajo del header */
+body:has(#th-hero) .md-main,
+body:has(#th-hero) .md-main__inner,
+body:has(#th-hero) .md-container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Elimina cualquier espacio residual del tema en el primer hijo tras el header */
+.md-header + .md-container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Asegura que el hero toque exactamente el borde inferior del header */
+body:has(#th-hero) #th-hero {
+  margin-top: -1px !important;  /* corrige 1px de borde invisible */
+}
