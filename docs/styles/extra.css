@@ -35,29 +35,44 @@ body:has(#th-hero) .md-header{ backdrop-filter:none!important; }
 /* Evita reflujo por la barra de scroll */
 html{ scrollbar-gutter:stable; }
 
-/* -------------------- HOME: quitar sidebars y OFFSET del header -------------------- */
-body:has(#th-hero) .md-sidebar--primary,
-body:has(#th-hero) .md-sidebar--secondary{ display:none!important; }
+/* ============================================================
+TH BioData — Ajuste para eliminar franja blanca bajo header
+============================================================ */
 
-/* El tema aplica el offset bajo el header en varias combinaciones de selectores.
-   Los anulamos TODOS para Home. */
+/* Forzar al header a superponerse directamente sobre el hero */
+body:has(#th-hero) .md-header,
+body:has(#th-hero) .md-header__inner {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+/* Eliminar cualquier espacio del contenedor principal */
+body:has(#th-hero) .md-container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Asegurar que el main y el hero estén perfectamente pegados */
 body:has(#th-hero) .md-main,
-body:has(#th-hero) .md-main__inner,
-body:has(#th-hero) .md-header + .md-container .md-main,
-body:has(#th-hero) .md-header ~ .md-container .md-main,
-body:has(#th-hero) .md-tabs ~ .md-container .md-main{
-  margin-top:0!important;
-  padding-top:0!important;
+body:has(#th-hero) .md-main__inner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
-/* Por si el primer bloque del contenido empuja hacia abajo */
-body:has(#th-hero) .md-content,
-body:has(#th-hero) .md-content__inner, /* <-- Agregado para más robustez */
-body:has(#th-hero) .md-typeset,       /* <-- Agregado para más robustez */
-body:has(#th-hero) .md-typeset > :first-child{
-  margin-top:0!important;  /* <-- Corregido */
-  padding-top:0!important;
+/* Compensar posibles píxeles residuales del tema */
+body:has(#th-hero) .md-header + .md-container,
+body:has(#th-hero) .md-header ~ .md-container {
+  margin-top: -8px !important; /* elimina línea blanca sin solapar */
 }
+
+/* Reforzar unión visual */
+#th-hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Si la franja persiste, puedes aumentar el margen negativo hasta -12px */
 
 /* -------------------- Contenedor del contenido (bajo el hero) -------------------- */
 body:has(#th-hero) .md-content{
