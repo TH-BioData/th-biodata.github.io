@@ -57,11 +57,16 @@ hide:
     <h2 id="services" class="lang lang-en">Services</h2>
     <h2 id="services" class="lang lang-es">Servicios</h2>
 
+    <!-- Tarjetas 2×2 -->
     <div class="th-cards th-cards--services">
 
       <div class="th-card">
-        <h3 class="lang lang-en">Omics Data Processing</h3>
-        <h3 class="lang lang-es">Procesamiento de Datos Ómicos</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="dna"></span> Omics Data Processing
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="dna"></span> Procesamiento de Datos Ómicos
+        </h3>
         <p class="lang lang-en">
           Genomics, transcriptomics, and proteomics analysis using reproducible, scalable pipelines.
         </p>
@@ -71,8 +76,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Statistical & Predictive Modeling</h3>
-        <h3 class="lang lang-es">Modelado Estadístico y Predictivo</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="brain-circuit"></span> Statistical & Predictive Modeling
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="brain-circuit"></span> Modelado Estadístico y Predictivo
+        </h3>
         <p class="lang lang-en">
           Multivariate and machine learning approaches for biological data interpretation and prediction.
         </p>
@@ -82,8 +91,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Biomarker Discovery</h3>
-        <h3 class="lang lang-es">Descubrimiento de Biomarcadores</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="sparkles"></span> Biomarker Discovery
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="sparkles"></span> Descubrimiento de Biomarcadores
+        </h3>
         <p class="lang lang-en">
           Identification of key molecular features through differential analysis and feature selection methods.
         </p>
@@ -93,8 +106,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Workflow Automation</h3>
-        <h3 class="lang lang-es">Automatización de Flujos</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="settings-2"></span> Workflow Automation
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="settings-2"></span> Automatización de Flujos
+        </h3>
         <p class="lang lang-en">
           Scalable pipelines using Snakemake, Python, and R for reproducible research and collaboration.
         </p>
