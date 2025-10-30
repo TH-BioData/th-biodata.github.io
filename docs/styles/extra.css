@@ -439,3 +439,86 @@ ABOUT — cuadrícula 2x2 y botones simples en Founder
   color: var(--th-color-corporate-blue) !important;
   text-decoration: none !important;
 }
+
+
+/* ============================================================
+TH BioData — Visual polish para Services (íconos, barra lateral, fondo sutil)
+Scope: .th-services (Services) y .th-servicepage (subpáginas: image/bioinfo/geo/consulting)
+============================================================ */
+
+/* ---------- 1) Barra azul degradada en tarjetas ---------- */
+.th-services .th-card,
+.th-servicepage .th-card {
+  position: relative;
+  overflow: hidden;
+}
+.th-services .th-card::before,
+.th-servicepage .th-card::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--th-color-corporate-blue), var(--th-color-corporate-light-blue));
+  opacity: .8;
+  border-radius: 6px 0 0 6px;
+}
+
+/* ---------- 2) Íconos en títulos (Lucide) ---------- */
+.th-services .th-card h3,
+.th-servicepage .th-card h3 {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.th-icon[data-lucide] {
+  display: inline-flex;
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--th-color-corporate-light-blue);
+  opacity: .95;
+}
+.th-card:hover .th-icon[data-lucide] { opacity: 1; transform: translateY(-1px); transition: transform .2s ease; }
+
+/* ---------- 3) Divisor con degradado ---------- */
+.th-divider {
+  height: 3px;
+  width: 84px;
+  margin: 2rem auto;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--th-color-corporate-blue), var(--th-color-corporate-light-blue));
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
+/* ---------- 4) Fondo geométrico tenue (solo geospatial) ---------- */
+/* Agregar clase .th-cards--geospatial al contenedor de tarjetas en geospatial.md */
+.th-servicepage .th-cards--geospatial {
+  position: relative;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='200' height='140' viewBox='0 0 200 140' opacity='0.12'>\
+    <defs>\
+      <pattern id='dots' width='20' height='20' patternUnits='userSpaceOnUse'>\
+        <circle cx='2' cy='2' r='2' fill='%237CC6FF'/>\
+      </pattern>\
+      <pattern id='grid' width='40' height='40' patternUnits='userSpaceOnUse'>\
+        <path d='M40 0H0V40' fill='none' stroke='%230F3D73' stroke-width='0.6' opacity='0.4'/>\
+      </pattern>\
+    </defs>\
+    <rect width='100%' height='100%' fill='url(%23grid)'/>\
+    <rect width='100%' height='100%' fill='url(%23dots)'/>\
+  </svg>");
+  background-repeat: no-repeat;
+  background-size: 780px auto;
+  background-position: right 10% top 0;
+  border-radius: 12px;
+}
+
+/* Modo oscuro: bajar opacidad aún más */
+[data-md-color-scheme="slate"] .th-servicepage .th-cards--geospatial {
+  opacity: .9;
+}
+
+/* ---------- Opcional: altura pareja + botón anclado (ya compatible con tu v21) ---------- */
+.th-services .th-card,
+.th-servicepage .th-card {
+  min-height: 260px;
+}
