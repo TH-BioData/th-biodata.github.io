@@ -310,3 +310,33 @@ MÓVIL — toggle, ocultar índice About, drawer funcional
   .md-overlay{ z-index:11000!important; }
   input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero{ pointer-events:none!important; }
 }
+
+
+/* ============================================================
+SERVICES — forzar grilla 2x2 y tipografía sin cortes raros
+============================================================ */
+
+/* Fuerza 2 columnas en Services (desactiva el fallback 4-col de .th-cards) */
+.th-services .th-cards,
+.th-cards--services {
+  grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .th-services .th-cards,
+  .th-cards--services { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 640px) {
+  .th-services .th-cards,
+  .th-cards--services { grid-template-columns: 1fr !important; }
+}
+
+/* Evita cortes feos de palabras en los títulos de tarjetas de Services */
+.th-services .th-card h3 {
+  word-break: normal;
+  hyphens: manual;
+}
+
+/* (Opcional) alturas consistentes para las 4 tarjetas de Services */
+.th-services .th-card { min-height: 240px; }
