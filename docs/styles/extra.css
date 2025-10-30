@@ -589,3 +589,104 @@ PROJECTS — Hero personalizado
   display: none !important;
   content: none !important;
 }
+
+
+/* ============================================================
+CONTACT — Layout y formulario
+============================================================ */
+.th-contact {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.th-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .th-contact-grid { grid-template-columns: 1fr; }
+}
+
+.th-contact-info ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.th-contact-info li {
+  margin: .5rem 0;
+  font-size: 1rem;
+}
+.th-contact-info a {
+  color: var(--th-color-corporate-blue);
+  text-decoration: none;
+}
+.th-contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* --- Formulario --- */
+.th-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.th-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: var(--th-color-corporate-blue);
+  font-size: .95rem;
+}
+.th-form input,
+.th-form textarea {
+  margin-top: .3rem;
+  padding: .7rem .9rem;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 8px;
+  font-size: .95rem;
+  font-family: inherit;
+  resize: vertical;
+}
+.th-form input:focus,
+.th-form textarea:focus {
+  outline: none;
+  border-color: var(--th-color-corporate-light-blue);
+  box-shadow: 0 0 0 3px rgba(124,198,255,.25);
+}
+
+/* --- Botón --- */
+.th-btn {
+  align-self: flex-start;
+  background: var(--th-color-corporate-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(0,0,0,.12);
+  transition: transform .2s, box-shadow .2s, background .25s;
+}
+.th-btn:hover {
+  background: var(--th-color-corporate-light-blue);
+  color: var(--th-color-corporate-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+
+/* --- Oscuro --- */
+[data-md-color-scheme="slate"] .th-form input,
+[data-md-color-scheme="slate"] .th-form textarea {
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.15);
+}
+[data-md-color-scheme="slate"] .th-form input:focus,
+[data-md-color-scheme="slate"] .th-form textarea:focus {
+  border-color: var(--th-color-corporate-light-blue);
+  box-shadow: 0 0 0 3px rgba(124,198,255,.3);
+}
