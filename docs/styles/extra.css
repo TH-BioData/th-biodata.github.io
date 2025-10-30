@@ -582,3 +582,10 @@ PROJECTS — Hero personalizado
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
+/* === Quitar barra azul decorativa de títulos === */
+.th-page-title::before {
+  display: none !important;
+  content: none !important;
+}
