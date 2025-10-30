@@ -1,5 +1,5 @@
 /* ============================================================
-TH BioData — v20 (clean build)
+TH BioData — v21 (clean build)
 Hero con gradiente integrado · Drawer móvil OK · Toggle móvil OK
 About: índice oculto sólo en móvil
 ============================================================ */
@@ -33,28 +33,18 @@ HERO (Home) — full bleed sin franja + GRADIENTE INTEGRADO
   margin-top:0!important; padding:0!important;
   min-height:100vh; background:#0F3D73; overflow:hidden; z-index:0;
 }
-
-/* MULTI-BACKGROUND: gradiente (arriba) + foto (abajo) */
 #th-hero .hero__bg{
   position:absolute; inset:0;
-  /* El primer background es el gradiente (superior) */
   background:
     linear-gradient(to bottom,
       rgba(10,35,80,.35) 0%,
       rgba(10,35,80,.55) 40%,
       rgba(10,35,80,.85) 100%),
     url('../assets/home_hero_v2.jpg');
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  transition:transform 15s linear, filter 2s ease;
-  z-index:0;
+  background-position:center; background-size:cover; background-repeat:no-repeat;
+  transition:transform 15s linear, filter 2s ease; z-index:0;
 }
 #th-hero .hero__bg:hover{ transform:scale(1.05); filter:brightness(1.08); }
-
-/* (ya NO usamos ::before; el gradiente vive en .hero__bg) */
-
-/* Contenido del hero */
 #th-hero .hero__content{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   z-index:2; display:flex; flex-direction:column; align-items:center;
@@ -100,26 +90,36 @@ body:has(#th-hero) #th-hero ~ * h2{
 }
 
 /* ============================================================
-Tarjetas genéricas (Home/Approach)
+Tarjetas — estilos base compartidos (NO fijan columnas)
 ============================================================ */
 .th-cards{
-  display:grid!important; grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:var(--th-gap,24px); align-items:stretch;
+  display:grid; gap:var(--th-gap,24px);
+  align-items:stretch; justify-items:stretch;
   max-width:var(--th-content-max); margin:2.5rem auto 3rem; padding:0 1rem;
 }
 .th-card{
   display:flex; flex-direction:column; background:#f9fbfd;
   border:1px solid rgba(0,0,0,.06); border-radius:14px;
-  box-shadow:0 2px 6px rgba(0,0,0,.05); transition:transform .25s, box-shadow .25s; padding:1.25rem;
+  box-shadow:0 2px 6px rgba(0,0,0,.05);
+  transition:transform .25s, box-shadow .25s, background .25s;
+  padding:1.25rem;
 }
-.th-card:hover{ transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.08); }
+.th-card:hover{ transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.08); background:#fff; }
 .th-card__body{ flex:1; }
-.th-card h3{ color:var(--th-color-corporate-blue); font-size:1.15rem; font-weight:800; margin:0 0 .45rem; }
+.th-card h3{ color:var(--th-color-corporate-blue); font-size:1.15rem; font-weight:800; margin:0 0 .45rem; line-height:1.3; }
 .th-card p{ color:#2a2f35; font-size:.96rem; line-height:1.55; }
 
-/* Responsivo tarjetas */
-@media(max-width:1024px){ .th-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } }
-@media(max-width:640px){ .th-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } }
+/* Botones uniformes en tarjetas */
+.th-card a,
+.th-card a.md-button,
+.th-card a.md-button--primary{
+  display:inline-block; background:var(--th-color-corporate-blue)!important;
+  color:#fff!important; border:none!important; border-radius:10px;
+  padding:.6rem 1.1rem; font-weight:700;
+  box-shadow:0 5px 14px rgba(0,0,0,.12);
+  transition:transform .2s, box-shadow .2s, background .2s;
+}
+.th-card a:hover{ background:#004B8E!important; transform:translateY(-2px); }
 
 /* Modo oscuro tarjetas */
 [data-md-color-scheme="slate"] .th-card{
@@ -129,6 +129,31 @@ Tarjetas genéricas (Home/Approach)
 [data-md-color-scheme="slate"] .th-card:hover{ background:rgba(255,255,255,.10); box-shadow:0 6px 18px rgba(0,0,0,.35); }
 [data-md-color-scheme="slate"] .th-card h3{ color:var(--th-color-corporate-light-blue)!important; }
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
+
+/* ============================================================
+Variantes de grilla (evita sobreescrituras entre páginas)
+============================================================ */
+/* Home / About: 4×1 desktop, 2×1 tablet, 1×1 móvil */
+.th-cards--home,
+.th-cards:not(.th-cards--services){             /* fallback para páginas que usan sólo .th-cards */
+  grid-template-columns:repeat(4, minmax(0,1fr));
+}
+@media (max-width:1100px){
+  .th-cards--home,
+  .th-cards:not(.th-cards--services){ grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:640px){
+  .th-cards--home,
+  .th-cards:not(.th-cards--services){ grid-template-columns:1fr; }
+}
+
+/* Services: 2×2 desktop, 2×1 tablet, 1×1 móvil */
+.th-cards--services{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+@media (max-width:900px){ .th-cards--services{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:640px){ .th-cards--services{ grid-template-columns:1fr; } }
+
+/* (Opcional) alturas uniformes si querés: activa el min-height que prefieras */
+/* .th-card{ min-height: 220px; } */
 
 /* ============================================================
 Tipografía / espaciado
@@ -141,19 +166,6 @@ Tipografía / espaciado
 .md-typeset ul,.md-typeset ol{ margin:.35rem 0 .5rem!important; }
 .md-typeset li{ margin:.15rem 0!important; }
 .md-typeset hr{ margin:.8rem 0!important; }
-
-/* ============================================================
-Botones uniformes (tarjetas)
-============================================================ */
-.th-card a.md-button,
-.th-card a.md-button--primary{
-  display:inline-block; background:var(--th-color-corporate-blue)!important;
-  color:#fff!important; border:none!important; border-radius:10px;
-  padding:.75rem 1.25rem; font-weight:700;
-  box-shadow:0 5px 14px rgba(0,0,0,.12);
-  transition:transform .2s, box-shadow .2s, background .2s;
-}
-.th-card a.md-button:hover{ background:#004B8E!important; transform:translateY(-2px); }
 
 /* ============================================================
 Bilingüe — contenido y TOC
@@ -173,7 +185,7 @@ Bilingüe — contenido y TOC
 :root[data-lang="es"] .md-nav__link .lang-es{ display:inline!important; }
 .md-nav .md-ellipsis{ display:inline-block; }
 
-/* Botón EN/ES (posición desktop por defecto) */
+/* Botón EN/ES */
 .th-lang-switch{
   position:fixed; top:.7rem; right:1.2rem; z-index:9999;
   background:var(--th-color-corporate-blue,#0F3D73); color:#fff;
@@ -192,18 +204,14 @@ Bilingüe — contenido y TOC
 ABOUT — escopado a la página About
 ============================================================ */
 @media (min-width:769px){
-  /* Oculta sidebars del tema solo si usamos el layout propio */
   .md-main:has(.th-about-layout) .md-sidebar--secondary,
   .md-main:has(.th-about-layout) .md-nav--secondary,
   .md-main:has(.th-about-layout) nav[data-md-component="toc"],
   .md-main:has(.th-about-layout) .md-nav__title,
   .md-main:has(.th-about-layout) .md-sidebar--primary{ display:none!important; }
 }
-
-/* Ancho y layout */
 .md-main:has(.th-about-layout) .md-typeset{
-  max-width:80rem !important;
-  margin-left:auto!important; margin-right:auto!important;
+  max-width:80rem !important; margin-left:auto!important; margin-right:auto!important;
   padding-left:0!important; padding-right:0!important;
 }
 .th-about-layout{
@@ -221,7 +229,6 @@ ABOUT — escopado a la página About
 .th-sideindex a{ display:block; padding:.35rem .5rem; border-radius:8px; text-decoration:none; color:#1f2a37; border:1px solid transparent; }
 .th-sideindex a:hover{ background:#eef5ff; border-color:#cfe3ff; }
 .th-sideindex__label{ font-weight:800; color:var(--th-color-corporate-blue); margin:.1rem 0 .35rem; }
-
 [data-md-color-scheme="slate"] .th-sideindex{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); }
 [data-md-color-scheme="slate"] .th-sideindex a{ color:#e5eaf3; }
 [data-md-color-scheme="slate"] .th-sideindex a:hover{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18); }
@@ -270,7 +277,6 @@ MÓVIL — toggle, ocultar índice About, drawer funcional
 ============================================================ */
 @media (max-width:768px){
 
-  /* 1) Toggle de idioma: debajo del header */
   :root { --th-header-h:56px; }
   .th-lang-switch{
     position:fixed!important;
@@ -283,13 +289,13 @@ MÓVIL — toggle, ocultar índice About, drawer funcional
   }
   .md-header .md-header__button,.md-header .md-search,.md-header .md-icon{ z-index:10000; }
 
-  /* 2) Ocultar índice/menú lateral de About */
+  /* Ocultar índice/menú lateral de About en móvil */
   .th-sideindex,
   #about-index,.about-index,.about-menu,.about-sidebar,.about-floating-menu{
     display:none!important; visibility:hidden!important;
   }
 
-  /* 3) Drawer móvil (checkbox nativo) */
+  /* Drawer móvil */
   .md-sidebar--primary{
     position:fixed!important;
     top:var(--md-header-height,56px)!important; left:0!important;
@@ -298,91 +304,9 @@ MÓVIL — toggle, ocultar índice About, drawer funcional
     background:var(--md-default-bg-color,#fff)!important;
     transform:translateX(-100%)!important;
     box-shadow:0 8px 24px rgba(0,0,0,.25)!important;
-    z-index:12000!important;
-    display:block!important; visibility:visible!important;
+    z-index:12000!important; display:block!important; visibility:visible!important;
   }
-  input[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary{
-    transform:translateX(0)!important;
-  }
+  input[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary{ transform:translateX(0)!important; }
   .md-overlay{ z-index:11000!important; }
   input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero{ pointer-events:none!important; }
 }
-
-/* ============================================================
-TH BioData — Ajustes específicos para la página Services (2x2 grid)
-============================================================ */
-
-/* ---------- Contenedor de tarjetas ---------- */
-.th-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-  justify-items: stretch;
-  align-items: stretch;
-  margin-top: 1.5rem;
-}
-
-/* ---------- Tarjeta individual ---------- */
-.th-card {
-  background: #f9fbfd;
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: all 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Hover */
-.th-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  background: #fff;
-}
-
-/* ---------- Títulos dentro de tarjetas ---------- */
-.th-card h3 {
-  color: var(--th-color-corporate-blue);
-  margin-top: 0;
-  margin-bottom: 0.6rem;
-  font-size: 1.1rem;
-  line-height: 1.3;
-}
-
-/* ---------- Texto ---------- */
-.th-card p {
-  flex-grow: 1;
-  font-size: 0.96rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-/* ---------- Botón "View" ---------- */
-.th-card a {
-  display: inline-block;
-  align-self: flex-start;
-  background-color: var(--th-color-corporate-blue);
-  color: #fff !important;
-  text-decoration: none;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: background-color 0.25s ease;
-}
-.th-card a:hover {
-  background-color: var(--th-color-corporate-light-blue);
-}
-
-/* ---------- Responsividad ---------- */
-@media (max-width: 900px) {
-  .th-cards {
-    grid-template-columns: 1fr 1fr;  /* 2 columnas en tablets */
-  }
-}
-@media (max-width: 640px) {
-  .th-cards {
-    grid-template-columns: 1fr;      /* 1 columna en móviles */
-  }
-}
-
