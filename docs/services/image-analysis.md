@@ -61,8 +61,12 @@ hide:
     <div class="th-cards th-cards--services">
 
       <div class="th-card">
-        <h3 class="lang lang-en">Image Segmentation & Lesion Quantification</h3>
-        <h3 class="lang lang-es">Segmentación y Cuantificación de Lesiones</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="microscope"></span> Image Segmentation & Lesion Quantification
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="microscope"></span> Segmentación y Cuantificación de Lesiones
+        </h3>
         <p class="lang lang-en">
           Automated detection and measurement of lesions, spots, and regions of interest in plant and biological samples.
         </p>
@@ -72,8 +76,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Phenotyping Workflow Automation</h3>
-        <h3 class="lang lang-es">Automatización de Flujos de Fenotipado</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="workflow"></span> Phenotyping Workflow Automation
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="workflow"></span> Automatización de Flujos de Fenotipado
+        </h3>
         <p class="lang lang-en">
           High-throughput image pipelines for phenotyping and growth tracking with reproducible and scalable codebases.
         </p>
@@ -83,8 +91,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Custom Algorithm Design</h3>
-        <h3 class="lang lang-es">Diseño de Algoritmos Personalizados</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="code-2"></span> Custom Algorithm Design
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="code-2"></span> Diseño de Algoritmos Personalizados
+        </h3>
         <p class="lang lang-en">
           Tailored computer vision algorithms using OpenCV, Scikit-image, and NumPy for domain-specific analyses.
         </p>
@@ -94,8 +106,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">ML Integration & Morphological Quantification</h3>
-        <h3 class="lang lang-es">Integración de ML y Cuantificación Morfológica</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="brain-circuit"></span> ML Integration & Morphological Quantification
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="brain-circuit"></span> Integración de ML y Cuantificación Morfológica
+        </h3>
         <p class="lang lang-en">
           Integration of ML models for disease detection, color variation, and morphological quantification.
         </p>
