@@ -489,54 +489,6 @@ Scope: .th-services (Services) y .th-servicepage (subpáginas: image/bioinfo/geo
   box-shadow: 0 1px 0 rgba(0,0,0,.04);
 }
 
-/* ---------- 4) Fondo geométrico (GEO) — versión más visible ---------- */
-/* Reemplaza el bloque previo de .th-cards--geospatial por este */
-.th-servicepage .th-cards--geospatial{
-  position:relative;
-  border-radius:12px;
-  /* SVG embebido con mayor contraste (grid + puntos) */
-  background-image:url("data:image/svg+xml;utf8,\
-  <svg xmlns='http://www.w3.org/2000/svg' width='220' height='160' viewBox='0 0 220 160'>\
-    <defs>\
-      <pattern id='grid' width='40' height='40' patternUnits='userSpaceOnUse'>\
-        <path d='M40 0H0V40' fill='none' stroke='%230F3D73' stroke-width='0.8' opacity='0.55'/>\
-      </pattern>\
-      <pattern id='dots' width='22' height='22' patternUnits='userSpaceOnUse'>\
-        <circle cx='3' cy='3' r='2.2' fill='%237CC6FF' opacity='0.85'/>\
-      </pattern>\
-      <linearGradient id='fade' x1='0' y1='0' x2='1' y2='1'>\
-        <stop offset='0%' stop-color='%23ffffff' stop-opacity='0'/>\
-        <stop offset='100%' stop-color='%23ffffff' stop-opacity='0.12'/>\
-      </linearGradient>\
-    </defs>\
-    <rect width='100%' height='100%' fill='url(%23grid)'/>\
-    <rect width='100%' height='100%' fill='url(%23dots)'/>\
-    <rect width='100%' height='100%' fill='url(%23fade)'/>\
-  </svg>");
-  background-repeat:no-repeat;
-  background-size: 980px auto;        /* más grande = más visible */
-  background-position:right -24px top -10px;
-}
-
-/* Tema oscuro: baja un poco el contraste para no competir con el texto */
-[data-md-color-scheme="slate"] .th-servicepage .th-cards--geospatial{
-  filter: opacity(.82);
-}
-
-/* Responsive: reduce tamaño/posición del patrón en pantallas chicas */
-@media (max-width: 1100px){
-  .th-servicepage .th-cards--geospatial{
-    background-size: 720px auto;
-    background-position: right -16px top -8px;
-  }
-}
-@media (max-width: 640px){
-  .th-servicepage .th-cards--geospatial{
-    background-size: 520px auto;
-    background-position: right -12px top -6px;
-  }
-}
-
 /* ---------- Opcional: altura pareja + botón anclado (ya compatible con tu v21) ---------- */
 .th-services .th-card,
 .th-servicepage .th-card {
