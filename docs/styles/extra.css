@@ -721,3 +721,15 @@ CONTACT — quitar sidebar y margen (desktop)
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+
+/* ============================================================
+CONTACT — reducir espacio superior bajo la barra azul
+============================================================ */
+.md-main:has(.th-contact) .md-content__inner {
+  padding-top: 0.5rem !important;  /* antes suele ser 2–3rem */
+}
+
+.md-main:has(.th-contact) h1.th-page-title {
+  margin-top: 0.3rem !important;   /* antes suele ser 2rem */
+}
