@@ -1,30 +1,78 @@
-# Projects / Proyectos
-<div class="hero hero--full">
+---
+title: Projects
+hide:
+  - toc
+---
+
+<!-- ====================== HERO ====================== -->
+<div id="th-hero">
   <div class="hero__bg"></div>
   <div class="hero__content">
-    <div>
-      <div class="hero__title">Projects</div>
-      <div class="hero__tag">Our Data-driven solutions for biological and environmental challenges</div>
-    </div>
+    <h1 class="hero__title lang lang-en">Projects</h1>
+    <h1 class="hero__title lang lang-es">Proyectos</h1>
+
+    <p class="hero__tag lang lang-en">Our data-driven solutions for biological and environmental challenges</p>
+    <p class="hero__tag lang lang-es">Nuestras soluciones basadas en datos para desafíos biológicos y ambientales</p>
   </div>
 </div>
 
-<div class="grid cards" markdown="1">
+<!-- ====================== TARJETAS DE PROYECTOS ====================== -->
+<section class="th-section">
 
--   :globe_with_meridians: **GeoBio**  
-    Geospatial analysis & CHELSA extraction.  
-    [:arrow_right: Open](./geobio/)
+  <div class="th-cards th-cards--projects">
 
--   :leaves: **LLS-SevEst**  
-    Leaf lesion severity (K-Means + defoliation).  
-    [:arrow_right: Open](./lls-sevest/)
+    <div class="th-card">
+      <h3>
+        <span class="th-icon" data-lucide="globe-2"></span> GeoBio
+      </h3>
+      <p class="lang lang-en">
+        Geospatial data extraction and CHELSA climate integration for ecological and agricultural modeling.
+      </p>
+      <p class="lang lang-es">
+        Extracción geoespacial de datos y variables climáticas CHELSA para modelado ecológico y agrícola.
+      </p>
+      <a href="./geobio/" class="th-btn">View</a>
+    </div>
 
--   :potato: **CorkyScab**  
-    Tuber lesion detection & quantification.  
-    [:arrow_right: Open](./corkyscab/)
+    <div class="th-card">
+      <h3>
+        <span class="th-icon" data-lucide="leaf"></span> LLS-SevEst
+      </h3>
+      <p class="lang lang-en">
+        Leaf lesion severity estimation using K-Means segmentation and defoliation metrics.
+      </p>
+      <p class="lang lang-es">
+        Estimación de severidad foliar mediante segmentación K-Means y métricas de defoliación.
+      </p>
+      <a href="./lls-sevest/" class="th-btn">View</a>
+    </div>
 
--   :frog: **TadpoleNet**  
-    Semantic segmentation of Xenopus embryos.  
-    [:arrow_right: Open](./tadpolenet/)
+    <div class="th-card">
+      <h3>
+        <span class="th-icon" data-lucide="sprout"></span> CorkyScab
+      </h3>
+      <p class="lang lang-en">
+        Detection and quantification of potato tuber lesions through morphological image analysis.
+      </p>
+      <p class="lang lang-es">
+        Detección y cuantificación de lesiones tuberosas mediante análisis morfológico de imágenes.
+      </p>
+      <a href="./corkyscab/" class="th-btn">View</a>
+    </div>
 
-</div>
+    <div class="th-card">
+      <h3>
+        <span class="th-icon" data-lucide="frog"></span> TadpoleNet
+      </h3>
+      <p class="lang lang-en">
+        Semantic segmentation of <em>Xenopus</em> embryos using deep learning and UNet architectures.
+      </p>
+      <p class="lang lang-es">
+        Segmentación semántica de embriones de <em>Xenopus</em> mediante aprendizaje profundo y arquitecturas UNet.
+      </p>
+      <a href="./tadpolenet/" class="th-btn">View</a>
+    </div>
+
+  </div>
+
+</section>
