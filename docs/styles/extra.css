@@ -448,3 +448,51 @@ TH BioData — Hotfix móvil: drawer visible sobre el overlay
     transform: translateX(0) !important;
   }
 }
+
+
+/* ============================================================
+Drawer móvil: arreglar conflicto de especificidad
+============================================================ */
+
+/* 1) Solo en DESKTOP ocultamos sidebars en Home y About */
+@media (min-width: 769px) {
+  /* Home sin columnas laterales */
+  body:has(#th-hero) .md-sidebar--primary,
+  body:has(#th-hero) .md-sidebar--secondary,
+  body:has(#th-hero) nav[data-md-component="toc"] {
+    display: none !important;
+  }
+
+  /* About con layout propio sin sidebars del tema */
+  .md-main:has(.th-about-layout) .md-sidebar--secondary,
+  .md-main:has(.th-about-layout) .md-nav--secondary,
+  .md-main:has(.th-about-layout) nav[data-md-component="toc"],
+  .md-main:has(.th-about-layout) .md-nav__title,
+  .md-main:has(.th-about-layout) .md-sidebar--primary {
+    display: none !important;
+  }
+}
+
+/* 2) En MÓVIL permitimos que el drawer funcione */
+@media (max-width: 768px) {
+  /* Revertir displays para que el panel pueda mostrarse */
+  body:has(#th-hero) .md-sidebar--primary,
+  .md-main:has(.th-about-layout) .md-sidebar--primary {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* Cuando el drawer está abierto, aseguramos la entrada del panel
+     con igual o mayor especificidad que las reglas que lo ocultaban */
+  body:has(#th-hero) [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary,
+  .md-main:has(.th-about-layout) [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary,
+  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+    transform: translateX(0) !important;
+    display: block !important;
+    z-index: 11000 !important;           /* por encima del overlay */
+    background: var(--md-default-bg-color, #fff);
+  }
+
+  /* Overlay por debajo del panel */
+  .md-overlay { z-index: 10900 !important; }
+}
