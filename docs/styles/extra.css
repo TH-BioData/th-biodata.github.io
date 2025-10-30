@@ -1,5 +1,7 @@
 /* ============================================================
-TH BioData Consulting — v16 (Hero limpio + TOC bilingüe 100% + tipografía compacta)
+TH BioData Consulting — v17 (limpio)
+Hero intacto + títulos azules + tarjetas + toggle EN/ES
+About con índice bilingüe, sin sidebars del tema y ancho optimizado
 ============================================================ */
 
 /* ---------- Paleta ---------- */
@@ -21,8 +23,6 @@ TH BioData Consulting — v16 (Hero limpio + TOC bilingüe 100% + tipografía co
 .md-header,.md-tabs{ background:#0F3D73!important; color:#fff!important; }
 body:has(#th-hero) .md-header{ backdrop-filter:none!important; }
 body:has(#th-hero){ overflow-x:hidden; }
-body:has(#th-hero) .md-sidebar--primary,
-body:has(#th-hero) .md-sidebar--secondary{ display:none!important; }
 
 /* ============================================================
 HERO — full bleed sin franja
@@ -70,7 +70,7 @@ HERO — full bleed sin franja
 }
 #th-hero .hero__cta:hover{ background:#004B8E; transform:translateY(-4px); box-shadow:0 10px 22px rgba(0,0,0,.45); }
 
-/* FIX franja blanca */
+/* FIX franja blanca bajo header en Home */
 body:has(#th-hero) .md-main,
 body:has(#th-hero) .md-main__inner,
 body:has(#th-hero) .md-container{ margin-top:0!important; padding-top:0!important; }
@@ -78,7 +78,7 @@ body:has(#th-hero) .md-container{ margin-top:0!important; padding-top:0!importan
 body:has(#th-hero) #th-hero{ margin-top:-1px!important; }
 
 /* ============================================================
-Bloque principal bajo hero
+Bloque principal bajo hero (Home)
 ============================================================ */
 body:has(#th-hero) #th-hero ~ *{
   max-width:var(--th-content-max);
@@ -92,7 +92,7 @@ body:has(#th-hero) #th-hero ~ * h2{
 }
 
 /* ============================================================
-Tarjetas
+Tarjetas genéricas
 ============================================================ */
 .th-cards{
   display:grid!important; grid-template-columns:repeat(4,minmax(0,1fr));
@@ -109,13 +109,11 @@ Tarjetas
 .th-card h3{ color:var(--th-color-corporate-blue); font-size:1.15rem; font-weight:800; margin:0 0 .45rem; }
 .th-card p{ color:#2a2f35; font-size:.96rem; line-height:1.55; }
 
-/* Responsivo */
+/* Responsivo tarjetas */
 @media(max-width:1024px){ .th-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } }
 @media(max-width:640px){ .th-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } }
 
-/* ============================================================
-Modo oscuro
-============================================================ */
+/* Modo oscuro tarjetas */
 [data-md-color-scheme="slate"] .th-card{
   background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
   box-shadow:0 2px 10px rgba(0,0,0,.25);
@@ -125,7 +123,7 @@ Modo oscuro
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
 
 /* ============================================================
-Tipografía/espaciado compactos (títulos y párrafos)
+Tipografía/espaciado compactos globales
 ============================================================ */
 .md-typeset h1{ margin:0 0 .55rem!important; }
 .md-typeset h2{ margin:1rem 0 .4rem!important; }
@@ -141,7 +139,7 @@ Tipografía/espaciado compactos (títulos y párrafos)
 .md-typeset hr{ margin:.8rem 0!important; }
 
 /* ============================================================
-Botones uniformes
+Botones uniformes en tarjetas
 ============================================================ */
 .th-card a.md-button,
 .th-card a.md-button--primary{
@@ -154,41 +152,26 @@ Botones uniformes
 .th-card a.md-button:hover{ background:#004B8E!important; transform:translateY(-2px); }
 
 /* ============================================================
-Bilingüe — contenido y TOC (MENÚ IZQUIERDO) 
+Bilingüe — contenido y TOC
 ============================================================ */
-
-/* 1) Por defecto, ocultar todo el contenido bilingüe */
+/* 1) Por defecto, ocultar todo */
 .lang{ display:none; }
-
-/* 2) Mostrar sólo el idioma activo en el CONTENIDO */
+/* 2) Mostrar sólo el idioma activo en el contenido */
 :root[data-lang="en"] .lang-en{ display:block!important; }
 :root[data-lang="en"] .lang-es{ display:none !important; }
 :root[data-lang="es"] .lang-es{ display:block!important; }
 :root[data-lang="es"] .lang-en{ display:none !important; }
-
-/* 3) TOC/Sidebar: Material usa .md-ellipsis dentro de .md-nav__link */
+/* 3) TOC/Sidebar de Material: mostrar sólo el idioma activo en títulos */
 .md-nav .md-ellipsis .lang,
-.md-nav__link .lang{ display:none!important; }  /* oculta todo */
-
-/* Mostrar únicamente el idioma activo en TOC (dos selectores por compatibilidad) */
+.md-nav__link .lang{ display:none!important; }
 :root[data-lang="en"] .md-nav .md-ellipsis .lang-en,
 :root[data-lang="en"] .md-nav__link .lang-en{ display:inline!important; }
 :root[data-lang="es"] .md-nav .md-ellipsis .lang-es,
 :root[data-lang="es"] .md-nav__link .lang-es{ display:inline!important; }
-
-/* Evita saltos/altura extra cuando se oculta uno de los spans */
 .md-nav .md-ellipsis{ display:inline-block; }
 
-/* Ajustes finos de espaciado en listas bilingües */
-ul.lang, ol.lang{ margin:.25rem 0 .45rem!important; }
-
 /* ============================================================
-Accesibilidad / motion
-============================================================ */
-@media(prefers-reduced-motion:reduce){ *{ transition:none!important; } }
-
-/* ============================================================
-TH BioData — Botón flotante EN/ES
+Botón flotante EN/ES
 ============================================================ */
 .th-lang-switch{
   position:fixed; top:.7rem; right:1.2rem; z-index:9999;
@@ -202,8 +185,6 @@ TH BioData — Botón flotante EN/ES
 [data-md-color-scheme="slate"] .th-lang-switch{ background:#1d3664; color:#fff; }
 [data-md-color-scheme="slate"] .th-lang-switch:hover{ background:var(--th-color-corporate-light-blue,#7CC6FF); color:#0F3D73; }
 
-
-
 /* ============================================================
 Títulos azules estilo Home
 ============================================================ */
@@ -214,23 +195,14 @@ Títulos azules estilo Home
   font-weight: 800;
   margin-bottom: 0.6rem;
 }
-
-.th-section h1 {
-  font-size: 2.4rem;
-  margin-top: 1rem;
-}
-
+.th-section h1 { font-size: 2.4rem; margin-top: 1rem; }
 .th-section h2 {
   font-size: 1.7rem;
   border-bottom: 3px solid var(--th-color-corporate-light-blue);
   display: inline-block;
   padding-bottom: 0.3rem;
 }
-
-.th-section h3 {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-}
+.th-section h3 { font-size: 1.2rem; margin-top: 0.5rem; }
 
 /* ============================================================
 Bloque Founder estilo tarjeta
@@ -244,12 +216,7 @@ Bloque Founder estilo tarjeta
   margin: 1rem 0 1.5rem;
   transition: transform .25s, box-shadow .25s;
 }
-
-.th-card--founder:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,.08);
-}
-
+.th-card--founder:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
 [data-md-color-scheme="slate"] .th-card--founder {
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.15);
@@ -260,184 +227,20 @@ Bloque Founder estilo tarjeta
   box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
 
-/* ====== Layout índice + contenido ====== */
-.th-about-layout{
-  display:grid;
-  grid-template-columns: 260px 1fr;
-  gap: 28px;
-}
-
-/* Sidebar manual bilingüe */
-.th-sideindex{
-  position: sticky;
-  top: 96px; /* despega del header */
-  align-self: start;
-  padding: .75rem .75rem .9rem;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius: 12px;
-  background: #f9fbfd;
-  box-shadow: 0 2px 6px rgba(0,0,0,.04);
-}
-[data-md-color-scheme="slate"] .th-sideindex{
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.15);
-}
-
-.th-sideindex__label{
-  font-weight:800;
-  color: var(--th-color-corporate-blue);
-  margin: .1rem 0 .35rem;
-}
-
-.th-sideindex ul{
-  list-style:none;
-  padding:0; margin:0;
-}
-.th-sideindex li{ margin:.2rem 0; }
-.th-sideindex a{
-  display:block;
-  padding:.35rem .5rem;
-  border-radius:8px;
-  text-decoration:none;
-  color:#1f2a37;
-  border:1px solid transparent;
-}
-.th-sideindex a:hover{
-  background:#eef5ff;
-  border-color:#cfe3ff;
-}
-[data-md-color-scheme="slate"] .th-sideindex a{
-  color:#e5eaf3;
-}
-[data-md-color-scheme="slate"] .th-sideindex a:hover{
-  background:rgba(255,255,255,.08);
-  border-color:rgba(255,255,255,.18);
-}
-
-/* ====== Franja azul fina sobre el h1 ====== */
-.th-page-title{
-  position:relative;
-  padding-top:.9rem;   /* deja lugar para la franja */
-  margin-top:.2rem;
-}
-.th-page-title::before{
-  content:"";
-  position:absolute;
-  top:0; left:0;
-  width:84px; height:6px;
-  background: var(--th-color-corporate-blue);
-  border-radius: 4px;
-  box-shadow: 0 1px 0 rgba(0,0,0,.06);
-}
-
-/* ====== Responsive ====== */
-@media(max-width: 1100px){
-  .th-about-layout{
-    grid-template-columns: 1fr;
-  }
-  .th-sideindex{
-    position:relative;
-    top:auto;
-    margin-bottom: .75rem;
-  }
-}
-
-/* Suaviza el anclado al hacer click en el índice */
-html{ scroll-behavior:smooth; }
-
 /* ============================================================
-About: limpiar TOC residual y margen izquierdo (sólo en About)
+ABOUT — layout con índice bilingüe, más ancho y sin sidebars del tema
+(escopado: solo se aplica si existe .th-about-layout en la página)
 ============================================================ */
 
-/* Ocultar TOC/segundo sidebar SÓLO cuando existe .th-about-layout */
+/* 0) Ocultar sidebars/TOC del tema SOLO en About */
 body:has(.th-about-layout) .md-sidebar--secondary,
 body:has(.th-about-layout) .md-nav--secondary,
 body:has(.th-about-layout) nav[data-md-component="toc"],
-body:has(.th-about-layout) .md-nav__title {
-  display: none !important;
-}
-
-/* Quitar el margen reservado para el TOC SÓLO en About */
-body:has(.th-about-layout) .md-content {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-body:has(.th-about-layout) .md-main__inner {
-  margin-left: 0 !important;
-}
-
-/* Reafirmar la grilla del About (no afecta otras páginas) */
-body:has(.th-about-layout) .th-about-layout {
-  grid-template-columns: 260px 1fr;
-  gap: 28px;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-/* Ancho del índice lateral (sólo About) */
-body:has(.th-about-layout) .th-sideindex {
-  width: 260px;
-}
-
-
-/* ============================================================
-About: ocultar sidebar primario del tema (fuente del "About" chico)
-Sólo se aplica cuando existe nuestro layout .th-about-layout
-============================================================ */
-body:has(.th-about-layout) .md-sidebar--primary {
-  display: none !important;
-}
-
-/* El contenedor principal no debe reservar espacio para ese sidebar */
-body:has(.th-about-layout) .md-content,
-body:has(.th-about-layout) .md-main__inner,
-body:has(.th-about-layout) .md-main,
-body:has(.th-about-layout) .md-container {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-/* Asegura que nuestra grilla quede perfecta sin el sidebar del tema */
-body:has(.th-about-layout) .th-about-layout {
-  grid-template-columns: 260px 1fr;  /* índice + contenido */
-  gap: 28px;
-}
-
-/* (defensa extra) si Material reinyecta títulos del nav, ocultarlos */
 body:has(.th-about-layout) .md-nav__title,
-body:has(.th-about-layout) nav[data-md-component="toc"] {
-  display: none !important;
-}
-/* ============================================================
-About: ampliar ancho de texto (reducir margen derecho)
-============================================================ */
-
-/* Aumenta el ancho total del layout y reduce la proporción del gap */
-body:has(.th-about-layout) .th-about-layout {
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 20px !important;
-  max-width: 1600px; /* ancho total máximo */
+body:has(.th-about-layout) .md-sidebar--primary{
+  display:none!important;
 }
 
-/* El bloque de contenido principal se extiende más a la derecha */
-body:has(.th-about-layout) .th-about-content {
-  max-width: 1100px !important;   /* antes era ~900 */
-  padding-right: 0 !important;
-  margin-right: 0 !important;
-}
-
-/* Ajusta el contenedor principal de MkDocs para no limitar el ancho */
-body:has(.th-about-layout) .md-content {
-  max-width: none !important;
-  padding-right: 1rem !important; /* mantiene un pequeño margen visual */
-}
-
-/* En pantallas grandes, el texto puede ocupar más espacio aún */
-@media (min-width: 1400px) {
-  body:has(.th-about-layout) .th-about-content {
-    max-width: 1200px !important;
-  }
-}
-
-
+/* 1) Aumentar ancho máximo permitido por Material SOLO en About */
+body:has(.th-about-layout){
+  --md-content-width: 80rem;                 /* 1280px: puedes su*
