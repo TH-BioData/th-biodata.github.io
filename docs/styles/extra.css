@@ -409,5 +409,35 @@ body:has(.th-about-layout) .md-nav__title,
 body:has(.th-about-layout) nav[data-md-component="toc"] {
   display: none !important;
 }
+/* ============================================================
+About: ampliar ancho de texto (reducir margen derecho)
+============================================================ */
+
+/* Aumenta el ancho total del layout y reduce la proporción del gap */
+body:has(.th-about-layout) .th-about-layout {
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 20px !important;
+  max-width: 1600px; /* ancho total máximo */
+}
+
+/* El bloque de contenido principal se extiende más a la derecha */
+body:has(.th-about-layout) .th-about-content {
+  max-width: 1100px !important;   /* antes era ~900 */
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Ajusta el contenedor principal de MkDocs para no limitar el ancho */
+body:has(.th-about-layout) .md-content {
+  max-width: none !important;
+  padding-right: 1rem !important; /* mantiene un pequeño margen visual */
+}
+
+/* En pantallas grandes, el texto puede ocupar más espacio aún */
+@media (min-width: 1400px) {
+  body:has(.th-about-layout) .th-about-content {
+    max-width: 1200px !important;
+  }
+}
 
 
