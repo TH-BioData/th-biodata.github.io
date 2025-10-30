@@ -401,3 +401,41 @@ TH BioData — Uniformar altura de tarjetas y anclar botón al fondo
   color: #0F3D73 !important;
   transform: translateY(-2px);
 }
+
+/* ============================================================
+ABOUT — cuadrícula 2x2 y botones simples en Founder
+============================================================ */
+
+/* --- Cuadrícula 2x2 para las tarjetas del bloque "Our Approach" --- */
+.th-about-layout .th-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px;
+}
+@media (max-width: 900px) {
+  .th-about-layout .th-cards {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 640px) {
+  .th-about-layout .th-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* --- Botones simples en Founder (sin color corporativo de fondo) --- */
+.th-card--founder a {
+  background: none !important;
+  color: var(--th-color-corporate-blue) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.th-card--founder a:hover {
+  background: #f3f6fa !important;
+  border-color: var(--th-color-corporate-light-blue) !important;
+  color: var(--th-color-corporate-blue) !important;
+  text-decoration: none !important;
+}
