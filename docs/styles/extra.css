@@ -307,3 +307,77 @@ MÓVIL — toggle, ocultar índice About, drawer funcional
   .md-overlay{ z-index:11000!important; }
   input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero{ pointer-events:none!important; }
 }
+
+/* ============================================================
+TH BioData — Ajustes específicos para la página Services
+============================================================ */
+
+/* ---------- Contenedor de tarjetas ---------- */
+.th-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+/* ---------- Tarjeta individual ---------- */
+.th-card {
+  flex: 1 1 260px;                /* ancho base */
+  min-width: 260px;               /* evita que se achiquen demasiado */
+  max-width: 320px;               /* límite para mantener consistencia */
+  background: #f9fbfd;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Hover */
+.th-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+/* ---------- Títulos dentro de tarjetas ---------- */
+.th-card h3 {
+  color: var(--th-color-corporate-blue);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+/* ---------- Texto ---------- */
+.th-card p {
+  flex-grow: 1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ---------- Botón "View" ---------- */
+.th-card a {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: var(--th-color-corporate-blue);
+  color: #fff !important;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.25s ease;
+}
+.th-card a:hover {
+  background-color: var(--th-color-corporate-light-blue);
+}
+
+/* ---------- Responsividad ---------- */
+@media (max-width: 1100px) {
+  .th-card { flex: 1 1 45%; max-width: 45%; }
+}
+@media (max-width: 700px) {
+  .th-card { flex: 1 1 100%; max-width: 100%; }
+}
