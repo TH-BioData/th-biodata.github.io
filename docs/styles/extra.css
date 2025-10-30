@@ -1,7 +1,7 @@
 /* ============================================================
-TH BioData — v18
+TH BioData — v19
 Hero intacto · títulos azules · tarjetas · toggle EN/ES
-ABOUT con índice bilingüe sin tocar el resto del sitio
+ABOUT con índice bilingüe · Drawer móvil funcionando
 ============================================================ */
 
 /* ---------- Paleta + tokens ---------- */
@@ -118,16 +118,14 @@ Tarjetas genéricas (Home/Approach)
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
 
 /* ============================================================
-Tipografía/espaciado compactos globales
+Tipografía/espaciado
 ============================================================ */
 .md-typeset h1{ margin:0 0 .55rem!important; }
 .md-typeset h2{ margin:1rem 0 .4rem!important; }
 .md-typeset h3{ margin:.85rem 0 .35rem!important; }
 .md-typeset p{ margin:.4rem 0!important; line-height:1.6; }
-.md-typeset h1 + p,
-.md-typeset h2 + p,
-.md-typeset h3 + p{ margin-top:.2rem!important; }
-.md-typeset ul, .md-typeset ol{ margin:.35rem 0 .5rem!important; }
+.md-typeset h1 + p,.md-typeset h2 + p,.md-typeset h3 + p{ margin-top:.2rem!important; }
+.md-typeset ul,.md-typeset ol{ margin:.35rem 0 .5rem!important; }
 .md-typeset li{ margin:.15rem 0!important; }
 .md-typeset hr{ margin:.8rem 0!important; }
 
@@ -162,7 +160,7 @@ Bilingüe — contenido y TOC
 :root[data-lang="es"] .md-nav__link .lang-es{ display:inline!important; }
 .md-nav .md-ellipsis{ display:inline-block; }
 
-/* Botón flotante EN/ES */
+/* Botón flotante EN/ES (posición desktop por defecto) */
 .th-lang-switch{
   position:fixed; top:.7rem; right:1.2rem; z-index:9999;
   background:var(--th-color-corporate-blue,#0F3D73); color:#fff;
@@ -191,47 +189,38 @@ Títulos azules estilo Home
 .th-section h3{ font-size:1.2rem; margin-top:.5rem; }
 
 /* ============================================================
-ABOUT — escopado estrictamente a la página About
-(no toca Home ni otras secciones)
+ABOUT — escopado a la página About
 ============================================================ */
 
-/* 0) Esconder sidebars del tema SOLO si existe nuestro layout */
-.md-main:has(.th-about-layout) .md-sidebar--secondary,
-.md-main:has(.th-about-layout) .md-nav--secondary,
-.md-main:has(.th-about-layout) nav[data-md-component="toc"],
-.md-main:has(.th-about-layout) .md-nav__title,
-.md-main:has(.th-about-layout) .md-sidebar--primary{
-  display:none!important;
+/* (Desktop) ocultar sidebars del tema si usamos .th-about-layout */
+@media (min-width:769px){
+  .md-main:has(.th-about-layout) .md-sidebar--secondary,
+  .md-main:has(.th-about-layout) .md-nav--secondary,
+  .md-main:has(.th-about-layout) nav[data-md-component="toc"],
+  .md-main:has(.th-about-layout) .md-nav__title,
+  .md-main:has(.th-about-layout) .md-sidebar--primary{ display:none!important; }
 }
 
-/* 1) Ampliar el ancho permitido SOLO dentro del flujo typeset del About */
+/* Ancho de texto dentro de About */
 .md-main:has(.th-about-layout) .md-typeset{
-  max-width:80rem !important;         /* 1280px; subí a 88rem si querés más */
+  max-width:80rem !important;
   margin-left:auto!important;
   margin-right:auto!important;
   padding-left:0!important;
   padding-right:0!important;
 }
 
-/* 2) Layout índice + contenido (card limpio) */
+/* Layout índice + contenido */
 .th-about-layout{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  gap:36px;
-  align-items:start;
-  margin:0 auto;
-  padding:0 1rem;
+  display:grid; grid-template-columns:280px 1fr;
+  gap:36px; align-items:start; margin:0 auto; padding:0 1rem;
 }
 .th-sideindex{
   position:sticky; top:calc(var(--md-header-height,64px) + 24px);
-  align-self:start;
-  padding:.75rem .75rem .9rem;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:12px; background:#f9fbfd;
-  box-shadow:0 2px 6px rgba(0,0,0,.04);
-  width:280px; z-index:1;
+  align-self:start; padding:.75rem .75rem .9rem;
+  border:1px solid rgba(0,0,0,.08); border-radius:12px; background:#f9fbfd;
+  box-shadow:0 2px 6px rgba(0,0,0,.04); width:280px; z-index:1;
 }
-/* Si por cascada aparecen viñetas, las anulamos con fuerza */
 .th-sideindex ul{ list-style:none !important; padding-left:0 !important; margin:0 !important; }
 .th-sideindex li{ margin:.2rem 0; }
 .th-sideindex a{
@@ -249,7 +238,7 @@ ABOUT — escopado estrictamente a la página About
   background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18);
 }
 
-/* 3) Título principal con franja azul (About) */
+/* Título principal con franja azul (About) */
 .th-page-title{
   position:relative; padding-top:.9rem; margin-top:.2rem;
   color:var(--th-color-corporate-blue)!important; font-weight:800;
@@ -260,10 +249,7 @@ ABOUT — escopado estrictamente a la página About
   border-radius:4px; box-shadow:0 1px 0 rgba(0,0,0,.06);
 }
 
-/* 4) Evitar cualquier cruce visual con subrayados */
-.th-about-content h1,.th-about-content h2{ position:relative; z-index:0; }
-
-/* 5) Responsive — About */
+/* Responsive About */
 @media (max-width:1280px){
   .th-about-layout{ grid-template-columns:260px 1fr; gap:28px; }
   .th-sideindex{ width:260px; }
@@ -274,225 +260,82 @@ ABOUT — escopado estrictamente a la página About
 }
 
 /* ============================================================
-Accesibilidad / motion + anclado suave
+Accesibilidad + scroll suave
 ============================================================ */
 @media(prefers-reduced-motion:reduce){ *{ transition:none!important; } }
 html{ scroll-behavior:smooth; }
 
-
 /* ============================================================
-HOME — eliminar sangría/columna izquierda cuando existe #th-hero
-(no afecta otras páginas)
+HOME — quitar sidebars sólo en DESKTOP
 ============================================================ */
-body:has(#th-hero) .md-sidebar--primary,
-body:has(#th-hero) .md-sidebar--secondary,
-body:has(#th-hero) nav[data-md-component="toc"]{
-  display: none !important;
+@media (min-width:769px){
+  body:has(#th-hero) .md-sidebar--primary,
+  body:has(#th-hero) .md-sidebar--secondary,
+  body:has(#th-hero) nav[data-md-component="toc"]{ display:none!important; }
 }
 
-/* Quita el espacio reservado para esos sidebars */
+/* Quita márgenes laterales reservados (home) */
 body:has(#th-hero) .md-main,
 body:has(#th-hero) .md-main__inner,
 body:has(#th-hero) .md-content,
 body:has(#th-hero) .md-content__inner{
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  /* también anulamos posibles márgenes derechos “de seguridad” */
-  margin-right: 0 !important;
-  padding-right: 0 !important;
+  margin-left:0!important; padding-left:0!important;
+  margin-right:0!important; padding-right:0!important;
 }
-
-/* ============================================================
-HOME — corregir margen izquierdo residual
-(garantiza hero centrado y sin padding lateral)
-============================================================ */
-
 body:has(#th-hero) .md-main,
 body:has(#th-hero) .md-main__inner,
 body:has(#th-hero) .md-container,
 body:has(#th-hero) .md-content,
-body:has(#th-hero) .md-content__inner {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  margin-right: 0 !important;
-  padding-right: 0 !important;
-  max-width: 100% !important;
-  width: 100vw !important;
-}
-
-/* Asegura que el hero ocupe todo el ancho visible */
-body:has(#th-hero) #th-hero {
-  width: 100vw !important;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-
-
-
-
-/* ============================================================
-TH BioData — Fix móviles (toggle y menú About)
-Sólo <= 768px
-============================================================ */
-@media (max-width: 768px) {
-
-  /* --- 0) Altura base del header para cálculos --- */
-  :root { --th-header-h: 56px; } /* Material suele usar ~56px en móvil */
-
-  /* --- 1) Mover el toggle por debajo del header (no tapa búsqueda/tema) --- */
-  .th-lang-switch {
-    position: fixed !important;
-    top: calc(var(--th-header-h) + 8px) !important; /* queda debajo de la barra */
-    right: 12px !important;
-    z-index: 9999;
-    background: var(--th-color-corporate-blue);
-    color: #fff;
-    border: 0;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.15);
-    opacity: .95;
-  }
-
-  /* Asegura que los botones nativos del header queden por encima entre sí */
-  .md-header .md-header__button,
-  .md-header .md-search,
-  .md-header .md-icon {
-    z-index: 10000;
-  }
-
-  /* --- 2) Ocultar menú flotante de About en móvil ---
-     (reglas defensivas para distintos nombres/clases posibles) */
-  /* Si tu menú tiene alguno de estos ids/clases se ocultará */
-  #about-index,
-  .about-index,
-  .about-menu,
-  .about-sidebar,
-  .about-floating-menu {
-    display: none !important;
-    visibility: hidden !important;
-  }
-
-  /* Filtro genérico: si el primer bloque del contenido es un card/aside/nav
-     con "about" en id o class, también lo ocultamos (solo móvil) */
-  main .md-typeset > :is(div,nav,aside,section):first-child:is([id*="about"], [class*="about"]) {
-    display: none !important;
-    visibility: hidden !important;
-  }
-
-  /* Cuando el menú desaparece, el contenido se recentra */
-  .th-about-content,
-  main .md-typeset {
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-  }
+body:has(#th-hero) .md-content__inner{
+  max-width:100% !important; width:100vw !important;
 }
 
 /* ============================================================
-TH BioData — Hotfix móvil About: ocultar sólo el índice, no el contenido
+MÓVIL — fixes: toggle, ocultar índice About, drawer robusto
 ============================================================ */
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-  /* 1) Revertir la ocultación amplia del primer bloque "about" */
-  main .md-typeset > :is(div,nav,aside,section):first-child:is([id*="about"], [class*="about"]) {
-    display: revert !important;
-    visibility: visible !important;
+  /* 1) Mover toggle por debajo del header (no tapa búsqueda/tema) */
+  :root { --th-header-h:56px; }
+  .th-lang-switch{
+    position:fixed!important;
+    top:calc(var(--th-header-h) + 8px)!important;
+    right:12px!important;
+    z-index:9999;
+    padding:6px 10px; font-size:14px; border-radius:999px;
+    background:var(--th-color-corporate-blue); color:#fff; border:0;
+    box-shadow:0 2px 10px rgba(0,0,0,.15); opacity:.95;
+  }
+  .md-header .md-header__button,.md-header .md-search,.md-header .md-icon{ z-index:10000; }
+
+  /* 2) Ocultar índice flotante de About en móvil */
+  .th-sideindex,
+  #about-index,.about-index,.about-menu,.about-sidebar,.about-floating-menu{
+    display:none!important; visibility:hidden!important;
   }
 
-  /* 2) Ocultar específicamente el índice/menú de About en móvil
-        - Cubre variantes: nav/aside/card con links a secciones (#anchor) */
-  main .md-typeset :is(nav, aside, .md-card, .about-sidebar, .about-floating-menu, #about-index, .about-index, .about-menu)
-    :is(a[href^="#"], ul li a[href^="#"]) {
-    /* si encontramos links ancla dentro, oculta el contenedor superior */
+  /* 3) Drawer robusto: sidebar por encima del overlay y del hero */
+  .md-sidebar--primary{
+    display:block!important; visibility:visible!important;
+    position:fixed!important;
+    top:var(--md-header-height,56px)!important; left:0!important;
+    height:calc(100% - var(--md-header-height,56px))!important;
+    width:85vw!important; max-width:320px!important;
+    background:var(--md-default-bg-color,#fff)!important;
+    z-index:12000!important; transform:translateX(-100%)!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.25)!important;
   }
-  main .md-typeset :is(nav, aside, .md-card, .about-sidebar, .about-floating-menu, #about-index, .about-index, .about-menu):has(a[href^="#"]) {
-    display: none !important;
-    visibility: hidden !important;
+  html[data-md-state="drawer"] .md-sidebar--primary{
+    transform:translateX(0)!important;
   }
+  .md-overlay{ z-index:11000!important; }
 
-  /* 3) Asegurar que el resto del contenido quede visible y sin margen lateral */
-  .th-about-content,
-  main .md-typeset {
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-    visibility: visible !important;
+  /* 4) El hero no bloquea el drawer */
+  body:has(#th-hero) #th-hero,
+  body:has(#th-hero) #th-hero::before,
+  body:has(#th-hero) #th-hero .hero__bg,
+  body:has(#th-hero) #th-hero .hero__content{
+    z-index:1!important;
   }
-}
-
-
-/* ============================================================
-TH BioData — Hotfix móvil: drawer visible sobre el overlay
-(aplica sólo a pantallas chicas)
-============================================================ */
-@media (max-width: 768px) {
-
-  /* 1) Asegurar que el panel del menú (sidebar primario) quede
-        por encima del overlay y del header */
-  .md-sidebar--primary {
-    z-index: 11000 !important;            /* > overlay y header */
-    display: block !important;            /* evitar ocultamientos accidentales */
-    visibility: visible !important;
-    background: var(--md-default-bg-color, #fff); /* fondo sólido del panel */
-  }
-
-  /* 2) Mantener el overlay por debajo del panel */
-  .md-overlay {
-    z-index: 10900 !important;            /* < sidebar, > resto del contenido */
-  }
-
-  /* 3) (Defensivo) Cuando el drawer está activo, garantizamos que el panel entre */
-  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
-    transform: translateX(0) !important;
-  }
-}
-
-
-/* ============================================================
-Drawer móvil: arreglar conflicto de especificidad
-============================================================ */
-
-/* 1) Solo en DESKTOP ocultamos sidebars en Home y About */
-@media (min-width: 769px) {
-  /* Home sin columnas laterales */
-  body:has(#th-hero) .md-sidebar--primary,
-  body:has(#th-hero) .md-sidebar--secondary,
-  body:has(#th-hero) nav[data-md-component="toc"] {
-    display: none !important;
-  }
-
-  /* About con layout propio sin sidebars del tema */
-  .md-main:has(.th-about-layout) .md-sidebar--secondary,
-  .md-main:has(.th-about-layout) .md-nav--secondary,
-  .md-main:has(.th-about-layout) nav[data-md-component="toc"],
-  .md-main:has(.th-about-layout) .md-nav__title,
-  .md-main:has(.th-about-layout) .md-sidebar--primary {
-    display: none !important;
-  }
-}
-
-/* 2) En MÓVIL permitimos que el drawer funcione */
-@media (max-width: 768px) {
-  /* Revertir displays para que el panel pueda mostrarse */
-  body:has(#th-hero) .md-sidebar--primary,
-  .md-main:has(.th-about-layout) .md-sidebar--primary {
-    display: block !important;
-    visibility: visible !important;
-  }
-
-  /* Cuando el drawer está abierto, aseguramos la entrada del panel
-     con igual o mayor especificidad que las reglas que lo ocultaban */
-  body:has(#th-hero) [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary,
-  .md-main:has(.th-about-layout) [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary,
-  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
-    transform: translateX(0) !important;
-    display: block !important;
-    z-index: 11000 !important;           /* por encima del overlay */
-    background: var(--md-default-bg-color, #fff);
-  }
-
-  /* Overlay por debajo del panel */
-  .md-overlay { z-index: 10900 !important; }
+  html[data-md-state="drawer"] body:has(#th-hero) #th-hero{ pointer-events:none!important; }
 }
