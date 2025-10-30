@@ -383,3 +383,37 @@ PATCH — Drawer con flag de checkbox + degradado del hero
     pointer-events: none !important;
   }
 }
+
+
+/* ============================================================
+HOTFIX v19.1 — Overlay del HERO siempre visible
+(asegura orden de capas y fuerza el degradado)
+============================================================ */
+
+/* Orden de capas estable: fondo (0) → overlay (1) → contenido (2) */
+#th-hero { position: relative !important; z-index: 0 !important; overflow: hidden !important; }
+#th-hero .hero__bg { position: absolute !important; inset: 0 !important; z-index: 0 !important; }
+#th-hero::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  /* Degradado reforzado */
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 35, 80, .35) 0%,
+    rgba(10, 35, 80, .55) 40%,
+    rgba(10, 35, 80, .85) 100%
+  ) !important;
+  opacity: 1 !important;
+}
+#th-hero .hero__content { position: absolute !important; z-index: 2 !important; }
+
+/* En móvil mantenemos el mismo orden incluso con el drawer abierto */
+@media (max-width: 768px) {
+  #th-hero { z-index: 0 !important; }
+  #th-hero .hero__bg { z-index: 0 !important; }
+  #th-hero::before { z-index: 1 !important; }
+  #th-hero .hero__content { z-index: 2 !important; }
+}
