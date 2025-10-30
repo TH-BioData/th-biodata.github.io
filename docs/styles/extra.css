@@ -346,105 +346,38 @@ Bloque Founder estilo tarjeta
 html{ scroll-behavior:smooth; }
 
 /* ============================================================
-Elimina margen blanco y el texto "About" residual del TOC
+About: limpiar TOC residual y margen izquierdo (sólo en About)
 ============================================================ */
 
-/* 1) Quita el contenedor lateral fantasma del tema */
-.md-sidebar--secondary,
-.md-nav--secondary {
+/* Ocultar TOC/segundo sidebar SÓLO cuando existe .th-about-layout */
+body:has(.th-about-layout) .md-sidebar--secondary,
+body:has(.th-about-layout) .md-nav--secondary,
+body:has(.th-about-layout) nav[data-md-component="toc"],
+body:has(.th-about-layout) .md-nav__title {
   display: none !important;
 }
 
-/* 2) Elimina el margen izquierdo que quedaba reservado para el TOC */
-.md-content {
+/* Quitar el margen reservado para el TOC SÓLO en About */
+body:has(.th-about-layout) .md-content {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
 
-/* 3) Asegura que el layout principal del About ocupe todo el ancho */
-.th-about-layout {
-  grid-template-columns: 220px 1fr !important;
+body:has(.th-about-layout) .md-main__inner {
+  margin-left: 0 !important;
+}
+
+/* Reafirmar la grilla del About (no afecta otras páginas) */
+body:has(.th-about-layout) .th-about-layout {
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
 
-/* 4) Ajusta el contenido principal para que arranque sin sangría */
-.th-about-content {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
+/* Ancho del índice lateral (sólo About) */
+body:has(.th-about-layout) .th-sideindex {
+  width: 260px;
 }
 
-/* 5) Ajuste opcional: ancho un poco mayor del índice */
-.th-sideindex {
-  width: 220px;
-}
-
-
-/* ============================================================
-Corrección final: elimina margen blanco y TOC residual
-============================================================ */
-
-/* Quita el TOC autogenerado de MkDocs Material (a veces reaparece) */
-.md-sidebar--secondary,
-.md-nav--secondary,
-.md-nav__title,
-.md-nav__container > .md-nav__item:first-child {
-  display: none !important;
-}
-
-/* Elimina el margen lateral reservado para el TOC */
-.md-content {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-/* Ajusta la cuadrícula principal del About */
-.th-about-layout {
-  grid-template-columns: 230px 1fr !important;
-  gap: 32px !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  width: 100%;
-}
-
-/* Asegura que el contenido principal ocupe todo el espacio disponible */
-.th-about-content {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  width: 100%;
-}
-
-/* Índice lateral con leve mejora visual */
-.th-sideindex {
-  width: 230px;
-  background: #f9fbfd;
-  border: 1px solid rgba(0,0,0,.08);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.04);
-}
-
-/* Modo oscuro coherente */
-[data-md-color-scheme="slate"] .th-sideindex {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.12);
-}
-
-/* Ajuste extra: que el área principal no deje espacio lateral */
-.md-main__inner {
-  margin-left: 0 !important;
-}
-
-/* Responsive: el índice se mantiene centrado sin sangría */
-@media(max-width:1100px) {
-  .th-about-layout {
-    grid-template-columns: 1fr;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-  }
-  .th-sideindex {
-    position: relative;
-    top: auto;
-    margin: 0 auto 1rem;
-  }
-}
 
