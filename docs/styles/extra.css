@@ -421,3 +421,30 @@ TH BioData — Hotfix móvil About: ocultar sólo el índice, no el contenido
     visibility: visible !important;
   }
 }
+
+
+/* ============================================================
+TH BioData — Hotfix móvil: drawer visible sobre el overlay
+(aplica sólo a pantallas chicas)
+============================================================ */
+@media (max-width: 768px) {
+
+  /* 1) Asegurar que el panel del menú (sidebar primario) quede
+        por encima del overlay y del header */
+  .md-sidebar--primary {
+    z-index: 11000 !important;            /* > overlay y header */
+    display: block !important;            /* evitar ocultamientos accidentales */
+    visibility: visible !important;
+    background: var(--md-default-bg-color, #fff); /* fondo sólido del panel */
+  }
+
+  /* 2) Mantener el overlay por debajo del panel */
+  .md-overlay {
+    z-index: 10900 !important;            /* < sidebar, > resto del contenido */
+  }
+
+  /* 3) (Defensivo) Cuando el drawer está activo, garantizamos que el panel entre */
+  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+    transform: translateX(0) !important;
+  }
+}
