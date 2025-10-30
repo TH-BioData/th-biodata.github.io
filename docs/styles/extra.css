@@ -692,21 +692,32 @@ CONTACT — Layout y formulario
 }
 
 /* ============================================================
-CONTACT — eliminar sidebar y margen lateral
+CONTACT — quitar sidebar y margen (desktop)
 ============================================================ */
+@media (min-width: 769px){
+  /* oculta ambos sidebars y el título del TOC */
+  .md-main:has(.th-contact) .md-sidebar--primary,
+  .md-main:has(.th-contact) .md-sidebar--secondary,
+  .md-main:has(.th-contact) nav[data-md-component="toc"],
+  .md-main:has(.th-contact) .md-nav--secondary,
+  .md-main:has(.th-contact) .md-nav__title{
+    display: none !important;
+    visibility: hidden !important;
+  }
 
-/* Oculta completamente el mini "Contact" del TOC */
-.md-main:has(.th-contact) .md-sidebar--secondary,
-.md-main:has(.th-contact) .md-nav--secondary,
-.md-main:has(.th-contact) nav[data-md-component="toc"],
-.md-main:has(.th-contact) .md-nav__title {
-  display: none !important;
-  visibility: hidden !important;
+  /* elimina el espacio reservado por el sidebar */
+  .md-main:has(.th-contact) .md-content,
+  .md-main:has(.th-contact) .md-content__inner{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
 }
 
-/* Elimina el margen lateral reservado para ese TOC */
-.md-main:has(.th-contact) .md-content,
-.md-main:has(.th-contact) .md-content__inner {
-  margin-left: 0 !important;
+/* Por si algún tema aplica ancho distinto, centramos el contenido de Contact */
+.md-main:has(.th-contact) .md-typeset{
+  max-width: 80rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
   padding-left: 0 !important;
+  padding-right: 0 !important;
 }
