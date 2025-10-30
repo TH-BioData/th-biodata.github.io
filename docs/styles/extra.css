@@ -690,3 +690,23 @@ CONTACT — Layout y formulario
   border-color: var(--th-color-corporate-light-blue);
   box-shadow: 0 0 0 3px rgba(124,198,255,.3);
 }
+
+/* ============================================================
+CONTACT — eliminar sidebar y margen lateral
+============================================================ */
+
+/* Oculta completamente el mini "Contact" del TOC */
+.md-main:has(.th-contact) .md-sidebar--secondary,
+.md-main:has(.th-contact) .md-nav--secondary,
+.md-main:has(.th-contact) nav[data-md-component="toc"],
+.md-main:has(.th-contact) .md-nav__title {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Elimina el margen lateral reservado para ese TOC */
+.md-main:has(.th-contact) .md-content,
+.md-main:has(.th-contact) .md-content__inner {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
