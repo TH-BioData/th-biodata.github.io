@@ -5,7 +5,7 @@ hide:
 ---
 
 <!-- ====================== HERO ====================== -->
-<div id="th-hero">
+<div id="th-hero" class="th-hero--projects"
   <div class="hero__bg"></div>
   <div class="hero__content">
     <h1 class="hero__title lang lang-en">Projects</h1>
