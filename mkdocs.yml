@@ -88,3 +88,5 @@ extra_javascript:
   - scripts/hero-fade.js
   - scripts/ready.js
   - scripts/lang-toggle.js
+  - https://unpkg.com/lucide@latest/dist/umd/lucide.min.js
+  - scripts/init_lucide.js
