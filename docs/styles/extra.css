@@ -278,3 +278,26 @@ Accesibilidad / motion + anclado suave
 ============================================================ */
 @media(prefers-reduced-motion:reduce){ *{ transition:none!important; } }
 html{ scroll-behavior:smooth; }
+
+
+/* ============================================================
+HOME — eliminar sangría/columna izquierda cuando existe #th-hero
+(no afecta otras páginas)
+============================================================ */
+body:has(#th-hero) .md-sidebar--primary,
+body:has(#th-hero) .md-sidebar--secondary,
+body:has(#th-hero) nav[data-md-component="toc"]{
+  display: none !important;
+}
+
+/* Quita el espacio reservado para esos sidebars */
+body:has(#th-hero) .md-main,
+body:has(#th-hero) .md-main__inner,
+body:has(#th-hero) .md-content,
+body:has(#th-hero) .md-content__inner{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  /* también anulamos posibles márgenes derechos “de seguridad” */
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
