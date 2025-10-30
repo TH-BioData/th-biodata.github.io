@@ -390,3 +390,34 @@ Sólo <= 768px
     padding-left: 0 !important;
   }
 }
+
+/* ============================================================
+TH BioData — Hotfix móvil About: ocultar sólo el índice, no el contenido
+============================================================ */
+@media (max-width: 768px) {
+
+  /* 1) Revertir la ocultación amplia del primer bloque "about" */
+  main .md-typeset > :is(div,nav,aside,section):first-child:is([id*="about"], [class*="about"]) {
+    display: revert !important;
+    visibility: visible !important;
+  }
+
+  /* 2) Ocultar específicamente el índice/menú de About en móvil
+        - Cubre variantes: nav/aside/card con links a secciones (#anchor) */
+  main .md-typeset :is(nav, aside, .md-card, .about-sidebar, .about-floating-menu, #about-index, .about-index, .about-menu)
+    :is(a[href^="#"], ul li a[href^="#"]) {
+    /* si encontramos links ancla dentro, oculta el contenedor superior */
+  }
+  main .md-typeset :is(nav, aside, .md-card, .about-sidebar, .about-floating-menu, #about-index, .about-index, .about-menu):has(a[href^="#"]) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* 3) Asegurar que el resto del contenido quede visible y sin margen lateral */
+  .th-about-content,
+  main .md-typeset {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    visibility: visible !important;
+  }
+}
