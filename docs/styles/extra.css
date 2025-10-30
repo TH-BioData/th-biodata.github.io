@@ -328,3 +328,46 @@ body:has(#th-hero) #th-hero {
   margin-left: -50vw;
   margin-right: -50vw;
 }
+
+
+
+
+/* ============================================================
+TH BioData — Ajustes móviles (toggle y menú About)
+============================================================ */
+
+/* --- 1. Reubicar el botón toggle de idioma en móviles --- */
+@media (max-width: 768px) {
+  .th-lang-switch {
+    position: fixed;
+    top: 10px;
+    right: 12px;  /* se mueve a la esquina superior derecha */
+    z-index: 9999;
+    background-color: var(--th-color-corporate-blue);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0.95;
+  }
+
+  /* --- Evita que el toggle tape los botones del header --- */
+  [data-md-color-scheme] .md-header__button.md-icon {
+    z-index: 9000;
+  }
+
+  /* --- 2. Ocultar el menú flotante lateral en móviles (About) --- */
+  #about-index,
+  .about-sidebar,
+  .about-floating-menu {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* --- Ajuste opcional: centrar contenido si desaparece el menú lateral --- */
+  .th-about-content {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
