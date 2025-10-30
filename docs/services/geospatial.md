@@ -58,7 +58,7 @@ hide:
     <h2 id="services" class="lang lang-es">Servicios</h2>
 
     <!-- Tarjetas 2×2 + fondo geométrico sutil -->
-    <div class="th-cards th-cards--services th-cards--geospatial">
+    <div class="th-cards th-cards--services">
 
       <div class="th-card">
         <h3 class="lang lang-en">
