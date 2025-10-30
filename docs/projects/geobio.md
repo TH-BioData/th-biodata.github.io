@@ -40,7 +40,7 @@ hide:
 
     <!-- Imagen + caption -->
     <figure style="margin:0 0 1rem;">
-      <img src="../assets/geobio_figure.png" alt="GeoBio example" width="800" style="border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);max-width:100%;">
+      <img src="../../assets/geobio_figure.png" alt="GeoBio example" width="800" style="border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);max-width:100%;">
       <figcaption class="lang lang-en" style="font-size:.92rem;color:#54606c;margin-top:.4rem;">Example of occurrence map generated with GeoBio.</figcaption>
       <figcaption class="lang lang-es" style="font-size:.92rem;color:#54606c;margin-top:.4rem;">Ejemplo de mapa de ocurrencia generado con GeoBio.</figcaption>
     </figure>
