@@ -1,7 +1,7 @@
 /* ============================================================
-TH BioData — v19
-Hero intacto · títulos azules · tarjetas · toggle EN/ES
-ABOUT con índice bilingüe · Drawer móvil funcionando
+TH BioData — v20 (clean build)
+Hero con gradiente integrado · Drawer móvil OK · Toggle móvil OK
+About: índice oculto sólo en móvil
 ============================================================ */
 
 /* ---------- Paleta + tokens ---------- */
@@ -11,6 +11,8 @@ ABOUT con índice bilingüe · Drawer móvil funcionando
   --th-content-max:1600px;
   --th-gap:24px;
 }
+
+/* Tema (claro/oscuro) */
 [data-md-color-scheme="default"],
 [data-md-color-scheme="slate"]{
   --md-primary-fg-color:var(--th-color-corporate-blue);
@@ -23,7 +25,7 @@ body:has(#th-hero){ overflow-x:hidden; }
 body:has(#th-hero) .md-header{ backdrop-filter:none!important; }
 
 /* ============================================================
-HERO (Home) — full bleed sin franja
+HERO (Home) — full bleed sin franja + GRADIENTE INTEGRADO
 ============================================================ */
 #th-hero{
   position:relative; width:100vw;
@@ -31,17 +33,28 @@ HERO (Home) — full bleed sin franja
   margin-top:0!important; padding:0!important;
   min-height:100vh; background:#0F3D73; overflow:hidden; z-index:0;
 }
+
+/* MULTI-BACKGROUND: gradiente (arriba) + foto (abajo) */
 #th-hero .hero__bg{
-  position:absolute; inset:0; z-index:0;
-  background:url('../assets/home_hero_v2.jpg') center/cover no-repeat;
+  position:absolute; inset:0;
+  /* El primer background es el gradiente (superior) */
+  background:
+    linear-gradient(to bottom,
+      rgba(10,35,80,.35) 0%,
+      rgba(10,35,80,.55) 40%,
+      rgba(10,35,80,.85) 100%),
+    url('../assets/home_hero_v2.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
   transition:transform 15s linear, filter 2s ease;
+  z-index:0;
 }
 #th-hero .hero__bg:hover{ transform:scale(1.05); filter:brightness(1.08); }
-#th-hero::before{
-  content:""; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(to bottom, rgba(10,35,80,.2) 0%,
-    rgba(10,35,80,.45) 40%, rgba(10,35,80,.75) 100%);
-}
+
+/* (ya NO usamos ::before; el gradiente vive en .hero__bg) */
+
+/* Contenido del hero */
 #th-hero .hero__content{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   z-index:2; display:flex; flex-direction:column; align-items:center;
@@ -118,7 +131,7 @@ Tarjetas genéricas (Home/Approach)
 [data-md-color-scheme="slate"] .th-card p{ color:#f2f4f8!important; }
 
 /* ============================================================
-Tipografía/espaciado
+Tipografía / espaciado
 ============================================================ */
 .md-typeset h1{ margin:0 0 .55rem!important; }
 .md-typeset h2{ margin:1rem 0 .4rem!important; }
@@ -151,7 +164,7 @@ Bilingüe — contenido y TOC
 :root[data-lang="es"] .lang-es{ display:block!important; }
 :root[data-lang="es"] .lang-en{ display:none !important; }
 
-/* TOC (sidebar) mostrar sólo el idioma activo */
+/* TOC (sidebar) mostrar solo idioma activo */
 .md-nav .md-ellipsis .lang,
 .md-nav__link .lang{ display:none!important; }
 :root[data-lang="en"] .md-nav .md-ellipsis .lang-en,
@@ -160,7 +173,7 @@ Bilingüe — contenido y TOC
 :root[data-lang="es"] .md-nav__link .lang-es{ display:inline!important; }
 .md-nav .md-ellipsis{ display:inline-block; }
 
-/* Botón flotante EN/ES (posición desktop por defecto) */
+/* Botón EN/ES (posición desktop por defecto) */
 .th-lang-switch{
   position:fixed; top:.7rem; right:1.2rem; z-index:9999;
   background:var(--th-color-corporate-blue,#0F3D73); color:#fff;
@@ -176,24 +189,10 @@ Bilingüe — contenido y TOC
   background:var(--th-color-corporate-light-blue,#7CC6FF); color:#0F3D73; }
 
 /* ============================================================
-Títulos azules estilo Home
-============================================================ */
-.th-section h1,.th-section h2,.th-section h3{
-  color:var(--th-color-corporate-blue) !important; font-weight:800; margin-bottom:.6rem;
-}
-.th-section h1{ font-size:2.4rem; margin-top:1rem; }
-.th-section h2{
-  font-size:1.7rem; border-bottom:3px solid var(--th-color-corporate-light-blue);
-  display:inline-block; padding-bottom:.3rem;
-}
-.th-section h3{ font-size:1.2rem; margin-top:.5rem; }
-
-/* ============================================================
 ABOUT — escopado a la página About
 ============================================================ */
-
-/* (Desktop) ocultar sidebars del tema si usamos .th-about-layout */
 @media (min-width:769px){
+  /* Oculta sidebars del tema solo si usamos el layout propio */
   .md-main:has(.th-about-layout) .md-sidebar--secondary,
   .md-main:has(.th-about-layout) .md-nav--secondary,
   .md-main:has(.th-about-layout) nav[data-md-component="toc"],
@@ -201,16 +200,12 @@ ABOUT — escopado a la página About
   .md-main:has(.th-about-layout) .md-sidebar--primary{ display:none!important; }
 }
 
-/* Ancho de texto dentro de About */
+/* Ancho y layout */
 .md-main:has(.th-about-layout) .md-typeset{
   max-width:80rem !important;
-  margin-left:auto!important;
-  margin-right:auto!important;
-  padding-left:0!important;
-  padding-right:0!important;
+  margin-left:auto!important; margin-right:auto!important;
+  padding-left:0!important; padding-right:0!important;
 }
-
-/* Layout índice + contenido */
 .th-about-layout{
   display:grid; grid-template-columns:280px 1fr;
   gap:36px; align-items:start; margin:0 auto; padding:0 1rem;
@@ -221,43 +216,23 @@ ABOUT — escopado a la página About
   border:1px solid rgba(0,0,0,.08); border-radius:12px; background:#f9fbfd;
   box-shadow:0 2px 6px rgba(0,0,0,.04); width:280px; z-index:1;
 }
-.th-sideindex ul{ list-style:none !important; padding-left:0 !important; margin:0 !important; }
+.th-sideindex ul{ list-style:none!important; padding-left:0!important; margin:0!important; }
 .th-sideindex li{ margin:.2rem 0; }
-.th-sideindex a{
-  display:block; padding:.35rem .5rem; border-radius:8px;
-  text-decoration:none; color:#1f2a37; border:1px solid transparent;
-}
+.th-sideindex a{ display:block; padding:.35rem .5rem; border-radius:8px; text-decoration:none; color:#1f2a37; border:1px solid transparent; }
 .th-sideindex a:hover{ background:#eef5ff; border-color:#cfe3ff; }
 .th-sideindex__label{ font-weight:800; color:var(--th-color-corporate-blue); margin:.1rem 0 .35rem; }
 
-[data-md-color-scheme="slate"] .th-sideindex{
-  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
-}
+[data-md-color-scheme="slate"] .th-sideindex{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); }
 [data-md-color-scheme="slate"] .th-sideindex a{ color:#e5eaf3; }
-[data-md-color-scheme="slate"] .th-sideindex a:hover{
-  background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18);
-}
+[data-md-color-scheme="slate"] .th-sideindex a:hover{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18); }
 
-/* Título principal con franja azul (About) */
-.th-page-title{
-  position:relative; padding-top:.9rem; margin-top:.2rem;
-  color:var(--th-color-corporate-blue)!important; font-weight:800;
-}
-.th-page-title::before{
-  content:""; position:absolute; top:0; left:0;
-  width:84px; height:6px; background:var(--th-color-corporate-blue);
-  border-radius:4px; box-shadow:0 1px 0 rgba(0,0,0,.06);
-}
+/* Título principal con franja azul */
+.th-page-title{ position:relative; padding-top:.9rem; margin-top:.2rem; color:var(--th-color-corporate-blue)!important; font-weight:800; }
+.th-page-title::before{ content:""; position:absolute; top:0; left:0; width:84px; height:6px; background:var(--th-color-corporate-blue); border-radius:4px; box-shadow:0 1px 0 rgba(0,0,0,.06); }
 
 /* Responsive About */
-@media (max-width:1280px){
-  .th-about-layout{ grid-template-columns:260px 1fr; gap:28px; }
-  .th-sideindex{ width:260px; }
-}
-@media (max-width:1100px){
-  .th-about-layout{ grid-template-columns:1fr; gap:16px; padding:0 1rem; }
-  .th-sideindex{ position:relative; top:auto; width:100%; z-index:0; }
-}
+@media (max-width:1280px){ .th-about-layout{ grid-template-columns:260px 1fr; gap:28px; } .th-sideindex{ width:260px; } }
+@media (max-width:1100px){ .th-about-layout{ grid-template-columns:1fr; gap:16px; padding:0 1rem; } .th-sideindex{ position:relative; top:auto; width:100%; z-index:0; } }
 
 /* ============================================================
 Accesibilidad + scroll suave
@@ -291,11 +266,11 @@ body:has(#th-hero) .md-content__inner{
 }
 
 /* ============================================================
-MÓVIL — fixes: toggle, ocultar índice About, drawer robusto
+MÓVIL — toggle, ocultar índice About, drawer funcional
 ============================================================ */
 @media (max-width:768px){
 
-  /* 1) Mover toggle por debajo del header (no tapa búsqueda/tema) */
+  /* 1) Toggle de idioma: debajo del header */
   :root { --th-header-h:56px; }
   .th-lang-switch{
     position:fixed!important;
@@ -308,171 +283,27 @@ MÓVIL — fixes: toggle, ocultar índice About, drawer robusto
   }
   .md-header .md-header__button,.md-header .md-search,.md-header .md-icon{ z-index:10000; }
 
-  /* 2) Ocultar índice flotante de About en móvil */
+  /* 2) Ocultar índice/menú lateral de About */
   .th-sideindex,
   #about-index,.about-index,.about-menu,.about-sidebar,.about-floating-menu{
     display:none!important; visibility:hidden!important;
   }
 
-  /* 3) Drawer robusto: sidebar por encima del overlay y del hero */
+  /* 3) Drawer móvil (checkbox nativo) */
   .md-sidebar--primary{
-    display:block!important; visibility:visible!important;
     position:fixed!important;
     top:var(--md-header-height,56px)!important; left:0!important;
     height:calc(100% - var(--md-header-height,56px))!important;
     width:85vw!important; max-width:320px!important;
     background:var(--md-default-bg-color,#fff)!important;
-    z-index:12000!important; transform:translateX(-100%)!important;
+    transform:translateX(-100%)!important;
     box-shadow:0 8px 24px rgba(0,0,0,.25)!important;
+    z-index:12000!important;
+    display:block!important; visibility:visible!important;
   }
-  html[data-md-state="drawer"] .md-sidebar--primary{
+  input[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary{
     transform:translateX(0)!important;
   }
   .md-overlay{ z-index:11000!important; }
-
-  /* 4) El hero no bloquea el drawer */
-  body:has(#th-hero) #th-hero,
-  body:has(#th-hero) #th-hero::before,
-  body:has(#th-hero) #th-hero .hero__bg,
-  body:has(#th-hero) #th-hero .hero__content{
-    z-index:1!important;
-  }
-  html[data-md-state="drawer"] body:has(#th-hero) #th-hero{ pointer-events:none!important; }
-}
-
-
-/* ============================================================
-PATCH — Drawer con flag de checkbox + degradado del hero
-(añadir al final del CSS actual)
-============================================================ */
-@media (max-width: 768px) {
-
-  /* --- A) HERO: restaura el overlay degradado y el orden de capas --- */
-  #th-hero { z-index: 0 !important; }
-  #th-hero .hero__bg { z-index: 0 !important; }      /* fondo */
-  #th-hero::before { z-index: 1 !important; opacity: 1 !important; } /* degradado */
-  #th-hero .hero__content { z-index: 2 !important; } /* texto/botón */
-
-  /* --- B) Drawer móvil: usar el checkbox que controla el menú --- */
-  /* Estado base: panel fuera de vista */
-  .md-sidebar--primary{
-    position: fixed !important;
-    top: var(--md-header-height, 56px) !important;
-    left: 0 !important;
-    height: calc(100% - var(--md-header-height, 56px)) !important;
-    width: 85vw !important; max-width: 320px !important;
-    background: var(--md-default-bg-color, #fff) !important;
-    z-index: 12000 !important;
-    transform: translateX(-100%) !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
-  }
-  .md-overlay{ z-index: 11000 !important; }
-
-  /* Al abrir el drawer (checkbox checked), entra el panel */
-  input[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary{
-    transform: translateX(0) !important;
-    display: block !important;
-    visibility: visible !important;
-  }
-  input[data-md-toggle="drawer"]:checked ~ .md-container .md-overlay{
-    display: block !important;
-  }
-
-  /* Evita que el hero “robe” clics cuando el drawer está abierto */
-  input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero{
-    pointer-events: none !important;
-  }
-}
-
-
-/* ============================================================
-HOTFIX v19.1 — Overlay del HERO siempre visible
-(asegura orden de capas y fuerza el degradado)
-============================================================ */
-
-/* Orden de capas estable: fondo (0) → overlay (1) → contenido (2) */
-#th-hero { position: relative !important; z-index: 0 !important; overflow: hidden !important; }
-#th-hero .hero__bg { position: absolute !important; inset: 0 !important; z-index: 0 !important; }
-#th-hero::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 1 !important;
-  pointer-events: none !important;
-  /* Degradado reforzado */
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 35, 80, .35) 0%,
-    rgba(10, 35, 80, .55) 40%,
-    rgba(10, 35, 80, .85) 100%
-  ) !important;
-  opacity: 1 !important;
-}
-#th-hero .hero__content { position: absolute !important; z-index: 2 !important; }
-
-/* En móvil mantenemos el mismo orden incluso con el drawer abierto */
-@media (max-width: 768px) {
-  #th-hero { z-index: 0 !important; }
-  #th-hero .hero__bg { z-index: 0 !important; }
-  #th-hero::before { z-index: 1 !important; }
-  #th-hero .hero__content { z-index: 2 !important; }
-}
-
-/* ============================================================
-TH BioData — v19.2
-FIX FINAL: Degradado visible + Drawer intacto
-============================================================ */
-
-/* Restablecer orden correcto globalmente */
-#th-hero {
-  position: relative !important;
-  z-index: 0 !important;
-  overflow: hidden !important;
-}
-#th-hero .hero__bg {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-}
-#th-hero::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 1 !important;   /* el overlay va sobre el fondo */
-  pointer-events: none !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 35, 80, .35) 0%,
-    rgba(10, 35, 80, .55) 40%,
-    rgba(10, 35, 80, .85) 100%
-  ) !important;
-  opacity: 1 !important;
-}
-#th-hero .hero__content {
-  position: absolute !important;
-  z-index: 2 !important;  /* el texto siempre arriba */
-}
-
-/* --- Móvil --- */
-@media (max-width:768px){
-
-  /* No reasignamos z-index individuales para no pisar el degradado */
-  #th-hero,
-  #th-hero .hero__bg,
-  #th-hero::before,
-  #th-hero .hero__content {
-    isolation: isolate !important; /* aísla capas, evita interferencias */
-  }
-
-  /* Drawer funcional sin interferir en el hero */
-  input[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
-    transform: translateX(0) !important;
-    z-index: 12000 !important;
-  }
-  .md-overlay { z-index: 11000 !important; }
-
-  /* Desactivar clics del hero solo cuando drawer está abierto */
-  input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero {
-    pointer-events: none !important;
-  }
+  input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero{ pointer-events:none!important; }
 }
