@@ -5,7 +5,7 @@ hide:
 ---
 
 <!-- ====================== LAYOUT: ÍNDICE + CONTENIDO ====================== -->
-<section class="th-section th-about-layout">
+<section class="th-section th-about-layout th-services">
 
   <!-- ========== ÍNDICE LATERAL (bilingüe) ========== -->
   <nav class="th-sideindex" aria-label="Services index">
@@ -39,7 +39,7 @@ hide:
   <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <div class="th-about-content">
 
-    <!-- Título principal con franja azul fina -->
+    <!-- Título principal con franja azul -->
     <h1 class="th-page-title lang lang-en">Services</h1>
     <h1 class="th-page-title lang lang-es">Servicios</h1>
 
@@ -65,58 +65,73 @@ hide:
       Explora nuestras principales áreas de especialización a continuación:
     </p>
 
-    <div class="th-cards">
-      <div class="th-card">
+    <!-- ====================== TARJETAS (2x2 GRID) ====================== -->
+    <div class="th-cards th-cards--services">
+
+      <!-- ---------- Image Analysis ---------- -->
+      <div class="th-card" id="image">
         <h3 class="lang lang-en">Image Analysis & Computer Vision</h3>
         <h3 class="lang lang-es">Análisis de Imágenes y Visión por Computadora</h3>
         <p class="lang lang-en">
           Automated segmentation, lesion quantification, and phenotyping pipelines for plant pathology and microscopy.
-          <br><a href="./image-analysis/">→ Learn more</a>
         </p>
         <p class="lang lang-es">
           Segmentación automatizada, cuantificación de lesiones y pipelines de fenotipado para patología vegetal y microscopía.
-          <br><a href="./image-analysis/">→ Ver más</a>
         </p>
+        <a href="./image-analysis/" class="md-button">
+          <span class="lang lang-en">View</span>
+          <span class="lang lang-es">Ver</span>
+        </a>
       </div>
 
-      <div class="th-card">
+      <!-- ---------- Bioinformatics ---------- -->
+      <div class="th-card" id="bioinfo">
         <h3 class="lang lang-en">Bioinformatics & Data Science</h3>
         <h3 class="lang lang-es">Bioinformática y Ciencia de Datos</h3>
         <p class="lang lang-en">
           Omics data processing, statistical modeling, and visualization using open-source pipelines.
-          <br><a href="./bioinformatics/">→ Learn more</a>
         </p>
         <p class="lang lang-es">
           Procesamiento de datos ómicos, modelado estadístico y visualización mediante pipelines open-source.
-          <br><a href="./bioinformatics/">→ Ver más</a>
         </p>
+        <a href="./bioinformatics/" class="md-button">
+          <span class="lang lang-en">View</span>
+          <span class="lang lang-es">Ver</span>
+        </a>
       </div>
 
-      <div class="th-card">
+      <!-- ---------- Geospatial ---------- -->
+      <div class="th-card" id="geo">
         <h3 class="lang lang-en">Geospatial & Environmental Modeling</h3>
         <h3 class="lang lang-es">Modelado Geoespacial y Ambiental</h3>
         <p class="lang lang-en">
           Climatic variable extraction, ecological data workflows, and interactive mapping tools.
-          <br><a href="./geospatial/">→ Learn more</a>
         </p>
         <p class="lang lang-es">
           Extracción de variables climáticas, flujos de datos ecológicos y herramientas interactivas de mapeo.
-          <br><a href="./geospatial/">→ Ver más</a>
         </p>
+        <a href="./geospatial/" class="md-button">
+          <span class="lang lang-en">View</span>
+          <span class="lang lang-es">Ver</span>
+        </a>
       </div>
 
-      <div class="th-card">
+      <!-- ---------- Consulting ---------- -->
+      <div class="th-card" id="consulting">
         <h3 class="lang lang-en">Research Consulting & Data Integration</h3>
         <h3 class="lang lang-es">Consultoría e Integración de Datos</h3>
         <p class="lang lang-en">
           Technical and analytical support for research and innovation projects.
-          <br><a href="./consulting/">→ Learn more</a>
         </p>
         <p class="lang lang-es">
           Soporte técnico y analítico para proyectos de investigación e innovación.
-          <br><a href="./consulting/">→ Ver más</a>
         </p>
+        <a href="./consulting/" class="md-button">
+          <span class="lang lang-en">View</span>
+          <span class="lang lang-es">Ver</span>
+        </a>
       </div>
+
     </div>
 
     <hr/>
