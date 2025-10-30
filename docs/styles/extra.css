@@ -381,3 +381,33 @@ body:has(.th-about-layout) .th-sideindex {
 }
 
 
+/* ============================================================
+About: ocultar sidebar primario del tema (fuente del "About" chico)
+Sólo se aplica cuando existe nuestro layout .th-about-layout
+============================================================ */
+body:has(.th-about-layout) .md-sidebar--primary {
+  display: none !important;
+}
+
+/* El contenedor principal no debe reservar espacio para ese sidebar */
+body:has(.th-about-layout) .md-content,
+body:has(.th-about-layout) .md-main__inner,
+body:has(.th-about-layout) .md-main,
+body:has(.th-about-layout) .md-container {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Asegura que nuestra grilla quede perfecta sin el sidebar del tema */
+body:has(.th-about-layout) .th-about-layout {
+  grid-template-columns: 260px 1fr;  /* índice + contenido */
+  gap: 28px;
+}
+
+/* (defensa extra) si Material reinyecta títulos del nav, ocultarlos */
+body:has(.th-about-layout) .md-nav__title,
+body:has(.th-about-layout) nav[data-md-component="toc"] {
+  display: none !important;
+}
+
+
