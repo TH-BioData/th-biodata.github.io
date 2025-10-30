@@ -53,7 +53,7 @@ hide:
       Nuestros servicios combinan la precisión analítica con el conocimiento biológico para generar <strong>resultados claros, reproducibles y de impacto</strong>.
     </p>
 
-    <hr/>
+    <div class="th-divider"></div>
 
     <h2 id="overview" class="lang lang-en">Overview</h2>
     <h2 id="overview" class="lang lang-es">Descripción General</h2>
@@ -70,8 +70,12 @@ hide:
 
       <!-- ---------- Image Analysis ---------- -->
       <div class="th-card" id="image">
-        <h3 class="lang lang-en">Image Analysis & Computer Vision</h3>
-        <h3 class="lang lang-es">Análisis de Imágenes y Visión por Computadora</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="microscope"></span> Image Analysis & Computer Vision
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="microscope"></span> Análisis de Imágenes y Visión por Computadora
+        </h3>
         <p class="lang lang-en">
           Automated segmentation, lesion quantification, and phenotyping pipelines for plant pathology and microscopy.
         </p>
@@ -86,8 +90,12 @@ hide:
 
       <!-- ---------- Bioinformatics ---------- -->
       <div class="th-card" id="bioinfo">
-        <h3 class="lang lang-en">Bioinformatics & Data Science</h3>
-        <h3 class="lang lang-es">Bioinformática y Ciencia de Datos</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="dna"></span> Bioinformatics & Data Science
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="dna"></span> Bioinformática y Ciencia de Datos
+        </h3>
         <p class="lang lang-en">
           Omics data processing, statistical modeling, and visualization using open-source pipelines.
         </p>
@@ -102,8 +110,12 @@ hide:
 
       <!-- ---------- Geospatial ---------- -->
       <div class="th-card" id="geo">
-        <h3 class="lang lang-en">Geospatial & Environmental Modeling</h3>
-        <h3 class="lang lang-es">Modelado Geoespacial y Ambiental</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="globe-2"></span> Geospatial & Environmental Modeling
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="globe-2"></span> Modelado Geoespacial y Ambiental
+        </h3>
         <p class="lang lang-en">
           Climatic variable extraction, ecological data workflows, and interactive mapping tools.
         </p>
@@ -118,8 +130,12 @@ hide:
 
       <!-- ---------- Consulting ---------- -->
       <div class="th-card" id="consulting">
-        <h3 class="lang lang-en">Research Consulting & Data Integration</h3>
-        <h3 class="lang lang-es">Consultoría e Integración de Datos</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="bar-chart-3"></span> Research Consulting & Data Integration
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="bar-chart-3"></span> Consultoría e Integración de Datos
+        </h3>
         <p class="lang lang-en">
           Technical and analytical support for research and innovation projects.
         </p>
@@ -134,7 +150,7 @@ hide:
 
     </div>
 
-    <hr/>
+    <div class="th-divider"></div>
 
     <blockquote>
       <em class="lang lang-en">
