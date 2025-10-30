@@ -333,40 +333,59 @@ body:has(#th-hero) #th-hero {
 
 
 /* ============================================================
-TH BioData — Ajustes móviles (toggle y menú About)
+TH BioData — Fix móviles (toggle y menú About)
+Sólo <= 768px
 ============================================================ */
-
-/* --- 1. Reubicar el botón toggle de idioma en móviles --- */
 @media (max-width: 768px) {
+
+  /* --- 0) Altura base del header para cálculos --- */
+  :root { --th-header-h: 56px; } /* Material suele usar ~56px en móvil */
+
+  /* --- 1) Mover el toggle por debajo del header (no tapa búsqueda/tema) --- */
   .th-lang-switch {
-    position: fixed;
-    top: 10px;
-    right: 12px;  /* se mueve a la esquina superior derecha */
+    position: fixed !important;
+    top: calc(var(--th-header-h) + 8px) !important; /* queda debajo de la barra */
+    right: 12px !important;
     z-index: 9999;
-    background-color: var(--th-color-corporate-blue);
-    color: white;
-    border: none;
+    background: var(--th-color-corporate-blue);
+    color: #fff;
+    border: 0;
     padding: 6px 10px;
-    border-radius: 6px;
+    border-radius: 999px;
     font-size: 14px;
-    opacity: 0.95;
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    opacity: .95;
   }
 
-  /* --- Evita que el toggle tape los botones del header --- */
-  [data-md-color-scheme] .md-header__button.md-icon {
-    z-index: 9000;
+  /* Asegura que los botones nativos del header queden por encima entre sí */
+  .md-header .md-header__button,
+  .md-header .md-search,
+  .md-header .md-icon {
+    z-index: 10000;
   }
 
-  /* --- 2. Ocultar el menú flotante lateral en móviles (About) --- */
+  /* --- 2) Ocultar menú flotante de About en móvil ---
+     (reglas defensivas para distintos nombres/clases posibles) */
+  /* Si tu menú tiene alguno de estos ids/clases se ocultará */
   #about-index,
+  .about-index,
+  .about-menu,
   .about-sidebar,
   .about-floating-menu {
     display: none !important;
     visibility: hidden !important;
   }
 
-  /* --- Ajuste opcional: centrar contenido si desaparece el menú lateral --- */
-  .th-about-content {
+  /* Filtro genérico: si el primer bloque del contenido es un card/aside/nav
+     con "about" en id o class, también lo ocultamos (solo móvil) */
+  main .md-typeset > :is(div,nav,aside,section):first-child:is([id*="about"], [class*="about"]) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Cuando el menú desaparece, el contenido se recentra */
+  .th-about-content,
+  main .md-typeset {
     margin-left: 0 !important;
     padding-left: 0 !important;
   }
