@@ -301,3 +301,30 @@ body:has(#th-hero) .md-content__inner{
   margin-right: 0 !important;
   padding-right: 0 !important;
 }
+
+/* ============================================================
+HOME — corregir margen izquierdo residual
+(garantiza hero centrado y sin padding lateral)
+============================================================ */
+
+body:has(#th-hero) .md-main,
+body:has(#th-hero) .md-main__inner,
+body:has(#th-hero) .md-container,
+body:has(#th-hero) .md-content,
+body:has(#th-hero) .md-content__inner {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  max-width: 100% !important;
+  width: 100vw !important;
+}
+
+/* Asegura que el hero ocupe todo el ancho visible */
+body:has(#th-hero) #th-hero {
+  width: 100vw !important;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
