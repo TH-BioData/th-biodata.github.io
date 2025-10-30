@@ -65,8 +65,12 @@ hide:
     <div class="th-cards th-cards--services">
 
       <div class="th-card">
-        <h3 class="lang lang-en">Data Cleaning & Integration</h3>
-        <h3 class="lang lang-es">Limpieza e Integración de Datos</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="database"></span> Data Cleaning & Integration
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="database"></span> Limpieza e Integración de Datos
+        </h3>
         <p class="lang lang-en">
           Curation, harmonization, and merging of heterogeneous datasets to build reliable analysis layers.
         </p>
@@ -76,8 +80,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Statistical Reporting & Visualization</h3>
-        <h3 class="lang lang-es">Reportes Estadísticos y Visualización</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="bar-chart-3"></span> Statistical Reporting & Visualization
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="bar-chart-3"></span> Reportes Estadísticos y Visualización
+        </h3>
         <p class="lang lang-en">
           Clear statistical summaries, figures, and dashboards tailored for publications and decision-making.
         </p>
@@ -87,8 +95,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Scientific Deliverables & Grants</h3>
-        <h3 class="lang lang-es">Entregables Científicos y Subsidios</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="file-text"></span> Scientific Deliverables & Grants
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="file-text"></span> Entregables Científicos y Subsidios
+        </h3>
         <p class="lang lang-en">
           Support for manuscripts, supplementary materials, SOPs, and grant applications with robust methodology.
         </p>
@@ -98,8 +110,12 @@ hide:
       </div>
 
       <div class="th-card">
-        <h3 class="lang lang-en">Custom Tools & R&amp;D Collaboration</h3>
-        <h3 class="lang lang-es">Herramientas & Colaboración I+D</h3>
+        <h3 class="lang lang-en">
+          <span class="th-icon" data-lucide="workflow"></span> Custom Tools & R&amp;D Collaboration
+        </h3>
+        <h3 class="lang lang-es">
+          <span class="th-icon" data-lucide="workflow"></span> Herramientas & Colaboración I+D
+        </h3>
         <p class="lang lang-en">
           Development of bespoke dashboards and analysis tools; collaboration on joint research and innovation projects.
         </p>
@@ -128,7 +144,8 @@ hide:
     <h2 id="contact" class="lang lang-es">Contacto</h2>
 
     <p class="th-paragraph">
-      📧 <a href="mailto:thbiodata@gmail.com">thbiodata@gmail.com</a> · 🔗 <a href="https://www.linkedin.com/in/tiago-alejo-herrador-425090316" target="_blank">LinkedIn</a>
+      <span class="th-icon" data-lucide="mail"></span> <a href="mailto:thbiodata@gmail.com">thbiodata@gmail.com</a> ·
+      <span class="th-icon" data-lucide="linkedin"></span> <a href="https://www.linkedin.com/in/tiago-alejo-herrador-425090316" target="_blank">LinkedIn</a>
     </p>
 
     <div align="center" style="margin-top:1.2rem;">
