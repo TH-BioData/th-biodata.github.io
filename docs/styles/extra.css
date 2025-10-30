@@ -378,3 +378,38 @@ Elimina margen blanco y el texto "About" residual del TOC
 .th-sideindex {
   width: 220px;
 }
+
+
+/* ============================================================
+Elimina margen blanco y el texto "About" residual del TOC
+============================================================ */
+
+/* 1) Quita el contenedor lateral fantasma del tema */
+.md-sidebar--secondary,
+.md-nav--secondary {
+  display: none !important;
+}
+
+/* 2) Elimina el margen izquierdo que quedaba reservado para el TOC */
+.md-content {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* 3) Asegura que el layout principal del About ocupe todo el ancho */
+.th-about-layout {
+  grid-template-columns: 220px 1fr !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* 4) Ajusta el contenido principal para que arranque sin sangría */
+.th-about-content {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* 5) Ajuste opcional: ancho un poco mayor del índice */
+.th-sideindex {
+  width: 220px;
+}
