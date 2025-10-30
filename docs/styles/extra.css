@@ -417,3 +417,62 @@ HOTFIX v19.1 — Overlay del HERO siempre visible
   #th-hero::before { z-index: 1 !important; }
   #th-hero .hero__content { z-index: 2 !important; }
 }
+
+/* ============================================================
+TH BioData — v19.2
+FIX FINAL: Degradado visible + Drawer intacto
+============================================================ */
+
+/* Restablecer orden correcto globalmente */
+#th-hero {
+  position: relative !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+}
+#th-hero .hero__bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+}
+#th-hero::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;   /* el overlay va sobre el fondo */
+  pointer-events: none !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 35, 80, .35) 0%,
+    rgba(10, 35, 80, .55) 40%,
+    rgba(10, 35, 80, .85) 100%
+  ) !important;
+  opacity: 1 !important;
+}
+#th-hero .hero__content {
+  position: absolute !important;
+  z-index: 2 !important;  /* el texto siempre arriba */
+}
+
+/* --- Móvil --- */
+@media (max-width:768px){
+
+  /* No reasignamos z-index individuales para no pisar el degradado */
+  #th-hero,
+  #th-hero .hero__bg,
+  #th-hero::before,
+  #th-hero .hero__content {
+    isolation: isolate !important; /* aísla capas, evita interferencias */
+  }
+
+  /* Drawer funcional sin interferir en el hero */
+  input[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+    transform: translateX(0) !important;
+    z-index: 12000 !important;
+  }
+  .md-overlay { z-index: 11000 !important; }
+
+  /* Desactivar clics del hero solo cuando drawer está abierto */
+  input[data-md-toggle="drawer"]:checked ~ .md-container #th-hero {
+    pointer-events: none !important;
+  }
+}
