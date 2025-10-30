@@ -494,3 +494,74 @@ Scope: .th-services (Services) y .th-servicepage (subpáginas: image/bioinfo/geo
 .th-servicepage .th-card {
   min-height: 260px;
 }
+
+
+/* ============================================================
+PROJECTS — grilla, tipografía y botones (match con Services)
+============================================================ */
+
+/* 2×2 desktop, 2×1 tablet, 1×1 móvil */
+.th-cards--projects{
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: var(--th-gap, 24px);
+}
+@media (max-width: 900px){
+  .th-cards--projects{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px){
+  .th-cards--projects{ grid-template-columns: 1fr; }
+}
+
+/* Títulos con iconos Lucide alineados */
+.th-cards--projects .th-card h3{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .45rem;
+  color: var(--th-color-corporate-blue);
+  font-weight: 800;
+  line-height: 1.25;
+}
+.th-cards--projects .th-card h3 .th-icon[data-lucide]{
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--th-color-corporate-light-blue);
+  opacity: .95;
+}
+
+/* Texto y altura pareja */
+.th-cards--projects .th-card{
+  min-height: 260px;                 /* mismo alto que Services */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;    /* texto arriba, botón abajo */
+}
+
+/* Botón “View” anclado abajo (matching Services/Home) */
+.th-cards--projects .th-card .th-btn,
+.th-cards--projects .th-card a.md-button{
+  align-self: flex-start;
+  margin-top: auto;                  /* empuja hacia abajo */
+  background: var(--th-color-corporate-blue);
+  color: #fff !important;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 5px 14px rgba(0,0,0,.12);
+  transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.th-cards--projects .th-card .th-btn:hover,
+.th-cards--projects .th-card a.md-button:hover{
+  background: #004B8E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.18);
+}
+
+/* Evitar cortes feos en títulos largos */
+.th-cards--projects .th-card h3{
+  word-break: normal;
+  hyphens: manual;
+}
+
+/* Modo oscuro: hereda estilos globales de .th-card */
